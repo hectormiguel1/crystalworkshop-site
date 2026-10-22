@@ -1,0 +1,119 @@
+/* CrystalWorkshop palette: violet crystal, cyan accents, ink background,
+   one amber accent (the brand marks' "pulse"). */
+:root {
+  --cw-frost: #c9f6ff;
+  --cw-ice: #8ee8f5;
+  --cw-cyan: #38d3e8;
+  --cw-deep-cyan: #1e8fb8;
+  --cw-violet: #7a5cf5;
+  --cw-dusk: #4e36c2;
+  --cw-ink: #141731;
+  --cw-ink-2: #2a2f5e;
+  --cw-rim: #5a63b0;
+  --cw-amber: #ff9b3d;
+
+  --sl-font: 'Inter Variable', 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --sl-font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+
+  /* Dark (default) */
+  --sl-color-accent-low: #241a5c;
+  --sl-color-accent: #8f75ff;
+  --sl-color-accent-high: #d8ceff;
+  --sl-color-white: #ffffff;
+  --sl-color-gray-1: #eceefb;
+  --sl-color-gray-2: #c6cae8;
+  --sl-color-gray-3: #9399c9;
+  --sl-color-gray-4: #5d6399;
+  --sl-color-gray-5: #353b6e;
+  --sl-color-gray-6: #1c2045;
+  --sl-color-black: #10132b;
+
+  --cw-link: #7fe3f2;
+  --cw-surface: #181c3d;
+  --cw-surface-2: #20255033;
+  --cw-border: #343a72;
+  --cw-glow: 0 0 0 1px #5a63b066, 0 12px 40px -18px #7a5cf599;
+}
+
+:root[data-theme='light'] {
+  --sl-color-accent-low: #e7e1ff;
+  --sl-color-accent: #4e36c2;
+  --sl-color-accent-high: #2b1a85;
+  --sl-color-white: #10132b;
+  --sl-color-gray-1: #1c2045;
+  --sl-color-gray-2: #2f3566;
+  --sl-color-gray-3: #4f5588;
+  --sl-color-gray-4: #7f85b3;
+  --sl-color-gray-5: #c3c7e4;
+  --sl-color-gray-6: #eceefa;
+  --sl-color-gray-7: #f6f7fd;
+  --sl-color-black: #ffffff;
+
+  --cw-link: #12698a;
+  --cw-surface: #f7f6ff;
+  --cw-surface-2: #eef0fb;
+  --cw-border: #d4d6ee;
+  --cw-glow: 0 0 0 1px #c3c7e4, 0 10px 30px -18px #4e36c255;
+}
+
+.sl-markdown-content a:not(.sl-link-button, .card-link, .not-content a) {
+  color: var(--cw-link);
+  text-underline-offset: 0.18em;
+}
+
+/* Pixel-art brand marks stay crisp at every size. */
+.site-title img,
+img.pixel,
+.pixel img {
+  image-rendering: pixelated;
+}
+.site-title img {
+  height: 2.25rem !important;
+  width: auto;
+}
+
+/* Header gets a faint crystal gradient line. */
+header.header {
+  border-bottom: 1px solid transparent;
+  border-image: linear-gradient(90deg, var(--cw-violet), var(--cw-cyan) 60%, transparent) 1;
+}
+
+/* Screenshots: framed, zoomable. */
+.sl-markdown-content img:not(.pixel, .brand-icon, .not-content img) {
+  border-radius: 0.6rem;
+  border: 1px solid var(--cw-border);
+  box-shadow: var(--cw-glow);
+  cursor: zoom-in;
+  height: auto;
+}
+
+/* Hero on the splash page. */
+.hero h1 {
+  background: linear-gradient(100deg, var(--sl-color-white) 30%, var(--cw-cyan));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+:root[data-theme='light'] .hero h1 {
+  background: linear-gradient(100deg, var(--cw-dusk) 30%, var(--cw-deep-cyan));
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+.hero img {
+  image-rendering: pixelated;
+  filter: drop-shadow(0 18px 40px #7a5cf566);
+}
+
+/* Tables scroll on narrow screens instead of the page. */
+.sl-markdown-content table {
+  display: block;
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}

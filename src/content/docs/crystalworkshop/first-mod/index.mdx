@@ -1,0 +1,26 @@
+---
+title: Build your first mod
+description: A five-step beginner track - from opening your game in CrystalWorkshop to playing your own mod installed with PulseDepot.
+sidebar:
+  label: The plan
+---
+
+import { CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+In this track you make a small, complete mod for FINAL FANTASY XIII: **a cheaper Potion in the shops**. It touches every part of the workflow once, so the bigger guides make sense afterwards.
+
+**You need:** [CrystalWorkshop installed](../installing/), a Steam install of FINAL FANTASY XIII, and [PulseDepot](../../pulsedepot/install/) for step 5. About 15 minutes.
+
+<CardGrid>
+  <LinkCard title="1. Create your project" description="Open the game; CrystalWorkshop keeps your work beside it." href="create-project/" />
+  <LinkCard title="2. Make an edit" description="Change the Potion's price in a sheet, or with one SQL statement." href="make-an-edit/" />
+  <LinkCard title="3. Review your changes" description="See every changed file and undo what you do not want." href="review-changes/" />
+  <LinkCard title="4. Export a .cws shard" description="Name, version and changelog; build the shard." href="export-shard/" />
+  <LinkCard title="5. Install and test it" description="Add the shard in PulseDepot, apply, and check in game." href="install-and-test/" />
+</CardGrid>
+
+## What happens to your game
+
+Nothing in the game archives changes, at any step. CrystalWorkshop keeps your pending changes in its own work folder (`ff13_studio/` in the game folder) until you export. The shard you export stores your edit as a patch against each player's own game files, and PulseDepot installs it through Crux. Your saves are never written.
+
+When you are done, continue with the editing guides in the sidebar: they go from simple data and text edits to models, effects, scenes and scripts.

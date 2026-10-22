@@ -1,0 +1,32 @@
+---
+import BrandIcon from './BrandIcon.astro';
+import { changelog, item, href, stageLabel, gameShort } from '../lib/data';
+
+interface Props {
+  limit?: number;
+}
+const { limit = 8 } = Astro.props;
+const latest = [...changelog].sort((a, b) => b.date.localeCompare(a.date)).slice(0, limit);
+---
+
+<ul class="latest not-content">
+  {
+    latest.map((e) => {
+      const it = item(e.product);
+      return (
+        <li>
+          <a href={href(`changelog/#${e.id}`)}>
+            <BrandIcon name={it.icon} size={28} />
+            <strong>{e.name}</strong>
+            <span class="cl-version">v{e.version}</span>
+            <span class={`pill stage-${e.stage}`}>{stageLabel(e.stage)}</span>
+            {e.games.length < 3 && e.games.map((g) => <span class={`pill game game-${g}`}>{gameShort(g)}</span>)}
+            <span class="spacer" />
+            <time datetime={e.date}>{e.date}</time>
+          </a>
+        </li>
+      );
+    })
+  }
+</ul>
+<p><a class="cw-button" href={href('changelog/')}>All releases</a> <a class="cw-button ghost" href={href('downloads/')}>Downloads</a></p>

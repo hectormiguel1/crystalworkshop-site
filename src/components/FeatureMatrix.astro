@@ -1,0 +1,105 @@
+---
+import features from '../data/features.json';
+import { gameShort, gameName, releases } from '../lib/data';
+
+const games = Object.keys(releases.games);
+const rows = features.rows as { game: string; area: string; completed: string; experimental: string; gaps: string }[];
+const cols = [
+  ['completed', 'Completed'],
+  ['experimental', 'Experimental'],
+  ['gaps', 'Known gaps'],
+] as const;
+---
+
+<div class="matrix not-content" data-matrix>
+  <p class="matrix-legend" set:html={features.legend} />
+  <form class="filters" aria-label="Filter the feature table" onsubmit="return false">
+    <fieldset class="filter chips">
+      <legend>Game</legend>
+      <label><input type="radio" name="mgame" value="" checked /> <span>All</span></label>
+      {
+        games.map((g) => (
+          <label title={gameName(g)}>
+            <input type="radio" name="mgame" value={g} /> <span>{gameShort(g)}</span>
+          </label>
+        ))
+      }
+    </fieldset>
+    <fieldset class="filter chips">
+      <legend>Show</legend>
+      {
+        cols.map(([k, label]) => (
+          <label class={`status-${k}`}>
+            <input type="checkbox" name="mcol" value={k} checked /> <span>{label}</span>
+          </label>
+        ))
+      }
+    </fieldset>
+    <label class="filter search">
+      <span>Search</span>
+      <input type="search" name="mq" placeholder="e.g. VFX, SQL, export" autocomplete="off" />
+    </label>
+  </form>
+  <p class="cl-count" aria-live="polite" data-count>{rows.length} areas</p>
+  <div class="matrix-scroll">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Game</th>
+          <th scope="col">Area</th>
+          {cols.map(([k, label]) => <th scope="col" class={`col-${k}`}>{label}</th>)}
+        </tr>
+      </thead>
+      <tbody>
+        {
+          rows.map((r) => (
+            <tr data-game={r.game}>
+              <td data-label="Game">
+                <span class={`pill game game-${r.game}`} title={gameName(r.game)}>
+                  {gameShort(r.game)}
+                </span>
+              </td>
+              <th scope="row" data-label="Area">
+                {r.area}
+              </th>
+              {cols.map(([k, label]) => (
+                <td class={`col-${k} ${r[k] ? '' : 'none'}`} data-label={label} set:html={r[k] || '—'} />
+              ))}
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </div>
+  <p class="cl-empty" data-empty hidden>No area matches these filters.</p>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-matrix]').forEach((root) => {
+    const rows = [...root.querySelectorAll<HTMLTableRowElement>('tbody tr')];
+    const count = root.querySelector<HTMLElement>('[data-count]')!;
+    const empty = root.querySelector<HTMLElement>('[data-empty]')!;
+    const apply = () => {
+      const game = root.querySelector<HTMLInputElement>('input[name="mgame"]:checked')?.value ?? '';
+      const cols = [...root.querySelectorAll<HTMLInputElement>('input[name="mcol"]')];
+      const q = (root.querySelector<HTMLInputElement>('input[name="mq"]')?.value ?? '').trim().toLowerCase();
+      for (const c of cols) root.classList.toggle(`hide-${c.value}`, !c.checked);
+      let shown = 0;
+      for (const r of rows) {
+        const visibleText = [...r.cells]
+          .filter((cell) => !cols.some((c) => !c.checked && cell.classList.contains(`col-${c.value}`)))
+          .map((cell) => cell.textContent ?? '')
+          .join(' ')
+          .toLowerCase();
+        const ok = (!game || r.dataset.game === game) && (!q || visibleText.includes(q));
+        r.hidden = !ok;
+        if (ok) shown++;
+      }
+      count.textContent = `${shown} area${shown === 1 ? '' : 's'}`;
+      empty.hidden = shown > 0;
+    };
+    root.addEventListener('input', apply);
+    root.addEventListener('change', apply);
+    apply();
+  });
+</script>

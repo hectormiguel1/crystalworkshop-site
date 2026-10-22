@@ -1,0 +1,137 @@
+---
+import { changelog, releases, stageLabel, gameShort, gameName, href, item } from '../lib/data';
+import BrandIcon from './BrandIcon.astro';
+
+const sorted = [...changelog].sort((a, b) => b.date.localeCompare(a.date) || a.kind.localeCompare(b.kind) || a.name.localeCompare(b.name));
+const dates = [...new Set(sorted.map((e) => e.date))];
+const products = releases.products.map((p) => ({ id: p.id, name: p.name }));
+const mods = releases.mods.map((m) => ({ id: m.id, name: m.name }));
+const games = Object.keys(releases.games);
+---
+
+<div class="cl-explorer not-content" data-cl-explorer>
+  <form class="filters" aria-label="Filter the changelog" onsubmit="return false">
+    <label class="filter">
+      <span>Product</span>
+      <select name="product" data-filter="product">
+        <option value="">All products and mods</option>
+        <optgroup label="Apps">
+          {products.map((p) => <option value={p.id}>{p.name}</option>)}
+        </optgroup>
+        <optgroup label="Mods">
+          {mods.map((m) => <option value={m.id}>{m.name}</option>)}
+        </optgroup>
+      </select>
+    </label>
+    <fieldset class="filter chips" data-filter="game">
+      <legend>Game</legend>
+      <label><input type="radio" name="game" value="" checked /> <span>All</span></label>
+      {
+        games.map((g) => (
+          <label title={gameName(g)}>
+            <input type="radio" name="game" value={g} /> <span>{gameShort(g)}</span>
+          </label>
+        ))
+      }
+    </fieldset>
+    <fieldset class="filter chips" data-filter="kind">
+      <legend>Type</legend>
+      <label><input type="radio" name="kind" value="" checked /> <span>All</span></label>
+      <label><input type="radio" name="kind" value="app" /> <span>Apps</span></label>
+      <label><input type="radio" name="kind" value="mod" /> <span>Mods</span></label>
+    </fieldset>
+  </form>
+  <p class="cl-count" aria-live="polite" data-count>{sorted.length} releases</p>
+
+  <ol class="timeline">
+    {
+      dates.map((d) => (
+        <li class="tl-day" data-day={d}>
+          <h2 class="tl-date" id={`d-${d}`}>
+            <time datetime={d}>{d}</time>
+          </h2>
+          <ul class="tl-entries">
+            {sorted
+              .filter((e) => e.date === d)
+              .map((e) => {
+                const it = item(e.product);
+                return (
+                  <li class="tl-entry" id={e.id} data-product={e.product} data-games={e.games.join(' ')} data-kind={e.kind === 'mod' ? 'mod' : 'app'}>
+                    <div class="tl-dot" aria-hidden="true" />
+                    <article>
+                      <header>
+                        <BrandIcon name={it.icon} size={32} />
+                        <a class="tl-name" href={href(`${it.docs}/`)}>
+                          {e.name}
+                        </a>
+                        <strong class="cl-version">v{e.version}</strong>
+                        <span class={`pill stage-${e.stage}`}>{stageLabel(e.stage)}</span>
+                        {e.games.map((g) => (
+                          <span class={`pill game game-${g}`} title={gameName(g)}>
+                            {gameShort(g)}
+                          </span>
+                        ))}
+                      </header>
+                      <p class="cl-title">{e.title}</p>
+                      {e.items.length > 0 && (
+                        <ul>
+                          {e.items.map((x) => (
+                            <li set:html={x} />
+                          ))}
+                        </ul>
+                      )}
+                    </article>
+                  </li>
+                );
+              })}
+          </ul>
+        </li>
+      ))
+    }
+  </ol>
+  <p class="cl-empty" data-empty hidden>No release matches these filters.</p>
+</div>
+
+<script>
+  function setup(root: HTMLElement) {
+    const product = root.querySelector<HTMLSelectElement>('select[name="product"]')!;
+    const radios = (name: string) => [...root.querySelectorAll<HTMLInputElement>(`input[name="${name}"]`)];
+    const value = (name: string) => radios(name).find((r) => r.checked)?.value ?? '';
+    const entries = [...root.querySelectorAll<HTMLElement>('.tl-entry')];
+    const days = [...root.querySelectorAll<HTMLElement>('.tl-day')];
+    const count = root.querySelector<HTMLElement>('[data-count]')!;
+    const empty = root.querySelector<HTMLElement>('[data-empty]')!;
+
+    const params = new URLSearchParams(location.search);
+    if (params.get('product')) product.value = params.get('product')!;
+    for (const name of ['game', 'kind']) {
+      const v = params.get(name);
+      const r = radios(name).find((x) => x.value === v);
+      if (r) r.checked = true;
+    }
+
+    function apply() {
+      const p = product.value;
+      const g = value('game');
+      const k = value('kind');
+      let shown = 0;
+      for (const e of entries) {
+        const ok = (!p || e.dataset.product === p) && (!g || (e.dataset.games ?? '').split(' ').includes(g)) && (!k || e.dataset.kind === k);
+        e.hidden = !ok;
+        if (ok) shown++;
+      }
+      for (const d of days) d.hidden = !d.querySelector('.tl-entry:not([hidden])');
+      count.textContent = `${shown} release${shown === 1 ? '' : 's'}`;
+      empty.hidden = shown > 0;
+      const q = new URLSearchParams();
+      if (p) q.set('product', p);
+      if (g) q.set('game', g);
+      if (k) q.set('kind', k);
+      const qs = q.toString();
+      history.replaceState(null, '', qs ? `?${qs}${location.hash}` : location.pathname + location.hash);
+    }
+    root.addEventListener('change', apply);
+    apply();
+  }
+  document.querySelectorAll<HTMLElement>('[data-cl-explorer]').forEach(setup);
+</script>

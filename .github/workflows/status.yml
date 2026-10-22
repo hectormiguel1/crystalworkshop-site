@@ -1,0 +1,70 @@
+# Issue status and roadmap for the PUBLIC site repository (not active in the
+# private repository: it lives under site/deploy-template/). Copy it to
+# .github/workflows/status.yml at the root of the public repository.
+#
+# On issue changes and once a day it reads the issues, their labels and the
+# milestones with the default GITHUB_TOKEN (read only), writes api/status.json
+# and api/roadmap.json into the built site, and deploys it to GitHub Pages.
+# Only number, title, product, status, milestone, fixed-in, updated and url
+# are published: never issue bodies, comments or user names.
+name: Issue status and roadmap
+
+on:
+  issues:
+    types: [opened, edited, labeled, unlabeled, closed, reopened, milestoned, demilestoned]
+  schedule:
+    - cron: '23 5 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    # A burst of label changes needs only the last run.
+    concurrency:
+      group: status-build
+      cancel-in-progress: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - id: pages
+        uses: actions/configure-pages@v5
+      - run: npm ci
+      - run: npm run build:site
+        env:
+          SITE_URL: ${{ steps.pages.outputs.origin }}
+          BASE_PATH: ${{ steps.pages.outputs.base_path }}/
+          SITE_OUT_DIR: ./dist
+          REPO_URL: ${{ github.server_url }}/${{ github.repository }}
+      - run: node scripts/check-links.mjs dist
+        env:
+          BASE_PATH: ${{ steps.pages.outputs.base_path }}/
+      - run: node scripts/check-terms.mjs dist
+      # After the checks: issue titles are written by users.
+      - run: node scripts/status.mjs dist/api
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

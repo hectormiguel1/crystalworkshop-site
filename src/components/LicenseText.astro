@@ -1,0 +1,20 @@
+---
+import text from '../data/LICENSE.txt?raw';
+---
+
+<pre class="license-text not-content">{text}</pre>
+
+<style>
+  .license-text {
+    white-space: pre-wrap;
+    font-family: var(--sl-font-mono);
+    font-size: var(--sl-text-sm);
+    line-height: 1.6;
+    padding: 1.25rem;
+    border-radius: 0.8rem;
+    border: 1px solid var(--cw-border);
+    background: var(--cw-surface);
+    color: var(--sl-color-gray-1);
+    overflow-x: auto;
+  }
+</style>

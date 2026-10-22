@@ -1,0 +1,34 @@
+---
+title: 5. Install and test it
+description: Add your new shard in PulseDepot, review and apply it, then check the new price in game. How to update and undo.
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+Test your mod exactly the way players will: with PulseDepot.
+
+<Steps>
+
+1. **Start PulseDepot** ([install it](../../../pulsedepot/install/) if you have not), choose the **FF13** tab and check the game folder. See [First setup](../../../pulsedepot/first-setup/).
+
+2. **Add your shard.** Choose **Add mod…** and pick `ff13_studio/exports/<name>.cws` from your game folder, or drop it on the window. It is listed as **SHARD · v1.0.0** with the badge **NEW**; select it to see the name, description and changelog you entered.
+
+   ![Shards listed in PulseDepot with their details](../../../../assets/shots/pd/mods.webp)
+
+3. **Review changes**, check that your mod changes `db/resident/item.wdb`, then **Apply changes** with the game closed. PulseDepot installs Crux if needed and writes the Crux image.
+
+   ![Review changes before applying](../../../../assets/shots/pd/review.webp)
+
+4. **Start the game** from Steam. On Linux/Proton without NovaFix, the launch options must contain `WINEDLLOVERRIDES="version=n,b" %command%`.
+
+5. **Check the result in game:** visit a shop that sells Potions. The price is the new value.
+
+</Steps>
+
+## Update or undo
+
+- **New version:** change what you want in CrystalWorkshop, export again with a higher **Version** and a **Changes** entry, and add the new file in PulseDepot. It replaces the listed mod and shows your changelog. See [Update and remove mods](../../../pulsedepot/update-and-remove/).
+- **Undo in CrystalWorkshop:** revert files on the **Changes** page.
+- **Undo in the game:** untick the mod in PulseDepot, or choose **Uninstall all…**, then **Apply changes**. Your saves are never touched.
+
+**Done.** You built, installed and tested a mod. Continue with the editing guides: [Text (ZTR)](../../ztr-text-edit/) is a good next step, then [Crystarium](../../crystarium-edit/) and [Models](../../model-edit/).

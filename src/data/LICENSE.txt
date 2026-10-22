@@ -1,0 +1,49 @@
+CrystalWorkshop, PulseDepot and Crux — End-User Licence
+
+Copyright (c) 2026 CrystalWorkshop. All rights reserved.
+
+CrystalWorkshop (with its crystalw command-line tool), PulseDepot and Crux
+("the Software") are freeware. By downloading or using the Software you
+agree to these terms.
+
+1. Use. You may download the Software free of charge and use it on any
+   number of your own computers.
+
+2. Redistribution. You may not share, re-upload or mirror the Software's
+   packages anywhere other than the official download pages. Linking to an
+   official download page is allowed.
+
+3. No modification. You may not modify, patch or alter the Software, or
+   distribute modified copies of it.
+
+4. No reverse engineering. You may not reverse engineer, decompile or
+   disassemble the Software, except where the law expressly allows it
+   despite this restriction.
+
+5. No sale. You may not sell the Software, charge for access to it, or
+   bundle it with anything that is sold.
+
+6. Your content. Mods and other content you create with CrystalWorkshop
+   belong to you, subject to the game's own terms. These terms do not cover
+   the mods other people publish; each mod has its own licence.
+
+7. Third-party components. The Software includes third-party components
+   under their own licences. Their notices are in THIRD-PARTY-NOTICES.txt
+   and the licenses folder of each package, and those licences apply to
+   those components instead of these terms.
+
+8. No warranty. The Software is provided "as is", without warranty of any
+   kind, express or implied, including fitness for a particular purpose.
+   Back up your saves and game files before using it.
+
+9. No liability. To the maximum extent the law allows, the author is not
+   liable for any damage or loss arising from the use of, or inability to
+   use, the Software.
+
+10. Trademarks. FINAL FANTASY is a trademark of Square Enix. The Software
+    is an unofficial fan tool. It is not affiliated with or endorsed by
+    Square Enix.
+
+The extension SDK for mod authors is not covered by these
+terms: it is open source under the MIT or Apache-2.0 licence, at your
+option.

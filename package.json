@@ -1,0 +1,35 @@
+{
+  "name": "crystalworkshop-site",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "CrystalWorkshop, PulseDepot, Crux and mods: release and documentation site",
+  "scripts": {
+    "generate": "node scripts/generate.mjs",
+    "dev": "astro dev",
+    "build": "node scripts/generate.mjs && astro build",
+    "build:site": "astro build",
+    "preview": "astro preview",
+    "check:links": "node scripts/check-links.mjs",
+    "check:terms": "node scripts/check-terms.mjs",
+    "check:forms": "node scripts/check-issue-forms.mjs",
+    "check": "node scripts/check-links.mjs && node scripts/check-terms.mjs && node scripts/check-issue-forms.mjs",
+    "screenshots": "node scripts/site-screenshots.mjs",
+    "test": "node --test \"scripts/tests/*.test.mjs\""
+  },
+  "dependencies": {
+    "@astrojs/markdown-remark": "7.3.2",
+    "@astrojs/starlight": "0.42.5",
+    "@fontsource-variable/inter": "5.3.0",
+    "@fontsource/jetbrains-mono": "5.3.0",
+    "astro": "7.3.6",
+    "sharp": "0.35.5"
+  },
+  "devDependencies": {
+    "playwright-core": "1.64.0",
+    "yaml": "2.9.1"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  }
+}

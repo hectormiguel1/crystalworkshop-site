@@ -1,0 +1,54 @@
+---
+title: PulseDepot FAQ
+description: Short answers about saves, game archives, Crux, NovaFix, Linux, script mods and offline play.
+sidebar:
+  label: FAQ
+---
+
+## Does PulseDepot change my saves?
+
+No. PulseDepot and Crux never read or write save files. Mods keep their settings in Crux's own storage (`mod-state.dat` in the mod folder), kept per save slot.
+
+## Does it change my game archives?
+
+No. Apply writes one merged file, `active.crximg`, plus Crux and PulseDepot's own state. Crux serves the image's files to the game while it runs. See [What Apply writes](../review-and-apply/#what-apply-writes).
+
+## Do I need NovaFix?
+
+No. With NovaFix, Crux runs as its addon. Without it, Crux runs as the standalone `version.dll`. **Automatic** under **Crux host** picks the right one.
+
+## Does it work on Linux?
+
+Yes. PulseDepot is a native x86_64 Linux program, and the games run through Steam Play (Proton). Without NovaFix, add `WINEDLLOVERRIDES="version=n,b" %command%` to the game's launch options. See [Install](../install/).
+
+## Which games are supported?
+
+FINAL FANTASY XIII and XIII-2 (Steam). LIGHTNING RETURNS is in the game list, but no LR mods ship with this release, so treat LR support as experimental.
+
+## Can I use mods made for the Nova Chrysalia mod manager?
+
+Yes: add the `.ncmp` (or `.zip`) like any mod. Packages that need an external setup install alone. See [Install Nova Chrysalia mods](../install-ncmp/).
+
+## Why does a mod need Java?
+
+Only mods that change game scripts need a JDK 17 or newer, to merge script changes class by class. Without one, some script mods cannot be applied. See [Script mods and Java](../order-and-conflicts/#script-mods-and-java).
+
+## Two mods change the same thing. Which one wins?
+
+The one lower in the list. Text, database and WPD files are merged entry by entry, so two mods only conflict where they change the same entry. See [Order and conflicts](../order-and-conflicts/).
+
+## Can I play offline?
+
+Yes. PulseDepot and Crux need no internet connection. See [Playing offline](../launch/#playing-offline-steam-offline-mode).
+
+## Is it safe to install mods with native code?
+
+A mod with native code (badge **DLL**) runs code inside the game process, which can do anything the game can. Install such mods only from authors you trust.
+
+## How do I go back to the unmodded game?
+
+Choose **Uninstall all…**, then **Apply changes**. See [Uninstall](../uninstall/).
+
+## Is PulseDepot free?
+
+Yes. It is freeware: free to download and use, all rights reserved. See the [licence](../../legal/).

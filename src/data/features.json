@@ -1,0 +1,201 @@
+{
+  "legend": "<strong>Completed</strong> works and passes automated checks on sample data, but has not yet been verified in game for this release. <strong>Experimental</strong> is partial, unverified for that game, or MCP-only. <strong>Known gaps</strong> are things that do not work yet.",
+  "rows": [
+    {
+      "game": "xiii",
+      "area": "Sheets (WDB)",
+      "completed": "Typed sheet editor: add, duplicate, rename, delete rows; bulk edit; columns; per-field docs; undo",
+      "experimental": "",
+      "gaps": "<code>!!strin7</code> string cells cannot be edited"
+    },
+    {
+      "game": "xiii",
+      "area": "SQL",
+      "completed": "<code>SELECT</code>/<code>UPDATE</code>/<code>INSERT</code>/<code>DELETE</code>, <code>JOIN … VIA</code>, <code>count(DISTINCT)</code>, text functions (<code>name()</code>, <code>ztr_validate</code>); dry run then apply; saved queries; Crystarium tables <code>cr_*</code>",
+      "experimental": "",
+      "gaps": "A script's later statements do not see rows an earlier <code>INSERT</code> added"
+    },
+    {
+      "game": "xiii",
+      "area": "Text (ZTR)",
+      "completed": "11 locales, code pages, tag palette and control-code insert, add/rename/delete keys, locales side by side, preview with a record",
+      "experimental": "",
+      "gaps": ""
+    },
+    {
+      "game": "xiii",
+      "area": "Models",
+      "completed": "Inspect meshes, materials (PRAM), textures, skeleton, motions, effects; game-shader render through DXVK (a simpler fallback renderer without it); glTF workspace export, dry-run import, apply (Tier A)",
+      "experimental": "Tier B import changes are reported, not applied",
+      "gaps": "Adding vertices, materials or bones is not applied"
+    },
+    {
+      "game": "xiii",
+      "area": "VFX",
+      "completed": "Package tree and typed inspector; field edits (lifetime, loops, colours, emitter, leaves); reference swaps (<code>model</code>, <code>texture.k</code>, <code>item.n.model</code>) to safe targets; playback controls; Check XIII loading; data column + resizable viewport column",
+      "experimental": "Playback is not full renderer parity: partial parts, flat ground; some effects show a geometry preview",
+      "gaps": "Animated curve editing; inserting a unit"
+    },
+    {
+      "game": "xiii",
+      "area": "Scenes (LYB)",
+      "completed": "Scene editor: Orbit/Fly camera, pick, Move/Rotate/Scale gizmo (G/R/S, X/Y/Z, L), snap, typed fields and payloads, Add (12 kinds), Duplicate, Delete, overlays, Render PNG; open a shard's changed zones",
+      "experimental": "Zone tool (MCP only)",
+      "gaps": ""
+    },
+    {
+      "game": "xiii",
+      "area": "Scripts (CLB)",
+      "completed": "Decompile (Vineflower, bundled), edit, compile (javac, verify, merge), stage, diff; game-VM restriction diagnostics; Java patches in shards",
+      "experimental": "",
+      "gaps": "Needs a JDK 17+ (<code>java</code> and <code>javac</code>; not bundled)"
+    },
+    {
+      "game": "xiii",
+      "area": "Actions / events",
+      "completed": "ACB/MCB schedules: timeline, tree, build a row from a spec, add clip, clone/remove, links, export file; event player with subtitles, MP4 export",
+      "experimental": "Event preview omits lights, shadows, DOF, glare, fog, grading, VFX, physics, movies",
+      "gaps": "Bink 2 movies are not previewed"
+    },
+    {
+      "game": "xiii",
+      "area": "Crystarium",
+      "completed": "3D/Top/Stages × roles editor, add/offshoot/rename/reparent/delete, bulk tools, validation, SQL tables",
+      "experimental": "",
+      "gaps": ""
+    },
+    {
+      "game": "xiii",
+      "area": "Battle",
+      "completed": "Battle page (specs, ability chains, new abilities)",
+      "experimental": "",
+      "gaps": ""
+    },
+    {
+      "game": "xiii",
+      "area": "Sound",
+      "completed": "Banks, music streams, dictionaries; play; loaded-by/references; link to ACB SE clips, zone BGM, charaspec, actioneffect; import",
+      "experimental": "",
+      "gaps": ""
+    },
+    {
+      "game": "xiii",
+      "area": "Export",
+      "completed": "Loose files (backups + manifest) and <code>.cws</code> shards with metadata, changelog, image; author-key project sealing; reopen your own shards",
+      "experimental": "Loose-file overrides of resident WDBs and filelists are marked unverified",
+      "gaps": ""
+    },
+    {
+      "game": "xiii",
+      "area": "MCP",
+      "completed": "<code>crystalw --mcp</code> (stdio) and in-app HTTP with a bearer token; read-only kill switch; progressive discovery (17 core tools, 70 total); audit log",
+      "experimental": "",
+      "gaps": ""
+    },
+    {
+      "game": "xiii2",
+      "area": "Sheets / SQL",
+      "completed": "Record packs (<code>wdbpack.bin</code>) as sheets, <code>item</code> alias, SQL",
+      "experimental": "Every export route is unverified in game (consent per file)",
+      "gaps": "No Crystarium tables"
+    },
+    {
+      "game": "xiii2",
+      "area": "Text",
+      "completed": "11 locales, XIII-2 tag palette",
+      "experimental": "Export unverified",
+      "gaps": "No record preview"
+    },
+    {
+      "game": "xiii2",
+      "area": "Models",
+      "completed": "Inspect and render",
+      "experimental": "Writes unverified; background blocks borrow textures",
+      "gaps": "New motion packs are XIII only"
+    },
+    {
+      "game": "xiii2",
+      "area": "VFX",
+      "completed": "Tree, inspector (read-only fields), reference swaps, playback",
+      "experimental": "Fields read-only (\"not proven for XIII-2\")",
+      "gaps": "Field editing"
+    },
+    {
+      "game": "xiii2",
+      "area": "Scenes",
+      "completed": "<code>.xwp</code> members in the scene editor and renders (weather, LUT)",
+      "experimental": "Layout types marked \"FF13 layouts: sibling\"; weather is the layout default (no selector)",
+      "gaps": ""
+    },
+    {
+      "game": "xiii2",
+      "area": "Scripts",
+      "completed": "Browse the script tree",
+      "experimental": "Compiling is untested",
+      "gaps": "No SCR archive"
+    },
+    {
+      "game": "xiii2",
+      "area": "Battle / Crystarium",
+      "completed": "",
+      "experimental": "<code>battle</code> MCP tool reads XIII-2 packs",
+      "gaps": "No Battle page, no Crystarium"
+    },
+    {
+      "game": "xiii2",
+      "area": "Sound",
+      "completed": "",
+      "experimental": "Untested on XIII-2",
+      "gaps": ""
+    },
+    {
+      "game": "lr",
+      "area": "Sheets / SQL",
+      "completed": "Record packs as sheets, SQL",
+      "experimental": "Exports unverified",
+      "gaps": "No Crystarium tables"
+    },
+    {
+      "game": "lr",
+      "area": "Text",
+      "completed": "8 locales, LR tags (<code>{Color Sapphire}</code>, …)",
+      "experimental": "Export unverified",
+      "gaps": "No record preview"
+    },
+    {
+      "game": "lr",
+      "area": "Models",
+      "completed": "Inspect and render",
+      "experimental": "Writes unverified; borrowed textures",
+      "gaps": ""
+    },
+    {
+      "game": "lr",
+      "area": "VFX",
+      "completed": "Tree, read-only fields, reference swaps, playback",
+      "experimental": "LR refuses ribbon/light/tint parts; emitter link fields unverified",
+      "gaps": "Field editing"
+    },
+    {
+      "game": "lr",
+      "area": "Scenes",
+      "completed": "<code>.xwp</code> members in the editor and renders; time-of-day lighting from ScreenEnvs",
+      "experimental": "<strong>Time of day is MCP-only</strong> (<code>lights:\"scene@18\"</code>); the View page renders at noon; it only changes regions whose ScreenEnvs are keyed by hour (per-hour region tables untraced)",
+      "gaps": "Hour selector in the UI"
+    },
+    {
+      "game": "lr",
+      "area": "Scripts",
+      "completed": "Browse",
+      "experimental": "Compiling untested",
+      "gaps": ""
+    },
+    {
+      "game": "lr",
+      "area": "Sound",
+      "completed": "",
+      "experimental": "Untested on LR",
+      "gaps": ""
+    }
+  ]
+}

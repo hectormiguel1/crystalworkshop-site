@@ -1,0 +1,22 @@
+---
+title: Troubleshooting
+description: Fix the common PulseDepot problems, and find the Crux log to attach to a bug report.
+---
+
+| Problem | What to do |
+|---|---|
+| SmartScreen blocks the start | The build is not signed. Choose **More info**, then **Run anyway** (see [Install](../install/)). |
+| The window closes at start with a graphics (wgpu) error | Start PulseDepot from a terminal with `WGPU_BACKEND=vulkan` (or `gl`) set. |
+| Mods do not show up in game | Check that `Crux.jsonl` exists in the `addons` folder beside the game executable (both builds log there). **No log** means Crux did not load: check the launch option on Proton (standalone build) or the NovaFix install (addon build). **A log** means it loaded: read the last lines for errors. |
+| "Crux not installed: …" | Extract the whole PulseDepot package again. See [When Apply refuses](../review-and-apply/#when-apply-refuses). |
+| "… version.dll belongs to another program" | Another tool owns `version.dll`. Remove it, or choose **Crux host › NovaFix addon (Crux.dll)**. |
+| Apply says a file could not be written | Close the game and apply again. |
+| Review stops: "Merging script changes needs a JDK 17 or newer …", or warns that the later mod wins a script file | Install a 64-bit JDK 17+ (see [Script mods and Java](../order-and-conflicts/#script-mods-and-java)) and start PulseDepot with `Start-PulseDepot.cmd` / `start-pulsedepot.sh`. `Check-Java` shows what is found. Then review again. |
+
+## The Crux log
+
+- The file is `Crux.jsonl` in the Crux folder (`addons`). It rotates to `Crux.jsonl.1` and `Crux.jsonl.2`.
+- Logging is set by `[log] mode` in `Crux.ini`: `2` (the default) writes the file, `1` shows a console, `3` does both.
+- Attach this log to bug reports, together with PulseDepot's status line and the `BUILD-INFO.json` from the package.
+
+More about the log: [Crux logs](../../crux/logs/).

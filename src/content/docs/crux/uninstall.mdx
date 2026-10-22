@@ -1,0 +1,27 @@
+---
+title: Uninstall Crux
+description: PulseDepot never removes Crux. How to remove it by hand once the mods are uninstalled.
+sidebar:
+  label: Uninstall
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+PulseDepot never removes Crux, even when you uninstall every mod. Remove it by hand:
+
+<Steps>
+
+1. In PulseDepot, choose **Uninstall all…**, then **Apply changes**. See [Uninstall](../../pulsedepot/uninstall/).
+
+2. Delete the Crux build you have:
+
+   - the addon: `Crux.dll` in the NovaFix `addons` folder;
+   - the standalone build: `version.dll` beside the game executable.
+
+3. On Linux, remove `WINEDLLOVERRIDES="version=n,b" %command%` from the game's Steam launch options.
+
+4. Optional: delete `Crux.ini`, the `Crux.jsonl` logs (in the `addons` folder) and `mod-state.dat` (the mods' settings, in the mod folder beside `active.crximg`).
+
+</Steps>
+
+Your saves are untouched: Crux never reads or writes them.

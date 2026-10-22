@@ -1,0 +1,26 @@
+---
+title: Crux logs
+description: Where Crux writes its log, how to turn the console on, and what to attach to a bug report.
+sidebar:
+  label: Logs
+---
+
+Both Crux builds log to the same place:
+
+- **File:** `Crux.jsonl` in the Crux folder, the `addons` folder beside the game executable. It rotates to `Crux.jsonl.1` and `Crux.jsonl.2`.
+- **Setting:** `[log] mode` in `Crux.ini`:
+
+  | `mode` | Effect |
+  |---|---|
+  | `2` (default) | Write the log file. |
+  | `1` | Show a console window. |
+  | `3` | Both. |
+
+## Reading it
+
+- **No `Crux.jsonl` at all** means Crux did not load. Check the launch option on Proton (standalone build) or your NovaFix install (addon build). See [Standalone or NovaFix addon](../hosts/).
+- **A log** means Crux loaded: read the last lines for errors. A mod whose game version is not recognised stays inactive and writes the reason here.
+
+## Reporting a problem
+
+Attach `Crux.jsonl`, PulseDepot's status line and the `BUILD-INFO.json` from the PulseDepot package.

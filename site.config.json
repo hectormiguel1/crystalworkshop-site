@@ -1,0 +1,10 @@
+{
+  "siteName": "CrystalWorkshop",
+  "tagline": "Modding tools for the FINAL FANTASY XIII trilogy on PC",
+  "repoUrl": "https://github.com/hectormiguel1/crystalworkshop-site",
+  "siteUrl": "https://hectormiguel1.github.io/crystalworkshop-site/",
+  "downloadBase": "https://github.com/hectormiguel1/crystalworkshop-site/releases",
+  "tagPattern": "{id}-v{version}",
+  "author": "CrystalWorkshop",
+  "releaseDir": "../dist/release-2026-10-21"
+}

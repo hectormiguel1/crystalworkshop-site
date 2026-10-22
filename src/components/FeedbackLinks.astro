@@ -1,0 +1,30 @@
+---
+import { feedbackFor, type Item } from '../lib/data';
+
+interface Props {
+  item: Item;
+}
+const { item: i } = Astro.props;
+const links = feedbackFor(i);
+const what = i.kind === 'mod' ? (i.title ?? i.name) : i.name;
+---
+
+<div class="feedback-links not-content" data-feedback={i.id}>
+  {
+    links ? (
+      <>
+        {links.problem && (
+          <a class="cw-button" href={links.problem} rel="noopener" target="_blank">
+            Report a problem
+          </a>
+        )}
+        <a class="cw-button ghost" href={links.feature} rel="noopener" target="_blank">
+          Suggest a feature
+        </a>
+        <span class="feedback-hint">Opens a form on GitHub, prefilled for {what} {`v${i.version}`}.</span>
+      </>
+    ) : (
+      <p class="feedback-off">Problem reports and feature suggestions open here once the issue tracker is online.</p>
+    )
+  }
+</div>

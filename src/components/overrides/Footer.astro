@@ -1,0 +1,76 @@
+---
+import Default from '@astrojs/starlight/components/Footer.astro';
+import { href } from '../../lib/data';
+---
+
+<Default />
+<div class="site-footer not-content">
+  <p>
+    CrystalWorkshop, PulseDepot and Crux are freeware, all rights reserved. Mods: see each mod’s permissions.
+    {' '}<a href={href('legal/')}>Licence</a>{' · '}<a href={href('legal/third-party/')}>Third-party notices</a>{' · '}<a href={href('legal/trademarks/')}>Trademarks</a>
+  </p>
+  <p>FINAL FANTASY is a trademark of Square Enix. These are unofficial fan tools, not affiliated with or endorsed by Square Enix.</p>
+</div>
+
+<dialog class="lightbox" aria-label="Screenshot" data-lightbox>
+  <form method="dialog">
+    <button class="lightbox-close" aria-label="Close">×</button>
+  </form>
+  <img alt="" data-lightbox-img />
+  <p class="lightbox-caption" data-lightbox-caption></p>
+</dialog>
+
+<script>
+  // Copy buttons (SHA-256 sums and the like).
+  document.addEventListener('click', async (ev) => {
+    const btn = (ev.target as HTMLElement).closest<HTMLButtonElement>('[data-copy]');
+    if (!btn) return;
+    const text = btn.dataset.copy ?? '';
+    try {
+      await navigator.clipboard.writeText(text);
+    } catch {
+      const area = document.createElement('textarea');
+      area.value = text;
+      document.body.append(area);
+      area.select();
+      document.execCommand('copy');
+      area.remove();
+    }
+    const old = btn.textContent;
+    btn.textContent = 'Copied';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = old;
+      btn.classList.remove('copied');
+    }, 1600);
+  });
+
+  // Screenshot lightbox: click (or Enter) on a content image opens it full size.
+  const dialog = document.querySelector<HTMLDialogElement>('[data-lightbox]');
+  const big = document.querySelector<HTMLImageElement>('[data-lightbox-img]');
+  const caption = document.querySelector<HTMLElement>('[data-lightbox-caption]');
+  if (dialog && big && caption) {
+    const images = document.querySelectorAll<HTMLImageElement>('.sl-markdown-content img:not(.pixel, .brand-icon, .not-content img)');
+    images.forEach((img) => {
+      img.tabIndex = 0;
+      img.setAttribute('role', 'button');
+      img.setAttribute('aria-label', `Enlarge: ${img.alt || 'screenshot'}`);
+      const open = () => {
+        big.src = img.currentSrc || img.src;
+        big.alt = img.alt;
+        caption.textContent = img.alt;
+        dialog.showModal();
+      };
+      img.addEventListener('click', open);
+      img.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          open();
+        }
+      });
+    });
+    dialog.addEventListener('click', (e) => {
+      if (e.target === dialog || e.target === big) dialog.close();
+    });
+  }
+</script>

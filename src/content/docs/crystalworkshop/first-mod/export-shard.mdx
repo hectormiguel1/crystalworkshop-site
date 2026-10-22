@@ -1,0 +1,36 @@
+---
+title: 4. Export a .cws shard
+description: Turn your pending change into a CrystalWorkshop Shard - mod name, description, version and changelog - and build it.
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+A **CrystalWorkshop Shard** (`.cws`) is the file players install. It stores your changes as patches against each player's own game files, so it carries no copy of the game's data.
+
+<Steps>
+
+1. **Choose Export…** (on the Changes page or in the top bar). The **Export changes** dialog plans what will be written. It never writes until you confirm.
+
+2. **Choose Shard (.cws).** The other choice, **Loose files (mod_data)**, writes the changed files straight into the game's `mod_data` folder for your own quick tests, with backups.
+
+3. **Fill in the Mod metadata form.** It opens the first time; **Edit metadata…** reopens it.
+
+   - **Mod name** and **Description** are required, for example *Cheaper Potions* and *Potions cost 60 gil in every shop.*
+   - **Changes** is this version's changelog entry in Markdown, for example `### Changed` and a list.
+   - **Version** is required and must be semver, for example `1.0.0`.
+   - **Author**, **Game** (read-only) and an optional **Image** are shown on PulseDepot's details page.
+   - **Output** defaults to `<game>/ff13_studio/exports/<name>.cws`.
+
+   ![The Mod metadata form of the Export dialog](../../../../assets/shots/cw/export-shard.webp)
+
+4. **Choose Continue, then Build shard (1 files).** CrystalWorkshop builds the shard, verifies it and writes it. Rows marked **Unverified** (routes not proven in game, which includes all of XIII-2 and LR) need **allow** ticked to be included.
+
+</Steps>
+
+**Result:** your shard is in `ff13_studio/exports/`. Your changes stay pending, so you can keep working and export again with a higher version.
+
+:::caution[Back up your author key]
+The first export creates your **author key** (in `~/.config/ff13-studio/author/` on Linux; the matching app-data folder on Windows). Each shard carries your project encrypted to this key, so only you can reopen it as an editable project with **File › Open shard…**. Without the key you cannot reopen your own shards as projects; the mod inside keeps working for players.
+:::
+
+More detail: [Mod export reference](../../mod-export/). Next: [5. Install and test it](../install-and-test/).

@@ -1,0 +1,38 @@
+---
+import { productNames, repoUrl } from '../lib/data';
+---
+
+<div class="roadmap not-content" data-roadmap data-products={JSON.stringify(productNames())}>
+  <p class="st-generated" data-generated hidden></p>
+  <div class="st-empty-state" data-unavailable>
+    <p class="st-empty-title">No roadmap to show yet</p>
+    <p>
+      The roadmap fills in by itself from the issue tracker once reports and plans are there.{' '}
+      {repoUrl && <a href={`${repoUrl}/milestones`} rel="noopener">See the milestones on GitHub</a>}
+    </p>
+  </div>
+  <div class="st-empty-state" data-roadmap-empty hidden>
+    <p class="st-empty-title">Nothing planned right now</p>
+    <p>No report or idea is scheduled at the moment. New ones appear here once they are confirmed.</p>
+  </div>
+  <div data-roadmap-content hidden>
+    <section data-planned>
+      <h2 id="planned-releases">Planned releases</h2>
+      <div class="st-milestones" data-milestones></div>
+    </section>
+    <section data-part="unscheduled">
+      <h2 id="not-scheduled">Confirmed, not scheduled yet</h2>
+      <ul class="st-list" data-list hidden></ul>
+      <p class="st-empty" data-empty hidden>Nothing waiting for a release slot.</p>
+    </section>
+    <section data-part="fixed">
+      <h2 id="recently-fixed">Recently fixed</h2>
+      <ul class="st-list" data-list hidden></ul>
+      <p class="st-empty" data-empty hidden>No fixes listed yet.</p>
+    </section>
+  </div>
+</div>
+
+<script>
+  import '../scripts/status-client';
+</script>

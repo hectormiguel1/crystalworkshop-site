@@ -1,0 +1,28 @@
+---
+import ReleaseCard from './ReleaseCard.astro';
+import { item, href } from '../lib/data';
+
+interface Props {
+  id: string;
+}
+const { id } = Astro.props;
+const m = item(id);
+const needs = (m.requires ?? []).map((r) => {
+  const it = item(r);
+  return { id: r, name: it.kind === 'mod' && it.title ? it.title : it.name, link: href(`${it.docs}/`), stage: it.stage };
+});
+---
+
+<div class="mod-header not-content">
+  <p class="mod-needs">
+    <span class="mod-needs-label">Needs</span>
+    {
+      needs.map((n) => (
+        <a class="chip" href={n.link}>
+          {n.name}
+        </a>
+      ))
+    }
+  </p>
+  <ReleaseCard id={id} compact />
+</div>

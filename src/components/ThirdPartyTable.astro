@@ -1,0 +1,102 @@
+---
+import notices from '../data/notices.json';
+import { href, productName } from '../lib/data';
+
+type C = { name: string; group: string; licence: string; copyright: string; source: string; packages: string[] };
+const components = notices.components as C[];
+const pkgs = [...new Set(components.flatMap((c) => c.packages))];
+const pkgLabel = (p: string) => {
+  const [prod, os] = [p.replace(/-(windows|linux)$/, ''), p.endsWith('windows') ? 'Windows' : 'Linux'];
+  return `${productName(prod)} (${os})`;
+};
+const families = ['MIT', 'Apache-2.0', 'BSD', 'Zlib', 'OFL', 'ISC', 'Unicode', 'MPL', 'GPL'];
+const family = (l: string) => families.filter((f) => l.includes(f));
+---
+
+<div class="tp not-content" data-tp>
+  <p>
+    Full texts, exactly as shipped in each package:{' '}
+    {
+      notices.files.map((f: { product: string; os: string; file: string }, i: number) => (
+        <>
+          {i > 0 && ', '}
+          <a href={href(f.file)}>{pkgLabel(`${f.product}-${f.os}`)}</a>
+        </>
+      ))
+    }.
+  </p>
+  <form class="filters" aria-label="Filter the third-party components" onsubmit="return false">
+    <label class="filter">
+      <span>Package</span>
+      <select name="tpkg">
+        <option value="">All packages</option>
+        {pkgs.map((p) => <option value={p}>{pkgLabel(p)}</option>)}
+      </select>
+    </label>
+    <label class="filter">
+      <span>Licence</span>
+      <select name="tlic">
+        <option value="">Any licence</option>
+        {families.map((f) => <option value={f}>{f}</option>)}
+      </select>
+    </label>
+    <label class="filter search">
+      <span>Search</span>
+      <input type="search" name="tq" placeholder="Component name" autocomplete="off" />
+    </label>
+  </form>
+  <p class="cl-count" aria-live="polite" data-count>{components.length} components</p>
+  <div class="matrix-scroll">
+    <table class="tp-table">
+      <thead>
+        <tr>
+          <th scope="col">Component</th>
+          <th scope="col">Licence</th>
+          <th scope="col">Copyright</th>
+          <th scope="col">Source</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          components.map((c) => (
+            <tr data-pkgs={c.packages.join(' ')} data-lic={family(c.licence).join(' ')} data-name={c.name.toLowerCase()}>
+              <th scope="row" data-label="Component">
+                {c.name}
+                {c.group !== 'Rust libraries' && <span class="pill kind">{c.group.split(',')[0]}</span>}
+              </th>
+              <td data-label="Licence">{c.licence}</td>
+              <td data-label="Copyright">{c.copyright || '—'}</td>
+              <td data-label="Source">{c.source ? <a href={c.source} rel="noopener">{c.source.replace(/^https?:\/\//, '')}</a> : '—'}</td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-tp]').forEach((root) => {
+    const rows = [...root.querySelectorAll<HTMLTableRowElement>('tbody tr')];
+    const count = root.querySelector<HTMLElement>('[data-count]')!;
+    const get = (n: string) => (root.querySelector<HTMLInputElement | HTMLSelectElement>(`[name="${n}"]`)?.value ?? '').trim();
+    const apply = () => {
+      const pkg = get('tpkg');
+      const lic = get('tlic');
+      const q = get('tq').toLowerCase();
+      let shown = 0;
+      for (const r of rows) {
+        const ok =
+          (!pkg || (r.dataset.pkgs ?? '').split(' ').includes(pkg)) &&
+          (!lic || (r.dataset.lic ?? '').split(' ').includes(lic)) &&
+          (!q || (r.dataset.name ?? '').includes(q));
+        r.hidden = !ok;
+        if (ok) shown++;
+      }
+      count.textContent = `${shown} component${shown === 1 ? '' : 's'}`;
+    };
+    root.addEventListener('input', apply);
+    root.addEventListener('change', apply);
+    apply();
+  });
+</script>

@@ -1,0 +1,22 @@
+---
+import notices from '../data/notices.json';
+import { releases, href } from '../lib/data';
+
+const files = new Map((notices.mods as { mod: string; file: string }[]).map((m) => [m.mod, m.file]));
+---
+
+<ul>
+  {
+    releases.mods.map((m) => (
+      <li>
+        <a href={href(`${m.docs}/#permissions`)}>{m.title ?? m.name}</a>
+        {files.has(m.id) && (
+          <>
+            {' · '}
+            <a href={href(files.get(m.id)!)}>third-party notices</a>
+          </>
+        )}
+      </li>
+    ))
+  }
+</ul>

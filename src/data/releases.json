@@ -1,0 +1,665 @@
+{
+  "date": "2026-10-21",
+  "downloadBase": "https://github.com/hectormiguel1/crystalworkshop-site/releases",
+  "games": {
+    "xiii": {
+      "id": "xiii",
+      "short": "XIII",
+      "name": "FINAL FANTASY XIII"
+    },
+    "xiii2": {
+      "id": "xiii2",
+      "short": "XIII-2",
+      "name": "FINAL FANTASY XIII-2"
+    },
+    "lr": {
+      "id": "lr",
+      "short": "LR",
+      "name": "LIGHTNING RETURNS: FINAL FANTASY XIII"
+    }
+  },
+  "products": [
+    {
+      "id": "crystalworkshop",
+      "name": "CrystalWorkshop",
+      "kind": "app",
+      "version": "0.1.0-alpha",
+      "stage": "alpha",
+      "date": "2026-10-21",
+      "games": [
+        "xiii",
+        "xiii2",
+        "lr"
+      ],
+      "summary": "A modding editor for the FINAL FANTASY XIII trilogy on PC: sheets, text, models, effects, scenes, scripts and the Crystarium. It exports CrystalWorkshop Shards (.cws) that players install with PulseDepot.",
+      "tag": "crystalworkshop-v0.1.0-alpha",
+      "docs": "crystalworkshop",
+      "icon": "crystalworkshop",
+      "contents": [
+        "CrystalWorkshop (editor)",
+        "crystalw (command line and MCP server)",
+        "PulseDepot",
+        "Vineflower 1.12.0",
+        "DXVK 3.1.1 (Windows package)",
+        "Wiki guides"
+      ],
+      "features": [
+        "**Sheets (WDB) and SQL**: edit typed database sheets, or query and change them with SQL (SELECT/UPDATE/INSERT/DELETE, joins to text). Changes show as a dry run before you apply them.",
+        "**Text (ZTR)**: every locale side by side, control tags with a tag palette, and add/rename/delete keys.",
+        "**Models**: inspect meshes, materials, textures, skeleton and motions, rendered with the game's own shaders (D3D9 via DXVK). Round-trip through a glTF workspace (Blender) with a dry-run import.",
+        "**VFX**: package tree, typed inspector, field edits (XIII), safe model/texture reference swaps, and playback.",
+        "**Scenes (LYB)**: a 3D scene editor with fly camera, picking, move/rotate/scale gizmo, typed fields, and add/duplicate/delete of placements. XIII-2 and LR layouts are Experimental.",
+        "**Scripts (CLB)**: decompile to Java, edit, compile and merge (JDK 17+ needed).",
+        "**Actions, events, sound, Crystarium (XIII), battle (XIII)**.",
+        "**Export**: a portable .cws shard with metadata, changelog and image, or loose files for your own testing.",
+        "**AI (MCP)**: `crystalw --mcp` or the in-app server lets Claude Code, Claude Desktop or Codex use the same editors, with progressive tool discovery and a read-only kill switch."
+      ],
+      "platforms": {
+        "windows": {
+          "file": "crystalworkshop-0.1.0-alpha-windows-x86_64.zip",
+          "bytes": 52971476,
+          "sha256": "599cde73f1a76cb54b18664d91d4a36fed1bf7a45223f074b5088377f2cef51e",
+          "requirements": [
+            "**CrystalWorkshop previews:** Bundled DXVK 3.1.1; a GPU and driver with Vulkan 1.3",
+            "**Script mods and script editing:** A JDK 17 or newer (not bundled), e.g. Eclipse Temurin"
+          ],
+          "label": "Windows 10/11 x64"
+        },
+        "linux": {
+          "file": "crystalworkshop-0.1.0-alpha-linux-x86_64.tar.gz",
+          "bytes": 54359386,
+          "sha256": "f3d0cc6404541945a5ba1c28bf0c9de791adf893ce7098381576ba657efe9523",
+          "requirements": [
+            "**CrystalWorkshop previews:** The system's DXVK-native (`libdxvk_d3d9.so`, e.g. Arch `libdxvk`) with SDL3 or SDL2; Vulkan 1.3",
+            "**Script mods and script editing:** A JDK 17 or newer from your distribution (not bundled)"
+          ],
+          "label": "Linux x86_64"
+        }
+      },
+      "changelog": [
+        {
+          "version": "0.1.0-alpha",
+          "text": "first public release."
+        }
+      ],
+      "knownIssues": [
+        "XIII-2/LR VFX fields are read-only, and their exports are unverified in game.",
+        "Model imports apply only Tier A changes (no new vertices, materials or bones).",
+        "Not yet tested in game for this release; unsigned; no installer; no AppImage."
+      ]
+    },
+    {
+      "id": "pulsedepot",
+      "name": "PulseDepot",
+      "kind": "app",
+      "version": "0.1.0-beta",
+      "stage": "beta",
+      "date": "2026-10-21",
+      "games": [
+        "xiii",
+        "xiii2",
+        "lr"
+      ],
+      "summary": "The mod manager for the FINAL FANTASY XIII trilogy on PC: install CrystalWorkshop shards and older Nova Chrysalia mod packages without touching your archives or your saves.",
+      "tag": "pulsedepot-v0.1.0-beta",
+      "docs": "pulsedepot",
+      "icon": "pulsedepot",
+      "contents": [
+        "PulseDepot",
+        "Crux (NovaFix addon and standalone builds)",
+        "Vineflower 1.12.0 (for script mods)",
+        "Guide with screenshots"
+      ],
+      "features": [
+        "FF13 / XIII2 / LR tabs; each game has its own folder, list and launcher options. Steam games are detected automatically on Windows and Linux.",
+        "Add **.cws** shards (older .bin shards too) and Nova Chrysalia **.ncmp**/.zip packages with `Add mod…` or drag and drop.",
+        "Enable, disable and order mods (later mods win). Conflicts are flagged, and text, database and WPD files are merged entry by entry.",
+        "**Review changes** shows exactly what will be installed, updated, downgraded or removed before anything is written. **Apply changes** installs the set.",
+        "Version-aware: updates replace a listed mod, downgrades ask first, and changelogs show what is new.",
+        "A clear warning for mods that ship native code.",
+        "Crux is installed and verified by SHA-256 for you: the NovaFix addon if NovaFix is present, otherwise the standalone build.",
+        "Saves are never read or written. Mod settings live in Crux's own per-slot storage.",
+        "Game launcher (Steam), Create package, and Format tools (WPD/WDB/ZTR/filelist/TRB/SCD/xlsx/SQLite conversions)."
+      ],
+      "platforms": {
+        "windows": {
+          "file": "pulsedepot-0.1.0-beta-windows-x86_64.zip",
+          "bytes": 14835234,
+          "sha256": "a82aaab04c640ae08fca00691e0633d976fd36822d97d35fc7dffb80dc9413ea",
+          "requirements": [
+            "**PulseDepot:** Windows 10/11 x64; D3D12 or Vulkan",
+            "**The game:** Steam",
+            "**Script mods and script editing:** A JDK 17 or newer (not bundled), e.g. Eclipse Temurin"
+          ],
+          "label": "Windows 10/11 x64"
+        },
+        "linux": {
+          "file": "pulsedepot-0.1.0-beta-linux-x86_64.tar.gz",
+          "bytes": 16716648,
+          "sha256": "ba4535a2515f5b0df65d1503d9ffaf9b030f54fa85d71f85ee927f91b33a71d2",
+          "requirements": [
+            "**PulseDepot:** x86_64; Vulkan or OpenGL",
+            "**The game:** Steam with Proton. The standalone Crux needs the launch option `WINEDLLOVERRIDES=\"version=n,b\" %command%`",
+            "**Script mods and script editing:** A JDK 17 or newer from your distribution (not bundled)"
+          ],
+          "label": "Linux x86_64"
+        }
+      },
+      "changelog": [
+        {
+          "version": "0.1.0-beta",
+          "text": "first public release. Crux in two builds with NovaFix detection, .cws shards, Nova Chrysalia package import, review/apply, changelogs and version prompts, Windows and Linux builds."
+        }
+      ],
+      "knownIssues": [
+        "Not yet tested on real Windows or in game (see BUILD-INFO.json).",
+        "Unsigned; no installer; no AppImage on Linux.",
+        "Uninstalling never removes Crux itself.",
+        "The list cannot be reordered by drag and drop; use the ▲/▼ buttons."
+      ]
+    },
+    {
+      "id": "crux",
+      "name": "Crux",
+      "kind": "component",
+      "version": "0.1.0-beta",
+      "stage": "beta",
+      "date": "2026-10-21",
+      "games": [
+        "xiii",
+        "xiii2",
+        "lr"
+      ],
+      "summary": "The mod host the game loads. It serves the merged mod image to the game while it runs and loads the mods’ native code. It ships inside PulseDepot, which installs the right build for you.",
+      "tag": "pulsedepot-v0.1.0-beta",
+      "bundledWith": "pulsedepot",
+      "docs": "crux",
+      "icon": "crux",
+      "builds": [
+        {
+          "file": "Crux.dll",
+          "variant": "addon",
+          "bytes": 1634304,
+          "sha256": "06b5d6607022fbd1a8d75268c26028b8a23cdb87652caeeba8aa7ca71518be9b",
+          "install": "Crux.dll in the NovaFix addons folder (NovaFix loads addons\\*.dll)"
+        },
+        {
+          "file": "version.dll",
+          "variant": "standalone",
+          "bytes": 1638400,
+          "sha256": "d8f1f14b0395fc10daeaa2835aaf0ca3a949a705eae2b7be2e32d3388e816b44",
+          "install": "version.dll beside the game executable, without NovaFix; forwards every export to System32\\version.dll"
+        }
+      ],
+      "platforms": {
+        "windows": {
+          "file": "pulsedepot-0.1.0-beta-windows-x86_64.zip",
+          "bytes": 14835234,
+          "sha256": "a82aaab04c640ae08fca00691e0633d976fd36822d97d35fc7dffb80dc9413ea",
+          "requirements": [
+            "**Installed by PulseDepot** 0.1.0-beta: it checks each DLL's SHA-256 before installing it.",
+            "**The game:** Steam"
+          ],
+          "label": "Windows 10/11 x64"
+        },
+        "linux": {
+          "file": "pulsedepot-0.1.0-beta-linux-x86_64.tar.gz",
+          "bytes": 16716648,
+          "sha256": "ba4535a2515f5b0df65d1503d9ffaf9b030f54fa85d71f85ee927f91b33a71d2",
+          "requirements": [
+            "**Installed by PulseDepot** 0.1.0-beta: it checks each DLL's SHA-256 before installing it.",
+            "**The game:** Steam with Proton. The standalone Crux needs the launch option `WINEDLLOVERRIDES=\"version=n,b\" %command%`"
+          ],
+          "label": "Linux x86_64"
+        }
+      },
+      "changelog": [
+        {
+          "version": "0.1.0-beta",
+          "text": "First public release, bundled with PulseDepot 0.1.0-beta. Crux.dll (NovaFix addon), version.dll (standalone), SHA-256 verified by PulseDepot before install."
+        }
+      ]
+    }
+  ],
+  "mods": [
+    {
+      "id": "drop-changes",
+      "name": "Drop Changes",
+      "title": "XIII — Drop Changes",
+      "kind": "mod",
+      "version": "0.1.0",
+      "stage": "release",
+      "date": "2026-10-21",
+      "games": [
+        "xiii"
+      ],
+      "stores": [
+        "Steam"
+      ],
+      "summary": "Choose what FINAL FANTASY XIII (Steam) gives you after battles and from treasure:",
+      "tag": "drop-changes-v0.1.0",
+      "docs": "mods/drop-changes",
+      "icon": "shard",
+      "requires": [
+        "pulsedepot",
+        "crux",
+        "mod-settings"
+      ],
+      "platforms": {
+        "windows": {
+          "file": "xiii-drop-changes-0.1.0.cws",
+          "bytes": 2817497,
+          "sha256": "42fa67d03bca6fa375594644b34c0b1e9f824f19d1bff2938d3c49ae1105b74e",
+          "requirements": [
+            "FINAL FANTASY XIII, Steam version, on Windows or on Linux (Proton).",
+            "**PulseDepot** (beta), the mod manager. It also installs **Crux**, which loads this mod in the game.",
+            "**XIII — Mod Settings** 0.1.0, for the in-game settings menu. Without it you cannot turn Drop Changes on."
+          ],
+          "label": "Windows"
+        },
+        "linux": {
+          "file": "xiii-drop-changes-0.1.0.cws",
+          "bytes": 2817497,
+          "sha256": "42fa67d03bca6fa375594644b34c0b1e9f824f19d1bff2938d3c49ae1105b74e",
+          "requirements": [
+            "FINAL FANTASY XIII, Steam version, on Windows or on Linux (Proton).",
+            "**PulseDepot** (beta), the mod manager. It also installs **Crux**, which loads this mod in the game.",
+            "**XIII — Mod Settings** 0.1.0, for the in-game settings menu. Without it you cannot turn Drop Changes on.",
+            "**Proton:** without NovaFix, the game’s Steam launch options need `WINEDLLOVERRIDES=\"version=n,b\" %command%` so Crux loads."
+          ],
+          "label": "Linux (Proton)"
+        }
+      },
+      "screenshots": [
+        {
+          "id": "drop-changes-categories",
+          "caption": "Drop Changes — settings categories",
+          "alt": "Final Fantasy XIII settings menu listing the Drop Changes categories: General, Drop chances, Drop quantities, Battle rewards, Quantities by item type, Shrouds, Advanced, Catalog effects, Reward display, Treasure boxes and Treasure multipliers by item type.",
+          "featured": true,
+          "thumb": "shots/mods/drop-changes/drop-changes-categories-thumb.webp"
+        },
+        {
+          "id": "drop-changes-drop-chances",
+          "caption": "Drop Changes — drop chance settings",
+          "alt": "Drop chances page with Rate mode set to Native + bonus, common and rare chance bonuses at 0%, and independent common and rare rolls turned off.",
+          "featured": true,
+          "thumb": "shots/mods/drop-changes/drop-changes-drop-chances-thumb.webp"
+        },
+        {
+          "id": "drop-changes-shrouds",
+          "caption": "Drop Changes — shroud drop settings",
+          "alt": "Shrouds page with an override for the shroud drop rate (off, 50%) and a shroud drop quantity setting.",
+          "featured": true,
+          "thumb": "shots/mods/drop-changes/drop-changes-shrouds-thumb.webp"
+        },
+        {
+          "id": "drop-changes-reward-display",
+          "caption": "Drop Changes — battle results display settings",
+          "alt": "Reward display page with options to show earned gil, show item icons, mark rare drops and choose reward name colors.",
+          "featured": true,
+          "thumb": "shots/mods/drop-changes/drop-changes-reward-display-thumb.webp"
+        },
+        {
+          "id": "drop-changes-advanced",
+          "caption": "Drop Changes — advanced settings",
+          "alt": "Advanced page with the item stack cap set to 999.",
+          "featured": false,
+          "thumb": "shots/mods/drop-changes/drop-changes-advanced-thumb.webp"
+        },
+        {
+          "id": "drop-changes-battle-rewards",
+          "caption": "Drop Changes — battle reward settings",
+          "alt": "Battle rewards page with the Crystarium reward rate at 100% and a gil reward set as a percentage of CP.",
+          "featured": false,
+          "thumb": "shots/mods/drop-changes/drop-changes-battle-rewards-thumb.webp"
+        },
+        {
+          "id": "drop-changes-catalog-effects",
+          "caption": "Drop Changes — catalog effect settings",
+          "alt": "Catalog effects page with common and rare catalog effect bonuses, both at 0%.",
+          "featured": false,
+          "thumb": "shots/mods/drop-changes/drop-changes-catalog-effects-thumb.webp"
+        },
+        {
+          "id": "drop-changes-drop-quantities",
+          "caption": "Drop Changes — drop quantity settings",
+          "alt": "Drop quantities page with common and rare drop quantity both set to 0, which keeps the game's own amounts.",
+          "featured": false,
+          "thumb": "shots/mods/drop-changes/drop-changes-drop-quantities-thumb.webp"
+        },
+        {
+          "id": "drop-changes-quantities-by-item-type",
+          "caption": "Drop Changes — drop quantities by item type",
+          "alt": "Quantities by item type page with separate quantity settings for consumable items, organic components, mechanical components, catalysts, and weapons and accessories.",
+          "featured": false,
+          "thumb": "shots/mods/drop-changes/drop-changes-quantities-by-item-type-thumb.webp"
+        },
+        {
+          "id": "drop-changes-treasure-boxes",
+          "caption": "Drop Changes — treasure box settings",
+          "alt": "Treasure boxes page with a switch to modify treasure quantities, a base item quantity and a multiplier for all treasure items.",
+          "featured": false,
+          "thumb": "shots/mods/drop-changes/drop-changes-treasure-boxes-thumb.webp"
+        },
+        {
+          "id": "drop-changes-treasure-multipliers-by-item-type",
+          "caption": "Drop Changes — treasure multipliers by item type",
+          "alt": "Treasure multipliers by item type page with separate multipliers for consumables and shrouds, organic components, mechanical components, catalysts, weapons and accessories, all at 100%.",
+          "featured": false,
+          "thumb": "shots/mods/drop-changes/drop-changes-treasure-multipliers-by-item-type-thumb.webp"
+        }
+      ]
+    },
+    {
+      "id": "hard-mode",
+      "name": "Hard Mode",
+      "title": "XIII — Hard Mode",
+      "kind": "mod",
+      "version": "0.1.0",
+      "stage": "release",
+      "date": "2026-10-21",
+      "games": [
+        "xiii"
+      ],
+      "stores": [
+        "Steam"
+      ],
+      "summary": "Hard Mode makes the enemies in FINAL FANTASY XIII (Steam) tougher. When a battle starts, each enemy is made stronger:",
+      "tag": "hard-mode-v0.1.0",
+      "docs": "mods/hard-mode",
+      "icon": "shard",
+      "requires": [
+        "pulsedepot",
+        "crux",
+        "mod-settings"
+      ],
+      "platforms": {
+        "windows": {
+          "file": "xiii-hard-mode-0.1.0.cws",
+          "bytes": 2688430,
+          "sha256": "cdc54f964e5115bd69c63e1956e54fa5535232c824bc1a8a0ee2da5026799441",
+          "requirements": [
+            "FINAL FANTASY XIII, Steam version, on Windows or on Linux (Proton).",
+            "**PulseDepot** (beta), the mod manager. It also installs **Crux**, which loads this mod in the game.",
+            "**XIII — Mod Settings** 0.1.0, for the in-game settings menu. Without it you cannot turn Hard Mode on."
+          ],
+          "label": "Windows"
+        },
+        "linux": {
+          "file": "xiii-hard-mode-0.1.0.cws",
+          "bytes": 2688430,
+          "sha256": "cdc54f964e5115bd69c63e1956e54fa5535232c824bc1a8a0ee2da5026799441",
+          "requirements": [
+            "FINAL FANTASY XIII, Steam version, on Windows or on Linux (Proton).",
+            "**PulseDepot** (beta), the mod manager. It also installs **Crux**, which loads this mod in the game.",
+            "**XIII — Mod Settings** 0.1.0, for the in-game settings menu. Without it you cannot turn Hard Mode on.",
+            "**Proton:** without NovaFix, the game’s Steam launch options need `WINEDLLOVERRIDES=\"version=n,b\" %command%` so Crux loads."
+          ],
+          "label": "Linux (Proton)"
+        }
+      },
+      "screenshots": [
+        {
+          "id": "hard-mode-categories",
+          "caption": "Hard Mode — settings categories",
+          "alt": "Final Fantasy XIII settings menu listing the Hard Mode categories: General, Enemy stats, Party-average minimums and Battle rules.",
+          "featured": true,
+          "thumb": "shots/mods/hard-mode/hard-mode-categories-thumb.webp"
+        },
+        {
+          "id": "hard-mode-enemy-stats",
+          "caption": "Hard Mode — enemy stats settings",
+          "alt": "Enemy stats page with enemy HP at 150%, enemy Strength at 125% and enemy Magic at 125%.",
+          "featured": true,
+          "thumb": "shots/mods/hard-mode/hard-mode-enemy-stats-thumb.webp"
+        },
+        {
+          "id": "hard-mode-party-average-minimums",
+          "caption": "Hard Mode — party-average minimum settings",
+          "alt": "Party-average minimums page with party-based scaling on, an outnumbered threshold of 150%, and HP, Strength and Magic floors measured against the party average.",
+          "featured": true,
+          "thumb": "shots/mods/hard-mode/hard-mode-party-average-minimums-thumb.webp"
+        },
+        {
+          "id": "hard-mode-battle-rules",
+          "caption": "Hard Mode — battle rule settings",
+          "alt": "Battle rules page with boss scaling on and the Easy-mode override on.",
+          "featured": true,
+          "thumb": "shots/mods/hard-mode/hard-mode-battle-rules-thumb.webp"
+        }
+      ]
+    },
+    {
+      "id": "mod-settings",
+      "name": "XIII Mod Settings",
+      "title": "XIII — Mod Settings",
+      "kind": "mod",
+      "version": "0.1.0",
+      "stage": "release",
+      "date": "2026-10-21",
+      "games": [
+        "xiii"
+      ],
+      "stores": [
+        "Steam"
+      ],
+      "summary": "Adds Configuration → Mod Settings to FINAL FANTASY XIII (Steam): one in-game menu for the settings of every installed mod that has them, such as Hard Mode and Drop Changes.",
+      "tag": "mod-settings-v0.1.0",
+      "docs": "mods/mod-settings",
+      "icon": "shard",
+      "requires": [
+        "pulsedepot",
+        "crux"
+      ],
+      "platforms": {
+        "windows": {
+          "file": "xiii-mod-settings-0.1.0.cws",
+          "bytes": 2701837,
+          "sha256": "d7649080a9cdc382d5686db9686f8e3e3a74b527c9062cc019afce0bd690e21e",
+          "requirements": [
+            "FINAL FANTASY XIII, Steam version, on Windows or on Linux (Proton).",
+            "**PulseDepot** (beta), the mod manager. It also installs **Crux**, which loads this mod in the game."
+          ],
+          "label": "Windows"
+        },
+        "linux": {
+          "file": "xiii-mod-settings-0.1.0.cws",
+          "bytes": 2701837,
+          "sha256": "d7649080a9cdc382d5686db9686f8e3e3a74b527c9062cc019afce0bd690e21e",
+          "requirements": [
+            "FINAL FANTASY XIII, Steam version, on Windows or on Linux (Proton).",
+            "**PulseDepot** (beta), the mod manager. It also installs **Crux**, which loads this mod in the game.",
+            "**Proton:** without NovaFix, the game’s Steam launch options need `WINEDLLOVERRIDES=\"version=n,b\" %command%` so Crux loads."
+          ],
+          "label": "Linux (Proton)"
+        }
+      },
+      "screenshots": [
+        {
+          "id": "mod-settings-entry",
+          "caption": "Mod Settings — entry in the game's Settings menu",
+          "alt": "Final Fantasy XIII Settings menu with a new Mod Settings entry at the end of the list.",
+          "featured": true,
+          "thumb": "shots/mods/mod-settings/mod-settings-entry-thumb.webp"
+        },
+        {
+          "id": "mod-settings-mod-list",
+          "caption": "Mod Settings — list of installed mods",
+          "alt": "Mod Settings page listing installed mods, including No Post-Battle Healing, Accessory Expansion, Camera, Drop Changes, Early Upgrade, Hard Mode and UI Scale.",
+          "featured": true,
+          "thumb": "shots/mods/mod-settings/mod-settings-mod-list-thumb.webp"
+        }
+      ]
+    },
+    {
+      "id": "no-post-battle-heal",
+      "name": "No Post-Battle Healing",
+      "title": "No Post-Battle Healing",
+      "kind": "mod",
+      "version": "0.1.0",
+      "stage": "release",
+      "date": "2026-10-21",
+      "games": [
+        "xiii"
+      ],
+      "stores": [
+        "Steam"
+      ],
+      "summary": "No Post-Battle Healing makes the damage your party takes in FINAL FANTASY XIII (Steam) last. After a victory, each party member keeps the HP they had left and starts their next battle with it, instead of being fully healed.",
+      "tag": "no-post-battle-heal-v0.1.0",
+      "docs": "mods/no-post-battle-heal",
+      "icon": "shard",
+      "requires": [
+        "pulsedepot",
+        "crux",
+        "mod-settings"
+      ],
+      "platforms": {
+        "windows": {
+          "file": "no-post-battle-heal-0.1.0.cws",
+          "bytes": 2769996,
+          "sha256": "86b7056a6cbbc9203c010ca8e93b8c3d1b8936ba613e43c7c98957c5870e714e",
+          "requirements": [
+            "FINAL FANTASY XIII, Steam version, on Windows or on Linux (Proton).",
+            "**PulseDepot** (beta), the mod manager. It also installs **Crux**, which loads this mod in the game.",
+            "**XIII — Mod Settings** 0.1.0, for the in-game settings menu. Without it you cannot turn the mod on."
+          ],
+          "label": "Windows"
+        },
+        "linux": {
+          "file": "no-post-battle-heal-0.1.0.cws",
+          "bytes": 2769996,
+          "sha256": "86b7056a6cbbc9203c010ca8e93b8c3d1b8936ba613e43c7c98957c5870e714e",
+          "requirements": [
+            "FINAL FANTASY XIII, Steam version, on Windows or on Linux (Proton).",
+            "**PulseDepot** (beta), the mod manager. It also installs **Crux**, which loads this mod in the game.",
+            "**XIII — Mod Settings** 0.1.0, for the in-game settings menu. Without it you cannot turn the mod on.",
+            "**Proton:** without NovaFix, the game’s Steam launch options need `WINEDLLOVERRIDES=\"version=n,b\" %command%` so Crux loads."
+          ],
+          "label": "Linux (Proton)"
+        }
+      },
+      "screenshots": [
+        {
+          "id": "no-post-battle-heal-settings",
+          "caption": "No Post-Battle Healing — settings",
+          "alt": "No Post-Battle Healing settings page with the option to carry HP between battles.",
+          "featured": true,
+          "thumb": "shots/mods/no-post-battle-heal/no-post-battle-heal-settings-thumb.webp"
+        }
+      ]
+    },
+    {
+      "id": "paradigm-tuning",
+      "name": "Paradigm Tuning",
+      "title": "Paradigm Tuning",
+      "kind": "mod",
+      "version": "0.1.0",
+      "stage": "release",
+      "date": "2026-10-21",
+      "games": [
+        "xiii"
+      ],
+      "stores": [
+        "Steam"
+      ],
+      "summary": "Paradigm Tuning makes the party AI in FINAL FANTASY XIII (Steam) smarter, and lets you choose how your companions pick their targets in each paradigm. In the Paradigm Deck, every paradigm can be Normal, Cross (-X) or Wide (-W):",
+      "tag": "paradigm-tuning-v0.1.0",
+      "docs": "mods/paradigm-tuning",
+      "icon": "shard",
+      "requires": [
+        "pulsedepot",
+        "crux"
+      ],
+      "platforms": {
+        "windows": {
+          "file": "paradigm-tuning-0.1.0.cws",
+          "bytes": 2718849,
+          "sha256": "b3e5502f566a924f41f570a9107046403f901ba0c4bd25b9de9aca7174071c74",
+          "requirements": [
+            "FINAL FANTASY XIII, Steam version, on Windows or on Linux (Proton).",
+            "**PulseDepot** (beta), the mod manager. It also installs **Crux**, which loads this mod in the game.",
+            "No settings menu is needed: you make your choices in the Paradigm Deck."
+          ],
+          "label": "Windows"
+        },
+        "linux": {
+          "file": "paradigm-tuning-0.1.0.cws",
+          "bytes": 2718849,
+          "sha256": "b3e5502f566a924f41f570a9107046403f901ba0c4bd25b9de9aca7174071c74",
+          "requirements": [
+            "FINAL FANTASY XIII, Steam version, on Windows or on Linux (Proton).",
+            "**PulseDepot** (beta), the mod manager. It also installs **Crux**, which loads this mod in the game.",
+            "No settings menu is needed: you make your choices in the Paradigm Deck.",
+            "**Proton:** without NovaFix, the game’s Steam launch options need `WINEDLLOVERRIDES=\"version=n,b\" %command%` so Crux loads."
+          ],
+          "label": "Linux (Proton)"
+        }
+      },
+      "screenshots": [
+        {
+          "id": "paradigm-tuning-paradigm-deck",
+          "caption": "Paradigm Tuning — new paradigms in the Paradigm Deck",
+          "alt": "Paradigm Deck screen with Lightning and Snow as Commandos and Vanille as a Ravager, showing the paradigms Aggression, Aggression-X and Aggression-W; the help line explains how the Ravager and Commandos pick their targets.",
+          "featured": true,
+          "thumb": "shots/mods/paradigm-tuning/paradigm-tuning-paradigm-deck-thumb.webp"
+        }
+      ]
+    },
+    {
+      "id": "xiii2-ui-scale",
+      "name": "XIII-2 UI Scale",
+      "title": "XIII-2 — Field and Battle HUD Scale",
+      "kind": "mod",
+      "version": "0.1.0",
+      "stage": "release",
+      "date": "2026-10-21",
+      "games": [
+        "xiii2"
+      ],
+      "stores": [
+        "Steam",
+        "Microsoft Store"
+      ],
+      "summary": "Resize the field and battle HUD of FINAL FANTASY XIII-2. You set the size separately for the field and for battle, from 25% to 200%. The default for both is 50%; 100% is the normal size.",
+      "tag": "xiii2-ui-scale-v0.1.0",
+      "docs": "mods/xiii2-ui-scale",
+      "icon": "shard",
+      "requires": [
+        "pulsedepot",
+        "crux"
+      ],
+      "platforms": {
+        "windows": {
+          "file": "xiii2-ui-scale-0.1.0.cws",
+          "bytes": 1081192,
+          "sha256": "5bfb599e2d83a652e405a092ef88665491508bf88ed53de93a3352443eac44ae",
+          "requirements": [
+            "FINAL FANTASY XIII-2, Steam or Microsoft Store version, on Windows or on Linux (Proton).",
+            "**PulseDepot** (beta), the mod manager. It also installs **Crux**, which loads this mod in the game.",
+            "No separate settings mod is needed: this mod adds its own **Mod Settings** page."
+          ],
+          "label": "Windows"
+        },
+        "linux": {
+          "file": "xiii2-ui-scale-0.1.0.cws",
+          "bytes": 1081192,
+          "sha256": "5bfb599e2d83a652e405a092ef88665491508bf88ed53de93a3352443eac44ae",
+          "requirements": [
+            "FINAL FANTASY XIII-2, Steam or Microsoft Store version, on Windows or on Linux (Proton).",
+            "**PulseDepot** (beta), the mod manager. It also installs **Crux**, which loads this mod in the game.",
+            "No separate settings mod is needed: this mod adds its own **Mod Settings** page.",
+            "**Proton:** without NovaFix, the game’s Steam launch options need `WINEDLLOVERRIDES=\"version=n,b\" %command%` so Crux loads."
+          ],
+          "label": "Linux (Proton)"
+        }
+      },
+      "screenshots": []
+    }
+  ],
+  "knownIssues": [
+    "The packages are not code-signed (Windows SmartScreen asks once); there is no installer.",
+    "PulseDepot never removes Crux: uninstalling every mod leaves <code>Crux.dll</code> or <code>version.dll</code> in place.",
+    "CrystalWorkshop: LR time of day is MCP-only; XIII-2 and LR exports are unverified in game."
+  ]
+}

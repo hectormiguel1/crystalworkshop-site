@@ -1,0 +1,189 @@
+[
+  {
+    "product": "crystalworkshop",
+    "name": "CrystalWorkshop",
+    "kind": "app",
+    "games": [
+      "xiii",
+      "xiii2",
+      "lr"
+    ],
+    "version": "0.1.0-alpha",
+    "stage": "alpha",
+    "date": "2026-10-21",
+    "title": "First public release",
+    "items": [
+      "<strong>Sheets (WDB) and SQL</strong>",
+      "<strong>Text (ZTR)</strong>",
+      "<strong>Models</strong>",
+      "<strong>VFX</strong>",
+      "<strong>Scenes (LYB)</strong>",
+      "<strong>Scripts (CLB)</strong>",
+      "<strong>Actions, events, sound, Crystarium (XIII), battle (XIII)</strong>.",
+      "<strong>Export</strong>",
+      "<strong>AI (MCP)</strong>"
+    ],
+    "id": "crystalworkshop-0.1.0-alpha"
+  },
+  {
+    "product": "pulsedepot",
+    "name": "PulseDepot",
+    "kind": "app",
+    "games": [
+      "xiii",
+      "xiii2",
+      "lr"
+    ],
+    "version": "0.1.0-beta",
+    "stage": "beta",
+    "date": "2026-10-21",
+    "title": "First public release",
+    "items": [
+      "Crux in two builds with NovaFix detection",
+      ".cws shards",
+      "Nova Chrysalia package import",
+      "Review/apply",
+      "Changelogs and version prompts",
+      "Windows and Linux builds"
+    ],
+    "id": "pulsedepot-0.1.0-beta"
+  },
+  {
+    "product": "crux",
+    "name": "Crux",
+    "kind": "component",
+    "games": [
+      "xiii",
+      "xiii2",
+      "lr"
+    ],
+    "version": "0.1.0-beta",
+    "stage": "beta",
+    "date": "2026-10-21",
+    "title": "First public release, bundled with PulseDepot 0.1.0-beta",
+    "items": [
+      "Crux.dll (NovaFix addon)",
+      "version.dll (standalone)",
+      "SHA-256 verified by PulseDepot before install"
+    ],
+    "id": "crux-0.1.0-beta"
+  },
+  {
+    "product": "drop-changes",
+    "name": "Drop Changes",
+    "kind": "mod",
+    "games": [
+      "xiii"
+    ],
+    "version": "0.1.0",
+    "stage": "release",
+    "date": "2026-10-21",
+    "title": "First release",
+    "items": [
+      "Drop chance modes (Native, Native + bonus, Fixed) and quantities.",
+      "Shroud drop override.",
+      "CP rate and gil as a share of CP.",
+      "Raised item limit.",
+      "Treasure-box quantities.",
+      "Catalog bonuses.",
+      "Results-screen options.",
+      "Settings kept for each save slot."
+    ],
+    "id": "drop-changes-0.1.0"
+  },
+  {
+    "product": "hard-mode",
+    "name": "Hard Mode",
+    "kind": "mod",
+    "games": [
+      "xiii"
+    ],
+    "version": "0.1.0",
+    "stage": "release",
+    "date": "2026-10-21",
+    "title": "First release",
+    "items": [
+      "Enemy HP, Strength and Magic multipliers.",
+      "Minimums based on your party's average, with an outnumber guard.",
+      "Boss scaling.",
+      "Easy-mode override.",
+      "Settings kept for each save slot."
+    ],
+    "id": "hard-mode-0.1.0"
+  },
+  {
+    "product": "mod-settings",
+    "name": "XIII Mod Settings",
+    "kind": "mod",
+    "games": [
+      "xiii"
+    ],
+    "version": "0.1.0",
+    "stage": "release",
+    "date": "2026-10-21",
+    "title": "First release",
+    "items": [
+      "Configuration → Mod Settings with a list of mods, their setting groups and settings, split into pages.",
+      "Shows the settings of NovaFix add-ons too.",
+      "Menu texts in all eleven game languages."
+    ],
+    "id": "mod-settings-0.1.0"
+  },
+  {
+    "product": "no-post-battle-heal",
+    "name": "No Post-Battle Healing",
+    "kind": "mod",
+    "games": [
+      "xiii"
+    ],
+    "version": "0.1.0",
+    "stage": "release",
+    "date": "2026-10-21",
+    "title": "First release",
+    "items": [
+      "HP carries from a victory into the next battle; a knocked-out member starts with 1 HP.",
+      "Restorisol shroud at Unicorn Mart restores the whole party.",
+      "Setting and carried HP kept for each save slot."
+    ],
+    "id": "no-post-battle-heal-0.1.0"
+  },
+  {
+    "product": "paradigm-tuning",
+    "name": "Paradigm Tuning",
+    "kind": "mod",
+    "games": [
+      "xiii"
+    ],
+    "version": "0.1.0",
+    "stage": "release",
+    "date": "2026-10-21",
+    "title": "First release",
+    "items": [
+      "Normal, Cross or Wide for each paradigm, chosen in the Paradigm Deck and shown on the battle labels.",
+      "Role-aware Cross and Wide targeting.",
+      "Synergists queue several enhancements; Saboteurs keep casting.",
+      "Help texts in eleven languages.",
+      "Choices kept for each save slot."
+    ],
+    "id": "paradigm-tuning-0.1.0"
+  },
+  {
+    "product": "xiii2-ui-scale",
+    "name": "XIII-2 UI Scale",
+    "kind": "mod",
+    "games": [
+      "xiii2"
+    ],
+    "version": "0.1.0",
+    "stage": "release",
+    "date": "2026-10-21",
+    "title": "First release",
+    "items": [
+      "Field and battle HUD scaling with separate sizes.",
+      "Moogle Clock and Feral Link prompt kept in place.",
+      "Scaled cinematic-action prompts.",
+      "Mod Settings page."
+    ],
+    "id": "xiii2-ui-scale-0.1.0"
+  }
+]

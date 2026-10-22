@@ -1,0 +1,57 @@
+---
+title: 5. Review and apply
+description: Build the Crux image from every enabled mod, read what Apply will do, then install it. What Apply writes, and when it refuses.
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+**Goal:** your enabled mods are merged into one **Crux image** (`active.crximg`) and installed, together with Crux.
+
+<Steps>
+
+1. **Close the game.**
+
+2. **Choose Review changes.** PulseDepot builds the merged image from every enabled mod and shows what Apply will do. It writes nothing yet. The review shows:
+
+   - how many mods it will install, update, downgrade, rebuild or remove;
+   - where the merged image goes and which game executable it targets;
+   - any memory patches and native code;
+   - each mod's changed files, the conflicts and any Crystarium merge.
+
+   ![Review changes on four XIII shards: nothing is written yet](../../../assets/shots/pd/review.webp)
+
+3. **Choose Apply changes.** Apply checks again that nothing changed since the review, then installs the set. The status line reports, for example:
+
+   - "NovaFix found." or "NovaFix not found.";
+   - "Installed Crux as …\Crux.dll (SHA-256 verified)." or "Crux is up to date";
+   - "Applied: N mod(s) installed. Restart the game to load the new set."
+
+4. **Start the game.** See [Launch the game](../launch/). Restart the game after every Apply.
+
+</Steps>
+
+## What Apply writes
+
+- **The merged image** `active.crximg` goes in Crux's mod folder:
+  - `modRoot` from `Crux.ini`, if one is set;
+  - otherwise `addons/mod_data` beside the game executable, if that folder exists;
+  - otherwise `<game folder>/mod_data`.
+- **PulseDepot's own state** goes in `<game folder>/ff13_studio/nova/<game>/`: the installed mod list (`bundle.json`), the installed mods and backups of any image PulseDepot did not make.
+- **Crux** is installed as one of:
+  - `Crux.dll` in the NovaFix `addons` folder. For XIII: `white_data\prog\win\bin\addons\`; for XIII-2: `alba_data\prog\win\bin\addons\`.
+  - `version.dll` beside the game executable. For XIII: `white_data\prog\win\bin\`; for XIII-2: `alba_data\prog\win\bin\`; for LR: the game folder.
+
+  Installing one build removes the other, so only one Crux runs.
+- **Saves are never read or written.** A mod's settings live in Crux's host storage (`mod-state.dat` in the mod folder), kept per save slot.
+
+## When Apply refuses
+
+Apply stops **before writing anything** in these cases:
+
+| Message | What to do |
+|---|---|
+| "Crux not installed: … does not match … extract the whole PulseDepot zip again." | A Crux DLL beside PulseDepot is missing or altered. Extract the package again. |
+| "… version.dll belongs to another program (it is not Crux)." | Another tool, such as an ASI loader, owns `version.dll`. PulseDepot never replaces it. Remove that file yourself, or choose **NovaFix addon (Crux.dll)** under **Crux host**. |
+| "installed mod set changed since review; review again" | The installed set changed since you reviewed. Review again. |
+
+Next: [6. Launch the game](../launch/).

@@ -1,0 +1,37 @@
+---
+title: Roadmap
+description: What is being worked on, which fixes and features are planned for which release, and how problem reports and suggestions are handled.
+---
+
+import WorkingOn from '../../components/WorkingOn.astro';
+import Roadmap from '../../components/Roadmap.astro';
+import FeedbackLinks from '../../components/FeedbackLinks.astro';
+import { item } from '../../lib/data';
+
+This page shows the reported problems and suggested features that have been looked at, and the release each one is planned for. It updates by itself from the issue tracker.
+
+## Being worked on
+
+<WorkingOn heading={false} limit={20} />
+
+<Roadmap />
+
+## How reports are handled
+
+Every problem report and feature suggestion goes through the same steps:
+
+| Step | What it means |
+|---|---|
+| **New** | The report has arrived and nobody has looked at it yet. New reports are not listed here. |
+| **Confirmed** | The problem is understood, or the idea is accepted for consideration. |
+| **Planned** | It will be worked on. The release it is planned for is shown above. |
+| **In progress** | Someone is working on it now. |
+| **Fixed in *version*** | The fix ships in that version. Release cards and changelogs list it under "Fixed in this release". |
+
+Only the number, title, product, step, planned release and date of an issue appear on this site. What you write in a report stays on the issue tracker.
+
+## Report a problem or suggest a feature
+
+Use the buttons on the page of the mod or app, so the form already knows what it is about and which version you have. For PulseDepot:
+
+<FeedbackLinks item={item('pulsedepot')} />

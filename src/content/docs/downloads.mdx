@@ -1,0 +1,33 @@
+---
+title: Downloads
+description: Every release with its version, stage, size, SHA-256 checksum and requirements, for Windows and Linux.
+tableOfContents:
+  maxHeadingLevel: 2
+---
+
+import Downloads from '../../components/Downloads.astro';
+
+<Downloads section="notice" />
+
+Pick your system in any card; the choice applies to every card. Check a download against its SHA-256 before you run it:
+
+- **Windows (PowerShell):** `Get-FileHash .\file.zip` prints the SHA-256.
+- **Linux:** `sha256sum file.tar.gz`.
+
+The packages are not code-signed, so Windows SmartScreen asks once before the first start (**More info**, then **Run anyway**). There is no installer: extract the archive into a folder you can write to.
+
+## Apps
+
+PulseDepot is all a player needs: it includes Crux. CrystalWorkshop is for mod authors, and its package includes PulseDepot too, but not the Crux builds that installing mods needs, so get PulseDepot as well for testing in game.
+
+<Downloads section="apps" />
+
+## Mods
+
+Every mod is one `.cws` shard that you add in PulseDepot. The same file works on Windows and on Linux (Proton).
+
+<Downloads section="mods" />
+
+## Known issues
+
+<Downloads section="issues" />

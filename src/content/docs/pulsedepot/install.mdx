@@ -1,0 +1,57 @@
+---
+title: Install PulseDepot
+description: Install PulseDepot on Windows, or on Linux for games running through Steam Play (Proton).
+sidebar:
+  label: Install
+---
+
+import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
+
+PulseDepot has no installer: you extract the package and start it. Pick your system:
+
+<Tabs syncKey="os">
+<TabItem label="Windows">
+
+<Steps>
+
+1. Download `pulsedepot-…-windows-x86_64.zip` from [Downloads](../../downloads/#pulsedepot).
+
+2. Extract it to a folder you can write to, for example `C:\Games\PulseDepot`. Do not use `Program Files`. Keep the whole folder together: PulseDepot refuses to apply without its `Crux\` folder.
+
+3. Optional: check the zip against its SHA-256 (PowerShell: `Get-FileHash .\pulsedepot-…-windows-x86_64.zip`).
+
+4. Start `pulsedepot.exe`. The build is **not code-signed**, so SmartScreen may say "Windows protected your PC". Choose **More info**, check that the file is `pulsedepot.exe` from this folder, then choose **Run anyway**.
+
+5. Only for script mods: install a JDK 17 or newer, for example the Eclipse Temurin JDK 17 (or 21) MSI from adoptium.net with **Set JAVA_HOME variable** and **Add to PATH** turned on. Then start PulseDepot with `Start-PulseDepot.cmd`, which puts `%JAVA_HOME%\bin` first on `PATH`. `Check-Java.cmd` shows the versions it finds.
+
+</Steps>
+
+</TabItem>
+<TabItem label="Linux">
+
+<Steps>
+
+1. Download `pulsedepot-…-linux-x86_64.tar.gz` from [Downloads](../../downloads/#pulsedepot) and check it with `sha256sum`.
+
+2. Extract it anywhere you can write, for example `~/Games/PulseDepot`. Start `./pulsedepot` or `./start-pulsedepot.sh`.
+
+3. PulseDepot finds your Steam libraries in `~/.steam/steam`, `~/.steam/root`, `~/.local/share/Steam` and the Flatpak Steam folder, reading every library listed in each one's `libraryfolders.vdf`. `FF13_GAME_DIR`, `FF13_2_GAME_DIR` and `LR_GAME_DIR` override the detection.
+
+4. **Standalone Crux (no NovaFix):** set the game's Steam launch options once, in **Properties › General › Launch options**:
+
+   ```
+   WINEDLLOVERRIDES="version=n,b" %command%
+   ```
+
+   Without this override, Proton uses Wine's own `version.dll` and Crux never loads. **With NovaFix** (Crux as `addons/Crux.dll`), keep whatever NovaFix itself needs: Crux adds no requirement.
+
+5. Only for script mods: install a JDK 17 or newer from your distribution, for example Arch `jdk17-openjdk` or `jdk21-openjdk`, Debian/Ubuntu `openjdk-17-jdk`, Fedora `java-17-openjdk-devel`. `./check-java.sh` shows the versions it finds.
+
+</Steps>
+
+PulseDepot writes only into the game folder (see [What Apply writes](../review-and-apply/#what-apply-writes)). It never touches the Proton prefix or your saves.
+
+</TabItem>
+</Tabs>
+
+Next: [1. First setup](../first-setup/).

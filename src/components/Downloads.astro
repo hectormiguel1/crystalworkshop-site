@@ -1,0 +1,15 @@
+---
+import ReleaseCard from './ReleaseCard.astro';
+import { releases, placeholderDownloads } from '../lib/data';
+
+interface Props {
+  section: 'notice' | 'apps' | 'mods' | 'issues';
+}
+const { section } = Astro.props;
+const apps = ['pulsedepot', 'crystalworkshop', 'crux'].filter((id) => releases.products.some((p) => p.id === id));
+---
+
+{section === 'notice' && placeholderDownloads && <p class="downloads-notice not-content">The download buttons go live when the packages are published on the release page.</p>}
+{section === 'apps' && <div class="downloads-grid">{apps.map((id) => <ReleaseCard id={id} />)}</div>}
+{section === 'mods' && <div class="downloads-grid">{releases.mods.map((m) => <ReleaseCard id={m.id} />)}</div>}
+{section === 'issues' && <ul>{releases.knownIssues.map((k) => <li set:html={k} />)}</ul>}

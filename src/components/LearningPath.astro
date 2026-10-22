@@ -1,0 +1,37 @@
+---
+import { href } from '../lib/data';
+
+const path = [
+  { level: 'Start', title: 'Install', text: 'Windows or Linux, and what the previews need.', link: 'crystalworkshop/installing/' },
+  { level: 'Start', title: 'First run', text: 'Open your game and find your way around.', link: 'crystalworkshop/first-run/' },
+  { level: 'Beginner', title: 'Build your first mod', text: 'Five steps from an edit to a mod you play.', link: 'crystalworkshop/first-mod/' },
+  { level: 'Beginner', title: 'Sheets and SQL', text: 'Change data in a sheet or with a query.', link: 'crystalworkshop/db-edit/' },
+  { level: 'Beginner', title: 'Text (ZTR)', text: 'In-game text with its control tags.', link: 'crystalworkshop/ztr-text-edit/' },
+  { level: 'Intermediate', title: 'Crystarium', text: 'Nodes, stages and roles (XIII).', link: 'crystalworkshop/crystarium-edit/' },
+  { level: 'Intermediate', title: 'Models', text: 'Textures, materials and a glTF round trip.', link: 'crystalworkshop/model-edit/' },
+  { level: 'Advanced', title: 'VFX', text: 'Effect trees, fields, swaps and playback.', link: 'crystalworkshop/vfx-edit/' },
+  { level: 'Advanced', title: 'Scenes (LYB)', text: 'Move, add and delete placements in a zone.', link: 'crystalworkshop/scene-edit/' },
+  { level: 'Advanced', title: 'Scripts, actions, sound', text: 'Java scripts, schedules, events and audio.', link: 'crystalworkshop/scripts-actions-and-sound/' },
+  { level: 'Advanced', title: 'AI clients (MCP)', text: 'Let an AI client use the same editors.', link: 'crystalworkshop/mcp/' },
+];
+---
+
+<nav class="learning-path not-content" aria-label="Learning path">
+  <h2 class="lp-title">Learning path</h2>
+  <ol>
+    {
+      path.map((p, i) => (
+        <li data-level={p.level.toLowerCase()}>
+          <a href={href(p.link)}>
+            <span class="lp-n">{i + 1}</span>
+            <span class="lp-body">
+              <span class="lp-level">{p.level}</span>
+              <strong>{p.title}</strong>
+              <span class="lp-text">{p.text}</span>
+            </span>
+          </a>
+        </li>
+      ))
+    }
+  </ol>
+</nav>

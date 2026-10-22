@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <title>Shard</title>
+  <polygon points="128,20 70,112 128,112" fill="#C9F6FF"/>
+  <polygon points="128,20 128,112 186,112" fill="#38D3E8"/>
+  <polygon points="70,112 128,112 128,236" fill="#1E8FB8"/>
+  <polygon points="128,112 186,112 128,236" fill="#7A5CF5"/>
+  <polygon points="128,20 70,112 128,236 186,112" fill="none" stroke="#141731" stroke-width="8" stroke-linejoin="round"/>
+  <rect x="190" y="40" width="12" height="36" rx="3" fill="#FF9B3D"/>
+  <rect x="178" y="52" width="36" height="12" rx="3" fill="#FF9B3D"/>
+</svg>

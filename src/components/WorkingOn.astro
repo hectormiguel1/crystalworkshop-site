@@ -1,0 +1,25 @@
+---
+import { href, productNames, repoUrl } from '../lib/data';
+
+interface Props {
+  /** Only this product or mod. */
+  product?: string;
+  limit?: number;
+  heading?: boolean;
+}
+const { product, limit = 8, heading = true } = Astro.props;
+---
+
+<section class="status-widget not-content" data-status-working data-product={product} data-limit={limit} data-products={JSON.stringify(productNames())}>
+  {heading && <p class="st-heading">Being worked on</p>}
+  <ul class="st-list" data-list hidden></ul>
+  <p class="st-empty" data-empty hidden>Nothing is marked as in progress right now.</p>
+  <p class="st-empty" data-unavailable>
+    The live status list is not available yet.{' '}
+    {repoUrl ? <a href={`${repoUrl}/issues`} rel="noopener">See the open issues</a> : <a href={href('roadmap/')}>How reports are handled</a>}
+  </p>
+</section>
+
+<script>
+  import '../scripts/status-client';
+</script>

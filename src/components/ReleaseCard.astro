@@ -1,0 +1,121 @@
+---
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { item, bytes, downloadUrl, href, inline, gameShort, gameName, stageLabel, placeholderDownloads, productName, productNames } from '../lib/data';
+import BrandIcon from './BrandIcon.astro';
+import FeedbackLinks from './FeedbackLinks.astro';
+
+interface Props {
+  id: string;
+  compact?: boolean;
+}
+const { id, compact = false } = Astro.props;
+const i = item(id);
+const oses = ['windows', 'linux'] as const;
+const label = { windows: 'Windows', linux: 'Linux' };
+const kindLabel = { app: 'App', component: 'Mod host', mod: 'Mod' }[i.kind];
+const docsHref = href(`${i.docs}/`);
+---
+
+<article class="release-card not-content" id={compact ? undefined : i.id} data-kind={i.kind} data-games={i.games.join(' ')}>
+  <header class="rc-head">
+    <BrandIcon name={i.icon} size={56} />
+    <div class="rc-title">
+      <h3>{i.title && i.kind === 'mod' ? i.title : i.name}</h3>
+      <p class="rc-meta">
+        <span class="rc-version">v{i.version}</span>
+        <span class={`pill stage-${i.stage}`}>{stageLabel(i.stage)}</span>
+        <span class="pill kind">{kindLabel}</span>
+        {i.games.map((g) => <span class={`pill game game-${g}`} title={gameName(g)}>{gameShort(g)}</span>)}
+        <time datetime={i.date}>{i.date}</time>
+      </p>
+    </div>
+  </header>
+  {!compact && <p class="rc-summary">{i.summary}</p>}
+  {
+    i.bundledWith && (
+      <p class="rc-note">
+        Ships inside <a href={href(`${i.bundledWith}/`)}>{productName(i.bundledWith)}</a>: the download is the {productName(i.bundledWith)} package.
+      </p>
+    )
+  }
+  <Tabs syncKey="os">
+    {
+      oses.map((os) => {
+        const p = i.platforms[os];
+        return (
+          <TabItem label={label[os]}>
+            <dl class="rc-facts">
+              <div>
+                <dt>File</dt>
+                <dd>
+                  <code>{p.file}</code>
+                </dd>
+              </div>
+              <div>
+                <dt>Size</dt>
+                <dd>{bytes(p.bytes)}</dd>
+              </div>
+              <div>
+                <dt>Platform</dt>
+                <dd>{p.label}{i.stores && ` · ${i.stores.join(', ')}`}</dd>
+              </div>
+              <div class="rc-sha">
+                <dt>SHA-256</dt>
+                <dd>
+                  <code class="sha">{p.sha256}</code>
+                  <button type="button" class="copy-btn" data-copy={p.sha256} aria-label={`Copy the SHA-256 of ${p.file}`}>
+                    Copy
+                  </button>
+                </dd>
+              </div>
+            </dl>
+            {i.builds && (
+              <div class="rc-builds">
+                <p class="rc-sub">Crux builds in the package</p>
+                <ul>
+                  {i.builds.map((b) => (
+                    <li>
+                      <code>{b.file}</code> ({b.variant === 'addon' ? 'NovaFix addon' : 'standalone'}, {bytes(b.bytes)})
+                      <span class="build-sha">
+                        <code class="sha">{b.sha256}</code>
+                        <button type="button" class="copy-btn" data-copy={b.sha256} aria-label={`Copy the SHA-256 of ${b.file}`}>
+                          Copy
+                        </button>
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            <p class="rc-sub">Requirements</p>
+            <ul class="rc-reqs">
+              {p.requirements.map((r) => (
+                <li set:html={inline(r)} />
+              ))}
+            </ul>
+            <div class="rc-actions">
+              <a class="cw-button primary" href={downloadUrl(i, os)} data-download-placeholder={placeholderDownloads ? '' : undefined} rel="noopener">
+                Download for {label[os]}
+              </a>
+              <a class="cw-button" href={docsHref}>
+                {i.kind === 'mod' ? 'Mod page' : 'Documentation'}
+              </a>
+              <a class="cw-button ghost" href={href(`changelog/?product=${i.id}`)}>
+                Changelog
+              </a>
+            </div>
+          </TabItem>
+        );
+      })
+    }
+  </Tabs>
+  <div class="rc-fixed" data-status-fixed data-product={i.id} data-version={i.version} data-products={JSON.stringify(productNames())} hidden>
+    <p class="rc-sub">Fixed in this release</p>
+    <ul class="st-list" data-list></ul>
+  </div>
+  <FeedbackLinks item={i} />
+</article>
+
+<script>
+  import '../scripts/status-client';
+</script>

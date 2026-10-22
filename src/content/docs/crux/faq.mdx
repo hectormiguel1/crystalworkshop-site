@@ -1,0 +1,30 @@
+---
+title: Crux FAQ
+description: Short answers about Crux, NovaFix, Proton, saves and mod settings.
+sidebar:
+  label: FAQ
+---
+
+## Do I download Crux separately?
+
+No. It ships inside the PulseDepot package, and PulseDepot installs it when you apply.
+
+## Is Crux a replacement for NovaFix?
+
+No. NovaFix is a separate third-party fix for the games. Crux runs as a NovaFix addon when NovaFix is installed, and on its own (as `version.dll`) when it is not.
+
+## Why does Linux need a launch option?
+
+Without NovaFix, Crux is the game's `version.dll`. Proton prefers Wine's built-in `version.dll` unless `WINEDLLOVERRIDES="version=n,b" %command%` is set in the game's launch options.
+
+## Where are my mods' settings?
+
+In `mod-state.dat` in the Crux mod folder, kept per save slot. Your save files are never read or written.
+
+## How do I know Crux is running?
+
+`Crux.jsonl` appears in the `addons` folder beside the game executable after the game starts. See [Logs](../logs/).
+
+## Is Crux open source?
+
+No. Crux, like PulseDepot and CrystalWorkshop, is freeware, all rights reserved. See the [licence](../../legal/).

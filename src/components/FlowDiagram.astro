@@ -1,0 +1,51 @@
+---
+import BrandIcon from './BrandIcon.astro';
+import { href } from '../lib/data';
+
+const steps = [
+  { icon: 'crystalworkshop', name: 'CrystalWorkshop', what: 'You edit the game: sheets, text, models, effects, scenes, scripts.', link: 'crystalworkshop/' },
+  { icon: 'shard', name: 'Shard (.cws)', what: 'Your changes, stored as patches against the player’s own game files.', link: 'crystalworkshop/first-mod/export-shard/' },
+  { icon: 'pulsedepot', name: 'PulseDepot', what: 'Players add shards, order them and review what changes.', link: 'pulsedepot/' },
+  { icon: 'crux', name: 'Crux image', what: 'Every enabled mod merged into one file: active.crximg.', link: 'pulsedepot/review-and-apply/' },
+  { icon: 'crux', name: 'Crux', what: 'The mod host the game loads. It serves the image while you play.', link: 'crux/' },
+  { icon: 'game', name: 'The game', what: 'FINAL FANTASY XIII, XIII-2 or LIGHTNING RETURNS, saves untouched.', link: '' },
+];
+const verbs = ['exports', 'installs', 'merges', 'loads', 'runs'];
+---
+
+<figure class="flow not-content" aria-labelledby="flow-caption">
+  <ol class="flow-steps">
+    {
+      steps.map((s, i) => (
+        <li class="flow-step">
+          <div class="flow-node">
+            {s.icon === 'game' ? (
+              <svg class="flow-game" viewBox="0 0 48 48" width="48" height="48" aria-hidden="true">
+                <path d="M24 3 41 24 24 45 7 24Z" fill="none" stroke="currentColor" stroke-width="3" />
+                <path d="M24 12 33 24 24 36 15 24Z" fill="currentColor" opacity=".35" />
+              </svg>
+            ) : (
+              <BrandIcon name={s.icon} size={48} />
+            )}
+            <div>
+              {s.link ? (
+                <a class="flow-name" href={href(s.link)}>
+                  {s.name}
+                </a>
+              ) : (
+                <span class="flow-name">{s.name}</span>
+              )}
+              <p>{s.what}</p>
+            </div>
+          </div>
+          {i < verbs.length && (
+            <span class="flow-arrow" aria-hidden="true">
+              <span>{verbs[i]}</span>
+            </span>
+          )}
+        </li>
+      ))
+    }
+  </ol>
+  <figcaption id="flow-caption">How a mod travels from the editor to the game. Nothing in the game’s archives or your saves is changed.</figcaption>
+</figure>

@@ -1,0 +1,46 @@
+---
+title: CrystalWorkshop
+description: Free modding tools for the PC releases of FINAL FANTASY XIII, XIII-2 and LIGHTNING RETURNS. Make mods with CrystalWorkshop, install them with PulseDepot.
+template: splash
+hero:
+  tagline: Free modding tools for the PC (Steam) releases of FINAL FANTASY XIII, XIII-2 and LIGHTNING RETURNS. Make mods with CrystalWorkshop, play them with PulseDepot. Your game archives and your saves are never touched.
+  image:
+    file: ../../assets/brand/crystalworkshop.png
+    alt: CrystalWorkshop crystal and wrench
+  actions:
+    - text: Downloads
+      link: downloads/
+      icon: download
+      variant: primary
+    - text: Install mods with PulseDepot
+      link: pulsedepot/
+      variant: secondary
+    - text: Make mods with CrystalWorkshop
+      link: crystalworkshop/
+      variant: minimal
+---
+
+import FlowDiagram from '../../components/FlowDiagram.astro';
+import ProductCards from '../../components/ProductCards.astro';
+import LatestReleases from '../../components/LatestReleases.astro';
+import WorkingOn from '../../components/WorkingOn.astro';
+
+<ProductCards />
+
+## How it fits together
+
+<FlowDiagram />
+
+## Latest releases
+
+<LatestReleases />
+
+## Being worked on
+
+<WorkingOn heading={false} />
+
+Plans and recent fixes are on the [roadmap](roadmap/).
+
+:::caution[First public releases]
+PulseDepot is a **beta** and CrystalWorkshop an **alpha**. This release has not been tested in game yet. Back up your saves before you try mods, and attach the Crux log when you report a problem.
+:::

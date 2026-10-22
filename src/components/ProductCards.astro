@@ -1,0 +1,33 @@
+---
+import BrandIcon from './BrandIcon.astro';
+import { releases, href, stageLabel } from '../lib/data';
+
+const blurbs: Record<string, string> = {
+  pulsedepot: 'The mod manager for players. Add mods, put them in order, review what changes, apply. It installs Crux for you.',
+  crystalworkshop: 'The modding editor. Sheets, text, models, effects, scenes, scripts and the Crystarium, exported as a shard players install.',
+  crux: 'The small mod host the game loads. It serves your mods to the game while it runs. PulseDepot installs and updates it.',
+};
+const order = ['pulsedepot', 'crystalworkshop', 'crux'];
+const products = order.map((id) => releases.products.find((p) => p.id === id)).filter(Boolean);
+---
+
+<div class="products not-content">
+  {
+    products.map((p) => (
+      <a class="product" href={href(`${p!.docs}/`)}>
+        <BrandIcon name={p!.icon} size={56} />
+        <strong>{p!.name}</strong>
+        <span class={`pill stage-${p!.stage}`}>
+          {stageLabel(p!.stage)} · v{p!.version}
+        </span>
+        <p>{blurbs[p!.id]}</p>
+      </a>
+    ))
+  }
+  <a class="product" href={href('mods/')}>
+    <BrandIcon name="shard" size={56} />
+    <strong>Mods</strong>
+    <span class="pill kind">{releases.mods.length} mods</span>
+    <p>{releases.mods.map((m) => m.name).join(', ')}. Each one installs with PulseDepot.</p>
+  </a>
+</div>

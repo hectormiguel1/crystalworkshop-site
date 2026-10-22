@@ -1,0 +1,78 @@
+---
+import BrandIcon from './BrandIcon.astro';
+import { releases, href, gameShort, gameName, stageLabel, bytes, item } from '../lib/data';
+
+const games = [...new Set(releases.mods.flatMap((m) => m.games))];
+---
+
+<div class="modgrid not-content" data-modgrid>
+  <form class="filters" aria-label="Filter mods by game" onsubmit="return false">
+    <fieldset class="filter chips">
+      <legend>Game</legend>
+      <label><input type="radio" name="modgame" value="" checked /> <span>All</span></label>
+      {
+        games.map((g) => (
+          <label title={gameName(g)}>
+            <input type="radio" name="modgame" value={g} /> <span>{gameShort(g)}</span>
+          </label>
+        ))
+      }
+    </fieldset>
+  </form>
+  <div class="products">
+    {
+      releases.mods.map((m) => (
+        <a class="product" href={href(`${m.docs}/`)} data-games={m.games.join(' ')}>
+          {m.screenshots?.[0] && (
+            <img class="mod-thumb" src={href(m.screenshots[0].thumb)} alt={m.screenshots[0].alt} title={m.screenshots[0].caption} width="480" height="263" loading="lazy" decoding="async" />
+          )}
+          <BrandIcon name={m.icon} size={40} />
+          <strong>{m.title ?? m.name}</strong>
+          <span>
+            {m.games.map((g) => (
+              <span class={`pill game game-${g}`} title={gameName(g)}>
+                {gameShort(g)}
+              </span>
+            ))}{' '}
+            <span class={`pill stage-${m.stage}`}>
+              {stageLabel(m.stage)} · v{m.version}
+            </span>
+          </span>
+          <p>{m.summary}</p>
+          <p class="mod-needs-line">
+            Needs {(m.requires ?? []).map((r) => item(r).name).join(', ')} · {bytes(m.platforms.windows.bytes)}
+          </p>
+        </a>
+      ))
+    }
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-modgrid]').forEach((root) => {
+    const cards = [...root.querySelectorAll<HTMLElement>('[data-games]')];
+    root.addEventListener('change', () => {
+      const g = root.querySelector<HTMLInputElement>('input[name="modgame"]:checked')?.value ?? '';
+      for (const c of cards) c.hidden = !!g && !(c.dataset.games ?? '').split(' ').includes(g);
+    });
+  });
+</script>
+
+<style>
+  .mod-thumb {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: 0.4rem;
+    margin-bottom: 0.5rem;
+  }
+  .mod-needs-line {
+    color: var(--sl-color-gray-3);
+    font-size: var(--sl-text-xs) !important;
+  }
+  [data-games][hidden] {
+    display: none;
+  }
+</style>
