@@ -27,6 +27,12 @@ const TERMS = [
   /\/home\//gi,
 ];
 
+// Terms that are ordinary vocabulary on some pages: [path, term, reason].
+// Only the listed term is allowed there; every other term still fails.
+const ALLOWED = [
+  [/^sdk\//, /\bcrates?\b/i, 'Rust packaging vocabulary (crate, crate-type) in the extension SDK developer guide'],
+];
+
 // Verbatim legal texts: they must match what ships in the packages.
 const JUSTIFIED = [
   [/^legal\/(crystalworkshop|pulsedepot)-(windows|linux)\.txt$/, 'verbatim THIRD-PARTY-NOTICES.txt of a package (upstream licence texts and source URLs)'],
@@ -55,6 +61,7 @@ for (const file of files) {
   for (const re of TERMS) for (const m of text.matchAll(re)) hits.push({ index: m.index, text: m[0], key: m[0].toLowerCase() });
   for (const h of hashedHits(text, HASHED_TERMS, cache, { stripTags: /\.(html|svg|xml)$/i.test(rel) })) hits.push({ index: h.index, text: h.text, key: `banned name #${h.term + 1}` });
   for (const h of hits) {
+    if (ALLOWED.some(([r, term]) => r.test(rel) && term.test(h.text))) continue;
     const why = JUSTIFIED.find(([r]) => r.test(rel));
     if (why) {
       const cur = justified.get(rel) || { why: why[1], hits: new Map() };

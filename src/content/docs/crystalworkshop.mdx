@@ -50,6 +50,17 @@ never writes save files. It writes into the game folder only when you
 5. [Enabling MCP](mcp/): let an AI client (Claude Code, Claude Desktop, Codex)
    use the same editors.
 
+## Native extensions (developers)
+
+A shard can also carry **extension units**: small native DLLs that Crux
+loads into the game, for hooks, in-game settings pages and state that
+follows your save slot. Write them in Rust with the open-source extension
+SDK ([workshop-extension-sdk on GitHub](https://github.com/hectormiguel1/workshop-extension-sdk),
+MIT or Apache-2.0), then add the DLL on the **Project** page and export the
+shard as usual. The
+[Extension SDK guide](https://hectormiguel1.github.io/crystalworkshop-site/sdk/)
+covers it step by step.
+
 ## Reference
 
 - [FAQ and Troubleshooting](faq/)

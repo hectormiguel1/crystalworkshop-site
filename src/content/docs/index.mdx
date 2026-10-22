@@ -18,6 +18,9 @@ hero:
     - text: Make mods with CrystalWorkshop
       link: crystalworkshop/
       variant: minimal
+    - text: Write native extensions (SDK)
+      link: sdk/
+      variant: minimal
 ---
 
 import FlowDiagram from '../../components/FlowDiagram.astro';
@@ -40,6 +43,14 @@ import WorkingOn from '../../components/WorkingOn.astro';
 <WorkingOn heading={false} />
 
 Plans and recent fixes are on the [roadmap](roadmap/).
+
+## For developers
+
+Mods can ship native extensions that Crux loads into the game: hooks,
+in-game settings pages and state that follows your save slot. The
+[Extension SDK](sdk/) guide shows how to write one in Rust with the
+open-source [workshop-ext-sdk](https://github.com/hectormiguel1/workshop-extension-sdk)
+(MIT or Apache-2.0) and package it with CrystalWorkshop.
 
 :::caution[First public releases]
 PulseDepot is a **beta** and CrystalWorkshop an **alpha**. This release has not been tested in game yet. Back up your saves before you try mods, and attach the Crux log when you report a problem.

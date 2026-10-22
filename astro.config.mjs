@@ -97,6 +97,7 @@ export default defineConfig({
           group('Share and automate', [
             { label: 'Mod export reference', link: '/crystalworkshop/mod-export/' },
             { label: 'AI clients (MCP)', link: '/crystalworkshop/mcp/' },
+            { label: 'Native extensions (SDK)', link: '/sdk/' },
           ]),
           group('Reference', [
             { label: 'FAQ and troubleshooting', link: '/crystalworkshop/faq/' },
@@ -109,6 +110,20 @@ export default defineConfig({
           { label: 'Logs', link: '/crux/logs/' },
           { label: 'Uninstall', link: '/crux/uninstall/' },
           { label: 'FAQ', link: '/crux/faq/' },
+        ], { collapsed: true }),
+        group('Extension SDK', [
+          { label: 'Overview', link: '/sdk/', badge: { text: 'Developers', variant: 'note' } },
+          { label: '1. Set up a project', link: '/sdk/setup/' },
+          { label: '2. Units and exports', link: '/sdk/units/' },
+          { label: '3. Sites and hooks', link: '/sdk/sites-and-hooks/' },
+          { label: '4. In-game settings', link: '/sdk/settings/' },
+          { label: '5. Storage and per-save state', link: '/sdk/per-save/' },
+          { label: '6. Logging', link: '/sdk/logging/' },
+          { label: '7. Package a shard', link: '/sdk/packaging/' },
+          { label: '8. Testing', link: '/sdk/testing/' },
+          { label: 'Walkthrough: hello-unit', link: '/sdk/hello-unit/' },
+          { label: 'API reference', link: '/sdk/reference/' },
+          { label: 'Source on GitHub', link: 'https://github.com/hectormiguel1/workshop-extension-sdk', attrs: { target: '_blank', rel: 'noopener' } },
         ], { collapsed: true }),
         group('Mods', [
           { label: 'All mods', link: '/mods/' },
