@@ -8,6 +8,8 @@ const RULES = [
   [/The ALPHA release notes \(`ALPHA\.md`\) list/g, 'The [feature status](@/crystalworkshop/feature-status/) page lists'],
   [/\(see \[Licences\]\(#licences\)\)/g, '(see [Licences](@/legal/))'],
   [/The full guide with screenshots is `?docs\/README\.md`? in the download\./g, 'The full guide with screenshots is on this site.'],
+  // Nexus-page link placeholder (filled in on Nexus only); the site links PulseDepot itself.
+  [/, from \[its Nexus Mods page\]\(\{\{PULSEDEPOT_NEXUS_URL\}\}\)/g, ''],
 ];
 
 export function sanitize(md) {

@@ -5,6 +5,7 @@ import siteConfig from '../../site.config.json';
 import { feedbackLinks, isPlaceholder } from '../../scripts/lib/feedback.mjs';
 
 export type Platform = { file: string; bytes: number; sha256: string; requirements: string[]; label: string };
+export type Store = { name: string; status?: 'experimental'; note?: string };
 export type Item = {
   id: string;
   name: string;
@@ -14,7 +15,8 @@ export type Item = {
   stage: 'alpha' | 'beta' | 'release';
   date: string;
   games: string[];
-  stores?: string[];
+  /** PC store versions of the games it supports (status 'experimental': not tested in game yet). */
+  stores?: Store[];
   summary: string;
   tag: string;
   docs: string;

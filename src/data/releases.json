@@ -31,6 +31,16 @@
         "xiii2",
         "lr"
       ],
+      "stores": [
+        {
+          "name": "Steam"
+        },
+        {
+          "name": "Microsoft Store",
+          "status": "experimental",
+          "note": "XIII-2 only"
+        }
+      ],
       "summary": "A modding editor for the FINAL FANTASY XIII trilogy on PC: sheets, text, models, effects, scenes, scripts and the Crystarium. It exports CrystalWorkshop Shards (.cws) that players install with PulseDepot.",
       "tag": "crystalworkshop-v0.1.0-alpha",
       "docs": "crystalworkshop",
@@ -44,21 +54,21 @@
         "Wiki guides"
       ],
       "features": [
-        "**Sheets (WDB) and SQL**: edit typed database sheets, or query and change them with SQL (SELECT/UPDATE/INSERT/DELETE, joins to text). Changes show as a dry run before you apply them.",
+        "**Sheets (WDB) and SQL**: edit typed database sheets, or query and change them with SQL. Changes show as a dry run before you apply them.",
         "**Text (ZTR)**: every locale side by side, control tags with a tag palette, and add/rename/delete keys.",
-        "**Models**: inspect meshes, materials, textures, skeleton and motions, rendered with the game's own shaders (D3D9 via DXVK). Round-trip through a glTF workspace (Blender) with a dry-run import.",
+        "**Models**: inspect meshes, materials, textures, skeleton and motions, rendered with the game's own shaders. Round-trip through a glTF workspace (Blender) with a dry-run import.",
         "**VFX**: package tree, typed inspector, field edits (XIII), safe model/texture reference swaps, and playback.",
         "**Scenes (LYB)**: a 3D scene editor with fly camera, picking, move/rotate/scale gizmo, typed fields, and add/duplicate/delete of placements. XIII-2 and LR layouts are Experimental.",
-        "**Scripts (CLB)**: decompile to Java, edit, compile and merge (JDK 17+ needed).",
-        "**Actions, events, sound, Crystarium (XIII), battle (XIII)**.",
+        "**Scripts, actions, events and sound**: decompile scripts to Java, edit, compile and merge (JDK 17+ needed).",
+        "**Crystarium (XIII)**.",
         "**Export**: a portable .cws shard with metadata, changelog and image, or loose files for your own testing.",
-        "**AI (MCP)**: `crystalw --mcp` or the in-app server lets Claude Code, Claude Desktop or Codex use the same editors, with progressive tool discovery and a read-only kill switch."
+        "**AI (MCP)**: crystalw --mcp or the in-app server lets Claude Code, Claude Desktop or Codex use the same editors, with a read-only kill switch."
       ],
       "platforms": {
         "windows": {
           "file": "crystalworkshop-0.1.0-alpha-windows-x86_64.zip",
-          "bytes": 52971476,
-          "sha256": "599cde73f1a76cb54b18664d91d4a36fed1bf7a45223f074b5088377f2cef51e",
+          "bytes": 52777215,
+          "sha256": "82d80b4730c4b960b7004aaffb4a1ac60ab3958f0e75fed0ca579df3c944ea57",
           "requirements": [
             "**CrystalWorkshop previews:** Bundled DXVK 3.1.1; a GPU and driver with Vulkan 1.3",
             "**Script mods and script editing:** A JDK 17 or newer (not bundled), e.g. Eclipse Temurin"
@@ -66,9 +76,9 @@
           "label": "Windows 10/11 x64"
         },
         "linux": {
-          "file": "crystalworkshop-0.1.0-alpha-linux-x86_64.tar.gz",
-          "bytes": 54359386,
-          "sha256": "f3d0cc6404541945a5ba1c28bf0c9de791adf893ce7098381576ba657efe9523",
+          "file": "crystalworkshop-0.1.0-alpha-linux-x86_64.zip",
+          "bytes": 54146260,
+          "sha256": "c454d2ecd6535c1ae7d85a0a6633bbec6350b7cf059ea08ec87e029ded51dabf",
           "requirements": [
             "**CrystalWorkshop previews:** The system's DXVK-native (`libdxvk_d3d9.so`, e.g. Arch `libdxvk`) with SDL3 or SDL2; Vulkan 1.3",
             "**Script mods and script editing:** A JDK 17 or newer from your distribution (not bundled)"
@@ -84,8 +94,8 @@
       ],
       "knownIssues": [
         "XIII-2/LR VFX fields are read-only, and their exports are unverified in game.",
-        "Model imports apply only Tier A changes (no new vertices, materials or bones).",
-        "Not yet tested in game for this release; unsigned; no installer; no AppImage."
+        "Model imports apply only simple changes (no new vertices, materials or bones).",
+        "Unsigned (SmartScreen: More info → Run anyway); no installer; no AppImage."
       ]
     },
     {
@@ -100,6 +110,16 @@
         "xiii2",
         "lr"
       ],
+      "stores": [
+        {
+          "name": "Steam"
+        },
+        {
+          "name": "Microsoft Store",
+          "status": "experimental",
+          "note": "XIII-2 only; cannot start the game"
+        }
+      ],
       "summary": "The mod manager for the FINAL FANTASY XIII trilogy on PC: install CrystalWorkshop shards and older Nova Chrysalia mod packages without touching your archives or your saves.",
       "tag": "pulsedepot-v0.1.0-beta",
       "docs": "pulsedepot",
@@ -112,7 +132,7 @@
       ],
       "features": [
         "FF13 / XIII2 / LR tabs; each game has its own folder, list and launcher options. Steam games are detected automatically on Windows and Linux.",
-        "Add **.cws** shards (older .bin shards too) and Nova Chrysalia **.ncmp**/.zip packages with `Add mod…` or drag and drop.",
+        "Add **.cws** shards and Nova Chrysalia **.ncmp**/.zip packages with Add mod… or drag and drop.",
         "Enable, disable and order mods (later mods win). Conflicts are flagged, and text, database and WPD files are merged entry by entry.",
         "**Review changes** shows exactly what will be installed, updated, downgraded or removed before anything is written. **Apply changes** installs the set.",
         "Version-aware: updates replace a listed mod, downgrades ask first, and changelogs show what is new.",
@@ -124,8 +144,8 @@
       "platforms": {
         "windows": {
           "file": "pulsedepot-0.1.0-beta-windows-x86_64.zip",
-          "bytes": 14835234,
-          "sha256": "a82aaab04c640ae08fca00691e0633d976fd36822d97d35fc7dffb80dc9413ea",
+          "bytes": 14521197,
+          "sha256": "e18e9d78874f219ce015a2dae8f4c3135405526dcff074a732b267be9766f7a3",
           "requirements": [
             "**PulseDepot:** Windows 10/11 x64; D3D12 or Vulkan",
             "**The game:** Steam",
@@ -134,9 +154,9 @@
           "label": "Windows 10/11 x64"
         },
         "linux": {
-          "file": "pulsedepot-0.1.0-beta-linux-x86_64.tar.gz",
-          "bytes": 16716648,
-          "sha256": "ba4535a2515f5b0df65d1503d9ffaf9b030f54fa85d71f85ee927f91b33a71d2",
+          "file": "pulsedepot-0.1.0-beta-linux-x86_64.zip",
+          "bytes": 16403640,
+          "sha256": "20cb10b259c9512863d27e0504d6fdb1de7b3f448be45cf711b0124a3d5336c7",
           "requirements": [
             "**PulseDepot:** x86_64; Vulkan or OpenGL",
             "**The game:** Steam with Proton. The standalone Crux needs the launch option `WINEDLLOVERRIDES=\"version=n,b\" %command%`",
@@ -152,8 +172,8 @@
         }
       ],
       "knownIssues": [
-        "Not yet tested on real Windows or in game (see BUILD-INFO.json).",
-        "Unsigned; no installer; no AppImage on Linux.",
+        "Not yet tested on real Windows or in game.",
+        "Unsigned (SmartScreen: More info → Run anyway); no installer; no AppImage on Linux.",
         "Uninstalling never removes Crux itself.",
         "The list cannot be reordered by drag and drop; use the ▲/▼ buttons."
       ]
@@ -169,6 +189,16 @@
         "xiii",
         "xiii2",
         "lr"
+      ],
+      "stores": [
+        {
+          "name": "Steam"
+        },
+        {
+          "name": "Microsoft Store",
+          "status": "experimental",
+          "note": "XIII-2 only"
+        }
       ],
       "summary": "The mod host the game loads. It serves the merged mod image to the game while it runs and loads the mods’ native code. It ships inside PulseDepot, which installs the right build for you.",
       "tag": "pulsedepot-v0.1.0-beta",
@@ -194,8 +224,8 @@
       "platforms": {
         "windows": {
           "file": "pulsedepot-0.1.0-beta-windows-x86_64.zip",
-          "bytes": 14835234,
-          "sha256": "a82aaab04c640ae08fca00691e0633d976fd36822d97d35fc7dffb80dc9413ea",
+          "bytes": 14521197,
+          "sha256": "e18e9d78874f219ce015a2dae8f4c3135405526dcff074a732b267be9766f7a3",
           "requirements": [
             "**Installed by PulseDepot** 0.1.0-beta: it checks each DLL's SHA-256 before installing it.",
             "**The game:** Steam"
@@ -203,9 +233,9 @@
           "label": "Windows 10/11 x64"
         },
         "linux": {
-          "file": "pulsedepot-0.1.0-beta-linux-x86_64.tar.gz",
-          "bytes": 16716648,
-          "sha256": "ba4535a2515f5b0df65d1503d9ffaf9b030f54fa85d71f85ee927f91b33a71d2",
+          "file": "pulsedepot-0.1.0-beta-linux-x86_64.zip",
+          "bytes": 16403640,
+          "sha256": "20cb10b259c9512863d27e0504d6fdb1de7b3f448be45cf711b0124a3d5336c7",
           "requirements": [
             "**Installed by PulseDepot** 0.1.0-beta: it checks each DLL's SHA-256 before installing it.",
             "**The game:** Steam with Proton. The standalone Crux needs the launch option `WINEDLLOVERRIDES=\"version=n,b\" %command%`"
@@ -234,7 +264,9 @@
         "xiii"
       ],
       "stores": [
-        "Steam"
+        {
+          "name": "Steam"
+        }
       ],
       "summary": "Choose what FINAL FANTASY XIII (Steam) gives you after battles and from treasure:",
       "tag": "drop-changes-v0.1.0",
@@ -362,7 +394,9 @@
         "xiii"
       ],
       "stores": [
-        "Steam"
+        {
+          "name": "Steam"
+        }
       ],
       "summary": "Hard Mode makes the enemies in FINAL FANTASY XIII (Steam) tougher. When a battle starts, each enemy is made stronger:",
       "tag": "hard-mode-v0.1.0",
@@ -441,7 +475,9 @@
         "xiii"
       ],
       "stores": [
-        "Steam"
+        {
+          "name": "Steam"
+        }
       ],
       "summary": "Adds Configuration → Mod Settings to FINAL FANTASY XIII (Steam): one in-game menu for the settings of every installed mod that has them, such as Hard Mode and Drop Changes.",
       "tag": "mod-settings-v0.1.0",
@@ -503,7 +539,9 @@
         "xiii"
       ],
       "stores": [
-        "Steam"
+        {
+          "name": "Steam"
+        }
       ],
       "summary": "No Post-Battle Healing makes the damage your party takes in FINAL FANTASY XIII (Steam) last. After a victory, each party member keeps the HP they had left and starts their next battle with it, instead of being fully healed.",
       "tag": "no-post-battle-heal-v0.1.0",
@@ -561,7 +599,9 @@
         "xiii"
       ],
       "stores": [
-        "Steam"
+        {
+          "name": "Steam"
+        }
       ],
       "summary": "Paradigm Tuning makes the party AI in FINAL FANTASY XIII (Steam) smarter, and lets you choose how your companions pick their targets in each paradigm. In the Paradigm Deck, every paradigm can be Normal, Cross (-X) or Wide (-W):",
       "tag": "paradigm-tuning-v0.1.0",
@@ -618,8 +658,13 @@
         "xiii2"
       ],
       "stores": [
-        "Steam",
-        "Microsoft Store"
+        {
+          "name": "Steam"
+        },
+        {
+          "name": "Microsoft Store",
+          "status": "experimental"
+        }
       ],
       "summary": "Resize the field and battle HUD of FINAL FANTASY XIII-2. You set the size separately for the field and for battle, from 25% to 200%. The default for both is 50%; 100% is the normal size.",
       "tag": "xiii2-ui-scale-v0.1.0",
@@ -635,7 +680,8 @@
           "bytes": 1081192,
           "sha256": "5bfb599e2d83a652e405a092ef88665491508bf88ed53de93a3352443eac44ae",
           "requirements": [
-            "FINAL FANTASY XIII-2, Steam or Microsoft Store version, on Windows or on Linux (Proton).",
+            "FINAL FANTASY XIII-2, Steam version, on Windows or on Linux (Proton).",
+            "The Microsoft Store version is experimental and not tested yet.",
             "**PulseDepot** (beta), the mod manager. It also installs **Crux**, which loads this mod in the game.",
             "No separate settings mod is needed: this mod adds its own **Mod Settings** page."
           ],
@@ -646,7 +692,8 @@
           "bytes": 1081192,
           "sha256": "5bfb599e2d83a652e405a092ef88665491508bf88ed53de93a3352443eac44ae",
           "requirements": [
-            "FINAL FANTASY XIII-2, Steam or Microsoft Store version, on Windows or on Linux (Proton).",
+            "FINAL FANTASY XIII-2, Steam version, on Windows or on Linux (Proton).",
+            "The Microsoft Store version is experimental and not tested yet.",
             "**PulseDepot** (beta), the mod manager. It also installs **Crux**, which loads this mod in the game.",
             "No separate settings mod is needed: this mod adds its own **Mod Settings** page.",
             "**Proton:** without NovaFix, the game’s Steam launch options need `WINEDLLOVERRIDES=\"version=n,b\" %command%` so Crux loads."

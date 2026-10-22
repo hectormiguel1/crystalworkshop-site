@@ -1,0 +1,30 @@
+---
+// Store badges: "Steam", "Microsoft Store" and its experimental variant
+// (outlined, muted; not tested in game yet).
+import type { Store } from '../lib/data';
+import { storeLabel } from '../../scripts/lib/stores.mjs';
+
+interface Props {
+  stores?: Store[];
+  label?: string;
+}
+const { stores = [], label = 'Game stores' } = Astro.props;
+const cls = (s: Store) => `store-badge store-${s.name === 'Steam' ? 'steam' : 'msstore'}${s.status === 'experimental' ? ' store-experimental' : ''}`;
+---
+
+{
+  stores.length > 0 && (
+    <span class="store-badges" role="list" aria-label={label}>
+      {stores.map((s) => (
+        <span class={cls(s)} role="listitem" title={storeLabel(s)} aria-label={storeLabel(s)}>
+          <span aria-hidden="true">{s.name}</span>
+          {s.status === 'experimental' && (
+            <span class="store-flag" aria-hidden="true">
+              experimental
+            </span>
+          )}
+        </span>
+      ))}
+    </span>
+  )
+}

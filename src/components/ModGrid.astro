@@ -1,5 +1,6 @@
 ---
 import BrandIcon from './BrandIcon.astro';
+import StoreBadges from './StoreBadges.astro';
 import { releases, href, gameShort, gameName, stageLabel, bytes, item } from '../lib/data';
 
 const games = [...new Set(releases.mods.flatMap((m) => m.games))];
@@ -38,6 +39,7 @@ const games = [...new Set(releases.mods.flatMap((m) => m.games))];
               {stageLabel(m.stage)} · v{m.version}
             </span>
           </span>
+          <StoreBadges stores={m.stores} />
           <p>{m.summary}</p>
           <p class="mod-needs-line">
             Needs {(m.requires ?? []).map((r) => item(r).name).join(', ')} · {bytes(m.platforms.windows.bytes)}

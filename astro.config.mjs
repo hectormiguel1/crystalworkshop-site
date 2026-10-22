@@ -51,6 +51,7 @@ export default defineConfig({
         group('Start here', [
           { label: 'Home', link: '/' },
           { label: 'Downloads', link: '/downloads/' },
+          { label: 'Compatibility', link: '/compatibility/' },
           { label: 'Changelog', link: '/changelog/' },
           { label: 'Roadmap', link: '/roadmap/' },
         ]),

@@ -18,7 +18,7 @@ import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync, wri
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
-import { readFromTarGz } from './lib/tar.mjs';
+import { readFromZip } from './lib/zip.mjs';
 import {
   anchor,
   asides,
@@ -37,6 +37,8 @@ import {
 } from './lib/md.mjs';
 import { sanitize } from './lib/sanitize.mjs';
 import { renderFeedbackFiles } from './lib/feedback-files.mjs';
+import { appStores, modStores } from './lib/stores.mjs';
+import { bbChangelog, bbList } from './lib/bbcode.mjs';
 
 const SITE = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const config = JSON.parse(readFileSync(path.join(SITE, 'site.config.json'), 'utf8'));
@@ -86,25 +88,6 @@ function sha256sums(file) {
     if (m) out[path.basename(m[2].trim())] = m[1];
   }
   return out;
-}
-
-/** `[b]Changelog[/b]` section of a Nexus page: [{ version, text }]. */
-function bbChangelog(bb) {
-  const m = bb.match(/\[b\]Changelog\[\/b\]\[\/size\]\n([\s\S]*?)(?:\n\n\[size|$)/);
-  if (!m) return [];
-  return [...m[1].matchAll(/\[b\]([^[]+)\[\/b\]:\s*([^\n]+)/g)].map((x) => ({ version: x[1].trim(), text: x[2].trim() }));
-}
-
-/** `[*][b]Head[/b]: rest` items of a bbcode section. */
-function bbList(bb, heading) {
-  const m = bb.match(new RegExp(`\\[b\\]${heading}\\[\\/b\\]\\[\\/size\\]\\n\\[list\\]([\\s\\S]*?)\\[\\/list\\]`));
-  if (!m) return [];
-  return [...m[1].matchAll(/\[\*\]([^\n]+)/g)].map((x) =>
-    x[1]
-      .replace(/\[b\]([^[]+)\[\/b\]/g, '**$1**')
-      .replace(/\[i\]([^[]+)\[\/i\]/g, '`$1`')
-      .replace(/\[[^\]]+\]/g, ''),
-  );
 }
 
 function bbSummary(bb) {
@@ -160,6 +143,7 @@ function appRelease(dir, id, name, opts) {
     stage: stageOf(version),
     date: win.verification?.date || opts.date,
     games: ['xiii', 'xiii2', 'lr'],
+    stores: appStores(id),
     summary: bbSummary(nexus),
     tag: config.tagPattern.replace('{id}', id).replace('{version}', version),
     docs: opts.docs,
@@ -168,7 +152,7 @@ function appRelease(dir, id, name, opts) {
     features: bbList(nexus, opts.featuresHeading),
     platforms: {
       windows: { ...asset('windows', 'zip'), requirements: reqs('windows'), label: 'Windows 10/11 x64' },
-      linux: { ...asset('linux', 'tar.gz'), requirements: reqs('linux'), label: 'Linux x86_64' },
+      linux: { ...asset('linux', 'zip'), requirements: reqs('linux'), label: 'Linux x86_64' },
     },
     changelog: bbChangelog(nexus),
     knownIssues: bbList(nexus, 'Known issues'),
@@ -177,7 +161,7 @@ function appRelease(dir, id, name, opts) {
 
 function cruxRelease(pulsedepot, rows) {
   const archive = path.join(RELEASE, 'pulsedepot', pulsedepot.platforms.linux.file);
-  const raw = existsSync(archive) ? readFromTarGz(archive, 'Crux/CRUX-MANIFEST.json') : null;
+  const raw = existsSync(archive) ? readFromZip(archive, 'Crux/CRUX-MANIFEST.json') : null;
   if (!raw) return null;
   const manifest = JSON.parse(raw.toString('utf8'));
   const builds = Object.entries(manifest.files).map(([file, f]) => ({
@@ -203,6 +187,7 @@ function cruxRelease(pulsedepot, rows) {
     stage: pulsedepot.stage,
     date: pulsedepot.date,
     games: ['xiii', 'xiii2', 'lr'],
+    stores: appStores('crux'),
     summary: 'The mod host the game loads. It serves the merged mod image to the game while it runs and loads the mods’ native code. It ships inside PulseDepot, which installs the right build for you.',
     tag: pulsedepot.tag,
     bundledWith: 'pulsedepot',
@@ -281,12 +266,12 @@ function modReleases(names, date) {
     const needsSettings = /Mod Settings\*\*\s+\d/.test(req);
     if (needsSettings) requires.push('mod-settings');
     const short = names[`mods/${slug}/${file}`] || title;
-    const stores = /Microsoft Store/.test(req.split('\n')[0] || '') ? ['Steam', 'Microsoft Store'] : ['Steam'];
     const asset = { file, bytes: statSync(path.join(dir, file)).size, sha256: sums[`${slug}/${file}`] || sums[file] };
     const reqItems = req
       .split('\n')
       .filter((l) => l.startsWith('- '))
-      .map((l) => l.slice(2));
+      .map((l) => sanitize(l.slice(2)));
+    const stores = modStores(reqItems);
     const { screenshots, gallery } = modShots(slug, dir);
     out.push({
       id: slug,

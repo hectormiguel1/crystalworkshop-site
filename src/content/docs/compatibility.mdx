@@ -1,0 +1,55 @@
+---
+title: Compatibility
+description: Which game versions CrystalWorkshop, PulseDepot, Crux and each mod support, on Steam and on the Microsoft Store.
+tableOfContents:
+  maxHeadingLevel: 2
+---
+
+import FeedbackLinks from '../../components/FeedbackLinks.astro';
+import StoreBadges from '../../components/StoreBadges.astro';
+import { item } from '../../lib/data';
+
+This table shows which version of each game the tools and the mods work with. The Steam columns cover Windows and Linux (Proton).
+
+| | XIII (Steam) | XIII-2 (Steam) | LR (Steam) | XIII-2 (Microsoft Store) | XIII and LR (Microsoft Store) |
+|---|---|---|---|---|---|
+| **CrystalWorkshop:** open and edit | Supported | Supported | Supported | Experimental | Not supported |
+| **CrystalWorkshop:** export a shard | Supported (tested in game) | Experimental | Experimental | Experimental | Not supported |
+| **PulseDepot:** install mods | Supported (tested in game) | Supported (tested in game) | Experimental | Experimental | Not supported |
+| **PulseDepot:** launch the game | Supported (tested in game) | Supported (tested in game) | Experimental | Not supported | Not supported |
+| **Crux** | Supported (tested in game) | Supported (tested in game) | Experimental | Experimental | Not supported |
+| [XIII Mod Settings](../mods/mod-settings/) | Supported | Not supported | Not supported | Not supported | Not supported |
+| [Hard Mode](../mods/hard-mode/) | Supported | Not supported | Not supported | Not supported | Not supported |
+| [Drop Changes](../mods/drop-changes/) | Supported | Not supported | Not supported | Not supported | Not supported |
+| [Paradigm Tuning](../mods/paradigm-tuning/) | Supported | Not supported | Not supported | Not supported | Not supported |
+| [No Post-Battle Healing](../mods/no-post-battle-heal/) | Supported | Not supported | Not supported | Not supported | Not supported |
+| [XIII-2 UI Scale](../mods/xiii2-ui-scale/) | Not supported | Supported (tested in game) | Not supported | Experimental | Not supported |
+
+## What the values mean
+
+- **Supported (tested in game):** works, and has been checked by playing the game.
+- **Supported:** works and passes automated checks.
+- **Experimental:** may work, but has not been tested in game. Expect problems, and please report what you find.
+- **Not supported:** does not work with this version.
+
+## Store badges
+
+Each tool and mod page shows which store versions of the game it works with.
+
+<ul class="store-legend not-content">
+  <li><StoreBadges stores={[{ name: 'Steam' }]} label="Steam badge" /> works with the Steam version.</li>
+  <li><StoreBadges stores={[{ name: 'Microsoft Store', status: 'experimental' }]} label="Experimental Microsoft Store badge" /> may work with the Microsoft Store version, but has not been tested in game yet.</li>
+</ul>
+
+For LIGHTNING RETURNS, PulseDepot lists the game, but no LR mods ship yet, and shards exported from CrystalWorkshop for XIII-2 or LR have not been checked in game yet. The [CrystalWorkshop feature status](../crystalworkshop/feature-status/) page lists each editor feature per game.
+
+## Microsoft Store versions
+
+- Only FINAL FANTASY XIII-2 from the Microsoft Store is experimental. Nothing has been tested in game on any Microsoft Store version yet.
+- CrystalWorkshop does not find a Microsoft Store install by itself: choose the game folder yourself.
+- PulseDepot can install mods for it, but cannot start Microsoft Store games yet. Start the game from the Microsoft Store or Xbox app.
+- FINAL FANTASY XIII and LIGHTNING RETURNS from the Microsoft Store are not supported.
+
+If you try the Microsoft Store version of XIII-2, please report the result, whether it works or not. Say in the report that you use the Microsoft Store version, and attach the [Crux log](../crux/logs/) if there is one.
+
+<FeedbackLinks item={item('pulsedepot')} />

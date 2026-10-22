@@ -406,3 +406,30 @@ a.flow-name:hover { color: var(--cw-link); }
 .st-milestone h3 { margin: 0 0 0.2rem; font-size: var(--sl-text-h5); color: var(--sl-color-white); }
 .st-due { margin: 0 0 0.5rem; font-size: var(--sl-text-sm); color: var(--sl-color-gray-3); }
 .roadmap h2 { margin: 1.75rem 0 0.75rem; font-size: var(--sl-text-h3); color: var(--sl-color-white); }
+
+/* ---------------------------------------------------- store badges */
+.store-badges { display: inline-flex; flex-wrap: wrap; gap: 0.35rem; align-items: center; }
+.product .store-badges { align-self: flex-start; }
+.rc-head .store-badges { margin-top: 0.4rem; }
+.store-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border-radius: 0.35rem;
+  padding: 0.05rem 0.5rem;
+  font-size: var(--sl-text-xs);
+  font-weight: 600;
+  line-height: 1.6;
+  white-space: nowrap;
+  border: 1px solid;
+}
+.store-badge.store-steam { color: #dce9f5; background: #1b2838; border-color: #66c0f4; }
+.store-badge.store-msstore { color: #e3eaff; background: #1f2a55; border-color: #7f9cf5; }
+.store-badge.store-experimental { color: var(--sl-color-gray-2); background: transparent; border-style: dashed; border-color: var(--sl-color-gray-4); }
+.store-flag { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 700; color: #ffcf9e; }
+:root[data-theme='light'] .store-badge.store-steam { color: #10273d; background: #e6f1fa; border-color: #4a90c2; }
+:root[data-theme='light'] .store-badge.store-msstore { color: #1f2a6b; background: #eceffd; border-color: #7f8fe0; }
+:root[data-theme='light'] .store-badge.store-experimental { color: var(--sl-color-gray-2); background: transparent; border-color: var(--sl-color-gray-4); }
+:root[data-theme='light'] .store-flag { color: #8a4300; }
+.store-legend { list-style: none; padding: 0; display: grid; gap: 0.4rem; }
+.store-legend li { display: flex; gap: 0.6rem; align-items: center; flex-wrap: wrap; margin: 0; }

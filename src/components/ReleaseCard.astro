@@ -3,6 +3,8 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 import { item, bytes, downloadUrl, href, inline, gameShort, gameName, stageLabel, placeholderDownloads, productName, productNames } from '../lib/data';
 import BrandIcon from './BrandIcon.astro';
 import FeedbackLinks from './FeedbackLinks.astro';
+import StoreBadges from './StoreBadges.astro';
+import { storesText } from '../../scripts/lib/stores.mjs';
 
 interface Props {
   id: string;
@@ -28,6 +30,7 @@ const docsHref = href(`${i.docs}/`);
         {i.games.map((g) => <span class={`pill game game-${g}`} title={gameName(g)}>{gameShort(g)}</span>)}
         <time datetime={i.date}>{i.date}</time>
       </p>
+      <StoreBadges stores={i.stores} />
     </div>
   </header>
   {!compact && <p class="rc-summary">{i.summary}</p>}
@@ -57,7 +60,7 @@ const docsHref = href(`${i.docs}/`);
               </div>
               <div>
                 <dt>Platform</dt>
-                <dd>{p.label}{i.stores && ` · ${i.stores.join(', ')}`}</dd>
+                <dd>{p.label}{i.stores?.length ? ` · ${storesText(i.stores)}` : ''}</dd>
               </div>
               <div class="rc-sha">
                 <dt>SHA-256</dt>

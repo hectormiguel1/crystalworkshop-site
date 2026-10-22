@@ -9,10 +9,12 @@ import Downloads from '../../components/Downloads.astro';
 
 <Downloads section="notice" />
 
+Which game versions each download supports (Steam, Microsoft Store): see [Compatibility](../compatibility/).
+
 Pick your system in any card; the choice applies to every card. Check a download against its SHA-256 before you run it:
 
 - **Windows (PowerShell):** `Get-FileHash .\file.zip` prints the SHA-256.
-- **Linux:** `sha256sum file.tar.gz`.
+- **Linux:** `sha256sum file.zip`.
 
 The packages are not code-signed, so Windows SmartScreen asks once before the first start (**More info**, then **Run anyway**). There is no installer: extract the archive into a folder you can write to.
 

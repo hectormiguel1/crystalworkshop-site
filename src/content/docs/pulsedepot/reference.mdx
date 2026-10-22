@@ -12,12 +12,17 @@ PulseDepot is the mod manager for the FINAL FANTASY XIII trilogy on PC (Steam).
 It installs mods made with CrystalWorkshop and older Nova Chrysalia mod
 packages without editing your game archives or your save files.
 
+**Full guide and documentation:
+[CrystalWorkshop site](https://hectormiguel1.github.io/crystalworkshop-site/)**
+([PulseDepot guides](https://hectormiguel1.github.io/crystalworkshop-site/pulsedepot/),
+[Changelog](https://hectormiguel1.github.io/crystalworkshop-site/changelog/),
+[Report a problem](https://github.com/hectormiguel1/crystalworkshop-site/issues/new/choose)).
+
 :::caution[BETA]
-This is the first public build. It has passed automated tests
-on Linux and under Wine, but it has **not** been tested on a real Windows
-PC and the release has not been tested in game yet. Back up your saves
-and report problems with the files listed under
-[Troubleshooting](#troubleshooting).
+This is the first public build. It is tested in game and has
+passed automated tests on Linux and under Wine, but it has **not** been
+tested on a real Windows PC. Mods never change your save files. Report
+problems with the files listed under [Troubleshooting](#troubleshooting).
 :::
 
 ![The Mods page with five XIII shards listed](../../../assets/shots/pd/mods.webp)
@@ -55,7 +60,6 @@ Crux             ──loads───▶ that image inside the game (a small DLL
 | `support/ff13-studio/tools/vineflower-1.12.0.jar` | The Vineflower 1.12.0 Java decompiler, used to merge script mods. Nothing to download. |
 | `Start-PulseDepot.cmd`, `Check-Java.cmd` (Windows) / `start-pulsedepot.sh`, `check-java.sh` (Linux) | Start PulseDepot with `JAVA_HOME`'s JDK, or show the Java it will use. |
 | `README-Windows.txt` / `README-Linux.txt` | A short version of this guide. |
-| `schemas/` | Data schemas. Keep this folder beside the executable. |
 | `docs/` | This guide and its screenshots. |
 | `LICENSE`, `THIRD-PARTY-NOTICES.txt`, `licenses/` | The licence and the third-party notices (see [Licences](../../legal/)). |
 | `BUILD-INFO.json` | Build details, file hashes, and what was and was not tested. |
@@ -65,6 +69,9 @@ Crux             ──loads───▶ that image inside the game (a small DLL
 - The Steam release of FINAL FANTASY XIII and/or XIII-2. LIGHTNING RETURNS is
   in the game list, but no LR mods ship with this release. Treat LR support
   as experimental.
+- **Microsoft Store versions:** only XIII-2, and only as an experiment:
+  PulseDepot cannot start Store games yet. See
+  [Compatibility](https://hectormiguel1.github.io/crystalworkshop-site/compatibility/).
 - **Windows:** 64-bit Windows 10 or 11 with Direct3D 12 or Vulkan drivers.
 - **Linux:** x86_64 with a Vulkan or OpenGL driver. The games run through
   Steam Play (Proton).
@@ -92,9 +99,12 @@ Crux             ──loads───▶ that image inside the game (a small DLL
 
 ## Install on Linux (Steam / Proton)
 
-1. Extract `pulsedepot-0.1.0-beta-linux-x86_64.tar.gz` anywhere you can write,
-   for example `~/Games/PulseDepot`. Start `./pulsedepot` or
-   `./start-pulsedepot.sh`. (No AppImage is built for this release.)
+1. Extract `pulsedepot-0.1.0-beta-linux-x86_64.zip` anywhere you can write,
+   for example `~/Games/PulseDepot`, with
+   `unzip pulsedepot-0.1.0-beta-linux-x86_64.zip` (or any archive manager that
+   keeps file permissions). Start `./pulsedepot` or `./start-pulsedepot.sh`.
+   If it won't start, run `chmod +x pulsedepot start-pulsedepot.sh check-java.sh`
+   in the extracted folder. (No AppImage is built for this release.)
 2. PulseDepot finds Steam libraries in these places, reading every library
    listed in each one's `libraryfolders.vdf`:
    - `~/.steam/steam`
@@ -381,9 +391,8 @@ write save files.
 ## Known issues (BETA)
 
 - Not code-signed and no installer.
-- Not yet tested on a real Windows PC, and this release has not been tested
-  in game. It was checked on Linux and under Wine; `BUILD-INFO.json` lists
-  what was and was not tested.
+- Not yet tested on a real Windows PC. It was checked on Linux and under
+  Wine.
 - The Linux build is a native x86_64 binary and is not packaged as an
   AppImage. Its runtime has been tested less than the Windows build's.
 - PulseDepot never removes Crux itself (see [Uninstalling](#uninstalling)).

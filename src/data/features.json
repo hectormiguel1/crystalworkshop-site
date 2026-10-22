@@ -1,5 +1,5 @@
 {
-  "legend": "<strong>Completed</strong> works and passes automated checks on sample data, but has not yet been verified in game for this release. <strong>Experimental</strong> is partial, unverified for that game, or MCP-only. <strong>Known gaps</strong> are things that do not work yet.",
+  "legend": "<strong>Completed</strong> works and passes automated checks. <strong>Experimental</strong> is partial, unverified for that game, or MCP-only. <strong>Known gaps</strong> are things that do not work yet.",
   "rows": [
     {
       "game": "xiii",

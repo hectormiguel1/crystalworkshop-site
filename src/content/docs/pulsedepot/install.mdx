@@ -31,9 +31,9 @@ PulseDepot has no installer: you extract the package and start it. Pick your sys
 
 <Steps>
 
-1. Download `pulsedepot-…-linux-x86_64.tar.gz` from [Downloads](../../downloads/#pulsedepot) and check it with `sha256sum`.
+1. Download `pulsedepot-…-linux-x86_64.zip` from [Downloads](../../downloads/#pulsedepot) and check it with `sha256sum`.
 
-2. Extract it anywhere you can write, for example `~/Games/PulseDepot`. Start `./pulsedepot` or `./start-pulsedepot.sh`.
+2. Extract it anywhere you can write, for example `~/Games/PulseDepot`, with `unzip pulsedepot-…-linux-x86_64.zip` (or any archive manager that keeps file permissions). Start `./pulsedepot` or `./start-pulsedepot.sh`. If it won't start, run `chmod +x pulsedepot start-pulsedepot.sh check-java.sh` in the extracted folder.
 
 3. PulseDepot finds your Steam libraries in `~/.steam/steam`, `~/.steam/root`, `~/.local/share/Steam` and the Flatpak Steam folder, reading every library listed in each one's `libraryfolders.vdf`. `FF13_GAME_DIR`, `FF13_2_GAME_DIR` and `LR_GAME_DIR` override the detection.
 

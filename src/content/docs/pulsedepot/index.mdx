@@ -11,7 +11,7 @@ import ReleaseCard from '../../../components/ReleaseCard.astro';
 PulseDepot is the mod manager for the PC (Steam) releases of FINAL FANTASY XIII and XIII-2. It installs mods made with CrystalWorkshop, and older Nova Chrysalia mod packages, without editing your game archives or your save files.
 
 :::caution[Beta]
-This is the first public build. It passed automated tests on Linux and under Wine, but it has **not** been tested on a real Windows PC, and this release has not been tested in game yet. Back up your saves, and report problems with the files listed under [Troubleshooting](troubleshooting/).
+This is the first public build. It is tested in game and passed automated tests on Linux and under Wine, but it has **not** been tested on a real Windows PC. Mods never change your save files. Report problems with the files listed under [Troubleshooting](troubleshooting/).
 :::
 
 ![The Mods page with the XIII mods listed and Hard Mode selected](../../../assets/shots/pd/mods.webp)
@@ -39,6 +39,7 @@ This is the first public build. It passed automated tests on Linux and under Win
 ## Requirements
 
 - The Steam release of FINAL FANTASY XIII and/or XIII-2. LIGHTNING RETURNS is in the game list, but no LR mods ship with this release: treat LR support as experimental.
+- **Microsoft Store versions:** only XIII-2, and only as an experiment: PulseDepot cannot start Store games yet. See [Compatibility](../compatibility/).
 - **Windows:** 64-bit Windows 10 or 11 with Direct3D 12 or Vulkan drivers.
 - **Linux:** x86_64 with a Vulkan or OpenGL driver. The games run through Steam Play (Proton).
 - **NovaFix is optional.** With NovaFix, Crux runs as its addon. Without it, Crux runs as `version.dll` beside the game executable.
@@ -59,14 +60,13 @@ This is the first public build. It passed automated tests on Linux and under Win
 | `Crux/Crux.ini.example` | Starting Crux settings for a new setup. |
 | Vineflower 1.12.0 jar | The Java decompiler used to merge script mods. Nothing to download. |
 | `Start-PulseDepot.cmd`, `Check-Java.cmd` (Windows) / `start-pulsedepot.sh`, `check-java.sh` (Linux) | Start PulseDepot with `JAVA_HOME`'s JDK, or show the Java it will use. |
-| `schemas/` | Data schemas. Keep this folder beside the executable. |
 | `docs/` | The guide and its screenshots. |
 | `LICENSE`, `THIRD-PARTY-NOTICES.txt`, `licenses/` | The licence and the third-party notices. See [Legal](../legal/). |
 
 ## Known issues (beta)
 
 - Not code-signed and no installer.
-- Not yet tested on a real Windows PC, and this release has not been tested in game.
+- Not yet tested on a real Windows PC.
 - The Linux build is a native x86_64 binary, not an AppImage. Its runtime has been tested less than the Windows build's.
 - PulseDepot never removes Crux itself (see [Uninstall](uninstall/)).
 - LIGHTNING RETURNS appears in the game list, but no LR mod ships with this release.

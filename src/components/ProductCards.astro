@@ -1,5 +1,6 @@
 ---
 import BrandIcon from './BrandIcon.astro';
+import StoreBadges from './StoreBadges.astro';
 import { releases, href, stageLabel } from '../lib/data';
 
 const blurbs: Record<string, string> = {
@@ -20,6 +21,7 @@ const products = order.map((id) => releases.products.find((p) => p.id === id)).f
         <span class={`pill stage-${p!.stage}`}>
           {stageLabel(p!.stage)} · v{p!.version}
         </span>
+        <StoreBadges stores={p!.stores} />
         <p>{blurbs[p!.id]}</p>
       </a>
     ))
