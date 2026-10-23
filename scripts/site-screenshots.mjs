@@ -120,7 +120,7 @@ const ver = crux.builds.find((b) => b.file === 'version.dll');
 const scansDoc = {
   schema: 1,
   generated: now,
-  scanners: { virustotal: 'configured', metadefender: 'configured', kaspersky: 'configured', hybridanalysis: 'not configured', triage: 'not configured', filescan: 'not configured' },
+  scanners: { virustotal: 'configured', metadefender: 'configured', kaspersky: 'configured', hybridanalysis: 'not configured', triage: 'not configured' },
   files: [
     entry('pd-win', w.file, null, 'pulsedepot', pd.version, w.sha256, w.bytes, { virustotal: vt(w.sha256), metadefender: md(w.sha256), kaspersky: kas(w.sha256) }),
     entry('pd-win-ver', 'version.dll', w.file, 'pulsedepot', pd.version, ver.sha256, ver.bytes, { virustotal: vt(ver.sha256, 2, [{ engine: 'SampleEngine', category: 'malicious', result: 'Heur.Generic' }, { engine: 'OtherEngine', category: 'malicious', result: 'Sample.A!ml', heuristic: true }]), metadefender: { status: 'pending' }, kaspersky: kas(ver.sha256) }),

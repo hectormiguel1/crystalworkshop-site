@@ -1,11 +1,10 @@
 // The scan service adapters added after the first scans: VirusTotal report
 // details and the lost-analysis fallback, Kaspersky OpenTIP, Hybrid Analysis,
-// Triage and Filescan.io, all against mocked HTTP; plus the heuristic
+// and Triage, all against mocked HTTP; plus the heuristic
 // labelling and the schema of their records.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
-import { filescan, filescanRecord } from '../scans/filescan.mjs';
 import { limiter, request } from '../scans/http.mjs';
 import { HA_LINUX, HA_WINDOWS, haEnvironment, hybridAnalysis } from '../scans/hybridanalysis.mjs';
 import { kaspersky, parseOpenTip } from '../scans/kaspersky.mjs';
@@ -63,7 +62,6 @@ test('the schema checks every scanner record', () => {
     kaspersky: { status: 'ok', zone: 'Green', detections: [], url: 'https://k/', scanned_at: null },
     hybridanalysis: { status: 'ok', verdict: 'no specific threat', threat_score: 0, url: 'https://h/' },
     triage: { status: 'ok', score: 1, url: 'https://t/' },
-    filescan: { status: 'ok', verdict: 'benign', threat_level: 0.1, url: 'https://f/' },
   };
   assert.deepEqual(validateScans(docWith(ok)), []);
   // Older documents (only two scanners, no details) stay valid.
@@ -73,13 +71,25 @@ test('the schema checks every scanner record', () => {
     kaspersky: { ...ok.kaspersky, zone: 'Blue', detections: {} },
     hybridanalysis: { ...ok.hybridanalysis, verdict: 3, threat_score: 101 },
     triage: { ...ok.triage, score: 11 },
-    filescan: { ...ok.filescan, verdict: 'fine', threat_level: 2 },
   };
   const errors = validateScans(docWith(bad)).join('\n');
-  for (const want of ['details must be an object', 'behaviour must be an object', 'flagged must be a list', 'zone: Blue', 'detections must be a list', 'verdict must be a string', 'threat_score must be', 'score must be 0-10', 'verdict: fine', 'threat_level must be']) assert.ok(errors.includes(want), want);
+  for (const want of ['details must be an object', 'behaviour must be an object', 'flagged must be a list', 'zone: Blue', 'detections must be a list', 'verdict must be a string', 'threat_score must be', 'score must be 0-10']) assert.ok(errors.includes(want), want);
   const d = docWith(ok);
   d.scanners.other = 'configured';
   assert.match(validateScans(d).join(), /scanners\.other/);
+});
+
+test('leftover keys of the retired Filescan.io scanner are ignored', () => {
+  const d = docWith({ virustotal: { status: 'ok', stats: { malicious: 0, suspicious: 0, undetected: 1, harmless: 0, 'type-unsupported': 0 }, url: 'https://v/' }, filescan: { status: 'ok', verdict: 'benign', threat_level: 0.1, url: 'https://f/', scanned_at: '2030-01-01T00:00:00Z' } });
+  d.scanners.filescan = 'configured';
+  assert.deepEqual(validateScans(d), []);
+  assert.ok(!SCANNERS.includes('filescan'));
+  const html = fileHtml(d.files[0]);
+  assert.doesNotMatch(html, /<dt>Filescan|Threat level|2030-01-01/);
+  // Odd values under the retired key are not errors either.
+  d.files[0].scans.filescan = { status: 'weird' };
+  d.scanners.filescan = 'maybe';
+  assert.deepEqual(validateScans(d), []);
 });
 
 test('verdicts, states and badges of every scanner', () => {
@@ -96,11 +106,8 @@ test('verdicts, states and badges of every scanner', () => {
     ['triage', { status: 'ok', score: 1 }, 'Triage 1/10', 'clean'],
     ['triage', { status: 'ok', score: 6 }, 'Triage 6/10', 'flagged'],
     ['triage', { status: 'ok', score: null }, 'Triage: no score', 'none'],
-    ['filescan', { status: 'ok', verdict: 'likely_malicious' }, 'Filescan.io: likely malicious', 'flagged'],
-    ['filescan', { status: 'ok', verdict: 'no_threat' }, 'Filescan.io: no threat', 'clean'],
-    ['filescan', { status: 'ok', verdict: 'unknown' }, 'Filescan.io: unknown', 'none'],
     ['triage', { status: 'not configured' }, 'Triage: not set up', 'none'],
-    ['filescan', { status: 'pending' }, 'Filescan.io: in progress', 'pending'],
+    ['triage', { status: 'pending' }, 'Triage: in progress', 'pending'],
   ];
   for (const [s, scan, text, state] of cases) {
     assert.equal(badgeText(s, scan), text);
@@ -124,17 +131,16 @@ test('the Security page shows a column per scanner and the VirusTotal details', 
     kaspersky: { status: 'ok', zone: 'Red', detections: [{ name: 'HEUR:Trojan.Win32.Generic' }], url: 'https://opentip.kaspersky.com/x/' },
     hybridanalysis: { status: 'ok', verdict: 'no specific threat', threat_score: 7, family: null, environment: 'Windows 10 64 bit', url: 'https://h/' },
     triage: { status: 'ok', score: 3, family: ['none'], signatures: [{ name: 'Enumerates processes' }], url: 'https://tria.ge/x' },
-    filescan: { status: 'ok', verdict: 'benign', threat_level: 0.05, url: 'https://f/' },
   };
   const html = fileHtml(docWith(scans).files[0]);
-  for (const s of ['<dt>Kaspersky</dt>', '<dt>Hybrid Analysis</dt>', '<dt>Triage</dt>', '<dt>Filescan.io</dt>', 'Kaspersky: malware', 'Detected as: HEUR:Trojan.Win32.Generic', 'Threat score: 7/100', 'Sandbox: Windows 10 64 bit', 'Triage 3/10', 'Behaviour: Enumerates processes', 'Threat level: 5%', 'More from VirusTotal', 'trojan.wacatac', 'Zenbox: harmless', 'none matched', 'critical 0 · high 1 · medium 0 · low 2 — Rule &lt;A&gt;', 'not signed', 'T1027 Obfuscated files', 'Defense Evasion (1)', 'Reads a file', '2 processes started', 'https://tria.ge/x']) assert.ok(html.includes(s), s);
+  for (const s of ['<dt>Kaspersky</dt>', '<dt>Hybrid Analysis</dt>', '<dt>Triage</dt>', 'Kaspersky: malware', 'Detected as: HEUR:Trojan.Win32.Generic', 'Threat score: 7/100', 'Sandbox: Windows 10 64 bit', 'Triage 3/10', 'Behaviour: Enumerates processes', 'More from VirusTotal', 'trojan.wacatac', 'Zenbox: harmless', 'none matched', 'critical 0 · high 1 · medium 0 · low 2 — Rule &lt;A&gt;', 'not signed', 'T1027 Obfuscated files', 'Defense Evasion (1)', 'Reads a file', '2 processes started', 'https://tria.ge/x']) assert.ok(html.includes(s), s);
   assert.doesNotMatch(html, /Rule <A>/);
   // No details: no "More" block.
   assert.doesNotMatch(fileHtml(docWith({ virustotal: { ...scans.virustotal, details: undefined, behaviour: undefined } }).files[0]), /More from VirusTotal/);
   // Release cards: VirusTotal, MetaDefender, Kaspersky only.
   const card = cardBadgesHtml(docWith(scans), 'x.exe', '/s/');
   assert.match(card, /VirusTotal 0\/70.*MetaDefender: not scanned yet.*Kaspersky: malware/);
-  assert.doesNotMatch(card, /Triage|Hybrid|Filescan/);
+  assert.doesNotMatch(card, /Triage|Hybrid/);
 });
 
 // ------------------------------------------------------------- http budget
@@ -460,63 +466,6 @@ test('Triage: unknown files are submitted and the sample polled', async () => {
   assert.deepEqual(triage({}), { name: 'triage', configured: false });
 });
 
-// ------------------------------------------------------------- Filescan.io
-
-const fsReport = (verdict, finished = true) => ({
-  flowId: 'flow1',
-  allFinished: finished,
-  scanStartedDate: '2026-10-22T02:00:00Z',
-  reports: { rep1: { finalVerdict: { verdict, threatLevel: 0.1, confidence: 1 }, allTags: [{ tag: { name: 'peexe' } }, 'x64'], file: { name: 'a.exe', sha256: A } }, other: { file: { sha256: 'b' } } },
-});
-
-test('Filescan.io: a known file is found by its reputation and report', async () => {
-  const f = mockFetch([
-    ['GET', /\/api\/reputation\/hash\?sha256=[0-9a-f]{64}$/, () => json({ sha256: A, overall_verdict: 'benign', filescan_reports: [{ report_id: 'old', flow_id: 'f0', verdict: 'benign', report_date: '2026-01-01' }, { report_id: 'rep1', flow_id: 'flow1', verdict: 'benign', report_date: '2026-10-22' }] })],
-    ['GET', /\/api\/scan\/flow1\/report\?filter=general&filter=finalVerdict&filter=allTags$/, () => json(fsReport('BENIGN'))],
-  ]);
-  const r = await filescan(opts(f, 'https://fs')).lookup(target('a.exe', 'a'));
-  assert.equal(r.state, 'ok');
-  assert.deepEqual(r.result, { status: 'ok', verdict: 'benign', threat_level: 0.1, confidence: 1, tags: ['peexe', 'x64'], flagged: [], scanned_at: '2026-10-22T02:00:00.000Z', url: 'https://www.filescan.io/uploads/flow1/reports/rep1/overview' });
-  assert.equal(f.calls[0].init.headers['x-api-key'], 'KEY');
-  assert.deepEqual(validateScans(docWith({ filescan: r.result })), []);
-  // A report without a flow id: the reputation verdict and the search link.
-  const g = mockFetch([['GET', /reputation/, () => json({ filescan_reports: [{ report_id: 'r', verdict: 'likely_malicious', report_date: '2026-10-01T00:00:00Z' }] })]]);
-  const m = await filescan(opts(g, 'https://fs')).lookup(target('a', 'a'));
-  assert.equal(m.result.verdict, 'likely_malicious');
-  assert.deepEqual(m.result.flagged, [{ engine: 'Filescan.io', result: 'likely malicious' }]);
-  assert.equal(m.result.url, `https://www.filescan.io/search-result?query=${A}`);
-  assert.equal(filescanRecord(A, null, null, { finalVerdict: { verdict: 'weird', threatLevel: 5 } }).verdict, 'unknown');
-  assert.equal(filescanRecord(A, null, null, {}).threat_level, null);
-});
-
-test('Filescan.io: unknown files are uploaded and the scan polled', async () => {
-  const f = mockFetch([
-    ['GET', /reputation/, () => json({ overall_verdict: 'unknown', filescan_reports: [] })],
-    ['POST', /\/api\/scan\/file$/, () => json({ flow_id: 'flow1', priority: { applied: 5 } })],
-    ['GET', /\/api\/scan\/flow1\/report/, (u, i, n) => (n === 1 ? json({}, 404) : json(fsReport('MALICIOUS', n > 2)))],
-  ]);
-  const out = await scanAll(filescan(opts(f, 'https://fs')), [target('a.exe', 'a')], { sleep: noSleep, pollIntervalMs: 1 });
-  assert.equal(out.get(A).verdict, 'malicious');
-  assert.equal(f.calls.find((c) => c.method === 'POST').init.body.get('file').name, 'a.exe');
-  const g = mockFetch([
-    ['GET', /reputation/, (u, i, n) => (n === 1 ? json({}, 404) : json({}))],
-    ['GET', /\/scan\/bad\/report/, () => json({ job: { error: true, reason: 'rejected' } })],
-    ['GET', /\/scan\/empty\/report/, () => json({ allFinished: true, reports: {} })],
-  ]);
-  const fs = filescan(opts(g, 'https://fs'));
-  assert.deepEqual(await fs.lookup(target('a', 'a')), { state: 'unknown' });
-  assert.deepEqual(await fs.lookup(target('a', 'a')), { state: 'unknown' });
-  await assert.rejects(fs.poll(target('a', 'a'), { flowId: 'bad' }), /scan failed: rejected/);
-  assert.deepEqual(await fs.poll(target('a', 'a'), { flowId: 'empty' }), { state: 'pending', handle: { flowId: 'empty' } });
-  assert.deepEqual(await fs.poll(target('a', 'a'), {}), { state: 'pending', handle: {} });
-  await assert.rejects(filescan(opts(mockFetch([['POST', /scan\/file/, () => json({})]]), 'https://fs')).upload(target('a', 'a')), /no flow id/);
-  await assert.rejects(filescan(opts(mockFetch([['POST', /scan\/file/, () => json({}, 429)]]), 'https://fs')).upload(target('a', 'a')), /upload: HTTP 429/);
-  await assert.rejects(filescan(opts(mockFetch([['GET', /reputation/, () => json({}, 401)]]), 'https://fs')).lookup(target('a', 'a')), /reputation: HTTP 401/);
-  await assert.rejects(filescan(opts(mockFetch([['GET', /report/, () => json({}, 400)]]), 'https://fs')).poll(target('a', 'a'), { flowId: 'x' }), /scan report: HTTP 400/);
-  await assert.rejects(filescan(opts(f, 'https://fs')).upload({ ...target('a', 'a'), read: () => ({ length: 200 * 1024 * 1024 }) }), /100 MB/);
-  assert.deepEqual(filescan({}), { name: 'filescan', configured: false });
-});
-
 // --------------------------------------------------------------------- run
 
 test('a run with every scanner: missing keys are "not configured" and the document validates', async () => {
@@ -527,14 +476,14 @@ test('a run with every scanner: missing keys are "not configured" and the docume
   ]);
   const doc = await runScans({
     targets: [target('a.exe', 'a')],
-    scanners: [virusTotal(opts(f, 'https://vt')), kaspersky(opts(f, 'https://ot')), hybridAnalysis({}), triage({}), filescan({})],
+    scanners: [virusTotal(opts(f, 'https://vt')), kaspersky(opts(f, 'https://ot')), hybridAnalysis({}), triage({})],
     now: () => new Date('2026-10-22T04:00:00Z'),
     sleep: noSleep,
   });
   assert.deepEqual(validateScans(doc), []);
-  assert.deepEqual(doc.scanners, { virustotal: 'configured', kaspersky: 'configured', hybridanalysis: 'not configured', triage: 'not configured', filescan: 'not configured' });
+  assert.deepEqual(doc.scanners, { virustotal: 'configured', kaspersky: 'configured', hybridanalysis: 'not configured', triage: 'not configured' });
   const s = doc.files[0].scans;
   assert.equal(s.virustotal.flagged[0].heuristic, true);
   assert.equal(s.kaspersky.zone, 'Green');
-  for (const k of ['hybridanalysis', 'triage', 'filescan']) assert.deepEqual(s[k], { status: 'not configured' });
+  for (const k of ['hybridanalysis', 'triage']) assert.deepEqual(s[k], { status: 'not configured' });
 });

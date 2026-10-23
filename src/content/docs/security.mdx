@@ -1,6 +1,6 @@
 ---
 title: Security and virus scans
-description: VirusTotal, MetaDefender, Kaspersky, Hybrid Analysis, Triage and Filescan.io results for every download, the SHA-256 of each file, links to scan it yourself, and what to do if a scanner flags something.
+description: VirusTotal, MetaDefender, Kaspersky, Hybrid Analysis and Triage results for every download, the SHA-256 of each file, links to scan it yourself, and what to do if a scanner flags something.
 tableOfContents:
   maxHeadingLevel: 2
 ---
@@ -8,14 +8,14 @@ tableOfContents:
 import SecurityScans from '../../components/SecurityScans.astro';
 import { repoUrl } from '../../lib/data';
 
-Every download on this site, and the programs and DLLs inside the app packages, is checked when a release is published and again every week with two online multi-engine scanners, [VirusTotal](https://www.virustotal.com/) and [MetaDefender](https://metadefender.com/), with the [Kaspersky Threat Intelligence Portal](https://opentip.kaspersky.com/), and with three sandboxes that run or inspect the file and rate what it does: [Hybrid Analysis](https://hybrid-analysis.com/), [Triage](https://tria.ge/) and [Filescan.io](https://www.filescan.io/). This page lists the latest result for each file, a link to the full report and the file's SHA-256, so you can check it yourself.
+Every download on this site, and the programs and DLLs inside the app packages, is checked when a release is published and again every week with two online multi-engine scanners, [VirusTotal](https://www.virustotal.com/) and [MetaDefender](https://metadefender.com/), with the [Kaspersky Threat Intelligence Portal](https://opentip.kaspersky.com/), and with two sandboxes that run the file and rate what it does: [Hybrid Analysis](https://hybrid-analysis.com/) and [Triage](https://tria.ge/). This page lists the latest result for each file, a link to the full report and the file's SHA-256, so you can check it yourself.
 
 ## Reading the results
 
 - **VirusTotal 0/72**, for example, means none of the 72 engines that gave a verdict flagged the file. Engines that do not support the file type are not counted.
 - **MetaDefender 0/21** reads the same way for MetaDefender's engines.
 - **Kaspersky: clean** is Kaspersky's verdict for the file: *clean*, *adware or other*, *malware*, or *no verdict* when Kaspersky has no data on it yet.
-- **Hybrid Analysis**, **Triage** and **Filescan.io** are sandboxes. Hybrid Analysis gives a verdict (*no specific threat*, *suspicious* or *malicious*) and a threat score out of 100; Triage gives a score from 1 (nothing malicious seen) to 10 (known malware); Filescan.io gives a verdict from *benign* to *malicious*. Sandboxes rate behaviour, so tools that read and write game files can score above the minimum without being harmful.
+- **Hybrid Analysis** and **Triage** are sandboxes. Hybrid Analysis gives a verdict (*no specific threat*, *suspicious* or *malicious*) and a threat score out of 100; Triage gives a score from 1 (nothing malicious seen) to 10 (known malware). Sandboxes rate behaviour, so tools that read and write game files can score above the minimum without being harmful.
 - **More from VirusTotal** under a file lists extra details when VirusTotal has them: the most common threat label, sandbox verdicts, matching community YARA and Sigma rules, the code signature, and the behaviours and MITRE ATT&CK techniques its sandboxes saw.
 - An engine result marked **heuristic (machine-learning) — no signature match** comes from a model that rates how a file looks, or from a reputation label for a file it has rarely seen, not from a match with known malware.
 - **In progress**: the file was submitted and the results are not in yet. **Not set up** or **not scanned yet**: there is no automatic result for that scanner; the "Scan it yourself" links still work.

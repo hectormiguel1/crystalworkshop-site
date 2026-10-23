@@ -6,7 +6,7 @@
 //   "schema": 1,
 //   "generated": "2026-10-22T04:17:00.000Z" | null,   // null: placeholder, no scan yet
 //   "scanners": { "virustotal": "configured" | "not configured", "metadefender": …, "kaspersky": …,
-//                 "hybridanalysis": …, "triage": …, "filescan": … },
+//                 "hybridanalysis": …, "triage": … },
 //   "files": [{
 //     "id": "pulsedepot-0-1-0-beta-windows-x86-64-zip-pulsedepot-exe",
 //     "name": "pulsedepot.exe",                        // the file that was scanned
@@ -28,26 +28,26 @@
 //       "hybridanalysis": { "status": "ok", "verdict": "no specific threat", "threat_score": 0..100 | null,
 //                           "av_detect": 0..100 | null, "family", "environment", "tags", "scanned_at", "url" },
 //       "triage": { "status": "ok", "score": 1..10 | null, "family": [], "tags": [], "signatures": [{ "name", "score" }],
-//                   "scanned_at", "url" },
-//       "filescan": { "status": "ok", "verdict": "benign" | …, "threat_level": 0..1 | null, "confidence", "tags",
-//                     "scanned_at", "url" }
+//                   "scanned_at", "url" }
 //     }
 //   }]
 // }
 // A scan's status is "ok", "pending" (submitted, results not ready yet),
 // "error" (with "error": short reason) or "not configured" (no API key).
 // Every scanner field beyond "status", "url" and its verdict is optional, so
-// documents written by earlier versions stay valid.
+// documents written by earlier versions stay valid. Keys of retired scanners
+// (RETIRED_SCANNERS) in older documents are ignored.
 
 export const SCHEMA = 1;
-export const SCANNERS = ['virustotal', 'metadefender', 'kaspersky', 'hybridanalysis', 'triage', 'filescan'];
-export const SCANNER_NAMES = { virustotal: 'VirusTotal', metadefender: 'MetaDefender', kaspersky: 'Kaspersky', hybridanalysis: 'Hybrid Analysis', triage: 'Triage', filescan: 'Filescan.io' };
+export const SCANNERS = ['virustotal', 'metadefender', 'kaspersky', 'hybridanalysis', 'triage'];
+/** Scanners no longer run: their keys in older documents are skipped, not errors. */
+export const RETIRED_SCANNERS = ['filescan'];
+export const SCANNER_NAMES = { virustotal: 'VirusTotal', metadefender: 'MetaDefender', kaspersky: 'Kaspersky', hybridanalysis: 'Hybrid Analysis', triage: 'Triage' };
 /** Scanners shown on the release cards (when configured); the Security page shows all. */
 export const CARD_SCANNERS = ['virustotal', 'metadefender', 'kaspersky'];
 export const STATUSES = ['ok', 'pending', 'error', 'not configured'];
 export const VT_STATS = ['malicious', 'suspicious', 'undetected', 'harmless', 'type-unsupported'];
 export const KASPERSKY_ZONES = ['Green', 'Yellow', 'Red', 'Grey'];
-export const FILESCAN_VERDICTS = ['unknown', 'benign', 'informational', 'no_threat', 'suspicious', 'likely_malicious', 'malicious'];
 
 const SHA = /^[0-9a-f]{64}$/;
 
@@ -57,7 +57,6 @@ export const kasperskyReportUrl = (sha) => `https://opentip.kaspersky.com/${sha}
 export const haReportUrl = (sha) => `https://hybrid-analysis.com/sample/${sha}`;
 export const triageReportUrl = (id) => `https://tria.ge/${encodeURIComponent(id)}`;
 export const triageSearchUrl = (sha) => `https://tria.ge/s?q=sha256%3A${sha}`;
-export const filescanReportUrl = (flowId, reportId) => `https://www.filescan.io/uploads/${encodeURIComponent(flowId)}/reports/${encodeURIComponent(reportId)}/overview`;
 export const filescanSearchUrl = (sha) => `https://www.filescan.io/search-result?query=${sha}`;
 
 /** "Scan it yourself": where anyone can look a SHA-256 up, or upload the file. */
@@ -106,9 +105,6 @@ function scanErrors(name, s, err) {
     if (!isOptInt(s.threat_score, 100)) err('threat_score must be 0-100 or null');
   } else if (name === 'triage') {
     if (!isOptInt(s.score, 10)) err('score must be 0-10 or null');
-  } else if (name === 'filescan') {
-    if (!FILESCAN_VERDICTS.includes(s.verdict)) err(`verdict: ${s.verdict}`);
-    if (s.threat_level != null && !(typeof s.threat_level === 'number' && s.threat_level >= 0 && s.threat_level <= 1)) err('threat_level must be 0-1 or null');
   }
   for (const k of ['flagged', 'detections', 'engines', 'tags', 'signatures']) if (s[k] !== undefined && !Array.isArray(s[k])) err(`${k} must be a list`);
   if (s.details !== undefined && (typeof s.details !== 'object' || Array.isArray(s.details) || s.details === null)) err('details must be an object');
@@ -123,7 +119,7 @@ export function validateScans(doc) {
   if (doc.schema !== SCHEMA) err(`schema must be ${SCHEMA}`);
   if (doc.generated !== null && Number.isNaN(Date.parse(doc.generated))) err('generated must be an ISO date or null');
   if (!doc.scanners || typeof doc.scanners !== 'object') err('scanners must be an object');
-  else for (const [k, v] of Object.entries(doc.scanners)) if (!SCANNERS.includes(k) || !['configured', 'not configured'].includes(v)) err(`scanners.${k}: ${v}`);
+  else for (const [k, v] of Object.entries(doc.scanners)) if (!RETIRED_SCANNERS.includes(k) && (!SCANNERS.includes(k) || !['configured', 'not configured'].includes(v))) err(`scanners.${k}: ${v}`);
   if (!Array.isArray(doc.files)) return [...errors, 'files must be an array'];
   const ids = new Set();
   doc.files.forEach((f, i) => {
@@ -137,6 +133,7 @@ export function validateScans(doc) {
     ids.add(f.id);
     if (!f.scans || typeof f.scans !== 'object') return err(`${at}.scans must be an object`);
     for (const [name, s] of Object.entries(f.scans)) {
+      if (RETIRED_SCANNERS.includes(name)) continue;
       const sat = `${at}.scans.${name}`;
       if (!SCANNERS.includes(name)) err(`${sat}: unknown scanner`);
       if (!STATUSES.includes(s?.status)) err(`${sat}.status: ${s?.status}`);
@@ -169,7 +166,6 @@ export function ratio(scanner, scan) {
 
 const KASPERSKY_TEXT = { Green: ['clean', 'clean'], Yellow: ['adware or other', 'flagged'], Red: ['malware', 'flagged'], Grey: ['no verdict', 'none'] };
 const HA_STATE = { 'no specific threat': 'clean', whitelisted: 'clean', suspicious: 'flagged', malicious: 'flagged' };
-const FILESCAN_STATE = { benign: 'clean', no_threat: 'clean', informational: 'clean', suspicious: 'flagged', likely_malicious: 'flagged', malicious: 'flagged', unknown: 'none' };
 
 /** { text, state } of an "ok" scan (badge text without the scanner name), or null. */
 export function verdict(scanner, scan) {
@@ -186,7 +182,6 @@ export function verdict(scanner, scan) {
     // Triage: 1 nothing malicious, 2-5 likely benign, 6-7 suspicious, 8-9 likely malicious, 10 known bad.
     return { text: `${scan.score}/10`, state: scan.score >= 6 ? 'flagged' : 'clean' };
   }
-  if (scanner === 'filescan') return { text: (scan.verdict || 'unknown').replace(/_/g, ' '), state: FILESCAN_STATE[scan.verdict] || 'none' };
   return null;
 }
 
@@ -268,8 +263,6 @@ function notes(scanner, scan) {
     line('Family', list(scan.family).length && join(list(scan.family)));
     const sig = list(scan.signatures, 4).map((s) => s.name).filter(Boolean);
     line('Behaviour', sig.length && join(sig));
-  } else if (scanner === 'filescan') {
-    line('Threat level', typeof scan.threat_level === 'number' && `${Math.round(scan.threat_level * 100)}%`);
   }
   return out.join('');
 }

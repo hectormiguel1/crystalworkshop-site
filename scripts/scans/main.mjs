@@ -2,14 +2,13 @@
 // Virus scans of the published downloads, run by the public repository's
 // scans workflow:
 //   GITHUB_TOKEN=… GITHUB_REPOSITORY=OWNER/REPO VT_API_KEY=… METADEFENDER_API_KEY=… \
-//   KASPERSKY_OPENTIP_KEY=… HYBRID_ANALYSIS_KEY=… TRIAGE_API_KEY=… FILESCAN_API_KEY=… \
+//   KASPERSKY_OPENTIP_KEY=… HYBRID_ANALYSIS_KEY=… TRIAGE_API_KEY=… \
 //     node scripts/scans/main.mjs public/api/scans.json
 // A missing API key skips that service ("not configured"). It always exits 0:
 // on any failure it keeps the existing file and prints a warning.
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { APPS, downloadAsset, latestReleases, listReleases, scannableAssets, targetsOf } from './collect.mjs';
-import { filescan } from './filescan.mjs';
 import { hybridAnalysis } from './hybridanalysis.mjs';
 import { kaspersky } from './kaspersky.mjs';
 import { metaDefender } from './metadefender.mjs';
@@ -44,7 +43,6 @@ async function main() {
     kaspersky({ apiKey: env.KASPERSKY_OPENTIP_KEY }),
     hybridAnalysis({ apiKey: env.HYBRID_ANALYSIS_KEY }),
     triage({ apiKey: env.TRIAGE_API_KEY }),
-    filescan({ apiKey: env.FILESCAN_API_KEY }),
   ];
   for (const s of scanners) if (!s.configured) console.log(`::notice::${s.name}: no API key secret, skipped (recorded as "not configured")`);
 

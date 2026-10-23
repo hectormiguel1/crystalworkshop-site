@@ -6,8 +6,7 @@
     "metadefender": "configured",
     "kaspersky": "configured",
     "hybridanalysis": "configured",
-    "triage": "not configured",
-    "filescan": "configured"
+    "triage": "not configured"
   },
   "files": [
     {
@@ -356,10 +355,6 @@
         },
         "triage": {
           "status": "not configured"
-        },
-        "filescan": {
-          "status": "error",
-          "error": "scan failed: internal"
         }
       }
     },
@@ -539,24 +534,6 @@
         },
         "triage": {
           "status": "not configured"
-        },
-        "filescan": {
-          "status": "ok",
-          "verdict": "no_threat",
-          "threat_level": 0.25,
-          "confidence": 1,
-          "tags": [
-            "elf",
-            "html",
-            "elf-shared",
-            "javac",
-            "lolbin",
-            "gcc",
-            "rust"
-          ],
-          "flagged": [],
-          "scanned_at": "2026-10-23T03:16:32.000Z",
-          "url": "https://www.filescan.io/uploads/6adad18dace613b2876c8794/reports/04780484-5dbd-491a-93b2-7fcf2f6af1e7/overview"
         }
       }
     },
@@ -736,23 +713,6 @@
         },
         "triage": {
           "status": "not configured"
-        },
-        "filescan": {
-          "status": "ok",
-          "verdict": "no_threat",
-          "threat_level": 0.25,
-          "confidence": 1,
-          "tags": [
-            "elf",
-            "elf-shared",
-            "javac",
-            "lolbin",
-            "gcc",
-            "rust"
-          ],
-          "flagged": [],
-          "scanned_at": "2026-10-23T03:16:42.000Z",
-          "url": "https://www.filescan.io/uploads/6adad197b62c9df06c4b0418/reports/4cca3d04-c1dd-45b8-a268-e597e428e009/overview"
         }
       }
     },
@@ -1167,25 +1127,6 @@
         },
         "triage": {
           "status": "not configured"
-        },
-        "filescan": {
-          "status": "ok",
-          "verdict": "no_threat",
-          "threat_level": 0.25,
-          "confidence": 1,
-          "tags": [
-            "elf",
-            "html",
-            "elf-shared",
-            "expand",
-            "javac",
-            "lolbin",
-            "gcc",
-            "rust"
-          ],
-          "flagged": [],
-          "scanned_at": "2026-10-23T03:16:54.000Z",
-          "url": "https://www.filescan.io/uploads/6adad1a4b62c9df06c4b0432/reports/41b84c5d-2302-47c0-a324-f321fe5c4bc0/overview"
         }
       }
     },
@@ -1633,26 +1574,6 @@
         },
         "triage": {
           "status": "not configured"
-        },
-        "filescan": {
-          "status": "ok",
-          "verdict": "suspicious",
-          "threat_level": 0.5,
-          "confidence": 1,
-          "tags": [
-            "java",
-            "macros-on-close",
-            "anti-debug",
-            "obfuscated"
-          ],
-          "flagged": [
-            {
-              "engine": "Filescan.io",
-              "result": "suspicious"
-            }
-          ],
-          "scanned_at": "2026-10-23T03:17:06.000Z",
-          "url": "https://www.filescan.io/uploads/6adad1b18f6bd1e6f87d7e09/reports/0561a50d-779b-410d-8cde-8ee24466f1d7/overview"
         }
       }
     },
@@ -2108,30 +2029,6 @@
         },
         "triage": {
           "status": "not configured"
-        },
-        "filescan": {
-          "status": "ok",
-          "verdict": "suspicious",
-          "threat_level": 0.5,
-          "confidence": 1,
-          "tags": [
-            "peexe",
-            "pedll",
-            "adaptive-context",
-            "anti-debug",
-            "packed",
-            "overlay",
-            "crypto",
-            "reconnaissance"
-          ],
-          "flagged": [
-            {
-              "engine": "Filescan.io",
-              "result": "suspicious"
-            }
-          ],
-          "scanned_at": "2026-10-23T03:17:16.000Z",
-          "url": "https://www.filescan.io/uploads/6adad1bad6c4a5cfe5763692/reports/a0273ee6-6d05-42f2-a196-f3bbd4f4058c/overview"
         }
       }
     },
@@ -2547,25 +2444,6 @@
         },
         "triage": {
           "status": "not configured"
-        },
-        "filescan": {
-          "status": "ok",
-          "verdict": "no_threat",
-          "threat_level": 0.25,
-          "confidence": 1,
-          "tags": [
-            "peexe",
-            "crypto",
-            "fingerprint",
-            "reconnaissance",
-            "adaptive-context",
-            "anti-debug",
-            "keylogger",
-            "packed"
-          ],
-          "flagged": [],
-          "scanned_at": "2026-10-23T03:17:32.000Z",
-          "url": "https://www.filescan.io/uploads/6adad1c98f6bd1e6f87d7e9a/reports/9ff6bd1f-847d-4b9b-a29d-7cfd9abbf6e5/overview"
         }
       }
     },
@@ -2953,27 +2831,6 @@
         },
         "triage": {
           "status": "not configured"
-        },
-        "filescan": {
-          "status": "ok",
-          "verdict": "suspicious",
-          "threat_level": 0.5,
-          "confidence": 1,
-          "tags": [
-            "peexe",
-            "anti-debug",
-            "packed",
-            "crypto",
-            "reconnaissance"
-          ],
-          "flagged": [
-            {
-              "engine": "Filescan.io",
-              "result": "suspicious"
-            }
-          ],
-          "scanned_at": "2026-10-23T03:17:41.000Z",
-          "url": "https://www.filescan.io/uploads/6adad1d3d6c4a5cfe57636ce/reports/48944b1e-9846-42cd-954b-d8886a6cd538/overview"
         }
       }
     },
@@ -3399,25 +3256,6 @@
         },
         "triage": {
           "status": "not configured"
-        },
-        "filescan": {
-          "status": "ok",
-          "verdict": "no_threat",
-          "threat_level": 0.25,
-          "confidence": 1,
-          "tags": [
-            "peexe",
-            "crypto",
-            "fingerprint",
-            "reconnaissance",
-            "adaptive-context",
-            "anti-debug",
-            "keylogger",
-            "packed"
-          ],
-          "flagged": [],
-          "scanned_at": "2026-10-23T03:17:53.000Z",
-          "url": "https://www.filescan.io/uploads/6adad1dfd46d1fed87ec2f3c/reports/9f0fd578-d75a-4643-b24b-3341d83501c7/overview"
         }
       }
     },
@@ -3836,25 +3674,6 @@
         },
         "triage": {
           "status": "not configured"
-        },
-        "filescan": {
-          "status": "ok",
-          "verdict": "no_threat",
-          "threat_level": 0.25,
-          "confidence": 1,
-          "tags": [
-            "elf",
-            "html",
-            "elf-shared",
-            "expand",
-            "javac",
-            "lolbin",
-            "gcc",
-            "rust"
-          ],
-          "flagged": [],
-          "scanned_at": "2026-10-23T03:18:03.000Z",
-          "url": "https://www.filescan.io/uploads/6adad1ead6c4a5cfe57636ff/reports/2903c035-ba7e-4056-a323-c21f4911f425/overview"
         }
       }
     },
@@ -4104,29 +3923,6 @@
         },
         "triage": {
           "status": "not configured"
-        },
-        "filescan": {
-          "status": "ok",
-          "verdict": "likely_malicious",
-          "threat_level": 0.75,
-          "confidence": 1,
-          "tags": [
-            "peexe",
-            "pedll",
-            "adaptive-context",
-            "anti-debug",
-            "anti-vm",
-            "packed",
-            "crypto"
-          ],
-          "flagged": [
-            {
-              "engine": "Filescan.io",
-              "result": "likely malicious"
-            }
-          ],
-          "scanned_at": "2026-10-23T03:18:16.000Z",
-          "url": "https://www.filescan.io/uploads/6adad1f6d6c4a5cfe576371c/reports/bcfc779c-6df2-46dd-8176-e0953b250fac/overview"
         }
       }
     },
@@ -4353,29 +4149,6 @@
         },
         "triage": {
           "status": "not configured"
-        },
-        "filescan": {
-          "status": "ok",
-          "verdict": "likely_malicious",
-          "threat_level": 0.75,
-          "confidence": 1,
-          "tags": [
-            "peexe",
-            "pedll",
-            "adaptive-context",
-            "anti-debug",
-            "anti-vm",
-            "packed",
-            "crypto"
-          ],
-          "flagged": [
-            {
-              "engine": "Filescan.io",
-              "result": "likely malicious"
-            }
-          ],
-          "scanned_at": "2026-10-23T03:18:28.000Z",
-          "url": "https://www.filescan.io/uploads/6adad201d6c4a5cfe5763752/reports/f615f001-0a1b-43dd-8a32-eac85fcb8261/overview"
         }
       }
     },
@@ -4790,25 +4563,6 @@
         },
         "triage": {
           "status": "not configured"
-        },
-        "filescan": {
-          "status": "ok",
-          "verdict": "no_threat",
-          "threat_level": 0.25,
-          "confidence": 1,
-          "tags": [
-            "elf",
-            "html",
-            "elf-shared",
-            "expand",
-            "javac",
-            "lolbin",
-            "gcc",
-            "rust"
-          ],
-          "flagged": [],
-          "scanned_at": "2026-10-23T03:16:54.000Z",
-          "url": "https://www.filescan.io/uploads/6adad1a4b62c9df06c4b0432/reports/41b84c5d-2302-47c0-a324-f321fe5c4bc0/overview"
         }
       }
     },
@@ -5297,25 +5051,6 @@
         },
         "triage": {
           "status": "not configured"
-        },
-        "filescan": {
-          "status": "ok",
-          "verdict": "no_threat",
-          "threat_level": 0.25,
-          "confidence": 1,
-          "tags": [
-            "peexe",
-            "crypto",
-            "fingerprint",
-            "reconnaissance",
-            "adaptive-context",
-            "anti-debug",
-            "keylogger",
-            "packed"
-          ],
-          "flagged": [],
-          "scanned_at": "2026-10-23T03:18:41.000Z",
-          "url": "https://www.filescan.io/uploads/6adad20ed6c4a5cfe5763761/reports/0ed8aab9-e1ad-4005-8a4c-04366c04a31c/overview"
         }
       }
     },
@@ -5565,29 +5300,6 @@
         },
         "triage": {
           "status": "not configured"
-        },
-        "filescan": {
-          "status": "ok",
-          "verdict": "likely_malicious",
-          "threat_level": 0.75,
-          "confidence": 1,
-          "tags": [
-            "peexe",
-            "pedll",
-            "adaptive-context",
-            "anti-debug",
-            "anti-vm",
-            "packed",
-            "crypto"
-          ],
-          "flagged": [
-            {
-              "engine": "Filescan.io",
-              "result": "likely malicious"
-            }
-          ],
-          "scanned_at": "2026-10-23T03:18:16.000Z",
-          "url": "https://www.filescan.io/uploads/6adad1f6d6c4a5cfe576371c/reports/bcfc779c-6df2-46dd-8176-e0953b250fac/overview"
         }
       }
     },
@@ -5814,29 +5526,6 @@
         },
         "triage": {
           "status": "not configured"
-        },
-        "filescan": {
-          "status": "ok",
-          "verdict": "likely_malicious",
-          "threat_level": 0.75,
-          "confidence": 1,
-          "tags": [
-            "peexe",
-            "pedll",
-            "adaptive-context",
-            "anti-debug",
-            "anti-vm",
-            "packed",
-            "crypto"
-          ],
-          "flagged": [
-            {
-              "engine": "Filescan.io",
-              "result": "likely malicious"
-            }
-          ],
-          "scanned_at": "2026-10-23T03:18:28.000Z",
-          "url": "https://www.filescan.io/uploads/6adad201d6c4a5cfe5763752/reports/f615f001-0a1b-43dd-8a32-eac85fcb8261/overview"
         }
       }
     },
@@ -6262,25 +5951,6 @@
         },
         "triage": {
           "status": "not configured"
-        },
-        "filescan": {
-          "status": "ok",
-          "verdict": "no_threat",
-          "threat_level": 0.25,
-          "confidence": 1,
-          "tags": [
-            "peexe",
-            "crypto",
-            "fingerprint",
-            "reconnaissance",
-            "adaptive-context",
-            "anti-debug",
-            "keylogger",
-            "packed"
-          ],
-          "flagged": [],
-          "scanned_at": "2026-10-23T03:17:53.000Z",
-          "url": "https://www.filescan.io/uploads/6adad1dfd46d1fed87ec2f3c/reports/9f0fd578-d75a-4643-b24b-3341d83501c7/overview"
         }
       }
     },
@@ -6530,29 +6200,6 @@
         },
         "triage": {
           "status": "not configured"
-        },
-        "filescan": {
-          "status": "ok",
-          "verdict": "likely_malicious",
-          "threat_level": 0.75,
-          "confidence": 1,
-          "tags": [
-            "peexe",
-            "pedll",
-            "adaptive-context",
-            "anti-debug",
-            "anti-vm",
-            "packed",
-            "crypto"
-          ],
-          "flagged": [
-            {
-              "engine": "Filescan.io",
-              "result": "likely malicious"
-            }
-          ],
-          "scanned_at": "2026-10-23T03:18:16.000Z",
-          "url": "https://www.filescan.io/uploads/6adad1f6d6c4a5cfe576371c/reports/bcfc779c-6df2-46dd-8176-e0953b250fac/overview"
         }
       }
     },
@@ -6779,29 +6426,6 @@
         },
         "triage": {
           "status": "not configured"
-        },
-        "filescan": {
-          "status": "ok",
-          "verdict": "likely_malicious",
-          "threat_level": 0.75,
-          "confidence": 1,
-          "tags": [
-            "peexe",
-            "pedll",
-            "adaptive-context",
-            "anti-debug",
-            "anti-vm",
-            "packed",
-            "crypto"
-          ],
-          "flagged": [
-            {
-              "engine": "Filescan.io",
-              "result": "likely malicious"
-            }
-          ],
-          "scanned_at": "2026-10-23T03:18:28.000Z",
-          "url": "https://www.filescan.io/uploads/6adad201d6c4a5cfe5763752/reports/f615f001-0a1b-43dd-8a32-eac85fcb8261/overview"
         }
       }
     },
@@ -6977,18 +6601,6 @@
         },
         "triage": {
           "status": "not configured"
-        },
-        "filescan": {
-          "status": "ok",
-          "verdict": "no_threat",
-          "threat_level": 0.25,
-          "confidence": 1,
-          "tags": [
-            "data"
-          ],
-          "flagged": [],
-          "scanned_at": "2026-10-23T03:18:50.000Z",
-          "url": "https://www.filescan.io/uploads/6adad219b62c9df06c4b050c/reports/166e35eb-9720-4d35-8295-17f710b93ce5/overview"
         }
       }
     },
@@ -7164,18 +6776,6 @@
         },
         "triage": {
           "status": "not configured"
-        },
-        "filescan": {
-          "status": "ok",
-          "verdict": "no_threat",
-          "threat_level": 0.25,
-          "confidence": 1,
-          "tags": [
-            "data"
-          ],
-          "flagged": [],
-          "scanned_at": "2026-10-23T03:19:02.000Z",
-          "url": "https://www.filescan.io/uploads/6adad2258f6bd1e6f87d7ffe/reports/3df94efc-d6da-4467-bdca-05cc6192735f/overview"
         }
       }
     },
@@ -7351,18 +6951,6 @@
         },
         "triage": {
           "status": "not configured"
-        },
-        "filescan": {
-          "status": "ok",
-          "verdict": "no_threat",
-          "threat_level": 0.25,
-          "confidence": 1,
-          "tags": [
-            "data"
-          ],
-          "flagged": [],
-          "scanned_at": "2026-10-23T03:19:14.000Z",
-          "url": "https://www.filescan.io/uploads/6adad232ed53c10f7271090c/reports/85ee9a13-a4f7-4a83-9a8f-b13a8a94eedf/overview"
         }
       }
     },
@@ -7538,18 +7126,6 @@
         },
         "triage": {
           "status": "not configured"
-        },
-        "filescan": {
-          "status": "ok",
-          "verdict": "no_threat",
-          "threat_level": 0.25,
-          "confidence": 1,
-          "tags": [
-            "data"
-          ],
-          "flagged": [],
-          "scanned_at": "2026-10-23T03:19:27.000Z",
-          "url": "https://www.filescan.io/uploads/6adad23e8f6bd1e6f87d8067/reports/cf3908af-4ae6-49bd-b238-82116ecaa7a1/overview"
         }
       }
     },
@@ -7735,18 +7311,6 @@
         },
         "triage": {
           "status": "not configured"
-        },
-        "filescan": {
-          "status": "ok",
-          "verdict": "no_threat",
-          "threat_level": 0.25,
-          "confidence": 1,
-          "tags": [
-            "data"
-          ],
-          "flagged": [],
-          "scanned_at": "2026-10-23T03:19:39.000Z",
-          "url": "https://www.filescan.io/uploads/6adad249b62c9df06c4b0581/reports/78873eb1-5e28-464e-a639-884513fda497/overview"
         }
       }
     },
@@ -7922,18 +7486,6 @@
         },
         "triage": {
           "status": "not configured"
-        },
-        "filescan": {
-          "status": "ok",
-          "verdict": "no_threat",
-          "threat_level": 0.25,
-          "confidence": 1,
-          "tags": [
-            "data"
-          ],
-          "flagged": [],
-          "scanned_at": "2026-10-23T03:19:52.000Z",
-          "url": "https://www.filescan.io/uploads/6adad2568f6bd1e6f87d80df/reports/4e54b951-ee79-4cb7-9f83-ca753c865a09/overview"
         }
       }
     }
