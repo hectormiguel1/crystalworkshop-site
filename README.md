@@ -16,6 +16,10 @@ npm test                         # unit tests (node test runner)
   `scripts/status.mjs` turns issues and milestones into `api/status.json`
   and `api/roadmap.json` for the Roadmap page. See `deploy-template/README.md`
   section 6.
+- Virus scans: `scripts/scans/` (VirusTotal and MetaDefender, run by the
+  public repository's scans workflow) write `public/api/scans.json` for the
+  Security page and the release-card badges. See `deploy-template/README.md`
+  section 7.
 - Banned names (people and their tools) are matched by SHA-256 in
   `scripts/lib/terms.mjs`; they are never written in plain text here.
 

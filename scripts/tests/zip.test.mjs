@@ -2,47 +2,8 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
-import { deflateRawSync } from 'node:zlib';
-import { entryFromZip, readFromZip } from '../lib/zip.mjs';
-
-// Builds a ZIP from [name, contents, method] entries (CRCs are not checked by the reader).
-function zipOf(entries) {
-  const locals = [];
-  const central = [];
-  let offset = 0;
-  for (const [name, text, method] of entries) {
-    const raw = Buffer.from(text);
-    const body = method === 8 ? deflateRawSync(raw) : raw;
-    const n = Buffer.from(name);
-    const extra = Buffer.from('xx');
-    const local = Buffer.alloc(30);
-    local.writeUInt32LE(0x04034b50, 0);
-    local.writeUInt16LE(method, 8);
-    local.writeUInt32LE(body.length, 18);
-    local.writeUInt32LE(raw.length, 22);
-    local.writeUInt16LE(n.length, 26);
-    local.writeUInt16LE(extra.length, 28);
-    const dir = Buffer.alloc(46);
-    dir.writeUInt32LE(0x02014b50, 0);
-    dir.writeUInt16LE(method, 10);
-    dir.writeUInt32LE(body.length, 20);
-    dir.writeUInt32LE(raw.length, 24);
-    dir.writeUInt16LE(n.length, 28);
-    dir.writeUInt16LE(extra.length, 30);
-    dir.writeUInt32LE(offset, 42);
-    locals.push(local, n, extra, body);
-    central.push(dir, n, extra);
-    offset += 30 + n.length + extra.length + body.length;
-  }
-  const cd = Buffer.concat(central);
-  const end = Buffer.alloc(22);
-  end.writeUInt32LE(0x06054b50, 0);
-  end.writeUInt16LE(entries.length, 8);
-  end.writeUInt16LE(entries.length, 10);
-  end.writeUInt32LE(cd.length, 12);
-  end.writeUInt32LE(offset, 16);
-  return Buffer.concat([...locals, cd, end]);
-}
+import { entryFromZip, readFromZip, zipEntries } from '../lib/zip.mjs';
+import { zipOf } from './fixtures.mjs';
 
 test('reads stored and deflated entries by path suffix', () => {
   const zip = zipOf([
@@ -69,4 +30,16 @@ test('refuses archives it cannot read', () => {
   const damaged = Buffer.from(zip);
   damaged.writeUInt32LE(0, damaged.readUInt32LE(damaged.length - 6));
   assert.throws(() => entryFromZip(damaged, 'a'), /damaged ZIP directory/);
+});
+
+test('lists file entries with their sizes and reads them lazily', () => {
+  const zip = zipOf([
+    ['pkg/', '', 0],
+    ['pkg/app.exe', 'MZ app', 8],
+    ['pkg/Crux/version.dll', 'MZ loader', 0],
+  ]);
+  const list = zipEntries(zip);
+  assert.deepEqual(list.map((e) => [e.name, e.size]), [['pkg/app.exe', 6], ['pkg/Crux/version.dll', 9]]);
+  assert.equal(list[0].read().toString('utf8'), 'MZ app');
+  assert.equal(list[1].read().toString('utf8'), 'MZ loader');
 });

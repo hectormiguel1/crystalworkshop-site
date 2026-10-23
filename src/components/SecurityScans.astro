@@ -1,0 +1,24 @@
+---
+// The scan results on the Security page: rendered at build time from the
+// committed api/scans.json (or the release data), refreshed at runtime.
+import { filesHtml, day } from '../../scripts/scans/model.mjs';
+import { productNames } from '../lib/data';
+import { scans, scanFiles, scanOrder } from '../lib/scans';
+
+const names = productNames();
+const order = scanOrder();
+const stamp = scans?.generated ? `Last checked ${day(scans.generated)}.` : '';
+---
+
+<div class="scans not-content" data-scans data-generated={scans?.generated ?? ''} data-products={JSON.stringify(names)} data-order={JSON.stringify(order)}>
+  <p class="st-generated" data-scans-stamp hidden={!stamp}>{stamp}</p>
+  <div class="st-empty-state" data-scans-empty hidden={!!scans}>
+    <p class="st-empty-title">No automatic scan results yet</p>
+    <p>The files below are listed with their SHA-256 so you can look them up yourself. Results from VirusTotal and MetaDefender appear here after the first automatic scan.</p>
+  </div>
+  <div data-scans-list set:html={filesHtml(scanFiles(), names, order)} />
+</div>
+
+<script>
+  import '../scripts/scans-client';
+</script>

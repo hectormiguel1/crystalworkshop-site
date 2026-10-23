@@ -45,7 +45,11 @@ const shots = [
   ['guide-cw-installing', '/crystalworkshop/installing/', { width: 1440, height: 900 }, 'dark', true],
   ['guide-cw-glossary', '/crystalworkshop/glossary/', { width: 1440, height: 900 }, 'light', false],
   ['third-party', '/legal/third-party/', { width: 1440, height: 900 }, 'dark', false],
+  ['security-dark', '/security/', { width: 1440, height: 900 }, 'dark', true],
+  ['security-light', '/security/', { width: 1440, height: 900 }, 'light', true],
   ['mobile-home', '/', { width: 390, height: 844 }, 'dark', true],
+  ['mobile-home-light', '/', { width: 390, height: 844 }, 'light', false],
+  ['mobile-security', '/security/', { width: 390, height: 844 }, 'dark', false],
   ['mobile-downloads', '/downloads/', { width: 390, height: 844 }, 'dark', false],
 ];
 
@@ -102,6 +106,32 @@ await page.screenshot({ path: path.join(out, 'roadmap-sample.png'), fullPage: tr
 await page.goto(url('/mods/hard-mode/'), { waitUntil: 'networkidle' });
 if (!(await page.locator('.rc-fixed:not([hidden]) .st-issue').count())) problems.push('fixed-in list did not render');
 await page.screenshot({ path: path.join(out, 'mod-page-fixed-sample.png') });
+
+// Virus scan results with sample data (served in place of api/scans.json).
+const rel = JSON.parse(readFileSync(path.join(SITE, 'src/data/releases.json'), 'utf8'));
+const pd = rel.products.find((p) => p.id === 'pulsedepot');
+const crux = rel.products.find((p) => p.id === 'crux');
+const vt = (sha, malicious = 0, flagged = []) => ({ status: 'ok', stats: { malicious, suspicious: 0, undetected: 68 - malicious, harmless: 0, 'type-unsupported': 4 }, flagged, scanned_at: now, url: `https://www.virustotal.com/gui/file/${sha}` });
+const md = (sha) => ({ status: 'ok', stats: { detected: 0, total: 21 }, result: 'No Threat Detected', engines: [], flagged: [], scanned_at: now, url: `https://metadefender.com/results/hash/${sha}` });
+const entry = (id, name, container, product, version, sha256, size, scans) => ({ id, name, container, product, version, release: `${product}-v${version}`, sha256, size, scanned_at: now, scans });
+const w = pd.platforms.windows;
+const ver = crux.builds.find((b) => b.file === 'version.dll');
+const scansDoc = {
+  schema: 1,
+  generated: now,
+  scanners: { virustotal: 'configured', metadefender: 'configured' },
+  files: [
+    entry('pd-win', w.file, null, 'pulsedepot', pd.version, w.sha256, w.bytes, { virustotal: vt(w.sha256), metadefender: md(w.sha256) }),
+    entry('pd-win-ver', 'version.dll', w.file, 'pulsedepot', pd.version, ver.sha256, ver.bytes, { virustotal: vt(ver.sha256, 2, [{ engine: 'SampleEngine', category: 'malicious', result: 'Heur.Generic' }]), metadefender: { status: 'pending' } }),
+  ],
+};
+await page.route('**/api/scans.json', (r) => r.fulfill({ json: scansDoc }));
+await page.goto(url('/security/'), { waitUntil: 'networkidle' });
+if ((await page.locator('[data-scans] .scan-file').count()) !== 2) problems.push('scans sample did not render');
+await page.screenshot({ path: path.join(out, 'security-sample.png'), fullPage: true });
+await page.goto(url('/downloads/'), { waitUntil: 'networkidle' });
+if (!(await page.locator('.scan-badges .scan-clean').count())) problems.push('release card scan badge did not render');
+await page.locator('#pulsedepot').screenshot({ path: path.join(out, 'release-card-scan-badge.png') });
 await ctx.close();
 await browser.close();
 server.close();

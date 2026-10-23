@@ -1,0 +1,74 @@
+# Virus scans for the PUBLIC site repository (not active in the private
+# repository: it lives under site/deploy-template/). Copy it to
+# .github/workflows/scans.yml at the root of the public repository.
+#
+# When a release is published, once a week and on demand, it downloads the
+# assets of the latest CrystalWorkshop, PulseDepot and Crux releases and every
+# mod's .cws (plus the programs and DLLs inside the app packages), looks each
+# file up on VirusTotal and MetaDefender by SHA-256, uploads only the files a
+# service does not know, and writes public/api/scans.json for the Security
+# page. It commits that file and starts the Pages deploy.
+#
+# API keys: repository secrets VT_API_KEY and METADEFENDER_API_KEY. Without
+# one, that service is skipped and recorded as "not configured"; the run
+# still succeeds.
+name: Virus scans
+
+on:
+  release:
+    types: [published]
+  schedule:
+    - cron: '41 4 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: scans
+  cancel-in-progress: false
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    # The VirusTotal free tier allows 4 requests a minute; new uploads are
+    # polled for up to 90 minutes.
+    timeout-minutes: 120
+    steps:
+      # Always main (a release event would otherwise check out its tag).
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      # Node built-ins only: no npm install needed.
+      - name: Scan release files
+        run: node scripts/scans/main.mjs public/api/scans.json
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VT_API_KEY: ${{ secrets.VT_API_KEY }}
+          METADEFENDER_API_KEY: ${{ secrets.METADEFENDER_API_KEY }}
+      - name: Commit the results
+        id: commit
+        run: |
+          git add -N public/api/scans.json 2>/dev/null || true
+          if git diff --quiet -- public/api/scans.json; then
+            echo "No new scan results."
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add public/api/scans.json
+          git commit -m 'Update virus scan results'
+          git pull --rebase origin main
+          git push origin HEAD:main
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+      # A push made with GITHUB_TOKEN does not start other workflows, so the
+      # Pages deploy is started explicitly.
+      - name: Deploy the site
+        if: steps.commit.outputs.changed == 'true'
+        run: gh workflow run pages.yml --ref main
+        env:
+          GH_TOKEN: ${{ github.token }}

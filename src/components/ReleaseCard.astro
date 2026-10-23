@@ -5,6 +5,8 @@ import BrandIcon from './BrandIcon.astro';
 import FeedbackLinks from './FeedbackLinks.astro';
 import StoreBadges from './StoreBadges.astro';
 import { storesText } from '../../scripts/lib/stores.mjs';
+import { cardBadgesHtml } from '../../scripts/scans/model.mjs';
+import { scans } from '../lib/scans';
 
 interface Props {
   id: string;
@@ -16,6 +18,8 @@ const oses = ['windows', 'linux'] as const;
 const label = { windows: 'Windows', linux: 'Linux' };
 const kindLabel = { app: 'App', component: 'Mod host', mod: 'Mod' }[i.kind];
 const docsHref = href(`${i.docs}/`);
+const securityHref = href('security/');
+const scanAttrs = (file: string) => ({ 'data-scan-badges': '', 'data-file': file, 'data-security': securityHref, 'data-generated': scans?.generated ?? '' });
 ---
 
 <article class="release-card not-content" id={compact ? undefined : i.id} data-kind={i.kind} data-games={i.games.join(' ')}>
@@ -71,6 +75,13 @@ const docsHref = href(`${i.docs}/`);
                   </button>
                 </dd>
               </div>
+              <div class="rc-scans">
+                <dt>Virus scans</dt>
+                <dd>
+                  <span class="scan-badges" {...scanAttrs(p.file)} set:html={cardBadgesHtml(scans, p.file, securityHref)} />
+                  <a class="rc-scans-link" href={securityHref}>Security and scans</a>
+                </dd>
+              </div>
             </dl>
             {i.builds && (
               <div class="rc-builds">
@@ -85,6 +96,7 @@ const docsHref = href(`${i.docs}/`);
                           Copy
                         </button>
                       </span>
+                      <span class="scan-badges" {...scanAttrs(b.file)} set:html={cardBadgesHtml(scans, b.file, securityHref)} />
                     </li>
                   ))}
                 </ul>
@@ -121,4 +133,5 @@ const docsHref = href(`${i.docs}/`);
 
 <script>
   import '../scripts/status-client';
+  import '../scripts/scans-client';
 </script>

@@ -52,6 +52,7 @@ export default defineConfig({
           { label: 'Home', link: '/' },
           { label: 'Downloads', link: '/downloads/' },
           { label: 'Compatibility', link: '/compatibility/' },
+          { label: 'Security and virus scans', link: '/security/' },
           { label: 'Changelog', link: '/changelog/' },
           { label: 'Roadmap', link: '/roadmap/' },
         ]),
