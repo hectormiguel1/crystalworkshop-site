@@ -113,16 +113,17 @@ const pd = rel.products.find((p) => p.id === 'pulsedepot');
 const crux = rel.products.find((p) => p.id === 'crux');
 const vt = (sha, malicious = 0, flagged = []) => ({ status: 'ok', stats: { malicious, suspicious: 0, undetected: 68 - malicious, harmless: 0, 'type-unsupported': 4 }, flagged, scanned_at: now, url: `https://www.virustotal.com/gui/file/${sha}` });
 const md = (sha) => ({ status: 'ok', stats: { detected: 0, total: 21 }, result: 'No Threat Detected', engines: [], flagged: [], scanned_at: now, url: `https://metadefender.com/results/hash/${sha}` });
+const kas = (sha) => ({ status: 'ok', zone: 'Green', file_status: 'Clean', detections: [], scanned_at: now, url: `https://opentip.kaspersky.com/${sha}/` });
 const entry = (id, name, container, product, version, sha256, size, scans) => ({ id, name, container, product, version, release: `${product}-v${version}`, sha256, size, scanned_at: now, scans });
 const w = pd.platforms.windows;
 const ver = crux.builds.find((b) => b.file === 'version.dll');
 const scansDoc = {
   schema: 1,
   generated: now,
-  scanners: { virustotal: 'configured', metadefender: 'configured' },
+  scanners: { virustotal: 'configured', metadefender: 'configured', kaspersky: 'configured', hybridanalysis: 'not configured', triage: 'not configured', filescan: 'not configured' },
   files: [
-    entry('pd-win', w.file, null, 'pulsedepot', pd.version, w.sha256, w.bytes, { virustotal: vt(w.sha256), metadefender: md(w.sha256) }),
-    entry('pd-win-ver', 'version.dll', w.file, 'pulsedepot', pd.version, ver.sha256, ver.bytes, { virustotal: vt(ver.sha256, 2, [{ engine: 'SampleEngine', category: 'malicious', result: 'Heur.Generic' }]), metadefender: { status: 'pending' } }),
+    entry('pd-win', w.file, null, 'pulsedepot', pd.version, w.sha256, w.bytes, { virustotal: vt(w.sha256), metadefender: md(w.sha256), kaspersky: kas(w.sha256) }),
+    entry('pd-win-ver', 'version.dll', w.file, 'pulsedepot', pd.version, ver.sha256, ver.bytes, { virustotal: vt(ver.sha256, 2, [{ engine: 'SampleEngine', category: 'malicious', result: 'Heur.Generic' }, { engine: 'OtherEngine', category: 'malicious', result: 'Sample.A!ml', heuristic: true }]), metadefender: { status: 'pending' }, kaspersky: kas(ver.sha256) }),
   ],
 };
 await page.route('**/api/scans.json', (r) => r.fulfill({ json: scansDoc }));

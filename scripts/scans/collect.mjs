@@ -9,8 +9,9 @@ export const APPS = ['crystalworkshop', 'pulsedepot', 'crux'];
 // Release assets worth scanning; checksum lists and manifests are text.
 const APP_ASSET = /\.(zip|exe|dll|cws)$/i;
 const MOD_ASSET = /\.cws$/i;
-// Programs and DLLs scanned on their own inside a package (Windows and Linux builds).
-export const INNER = /^(crystalworkshop|crystalw|pulsedepot)(\.exe)?$|^(crux|version)\.dll$/i;
+// Programs and DLLs scanned on their own inside a package (Windows and Linux
+// builds), including the DXVK d3d9.dll that ships with CrystalWorkshop.
+export const INNER = /^(crystalworkshop|crystalw|pulsedepot)(\.exe)?$|^(crux|version|d3d9)\.dll$/i;
 
 /** { id, version } of a release tag like "pulsedepot-v0.1.0-beta", or null. */
 export function parseTag(tag) {

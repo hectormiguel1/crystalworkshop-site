@@ -1,6 +1,6 @@
 ---
 title: Security and virus scans
-description: VirusTotal and MetaDefender results for every download, the SHA-256 of each file, links to scan it yourself, and what to do if a scanner flags something.
+description: VirusTotal, MetaDefender, Kaspersky, Hybrid Analysis, Triage and Filescan.io results for every download, the SHA-256 of each file, links to scan it yourself, and what to do if a scanner flags something.
 tableOfContents:
   maxHeadingLevel: 2
 ---
@@ -8,12 +8,16 @@ tableOfContents:
 import SecurityScans from '../../components/SecurityScans.astro';
 import { repoUrl } from '../../lib/data';
 
-Every download on this site, and the programs and DLLs inside the app packages, is checked with two online multi-engine scanners, [VirusTotal](https://www.virustotal.com/) and [MetaDefender](https://metadefender.com/), when a release is published and again every week. This page lists the latest result for each file, a link to the full report and the file's SHA-256, so you can check it yourself.
+Every download on this site, and the programs and DLLs inside the app packages, is checked when a release is published and again every week with two online multi-engine scanners, [VirusTotal](https://www.virustotal.com/) and [MetaDefender](https://metadefender.com/), with the [Kaspersky Threat Intelligence Portal](https://opentip.kaspersky.com/), and with three sandboxes that run or inspect the file and rate what it does: [Hybrid Analysis](https://hybrid-analysis.com/), [Triage](https://tria.ge/) and [Filescan.io](https://www.filescan.io/). This page lists the latest result for each file, a link to the full report and the file's SHA-256, so you can check it yourself.
 
 ## Reading the results
 
 - **VirusTotal 0/72**, for example, means none of the 72 engines that gave a verdict flagged the file. Engines that do not support the file type are not counted.
 - **MetaDefender 0/21** reads the same way for MetaDefender's engines.
+- **Kaspersky: clean** is Kaspersky's verdict for the file: *clean*, *adware or other*, *malware*, or *no verdict* when Kaspersky has no data on it yet.
+- **Hybrid Analysis**, **Triage** and **Filescan.io** are sandboxes. Hybrid Analysis gives a verdict (*no specific threat*, *suspicious* or *malicious*) and a threat score out of 100; Triage gives a score from 1 (nothing malicious seen) to 10 (known malware); Filescan.io gives a verdict from *benign* to *malicious*. Sandboxes rate behaviour, so tools that read and write game files can score above the minimum without being harmful.
+- **More from VirusTotal** under a file lists extra details when VirusTotal has them: the most common threat label, sandbox verdicts, matching community YARA and Sigma rules, the code signature, and the behaviours and MITRE ATT&CK techniques its sandboxes saw.
+- An engine result marked **heuristic (machine-learning) — no signature match** comes from a model that rates how a file looks, or from a reputation label for a file it has rarely seen, not from a match with known malware.
 - **In progress**: the file was submitted and the results are not in yet. **Not set up** or **not scanned yet**: there is no automatic result for that scanner; the "Scan it yourself" links still work.
 - The report link shows every engine's verdict and the date of the scan.
 
@@ -23,13 +27,15 @@ CrystalWorkshop, PulseDepot and Crux are free tools that are not code-signed. So
 
 A result from one to three engines with generic names (words like *Heur*, *Generic*, *ML*, *Suspicious* or *Unsafe*) is usually such a false positive. Many engines agreeing on one named threat is not, and neither is a file whose SHA-256 differs from the one listed here: in either case, do not run the file, and report it.
 
+At the moment, Microsoft Defender reports `Trojan:Win32/Wacatac.C!ml` for the Windows programs and for `Crux.dll`; no other engine reports it. The `!ml` ending marks a machine-learning guess, which Defender often makes for new, unsigned files, not a match with known malware. It has been reported to Microsoft as a false positive.
+
 ## Check a download yourself
 
 1. **Compare the SHA-256.** After downloading, compute the file's SHA-256 and compare it with the value on the [Downloads](../downloads/) page and below. Every character must match.
    - **Windows (PowerShell):** `Get-FileHash .\file.zip`
    - **Linux:** `sha256sum file.zip`
-2. **Look the SHA-256 up.** The **Scan it yourself** links under each file search VirusTotal, MetaDefender, Jotti and Hybrid Analysis for that SHA-256. A lookup uploads nothing. If a service does not know the file yet, you can upload the file to it yourself.
-3. **Check the extracted files.** The programs and DLLs inside the PulseDepot and CrystalWorkshop packages are listed on their own, so you can also compare what you extracted.
+2. **Look the SHA-256 up.** The **Scan it yourself** links under each file search VirusTotal, MetaDefender, Kaspersky, Jotti, Hybrid Analysis, Triage and Filescan.io for that SHA-256. A lookup uploads nothing. If a service does not know the file yet, you can upload the file to it yourself.
+3. **Check the extracted files.** The programs and DLLs inside the PulseDepot and CrystalWorkshop packages (including the DXVK `d3d9.dll` that comes with CrystalWorkshop) are listed on their own, so you can also compare what you extracted.
 
 ## Report a concern
 

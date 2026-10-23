@@ -468,3 +468,9 @@ a.pill.scan:hover { border-color: var(--cw-cyan); }
 .scan-engines { flex-basis: 100%; font-size: var(--sl-text-xs); color: var(--sl-color-gray-3); }
 .scan-self { margin: 0; font-size: var(--sl-text-sm); color: var(--sl-color-gray-2); }
 .scan-self span { font-size: var(--sl-text-xs); text-transform: uppercase; letter-spacing: 0.06em; color: var(--sl-color-gray-3); margin-inline-end: 0.3rem; }
+.scan-more { margin: 0 0 0.5rem; font-size: var(--sl-text-sm); color: var(--sl-color-gray-2); }
+.scan-more summary { cursor: pointer; color: var(--cw-link); font-size: var(--sl-text-xs); text-transform: uppercase; letter-spacing: 0.06em; }
+.scan-more ul { margin: 0.4rem 0 0; padding-inline-start: 1.1rem; display: grid; gap: 0.25rem; }
+.scan-more li { overflow-wrap: anywhere; }
+.scan-more-k { color: var(--sl-color-gray-3); margin-inline-end: 0.25rem; }
+.scan-more-k::after { content: ':'; }

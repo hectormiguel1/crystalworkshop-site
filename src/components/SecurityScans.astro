@@ -14,7 +14,7 @@ const stamp = scans?.generated ? `Last checked ${day(scans.generated)}.` : '';
   <p class="st-generated" data-scans-stamp hidden={!stamp}>{stamp}</p>
   <div class="st-empty-state" data-scans-empty hidden={!!scans}>
     <p class="st-empty-title">No automatic scan results yet</p>
-    <p>The files below are listed with their SHA-256 so you can look them up yourself. Results from VirusTotal and MetaDefender appear here after the first automatic scan.</p>
+    <p>The files below are listed with their SHA-256 so you can look them up yourself. Results from the scanners appear here after the first automatic scan.</p>
   </div>
   <div data-scans-list set:html={filesHtml(scanFiles(), names, order)} />
 </div>

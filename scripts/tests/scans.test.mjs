@@ -134,14 +134,21 @@ test('badges and file cards are escaped HTML', () => {
   for (const l of selfScanLinks(A)) assert.ok(html.includes(l.url.replace(/&/g, '&amp;')), l.name);
   assert.deepEqual(
     selfScanLinks(A).map((l) => l.name),
-    ['VirusTotal', 'MetaDefender', 'Jotti', 'Hybrid Analysis'],
+    ['VirusTotal', 'MetaDefender', 'Kaspersky', 'Jotti', 'Hybrid Analysis', 'Triage', 'Filescan.io'],
   );
   assert.match(fileHtml(okDoc().files[0]), /<time datetime="2026-10-21">/);
 });
 
 test('release card badges link to the file on the Security page', () => {
   const doc = okDoc();
-  assert.match(cardBadgesHtml(doc, 'p.zip', '/security/'), /href="\/security\/#p-zip".*VirusTotal 0\/72.*MetaDefender: not set up/);
+  // Only VirusTotal and the card scanners that are set up.
+  assert.match(cardBadgesHtml(doc, 'p.zip', '/security/'), /href="\/security\/#p-zip".*VirusTotal 0\/72/);
+  assert.doesNotMatch(cardBadgesHtml(doc, 'p.zip', '/security/'), /MetaDefender/);
+  doc.scanners.metadefender = 'configured';
+  doc.scanners.triage = 'configured';
+  const html = cardBadgesHtml(doc, 'p.zip', '/security/');
+  assert.match(html, /VirusTotal 0\/72.*MetaDefender: not set up/);
+  assert.doesNotMatch(html, /Triage/);
   assert.equal(cardBadgesHtml(doc, 'other.zip', '/security/'), '<a class="pill scan scan-none" href="/security/">Not scanned yet</a>');
   assert.equal(cardBadgesHtml(null, 'p.zip', '/s/'), '<a class="pill scan scan-none" href="/s/">Not scanned yet</a>');
 });
@@ -188,8 +195,8 @@ test('release tags, latest releases and scannable assets', () => {
 });
 
 test('packages are scanned whole and per program', () => {
-  for (const n of ['crystalworkshop.exe', 'crystalw.exe', 'pulsedepot.exe', 'Crux.dll', 'version.dll', 'pulsedepot', 'crystalw']) assert.ok(INNER.test(n), n);
-  for (const n of ['d3d9.dll', 'readme.exe.txt', 'pulsedepot.ico']) assert.ok(!INNER.test(n), n);
+  for (const n of ['crystalworkshop.exe', 'crystalw.exe', 'pulsedepot.exe', 'Crux.dll', 'version.dll', 'd3d9.dll', 'pulsedepot', 'crystalw']) assert.ok(INNER.test(n), n);
+  for (const n of ['dxgi.dll', 'readme.exe.txt', 'pulsedepot.ico']) assert.ok(!INNER.test(n), n);
   const zip = zipOf([
     ['pd/', '', 0],
     ['pd/pulsedepot.exe', 'MZ pd', 8],
@@ -205,6 +212,7 @@ test('packages are scanned whole and per program', () => {
     ['pulsedepot.exe', 'pd.zip', 'pd-zip-pulsedepot-exe'],
     ['Crux.dll', 'pd.zip', 'pd-zip-crux-dll'],
     ['version.dll', 'pd.zip', 'pd-zip-version-dll'],
+    ['d3d9.dll', 'pd.zip', 'pd-zip-d3d9-dll'],
   ]);
   assert.equal(t[1].sha256, sha('MZ pd'));
   assert.equal(t[1].size, 5);
@@ -272,7 +280,7 @@ test('VirusTotal: a known file is looked up and never uploaded', async () => {
   const r = await vt.lookup(target('a.zip', 'a'));
   assert.equal(r.state, 'ok');
   assert.deepEqual(r.result.stats, { malicious: 0, suspicious: 0, undetected: 60, harmless: 0, 'type-unsupported': 12 });
-  assert.deepEqual(r.result.flagged, [{ engine: 'Alpha', category: 'suspicious', result: 'Heur.Gen' }]);
+  assert.deepEqual(r.result.flagged, [{ engine: 'Alpha', category: 'suspicious', result: 'Heur.Gen', heuristic: false, engine_version: null, engine_update: null }]);
   assert.equal(r.result.url, `https://www.virustotal.com/gui/file/${A}`);
   assert.equal(r.result.scanned_at, new Date(1760000000 * 1000).toISOString());
   assert.equal(f.calls[0].init.headers['x-apikey'], 'K');
@@ -290,7 +298,7 @@ test('VirusTotal: an unknown file is uploaded and its analysis polled', async ()
   const r = out.get(A);
   assert.equal(r.status, 'ok');
   assert.equal(r.stats.malicious, 1);
-  assert.deepEqual(r.flagged, [{ engine: 'Bad', category: 'malicious', result: 'Trojan' }]);
+  assert.deepEqual(r.flagged, [{ engine: 'Bad', category: 'malicious', result: 'Trojan', heuristic: false, engine_version: null, engine_update: null }]);
   const post = f.calls.find((c) => c.method === 'POST');
   assert.ok(post.init.body instanceof FormData);
   assert.equal(post.init.body.get('file').name, 'a.zip');
@@ -368,7 +376,10 @@ test('a run scans each SHA-256 once and records every service', async () => {
   });
   assert.deepEqual(validateScans(doc), []);
   assert.equal(doc.files.length, 3);
-  assert.equal(f.calls.length, 4);
+  // Two lookups per service, plus one VirusTotal behaviour summary per file (empty, so no MITRE tree).
+  assert.equal(f.calls.length, 6);
+  assert.equal(f.calls.filter((c) => c.url.endsWith('/behaviour_summary')).length, 2);
+  assert.equal(doc.files[0].scans.virustotal.behaviour, null);
   assert.deepEqual(doc.scanners, { virustotal: 'configured', metadefender: 'configured' });
   assert.equal(doc.files[2].scans.virustotal.stats.undetected, 60);
   assert.equal(doc.files[1].container, 'p.zip');

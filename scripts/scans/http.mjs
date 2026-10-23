@@ -4,12 +4,21 @@
 
 export const realSleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
-/** At most one request every `intervalMs` (VirusTotal free tier: 4 a minute -> 15000). */
-export function limiter(intervalMs, { now = () => Date.now(), sleep = realSleep } = {}) {
+/**
+ * At most one request every `intervalMs` (VirusTotal free tier: 4 a minute -> 15000)
+ * and at most `max` requests in all (a daily quota); past that, wait() throws.
+ */
+export function limiter(intervalMs, { now = () => Date.now(), sleep = realSleep, max = Infinity } = {}) {
   let next = 0;
+  let used = 0;
   return {
     intervalMs,
+    get used() {
+      return used;
+    },
     async wait() {
+      if (used >= max) throw new Error(`request budget of ${max} for this run used up`);
+      used++;
       const t = now();
       const at = Math.max(t, next);
       next = at + intervalMs;

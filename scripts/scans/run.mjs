@@ -10,7 +10,7 @@ import { realSleep } from './http.mjs';
 const msg = (e) => String(e?.message || e).slice(0, 200);
 
 /** Results of one scanner: Map sha256 -> scan record. */
-export async function scanAll(scanner, targets, { sleep = realSleep, clock = () => Date.now(), pollIntervalMs = 60000, budgetMs = 90 * 60000, log = () => {} } = {}) {
+export async function scanAll(scanner, targets, { sleep = realSleep, clock = () => Date.now(), pollIntervalMs = 60000, budgetMs = 90 * 60000, enrichBudgetMs = 20 * 60000, log = () => {} } = {}) {
   const out = new Map();
   if (!scanner.configured) {
     for (const t of targets) out.set(t.sha256, { status: 'not configured' });
@@ -55,6 +55,23 @@ export async function scanAll(scanner, targets, { sleep = realSleep, clock = () 
     }
   }
   for (const p of pending) out.set(p.t.sha256, { status: 'pending' });
+  // Extra report data for finished results (VirusTotal: file attributes,
+  // behaviour, MITRE ATT&CK), within its own time budget. A failure keeps the result.
+  if (scanner.enrich) {
+    for (const t of targets) {
+      const r = out.get(t.sha256);
+      if (r?.status !== 'ok') continue;
+      if (clock() - started >= budgetMs + enrichBudgetMs) {
+        log(`${scanner.name}: no time left for report details`);
+        break;
+      }
+      try {
+        out.set(t.sha256, await scanner.enrich(t, r));
+      } catch (e) {
+        log(`${scanner.name}: ${t.name}: details: ${msg(e)}`);
+      }
+    }
+  }
   return out;
 }
 
