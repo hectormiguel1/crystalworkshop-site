@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generated": "2026-10-26T05:52:57.323Z",
+  "generated": "2026-10-26T10:41:04.677Z",
   "scanners": {
     "virustotal": "configured",
     "metadefender": "configured",
@@ -18,7 +18,7 @@
       "release": "crystalworkshop-v0.1.0-alpha",
       "sha256": "c454d2ecd6535c1ae7d85a0a6633bbec6350b7cf059ea08ec87e029ded51dabf",
       "size": 54146260,
-      "scanned_at": "2026-10-26T05:52:57.323Z",
+      "scanned_at": "2026-10-26T10:41:04.677Z",
       "scans": {
         "virustotal": {
           "status": "ok",
@@ -430,7 +430,7 @@
       "release": "crystalworkshop-v0.1.0-alpha",
       "sha256": "c33a8f96a67be5e3ad4029642788d4dce708058b97331b27a61cbd12218c9594",
       "size": 50658160,
-      "scanned_at": "2026-10-26T05:52:57.323Z",
+      "scanned_at": "2026-10-26T10:41:04.677Z",
       "scans": {
         "virustotal": {
           "status": "ok",
@@ -616,7 +616,7 @@
       "release": "crystalworkshop-v0.1.0-alpha",
       "sha256": "7d9b465373f99ff736aacdc930cf281e9017463d8c1da7c499189f448f4092e0",
       "size": 26443480,
-      "scanned_at": "2026-10-26T05:52:57.323Z",
+      "scanned_at": "2026-10-26T10:41:04.677Z",
       "scans": {
         "virustotal": {
           "status": "ok",
@@ -802,7 +802,7 @@
       "release": "crystalworkshop-v0.1.0-alpha",
       "sha256": "b3a79cdb5c83eaa4844cf9707610b631db107f4e796e57a45fd4f613ee333f58",
       "size": 28108192,
-      "scanned_at": "2026-10-26T05:52:57.323Z",
+      "scanned_at": "2026-10-26T10:41:04.677Z",
       "scans": {
         "virustotal": {
           "status": "ok",
@@ -1223,7 +1223,7 @@
       "release": "crystalworkshop-v0.1.0-alpha",
       "sha256": "82d80b4730c4b960b7004aaffb4a1ac60ab3958f0e75fed0ca579df3c944ea57",
       "size": 52777215,
-      "scanned_at": "2026-10-26T05:52:57.323Z",
+      "scanned_at": "2026-10-26T10:41:04.677Z",
       "scans": {
         "virustotal": {
           "status": "ok",
@@ -1692,7 +1692,7 @@
       "release": "crystalworkshop-v0.1.0-alpha",
       "sha256": "c126316f7478eaff1ad8087702eda5930f2400187b9c8b3592219c34f6632780",
       "size": 7286798,
-      "scanned_at": "2026-10-26T05:52:57.323Z",
+      "scanned_at": "2026-10-26T10:41:04.677Z",
       "scans": {
         "virustotal": {
           "status": "ok",
@@ -2147,7 +2147,7 @@
       "release": "crystalworkshop-v0.1.0-alpha",
       "sha256": "6e2f5d338907649a0896d9300e4f9dc0c7782c065f24d9d515ee8d7db4800783",
       "size": 44564992,
-      "scanned_at": "2026-10-26T05:52:57.323Z",
+      "scanned_at": "2026-10-26T10:41:04.677Z",
       "scans": {
         "virustotal": {
           "status": "ok",
@@ -2588,7 +2588,7 @@
       "release": "crystalworkshop-v0.1.0-alpha",
       "sha256": "b68fc40add25492bdb6aa056f84d6dfaa4ba61c75cf9bfc3338a4d4f90ea3932",
       "size": 24711168,
-      "scanned_at": "2026-10-26T05:52:57.323Z",
+      "scanned_at": "2026-10-26T10:41:04.677Z",
       "scans": {
         "virustotal": {
           "status": "ok",
@@ -2982,7 +2982,7 @@
       "release": "crystalworkshop-v0.1.0-alpha",
       "sha256": "55b05ea5c7666ed3943010de6a6b756f06be1fe14ac8fb39a51fc07205f0407e",
       "size": 22993408,
-      "scanned_at": "2026-10-26T05:52:57.323Z",
+      "scanned_at": "2026-10-26T10:41:04.677Z",
       "scans": {
         "virustotal": {
           "status": "ok",
@@ -3415,7 +3415,7 @@
       "release": "pulsedepot-v0.1.0-beta",
       "sha256": "20cb10b259c9512863d27e0504d6fdb1de7b3f448be45cf711b0124a3d5336c7",
       "size": 16403640,
-      "scanned_at": "2026-10-26T05:52:57.323Z",
+      "scanned_at": "2026-10-26T10:41:04.677Z",
       "scans": {
         "virustotal": {
           "status": "ok",
@@ -3857,7 +3857,7 @@
       "release": "pulsedepot-v0.1.0-beta",
       "sha256": "06b5d6607022fbd1a8d75268c26028b8a23cdb87652caeeba8aa7ca71518be9b",
       "size": 1634304,
-      "scanned_at": "2026-10-26T05:52:57.323Z",
+      "scanned_at": "2026-10-26T10:41:04.677Z",
       "scans": {
         "virustotal": {
           "status": "ok",
@@ -4205,7 +4205,7 @@
       "release": "pulsedepot-v0.1.0-beta",
       "sha256": "d8f1f14b0395fc10daeaa2835aaf0ca3a949a705eae2b7be2e32d3388e816b44",
       "size": 1638400,
-      "scanned_at": "2026-10-26T05:52:57.323Z",
+      "scanned_at": "2026-10-26T10:41:04.677Z",
       "scans": {
         "virustotal": {
           "status": "ok",
@@ -4531,7 +4531,7 @@
       "release": "pulsedepot-v0.1.0-beta",
       "sha256": "b3a79cdb5c83eaa4844cf9707610b631db107f4e796e57a45fd4f613ee333f58",
       "size": 28108192,
-      "scanned_at": "2026-10-26T05:52:57.323Z",
+      "scanned_at": "2026-10-26T10:41:04.677Z",
       "scans": {
         "virustotal": {
           "status": "ok",
@@ -4952,7 +4952,7 @@
       "release": "pulsedepot-v0.1.0-beta",
       "sha256": "e18e9d78874f219ce015a2dae8f4c3135405526dcff074a732b267be9766f7a3",
       "size": 14521197,
-      "scanned_at": "2026-10-26T05:52:57.323Z",
+      "scanned_at": "2026-10-26T10:41:04.677Z",
       "scans": {
         "virustotal": {
           "status": "ok",
@@ -5475,7 +5475,7 @@
       "release": "pulsedepot-v0.1.0-beta",
       "sha256": "06b5d6607022fbd1a8d75268c26028b8a23cdb87652caeeba8aa7ca71518be9b",
       "size": 1634304,
-      "scanned_at": "2026-10-26T05:52:57.323Z",
+      "scanned_at": "2026-10-26T10:41:04.677Z",
       "scans": {
         "virustotal": {
           "status": "ok",
@@ -5823,7 +5823,7 @@
       "release": "pulsedepot-v0.1.0-beta",
       "sha256": "d8f1f14b0395fc10daeaa2835aaf0ca3a949a705eae2b7be2e32d3388e816b44",
       "size": 1638400,
-      "scanned_at": "2026-10-26T05:52:57.323Z",
+      "scanned_at": "2026-10-26T10:41:04.677Z",
       "scans": {
         "virustotal": {
           "status": "ok",
@@ -6149,7 +6149,7 @@
       "release": "pulsedepot-v0.1.0-beta",
       "sha256": "55b05ea5c7666ed3943010de6a6b756f06be1fe14ac8fb39a51fc07205f0407e",
       "size": 22993408,
-      "scanned_at": "2026-10-26T05:52:57.323Z",
+      "scanned_at": "2026-10-26T10:41:04.677Z",
       "scans": {
         "virustotal": {
           "status": "ok",
@@ -6582,7 +6582,7 @@
       "release": "crux-v0.1.1",
       "sha256": "8dbeae74227ef147463a3d3c843e3f0143b8cf4a8d35e07ca897d638ca8c5301",
       "size": 2035904,
-      "scanned_at": "2026-10-26T05:52:57.323Z",
+      "scanned_at": "2026-10-26T10:41:04.677Z",
       "scans": {
         "virustotal": {
           "status": "ok",
@@ -6896,8 +6896,8 @@
         },
         "kaspersky": {
           "status": "ok",
-          "zone": "Grey",
-          "file_status": "NotCategorized",
+          "zone": "Green",
+          "file_status": "NoThreats",
           "detections": [],
           "flagged": [],
           "type": "zip",
@@ -6907,7 +6907,16 @@
           "url": "https://opentip.kaspersky.com/8dbeae74227ef147463a3d3c843e3f0143b8cf4a8d35e07ca897d638ca8c5301/"
         },
         "hybridanalysis": {
-          "status": "pending"
+          "status": "ok",
+          "verdict": "no verdict",
+          "threat_score": null,
+          "av_detect": null,
+          "family": null,
+          "environment": "Windows 10 64 bit",
+          "tags": [],
+          "flagged": [],
+          "scanned_at": null,
+          "url": "https://hybrid-analysis.com/sample/8dbeae74227ef147463a3d3c843e3f0143b8cf4a8d35e07ca897d638ca8c5301"
         },
         "triage": {
           "status": "not configured"
@@ -6923,7 +6932,7 @@
       "release": "crux-v0.1.1",
       "sha256": "e8c2a34c887ad00bc685246afeae1bdd30141dc99ea8b1cec9bdf84ed4d96ce5",
       "size": 2031616,
-      "scanned_at": "2026-10-26T05:52:57.323Z",
+      "scanned_at": "2026-10-26T10:41:04.677Z",
       "scans": {
         "virustotal": {
           "status": "ok",
@@ -7102,8 +7111,8 @@
         },
         "kaspersky": {
           "status": "ok",
-          "zone": "Grey",
-          "file_status": "NotCategorized",
+          "zone": "Green",
+          "file_status": "NoThreats",
           "detections": [],
           "flagged": [],
           "type": "dll x32",
@@ -7116,12 +7125,12 @@
           "status": "ok",
           "verdict": "no specific threat",
           "threat_score": null,
-          "av_detect": 0,
+          "av_detect": null,
           "family": null,
           "environment": "Windows 10 64 bit",
           "tags": [],
           "flagged": [],
-          "scanned_at": "2026-10-26T04:23:33.000Z",
+          "scanned_at": null,
           "url": "https://hybrid-analysis.com/sample/e8c2a34c887ad00bc685246afeae1bdd30141dc99ea8b1cec9bdf84ed4d96ce5"
         },
         "triage": {
@@ -7138,7 +7147,7 @@
       "release": "crux-v0.1.1",
       "sha256": "f658e63eed332307a160b6d8ba631b65fb4fc3a106472b4ecde0309f87ac3ff6",
       "size": 2035200,
-      "scanned_at": "2026-10-26T05:52:57.323Z",
+      "scanned_at": "2026-10-26T10:41:04.677Z",
       "scans": {
         "virustotal": {
           "status": "ok",
@@ -7207,7 +7216,140 @@
               "original_name": "version.dll"
             }
           },
-          "behaviour": null
+          "behaviour": {
+            "tags": [],
+            "verdicts": [],
+            "techniques": [
+              {
+                "id": "T1057",
+                "description": "enumerate process modules",
+                "severity": "IMPACT_SEVERITY_INFO"
+              },
+              {
+                "id": "T1129",
+                "description": "link function at runtime on Windows",
+                "severity": "IMPACT_SEVERITY_INFO"
+              },
+              {
+                "id": "T1083",
+                "description": "check if file exists",
+                "severity": "IMPACT_SEVERITY_INFO"
+              },
+              {
+                "id": "T1574",
+                "description": "linked against MinHook",
+                "severity": "IMPACT_SEVERITY_INFO"
+              },
+              {
+                "id": "T1082",
+                "description": "query environment variable",
+                "severity": "IMPACT_SEVERITY_INFO"
+              },
+              {
+                "id": "T1027",
+                "description": "encrypt data using RC4 PRGA",
+                "severity": "IMPACT_SEVERITY_INFO"
+              }
+            ],
+            "signatures": [
+              {
+                "name": "delete file",
+                "severity": null
+              },
+              {
+                "name": "enumerate process modules",
+                "severity": null
+              },
+              {
+                "name": "hash data using murmur3",
+                "severity": null
+              },
+              {
+                "name": "link function at runtime on Windows",
+                "severity": null
+              },
+              {
+                "name": "enumerate threads",
+                "severity": null
+              },
+              {
+                "name": "check if file exists",
+                "severity": null
+              },
+              {
+                "name": "allocate thread local storage",
+                "severity": null
+              },
+              {
+                "name": "get thread local storage value",
+                "severity": null
+              },
+              {
+                "name": "hash data using SHA256",
+                "severity": null
+              },
+              {
+                "name": "linked against MinHook",
+                "severity": null
+              }
+            ],
+            "counts": {
+              "processes_created": 0,
+              "files_written": 0,
+              "files_dropped": 0,
+              "registry_keys_set": 0,
+              "dns_lookups": 0,
+              "ip_traffic": 0
+            },
+            "tactics": [
+              {
+                "id": "TA0002",
+                "name": "Execution",
+                "techniques": [
+                  {
+                    "id": "T1129",
+                    "name": "Shared Modules"
+                  },
+                  {
+                    "id": "T1574",
+                    "name": "Hijack Execution Flow"
+                  }
+                ]
+              },
+              {
+                "id": "TA0005",
+                "name": "Stealth",
+                "techniques": [
+                  {
+                    "id": "T1574",
+                    "name": "Hijack Execution Flow"
+                  },
+                  {
+                    "id": "T1027",
+                    "name": "Obfuscated Files or Information"
+                  }
+                ]
+              },
+              {
+                "id": "TA0007",
+                "name": "Discovery",
+                "techniques": [
+                  {
+                    "id": "T1057",
+                    "name": "Process Discovery"
+                  },
+                  {
+                    "id": "T1083",
+                    "name": "File and Directory Discovery"
+                  },
+                  {
+                    "id": "T1082",
+                    "name": "System Information Discovery"
+                  }
+                ]
+              }
+            ]
+          }
         },
         "metadefender": {
           "status": "ok",
@@ -7338,8 +7480,8 @@
         },
         "kaspersky": {
           "status": "ok",
-          "zone": "Grey",
-          "file_status": "NotCategorized",
+          "zone": "Green",
+          "file_status": "NoThreats",
           "detections": [],
           "flagged": [],
           "type": "dll x32",
@@ -7352,12 +7494,12 @@
           "status": "ok",
           "verdict": "no specific threat",
           "threat_score": null,
-          "av_detect": 0,
+          "av_detect": null,
           "family": null,
           "environment": "Windows 10 64 bit",
           "tags": [],
           "flagged": [],
-          "scanned_at": "2026-10-26T04:23:32.000Z",
+          "scanned_at": null,
           "url": "https://hybrid-analysis.com/sample/f658e63eed332307a160b6d8ba631b65fb4fc3a106472b4ecde0309f87ac3ff6"
         },
         "triage": {
@@ -7374,7 +7516,7 @@
       "release": "drop-changes-v0.1.0",
       "sha256": "42fa67d03bca6fa375594644b34c0b1e9f824f19d1bff2938d3c49ae1105b74e",
       "size": 2817497,
-      "scanned_at": "2026-10-26T05:52:57.323Z",
+      "scanned_at": "2026-10-26T10:41:04.677Z",
       "scans": {
         "virustotal": {
           "status": "ok",
@@ -7549,7 +7691,7 @@
       "release": "hard-mode-v0.1.0",
       "sha256": "cdc54f964e5115bd69c63e1956e54fa5535232c824bc1a8a0ee2da5026799441",
       "size": 2688430,
-      "scanned_at": "2026-10-26T05:52:57.323Z",
+      "scanned_at": "2026-10-26T10:41:04.677Z",
       "scans": {
         "virustotal": {
           "status": "ok",
@@ -7724,7 +7866,7 @@
       "release": "mod-settings-v0.1.0",
       "sha256": "d7649080a9cdc382d5686db9686f8e3e3a74b527c9062cc019afce0bd690e21e",
       "size": 2701837,
-      "scanned_at": "2026-10-26T05:52:57.323Z",
+      "scanned_at": "2026-10-26T10:41:04.677Z",
       "scans": {
         "virustotal": {
           "status": "ok",
@@ -7899,7 +8041,7 @@
       "release": "no-post-battle-heal-v0.1.0",
       "sha256": "86b7056a6cbbc9203c010ca8e93b8c3d1b8936ba613e43c7c98957c5870e714e",
       "size": 2769996,
-      "scanned_at": "2026-10-26T05:52:57.323Z",
+      "scanned_at": "2026-10-26T10:41:04.677Z",
       "scans": {
         "virustotal": {
           "status": "ok",
@@ -8074,7 +8216,7 @@
       "release": "paradigm-tuning-v0.1.0",
       "sha256": "b3e5502f566a924f41f570a9107046403f901ba0c4bd25b9de9aca7174071c74",
       "size": 2718849,
-      "scanned_at": "2026-10-26T05:52:57.323Z",
+      "scanned_at": "2026-10-26T10:41:04.677Z",
       "scans": {
         "virustotal": {
           "status": "ok",
@@ -8259,7 +8401,7 @@
       "release": "xiii2-ui-scale-v0.1.0",
       "sha256": "5bfb599e2d83a652e405a092ef88665491508bf88ed53de93a3352443eac44ae",
       "size": 1081192,
-      "scanned_at": "2026-10-26T05:52:57.323Z",
+      "scanned_at": "2026-10-26T10:41:04.677Z",
       "scans": {
         "virustotal": {
           "status": "ok",
