@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generated": "2026-10-23T03:35:42.832Z",
+  "generated": "2026-10-26T05:52:57.323Z",
   "scanners": {
     "virustotal": "configured",
     "metadefender": "configured",
@@ -18,7 +18,7 @@
       "release": "crystalworkshop-v0.1.0-alpha",
       "sha256": "c454d2ecd6535c1ae7d85a0a6633bbec6350b7cf059ea08ec87e029ded51dabf",
       "size": 54146260,
-      "scanned_at": "2026-10-23T03:35:42.832Z",
+      "scanned_at": "2026-10-26T05:52:57.323Z",
       "scans": {
         "virustotal": {
           "status": "ok",
@@ -37,10 +37,20 @@
               "zip",
               "contains-elf",
               "sets-process-name",
-              "detect-debug-environment"
+              "detect-debug-environment",
+              "long-sleeps"
             ],
             "threat": null,
             "sandboxes": [
+              {
+                "sandbox": "Zenbox",
+                "category": "harmless",
+                "classification": [
+                  "CLEAN"
+                ],
+                "names": [],
+                "confidence": 97
+              },
               {
                 "sandbox": "Zenbox Linux",
                 "category": "harmless",
@@ -60,8 +70,9 @@
           },
           "behaviour": {
             "tags": [
-              "SETS_PROCESS_NAME",
-              "DETECT_DEBUG_ENVIRONMENT"
+              "DETECT_DEBUG_ENVIRONMENT",
+              "LONG_SLEEPS",
+              "SETS_PROCESS_NAME"
             ],
             "verdicts": [
               "CLEAN"
@@ -71,6 +82,26 @@
                 "id": "T1071",
                 "description": "Yara detections observed in process dumps, payloads or dropped files",
                 "severity": "IMPACT_SEVERITY_MEDIUM"
+              },
+              {
+                "id": "T1055",
+                "description": "May try to detect the Windows Explorer process (often used for injection)",
+                "severity": "IMPACT_SEVERITY_INFO"
+              },
+              {
+                "id": "T1497",
+                "description": "May sleep (evasive loops) to hinder dynamic analysis",
+                "severity": "IMPACT_SEVERITY_INFO"
+              },
+              {
+                "id": "T1057",
+                "description": "May try to detect the Windows Explorer process (often used for injection)",
+                "severity": "IMPACT_SEVERITY_INFO"
+              },
+              {
+                "id": "T1082",
+                "description": "Queries the volume information (name, serial number etc) of a device",
+                "severity": "IMPACT_SEVERITY_INFO"
               },
               {
                 "id": "T1064",
@@ -99,41 +130,49 @@
                 "severity": "IMPACT_SEVERITY_MEDIUM"
               },
               {
-                "name": "May try to detect the virtual machine to hinder analysis (VM artifact strings found in memory)",
+                "name": "Submission file is bigger than most known malware samples",
                 "severity": "IMPACT_SEVERITY_INFO"
               },
               {
-                "name": "Uses the \"uname\" system call to query kernel version information (possible evasion)",
+                "name": "Creates temporary files",
                 "severity": "IMPACT_SEVERITY_INFO"
               },
               {
-                "name": "Executes commands using a shell command-line interpreter",
+                "name": "Reads software policies",
                 "severity": "IMPACT_SEVERITY_INFO"
               },
               {
-                "name": "Executes the \"systemctl\" command used for controlling the systemd system and service manager",
+                "name": "Parts of this applications are using the .NET runtime (Probably coded in C#)",
+                "severity": "IMPACT_SEVERITY_INFO"
+              },
+              {
+                "name": "Queries the volume information (name, serial number etc) of a device",
+                "severity": "IMPACT_SEVERITY_INFO"
+              },
+              {
+                "name": "Performs DNS lookups",
+                "severity": "IMPACT_SEVERITY_INFO"
+              },
+              {
+                "name": "Creates license or readme file",
+                "severity": "IMPACT_SEVERITY_INFO"
+              },
+              {
+                "name": "Queries the cryptographic machine GUID",
                 "severity": "IMPACT_SEVERITY_INFO"
               },
               {
                 "name": "Classification label",
                 "severity": "IMPACT_SEVERITY_INFO"
-              },
-              {
-                "name": "Creates hidden files and/or directories",
-                "severity": "IMPACT_SEVERITY_INFO"
-              },
-              {
-                "name": "URLs found in memory or binary data",
-                "severity": "IMPACT_SEVERITY_INFO"
               }
             ],
             "counts": {
-              "processes_created": 16,
-              "files_written": 5,
-              "files_dropped": 64,
+              "processes_created": 20,
+              "files_written": 75,
+              "files_dropped": 93,
               "registry_keys_set": 0,
-              "dns_lookups": 0,
-              "ip_traffic": 0
+              "dns_lookups": 1,
+              "ip_traffic": 1
             },
             "tactics": [
               {
@@ -165,6 +204,10 @@
                 "name": "Privilege Escalation",
                 "techniques": [
                   {
+                    "id": "T1055",
+                    "name": "Process Injection"
+                  },
+                  {
                     "id": "T1543",
                     "name": "Create or Modify System Process"
                   },
@@ -178,6 +221,14 @@
                 "id": "TA0005",
                 "name": "Stealth",
                 "techniques": [
+                  {
+                    "id": "T1055",
+                    "name": "Process Injection"
+                  },
+                  {
+                    "id": "T1497",
+                    "name": "Virtualization/Sandbox Evasion"
+                  },
                   {
                     "id": "T1064",
                     "name": "Scripting"
@@ -196,6 +247,18 @@
                 "id": "TA0007",
                 "name": "Discovery",
                 "techniques": [
+                  {
+                    "id": "T1497",
+                    "name": "Virtualization/Sandbox Evasion"
+                  },
+                  {
+                    "id": "T1057",
+                    "name": "Process Discovery"
+                  },
+                  {
+                    "id": "T1082",
+                    "name": "System Information Discovery"
+                  },
                   {
                     "id": "T1518",
                     "name": "Software Discovery"
@@ -339,8 +402,8 @@
         },
         "kaspersky": {
           "status": "ok",
-          "zone": "Grey",
-          "file_status": "NotCategorized",
+          "zone": "Green",
+          "file_status": "NoThreats",
           "detections": [],
           "flagged": [],
           "type": "zip",
@@ -367,7 +430,7 @@
       "release": "crystalworkshop-v0.1.0-alpha",
       "sha256": "c33a8f96a67be5e3ad4029642788d4dce708058b97331b27a61cbd12218c9594",
       "size": 50658160,
-      "scanned_at": "2026-10-23T03:35:42.832Z",
+      "scanned_at": "2026-10-26T05:52:57.323Z",
       "scans": {
         "virustotal": {
           "status": "ok",
@@ -389,7 +452,14 @@
             ],
             "threat": null,
             "sandboxes": [],
-            "yara": [],
+            "yara": [
+              {
+                "rule": "Windows_API_Function",
+                "ruleset": "Windows_API_Function",
+                "source": "https://github.com/InQuest/yara-rules-vt",
+                "description": "This signature detects the presence of a number of Windows API functionality often seen within embedded executables. When this signature alerts on an executable, it is not an indication of malicious behavior. However, if seen firing in other file types, deeper investigation may be warranted."
+              }
+            ],
             "sigma": {
               "stats": null,
               "rules": []
@@ -518,11 +588,11 @@
         },
         "kaspersky": {
           "status": "ok",
-          "zone": "Grey",
-          "file_status": "NotCategorized",
+          "zone": "Green",
+          "file_status": "NoThreats",
           "detections": [],
           "flagged": [],
-          "type": "ELF 64 LE",
+          "type": "elf.64.le",
           "signer": null,
           "first_seen": null,
           "scanned_at": null,
@@ -546,7 +616,7 @@
       "release": "crystalworkshop-v0.1.0-alpha",
       "sha256": "7d9b465373f99ff736aacdc930cf281e9017463d8c1da7c499189f448f4092e0",
       "size": 26443480,
-      "scanned_at": "2026-10-23T03:35:42.832Z",
+      "scanned_at": "2026-10-26T05:52:57.323Z",
       "scans": {
         "virustotal": {
           "status": "ok",
@@ -568,7 +638,14 @@
             ],
             "threat": null,
             "sandboxes": [],
-            "yara": [],
+            "yara": [
+              {
+                "rule": "Windows_API_Function",
+                "ruleset": "Windows_API_Function",
+                "source": "https://github.com/InQuest/yara-rules-vt",
+                "description": "This signature detects the presence of a number of Windows API functionality often seen within embedded executables. When this signature alerts on an executable, it is not an indication of malicious behavior. However, if seen firing in other file types, deeper investigation may be warranted."
+              }
+            ],
             "sigma": {
               "stats": null,
               "rules": []
@@ -697,11 +774,11 @@
         },
         "kaspersky": {
           "status": "ok",
-          "zone": "Grey",
-          "file_status": "NotCategorized",
+          "zone": "Green",
+          "file_status": "NoThreats",
           "detections": [],
           "flagged": [],
-          "type": "ELF 64 LE",
+          "type": "elf.64.le",
           "signer": null,
           "first_seen": null,
           "scanned_at": null,
@@ -725,26 +802,26 @@
       "release": "crystalworkshop-v0.1.0-alpha",
       "sha256": "b3a79cdb5c83eaa4844cf9707610b631db107f4e796e57a45fd4f613ee333f58",
       "size": 28108192,
-      "scanned_at": "2026-10-23T03:35:42.832Z",
+      "scanned_at": "2026-10-26T05:52:57.323Z",
       "scans": {
         "virustotal": {
           "status": "ok",
           "stats": {
             "malicious": 0,
             "suspicious": 0,
-            "undetected": 64,
+            "undetected": 63,
             "harmless": 0,
             "type-unsupported": 11
           },
           "flagged": [],
-          "scanned_at": "2026-10-23T02:31:40.000Z",
+          "scanned_at": "2026-10-23T02:31:55.000Z",
           "url": "https://www.virustotal.com/gui/file/b3a79cdb5c83eaa4844cf9707610b631db107f4e796e57a45fd4f613ee333f58",
           "details": {
             "tags": [
               "64bits",
-              "shared-lib",
+              "detect-debug-environment",
               "elf",
-              "detect-debug-environment"
+              "shared-lib"
             ],
             "threat": null,
             "sandboxes": [
@@ -758,7 +835,14 @@
                 "confidence": 96
               }
             ],
-            "yara": [],
+            "yara": [
+              {
+                "rule": "Windows_API_Function",
+                "ruleset": "Windows_API_Function",
+                "source": "https://github.com/InQuest/yara-rules-vt",
+                "description": "This signature detects the presence of a number of Windows API functionality often seen within embedded executables. When this signature alerts on an executable, it is not an indication of malicious behavior. However, if seen firing in other file types, deeper investigation may be warranted."
+              }
+            ],
             "sigma": {
               "stats": null,
               "rules": []
@@ -1111,11 +1195,11 @@
         },
         "kaspersky": {
           "status": "ok",
-          "zone": "Grey",
-          "file_status": "NotCategorized",
+          "zone": "Green",
+          "file_status": "NoThreats",
           "detections": [],
           "flagged": [],
-          "type": "ELF 64 LE",
+          "type": "elf.64.le",
           "signer": null,
           "first_seen": null,
           "scanned_at": null,
@@ -1139,7 +1223,7 @@
       "release": "crystalworkshop-v0.1.0-alpha",
       "sha256": "82d80b4730c4b960b7004aaffb4a1ac60ab3958f0e75fed0ca579df3c944ea57",
       "size": 52777215,
-      "scanned_at": "2026-10-23T03:35:42.832Z",
+      "scanned_at": "2026-10-26T05:52:57.323Z",
       "scans": {
         "virustotal": {
           "status": "ok",
@@ -1158,10 +1242,21 @@
               "zip",
               "contains-pe",
               "sets-process-name",
-              "detect-debug-environment"
+              "detect-debug-environment",
+              "long-sleeps"
             ],
             "threat": null,
-            "sandboxes": [],
+            "sandboxes": [
+              {
+                "sandbox": "Zenbox",
+                "category": "harmless",
+                "classification": [
+                  "CLEAN"
+                ],
+                "names": [],
+                "confidence": 97
+              }
+            ],
             "yara": [],
             "sigma": {
               "stats": {
@@ -1198,10 +1293,13 @@
           "behaviour": {
             "tags": [
               "OBFUSCATED",
-              "SETS_PROCESS_NAME",
-              "DETECT_DEBUG_ENVIRONMENT"
+              "DETECT_DEBUG_ENVIRONMENT",
+              "LONG_SLEEPS",
+              "SETS_PROCESS_NAME"
             ],
-            "verdicts": [],
+            "verdicts": [
+              "CLEAN"
+            ],
             "techniques": [
               {
                 "id": "T1082",
@@ -1297,12 +1395,12 @@
               }
             ],
             "counts": {
-              "processes_created": 27,
-              "files_written": 14,
-              "files_dropped": 68,
+              "processes_created": 30,
+              "files_written": 49,
+              "files_dropped": 73,
               "registry_keys_set": 0,
               "dns_lookups": 0,
-              "ip_traffic": 0
+              "ip_traffic": 1
             },
             "tactics": [
               {
@@ -1372,6 +1470,10 @@
                     "name": "Obfuscated Files or Information"
                   },
                   {
+                    "id": "T1497",
+                    "name": "Virtualization/Sandbox Evasion"
+                  },
+                  {
                     "id": "T1064",
                     "name": "Scripting"
                   },
@@ -1404,6 +1506,10 @@
                   {
                     "id": "T1012",
                     "name": "Query Registry"
+                  },
+                  {
+                    "id": "T1497",
+                    "name": "Virtualization/Sandbox Evasion"
                   },
                   {
                     "id": "T1518",
@@ -1558,8 +1664,8 @@
         },
         "kaspersky": {
           "status": "ok",
-          "zone": "Grey",
-          "file_status": "NotCategorized",
+          "zone": "Green",
+          "file_status": "NoThreats",
           "detections": [],
           "flagged": [],
           "type": "zip",
@@ -1586,7 +1692,7 @@
       "release": "crystalworkshop-v0.1.0-alpha",
       "sha256": "c126316f7478eaff1ad8087702eda5930f2400187b9c8b3592219c34f6632780",
       "size": 7286798,
-      "scanned_at": "2026-10-23T03:35:42.832Z",
+      "scanned_at": "2026-10-26T05:52:57.323Z",
       "scans": {
         "virustotal": {
           "status": "ok",
@@ -2041,45 +2147,48 @@
       "release": "crystalworkshop-v0.1.0-alpha",
       "sha256": "6e2f5d338907649a0896d9300e4f9dc0c7782c065f24d9d515ee8d7db4800783",
       "size": 44564992,
-      "scanned_at": "2026-10-23T03:35:42.832Z",
+      "scanned_at": "2026-10-26T05:52:57.323Z",
       "scans": {
         "virustotal": {
           "status": "ok",
           "stats": {
-            "malicious": 1,
+            "malicious": 0,
             "suspicious": 0,
-            "undetected": 70,
+            "undetected": 69,
             "harmless": 0,
             "type-unsupported": 4
           },
-          "flagged": [
-            {
-              "engine": "Microsoft",
-              "category": "malicious",
-              "result": "Trojan:Win32/Wacatac.C!ml",
-              "heuristic": true,
-              "engine_version": "1.26090",
-              "engine_update": "2026-10-23"
-            }
-          ],
-          "scanned_at": "2026-10-23T02:33:03.000Z",
+          "flagged": [],
+          "scanned_at": "2026-10-24T04:18:00.000Z",
           "url": "https://www.virustotal.com/gui/file/6e2f5d338907649a0896d9300e4f9dc0c7782c065f24d9d515ee8d7db4800783",
           "details": {
             "tags": [
-              "peexe",
-              "64bits"
+              "64bits",
+              "checks-user-input",
+              "detect-debug-environment",
+              "peexe"
             ],
-            "threat": {
-              "label": "trojan.",
-              "categories": [
-                {
-                  "value": "trojan",
-                  "count": 1
-                }
-              ],
-              "names": []
-            },
-            "sandboxes": [],
+            "threat": null,
+            "sandboxes": [
+              {
+                "sandbox": "C2AE",
+                "category": "undetected",
+                "classification": [
+                  "UNKNOWN_VERDICT"
+                ],
+                "names": [],
+                "confidence": null
+              },
+              {
+                "sandbox": "Zenbox",
+                "category": "harmless",
+                "classification": [
+                  "CLEAN"
+                ],
+                "names": [],
+                "confidence": 99
+              }
+            ],
             "yara": [],
             "sigma": {
               "stats": null,
@@ -2097,9 +2206,14 @@
           },
           "behaviour": {
             "tags": [
-              "OBFUSCATED"
+              "OBFUSCATED",
+              "CHECKS_USER_INPUT",
+              "DETECT_DEBUG_ENVIRONMENT"
             ],
-            "verdicts": [],
+            "verdicts": [
+              "UNKNOWN_VERDICT",
+              "CLEAN"
+            ],
             "techniques": [
               {
                 "id": "T1082",
@@ -2195,12 +2309,12 @@
               }
             ],
             "counts": {
-              "processes_created": 8,
-              "files_written": 5,
+              "processes_created": 9,
+              "files_written": 12,
               "files_dropped": 1,
               "registry_keys_set": 0,
               "dns_lookups": 0,
-              "ip_traffic": 0
+              "ip_traffic": 1
             },
             "tactics": [
               {
@@ -2250,6 +2364,16 @@
                 ]
               },
               {
+                "id": "TA0006",
+                "name": "Credential Access",
+                "techniques": [
+                  {
+                    "id": "T1056",
+                    "name": "Input Capture"
+                  }
+                ]
+              },
+              {
                 "id": "TA0007",
                 "name": "Discovery",
                 "techniques": [
@@ -2268,6 +2392,16 @@
                   {
                     "id": "T1012",
                     "name": "Query Registry"
+                  }
+                ]
+              },
+              {
+                "id": "TA0009",
+                "name": "Collection",
+                "techniques": [
+                  {
+                    "id": "T1056",
+                    "name": "Input Capture"
                   }
                 ]
               },
@@ -2418,28 +2552,26 @@
         },
         "kaspersky": {
           "status": "ok",
-          "zone": "Grey",
-          "file_status": "NotCategorized",
+          "zone": "Green",
+          "file_status": "NoThreats",
           "detections": [],
           "flagged": [],
           "type": "exe x64",
           "signer": null,
-          "first_seen": null,
-          "scanned_at": null,
+          "first_seen": "2026-10-23T07:41:00.000Z",
+          "scanned_at": "2026-10-23T09:56:00.000Z",
           "url": "https://opentip.kaspersky.com/6e2f5d338907649a0896d9300e4f9dc0c7782c065f24d9d515ee8d7db4800783/"
         },
         "hybridanalysis": {
           "status": "ok",
           "verdict": "no verdict",
           "threat_score": null,
-          "av_detect": 0,
+          "av_detect": null,
           "family": null,
           "environment": "Windows 10 64 bit",
-          "tags": [
-            "evasive"
-          ],
+          "tags": [],
           "flagged": [],
-          "scanned_at": "2026-10-23T03:17:10.000Z",
+          "scanned_at": null,
           "url": "https://hybrid-analysis.com/sample/6e2f5d338907649a0896d9300e4f9dc0c7782c065f24d9d515ee8d7db4800783"
         },
         "triage": {
@@ -2456,14 +2588,14 @@
       "release": "crystalworkshop-v0.1.0-alpha",
       "sha256": "b68fc40add25492bdb6aa056f84d6dfaa4ba61c75cf9bfc3338a4d4f90ea3932",
       "size": 24711168,
-      "scanned_at": "2026-10-23T03:35:42.832Z",
+      "scanned_at": "2026-10-26T05:52:57.323Z",
       "scans": {
         "virustotal": {
           "status": "ok",
           "stats": {
-            "malicious": 2,
+            "malicious": 1,
             "suspicious": 0,
-            "undetected": 68,
+            "undetected": 70,
             "harmless": 0,
             "type-unsupported": 4
           },
@@ -2475,34 +2607,29 @@
               "heuristic": true,
               "engine_version": "1.2.0.16534",
               "engine_update": "2026-10-23"
-            },
-            {
-              "engine": "Microsoft",
-              "category": "malicious",
-              "result": "Trojan:Win32/Wacatac.C!ml",
-              "heuristic": true,
-              "engine_version": "1.26090",
-              "engine_update": "2026-10-23"
             }
           ],
-          "scanned_at": "2026-10-23T02:33:37.000Z",
+          "scanned_at": "2026-10-23T02:33:44.000Z",
           "url": "https://www.virustotal.com/gui/file/b68fc40add25492bdb6aa056f84d6dfaa4ba61c75cf9bfc3338a4d4f90ea3932",
           "details": {
             "tags": [
+              "64bits",
               "peexe",
-              "64bits"
+              "idle",
+              "detect-debug-environment"
             ],
-            "threat": {
-              "label": "trojan.",
-              "categories": [
-                {
-                  "value": "trojan",
-                  "count": 1
-                }
-              ],
-              "names": []
-            },
-            "sandboxes": [],
+            "threat": null,
+            "sandboxes": [
+              {
+                "sandbox": "Zenbox",
+                "category": "harmless",
+                "classification": [
+                  "CLEAN"
+                ],
+                "names": [],
+                "confidence": 98
+              }
+            ],
             "yara": [],
             "sigma": {
               "stats": null,
@@ -2520,9 +2647,13 @@
           },
           "behaviour": {
             "tags": [
-              "OBFUSCATED"
+              "OBFUSCATED",
+              "IDLE",
+              "DETECT_DEBUG_ENVIRONMENT"
             ],
-            "verdicts": [],
+            "verdicts": [
+              "CLEAN"
+            ],
             "techniques": [
               {
                 "id": "T1071",
@@ -2597,11 +2728,19 @@
               {
                 "name": "antidebug_setunhandledexceptionfilter",
                 "severity": "IMPACT_SEVERITY_INFO"
+              },
+              {
+                "name": "Submission file is bigger than most known malware samples",
+                "severity": "IMPACT_SEVERITY_INFO"
+              },
+              {
+                "name": "Sample execution stops while process was sleeping (likely an evasion)",
+                "severity": "IMPACT_SEVERITY_INFO"
               }
             ],
             "counts": {
-              "processes_created": 1,
-              "files_written": 0,
+              "processes_created": 5,
+              "files_written": 1,
               "files_dropped": 0,
               "registry_keys_set": 0,
               "dns_lookups": 0,
@@ -2807,8 +2946,8 @@
         },
         "kaspersky": {
           "status": "ok",
-          "zone": "Grey",
-          "file_status": "NotCategorized",
+          "zone": "Green",
+          "file_status": "NoThreats",
           "detections": [],
           "flagged": [],
           "type": "exe x64",
@@ -2821,12 +2960,12 @@
           "status": "ok",
           "verdict": "no specific threat",
           "threat_score": null,
-          "av_detect": 0,
+          "av_detect": null,
           "family": null,
           "environment": "Windows 10 64 bit",
           "tags": [],
           "flagged": [],
-          "scanned_at": "2026-10-23T03:17:18.000Z",
+          "scanned_at": null,
           "url": "https://hybrid-analysis.com/sample/b68fc40add25492bdb6aa056f84d6dfaa4ba61c75cf9bfc3338a4d4f90ea3932"
         },
         "triage": {
@@ -2843,44 +2982,28 @@
       "release": "crystalworkshop-v0.1.0-alpha",
       "sha256": "55b05ea5c7666ed3943010de6a6b756f06be1fe14ac8fb39a51fc07205f0407e",
       "size": 22993408,
-      "scanned_at": "2026-10-23T03:35:42.832Z",
+      "scanned_at": "2026-10-26T05:52:57.323Z",
       "scans": {
         "virustotal": {
           "status": "ok",
           "stats": {
-            "malicious": 1,
+            "malicious": 0,
             "suspicious": 0,
-            "undetected": 62,
+            "undetected": 70,
             "harmless": 0,
             "type-unsupported": 4
           },
-          "flagged": [
-            {
-              "engine": "Microsoft",
-              "category": "malicious",
-              "result": "Trojan:Win32/Wacatac.C!ml",
-              "heuristic": true,
-              "engine_version": "1.26090",
-              "engine_update": "2026-10-23"
-            }
-          ],
-          "scanned_at": "2026-10-23T02:34:07.000Z",
+          "flagged": [],
+          "scanned_at": "2026-10-24T04:42:01.000Z",
           "url": "https://www.virustotal.com/gui/file/55b05ea5c7666ed3943010de6a6b756f06be1fe14ac8fb39a51fc07205f0407e",
           "details": {
             "tags": [
+              "detect-debug-environment",
+              "checks-user-input",
               "peexe",
               "64bits"
             ],
-            "threat": {
-              "label": "trojan.",
-              "categories": [
-                {
-                  "value": "trojan",
-                  "count": 1
-                }
-              ],
-              "names": []
-            },
+            "threat": null,
             "sandboxes": [],
             "yara": [],
             "sigma": {
@@ -2899,7 +3022,9 @@
           },
           "behaviour": {
             "tags": [
-              "OBFUSCATED"
+              "OBFUSCATED",
+              "CHECKS_USER_INPUT",
+              "DETECT_DEBUG_ENVIRONMENT"
             ],
             "verdicts": [],
             "techniques": [
@@ -2997,9 +3122,9 @@
               }
             ],
             "counts": {
-              "processes_created": 8,
-              "files_written": 5,
-              "files_dropped": 1,
+              "processes_created": 9,
+              "files_written": 13,
+              "files_dropped": 2,
               "registry_keys_set": 0,
               "dns_lookups": 0,
               "ip_traffic": 0
@@ -3022,6 +3147,10 @@
                   {
                     "id": "T1055",
                     "name": "Process Injection"
+                  },
+                  {
+                    "id": "T1548",
+                    "name": "Abuse Elevation Control Mechanism"
                   }
                 ]
               },
@@ -3052,6 +3181,16 @@
                 ]
               },
               {
+                "id": "TA0006",
+                "name": "Credential Access",
+                "techniques": [
+                  {
+                    "id": "T1056",
+                    "name": "Input Capture"
+                  }
+                ]
+              },
+              {
                 "id": "TA0007",
                 "name": "Discovery",
                 "techniques": [
@@ -3070,6 +3209,16 @@
                   {
                     "id": "T1012",
                     "name": "Query Registry"
+                  }
+                ]
+              },
+              {
+                "id": "TA0009",
+                "name": "Collection",
+                "techniques": [
+                  {
+                    "id": "T1056",
+                    "name": "Input Capture"
                   }
                 ]
               },
@@ -3230,8 +3379,8 @@
         },
         "kaspersky": {
           "status": "ok",
-          "zone": "Grey",
-          "file_status": "NotCategorized",
+          "zone": "Green",
+          "file_status": "NoThreats",
           "detections": [],
           "flagged": [],
           "type": "exe x64",
@@ -3244,14 +3393,12 @@
           "status": "ok",
           "verdict": "no verdict",
           "threat_score": null,
-          "av_detect": 0,
+          "av_detect": null,
           "family": null,
           "environment": "Windows 10 64 bit",
-          "tags": [
-            "evasive"
-          ],
+          "tags": [],
           "flagged": [],
-          "scanned_at": "2026-10-23T03:17:27.000Z",
+          "scanned_at": null,
           "url": "https://hybrid-analysis.com/sample/55b05ea5c7666ed3943010de6a6b756f06be1fe14ac8fb39a51fc07205f0407e"
         },
         "triage": {
@@ -3268,7 +3415,7 @@
       "release": "pulsedepot-v0.1.0-beta",
       "sha256": "20cb10b259c9512863d27e0504d6fdb1de7b3f448be45cf711b0124a3d5336c7",
       "size": 16403640,
-      "scanned_at": "2026-10-23T03:35:42.832Z",
+      "scanned_at": "2026-10-26T05:52:57.323Z",
       "scans": {
         "virustotal": {
           "status": "ok",
@@ -3288,10 +3435,20 @@
               "contains-pe",
               "zip",
               "sets-process-name",
-              "detect-debug-environment"
+              "detect-debug-environment",
+              "long-sleeps"
             ],
             "threat": null,
             "sandboxes": [
+              {
+                "sandbox": "Zenbox",
+                "category": "harmless",
+                "classification": [
+                  "CLEAN"
+                ],
+                "names": [],
+                "confidence": 95
+              },
               {
                 "sandbox": "Zenbox Linux",
                 "category": "harmless",
@@ -3327,8 +3484,9 @@
           },
           "behaviour": {
             "tags": [
-              "SETS_PROCESS_NAME",
-              "DETECT_DEBUG_ENVIRONMENT"
+              "DETECT_DEBUG_ENVIRONMENT",
+              "LONG_SLEEPS",
+              "SETS_PROCESS_NAME"
             ],
             "verdicts": [
               "CLEAN"
@@ -3358,6 +3516,11 @@
                 "id": "T1574",
                 "description": "A DLL was loaded from a suspicious directory",
                 "severity": "IMPACT_SEVERITY_LOW"
+              },
+              {
+                "id": "T1497",
+                "description": "Allocates memory with a write watch (potentially for evading sandboxes)",
+                "severity": "IMPACT_SEVERITY_INFO"
               },
               {
                 "id": "T1064",
@@ -3414,20 +3577,20 @@
                 "severity": "IMPACT_SEVERITY_INFO"
               },
               {
-                "name": "May try to detect the virtual machine to hinder analysis (VM artifact strings found in memory)",
+                "name": "Submission file is bigger than most known malware samples",
                 "severity": "IMPACT_SEVERITY_INFO"
               },
               {
-                "name": "Uses the \"uname\" system call to query kernel version information (possible evasion)",
+                "name": "Sample drops PE files which have not been started,",
                 "severity": "IMPACT_SEVERITY_INFO"
               }
             ],
             "counts": {
-              "processes_created": 13,
-              "files_written": 6,
-              "files_dropped": 28,
+              "processes_created": 16,
+              "files_written": 45,
+              "files_dropped": 48,
               "registry_keys_set": 0,
-              "dns_lookups": 0,
+              "dns_lookups": 1,
               "ip_traffic": 0
             },
             "tactics": [
@@ -3490,6 +3653,10 @@
                     "name": "Hijack Execution Flow"
                   },
                   {
+                    "id": "T1497",
+                    "name": "Virtualization/Sandbox Evasion"
+                  },
+                  {
                     "id": "T1064",
                     "name": "Scripting"
                   },
@@ -3514,6 +3681,10 @@
                   {
                     "id": "T1082",
                     "name": "System Information Discovery"
+                  },
+                  {
+                    "id": "T1497",
+                    "name": "Virtualization/Sandbox Evasion"
                   },
                   {
                     "id": "T1518",
@@ -3658,8 +3829,8 @@
         },
         "kaspersky": {
           "status": "ok",
-          "zone": "Grey",
-          "file_status": "NotCategorized",
+          "zone": "Green",
+          "file_status": "NoThreats",
           "detections": [],
           "flagged": [],
           "type": "zip",
@@ -3686,44 +3857,36 @@
       "release": "pulsedepot-v0.1.0-beta",
       "sha256": "06b5d6607022fbd1a8d75268c26028b8a23cdb87652caeeba8aa7ca71518be9b",
       "size": 1634304,
-      "scanned_at": "2026-10-23T03:35:42.832Z",
+      "scanned_at": "2026-10-26T05:52:57.323Z",
       "scans": {
         "virustotal": {
           "status": "ok",
           "stats": {
-            "malicious": 1,
+            "malicious": 0,
             "suspicious": 0,
-            "undetected": 70,
+            "undetected": 60,
             "harmless": 0,
             "type-unsupported": 4
           },
-          "flagged": [
-            {
-              "engine": "Microsoft",
-              "category": "malicious",
-              "result": "Trojan:Win32/Wacatac.C!ml",
-              "heuristic": true,
-              "engine_version": "1.26090",
-              "engine_update": "2026-10-22"
-            }
-          ],
-          "scanned_at": "2026-10-22T00:01:08.000Z",
+          "flagged": [],
+          "scanned_at": "2026-10-26T01:38:58.000Z",
           "url": "https://www.virustotal.com/gui/file/06b5d6607022fbd1a8d75268c26028b8a23cdb87652caeeba8aa7ca71518be9b",
           "details": {
             "tags": [
               "pedll"
             ],
-            "threat": {
-              "label": "trojan.",
-              "categories": [
-                {
-                  "value": "trojan",
-                  "count": 1
-                }
-              ],
-              "names": []
-            },
-            "sandboxes": [],
+            "threat": null,
+            "sandboxes": [
+              {
+                "sandbox": "C2AE",
+                "category": "undetected",
+                "classification": [
+                  "UNKNOWN_VERDICT"
+                ],
+                "names": [],
+                "confidence": null
+              }
+            ],
             "yara": [],
             "sigma": {
               "stats": null,
@@ -3741,7 +3904,9 @@
           },
           "behaviour": {
             "tags": [],
-            "verdicts": [],
+            "verdicts": [
+              "UNKNOWN_VERDICT"
+            ],
             "techniques": [
               {
                 "id": "T1082",
@@ -3877,25 +4042,130 @@
         "metadefender": {
           "status": "ok",
           "stats": {
-            "detected": 0,
-            "total": 1
+            "detected": 1,
+            "total": 21
           },
-          "result": "No Threat Detected",
+          "result": "Infected",
           "engines": [
+            {
+              "engine": "AhnLab",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Aurora",
+              "threat": null,
+              "result": 0
+            },
             {
               "engine": "Avira",
               "threat": null,
               "result": 0
+            },
+            {
+              "engine": "Bitdefender",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Bkav Pro",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "ClamAV",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "CMC",
+              "threat": "Trojan_Win32_Wacatac_C_ml",
+              "result": 1
+            },
+            {
+              "engine": "ESET",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "IKARUS",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "K7",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Lionic",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "OPSWAT Predictive Alin AI",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Quick Heal",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "SentinelOne",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Sophos",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "TACHYON",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Trellix",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Varist",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Webroot SMD",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Xcitium",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Xvirus Anti-Malware",
+              "threat": null,
+              "result": 0
             }
           ],
-          "flagged": [],
-          "scanned_at": null,
+          "flagged": [
+            {
+              "engine": "CMC",
+              "result": "Trojan_Win32_Wacatac_C_ml"
+            }
+          ],
+          "scanned_at": "2026-10-26T04:23:16.071Z",
           "url": "https://metadefender.com/results/hash/06b5d6607022fbd1a8d75268c26028b8a23cdb87652caeeba8aa7ca71518be9b"
         },
         "kaspersky": {
           "status": "ok",
-          "zone": "Grey",
-          "file_status": "NotCategorized",
+          "zone": "Green",
+          "file_status": "NoThreats",
           "detections": [],
           "flagged": [],
           "type": "dll x32",
@@ -3907,18 +4177,18 @@
         "hybridanalysis": {
           "status": "ok",
           "verdict": "suspicious",
-          "threat_score": 76,
-          "av_detect": 3,
-          "family": "Trojan_Win32_Wacatac_C_ml",
+          "threat_score": null,
+          "av_detect": null,
+          "family": null,
           "environment": "Windows 10 64 bit",
           "tags": [],
           "flagged": [
             {
               "engine": "Hybrid Analysis",
-              "result": "Trojan_Win32_Wacatac_C_ml"
+              "result": "suspicious"
             }
           ],
-          "scanned_at": "2026-10-23T03:17:39.000Z",
+          "scanned_at": null,
           "url": "https://hybrid-analysis.com/sample/06b5d6607022fbd1a8d75268c26028b8a23cdb87652caeeba8aa7ca71518be9b"
         },
         "triage": {
@@ -3935,7 +4205,7 @@
       "release": "pulsedepot-v0.1.0-beta",
       "sha256": "d8f1f14b0395fc10daeaa2835aaf0ca3a949a705eae2b7be2e32d3388e816b44",
       "size": 1638400,
-      "scanned_at": "2026-10-23T03:35:42.832Z",
+      "scanned_at": "2026-10-26T05:52:57.323Z",
       "scans": {
         "virustotal": {
           "status": "ok",
@@ -4109,24 +4379,124 @@
           "status": "ok",
           "stats": {
             "detected": 0,
-            "total": 1
+            "total": 21
           },
-          "result": "No Threat Detected",
+          "result": "Infected",
           "engines": [
             {
+              "engine": "AhnLab",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Aurora",
+              "threat": null,
+              "result": 0
+            },
+            {
               "engine": "Avira",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Bitdefender",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Bkav Pro",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "ClamAV",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "CMC",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "ESET",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "IKARUS",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "K7",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Lionic",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "OPSWAT Predictive Alin AI",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Quick Heal",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "SentinelOne",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Sophos",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "TACHYON",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Trellix",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Varist",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Webroot SMD",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Xcitium",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Xvirus Anti-Malware",
               "threat": null,
               "result": 0
             }
           ],
           "flagged": [],
-          "scanned_at": null,
+          "scanned_at": "2026-10-25T07:44:21.100Z",
           "url": "https://metadefender.com/results/hash/d8f1f14b0395fc10daeaa2835aaf0ca3a949a705eae2b7be2e32d3388e816b44"
         },
         "kaspersky": {
           "status": "ok",
-          "zone": "Grey",
-          "file_status": "NotCategorized",
+          "zone": "Green",
+          "file_status": "NoThreats",
           "detections": [],
           "flagged": [],
           "type": "dll x32",
@@ -4139,12 +4509,12 @@
           "status": "ok",
           "verdict": "no specific threat",
           "threat_score": null,
-          "av_detect": 0,
+          "av_detect": null,
           "family": null,
           "environment": "Windows 10 64 bit",
           "tags": [],
           "flagged": [],
-          "scanned_at": "2026-10-23T03:17:47.000Z",
+          "scanned_at": null,
           "url": "https://hybrid-analysis.com/sample/d8f1f14b0395fc10daeaa2835aaf0ca3a949a705eae2b7be2e32d3388e816b44"
         },
         "triage": {
@@ -4161,26 +4531,26 @@
       "release": "pulsedepot-v0.1.0-beta",
       "sha256": "b3a79cdb5c83eaa4844cf9707610b631db107f4e796e57a45fd4f613ee333f58",
       "size": 28108192,
-      "scanned_at": "2026-10-23T03:35:42.832Z",
+      "scanned_at": "2026-10-26T05:52:57.323Z",
       "scans": {
         "virustotal": {
           "status": "ok",
           "stats": {
             "malicious": 0,
             "suspicious": 0,
-            "undetected": 64,
+            "undetected": 63,
             "harmless": 0,
             "type-unsupported": 11
           },
           "flagged": [],
-          "scanned_at": "2026-10-23T02:31:40.000Z",
+          "scanned_at": "2026-10-23T02:31:55.000Z",
           "url": "https://www.virustotal.com/gui/file/b3a79cdb5c83eaa4844cf9707610b631db107f4e796e57a45fd4f613ee333f58",
           "details": {
             "tags": [
               "64bits",
-              "shared-lib",
+              "detect-debug-environment",
               "elf",
-              "detect-debug-environment"
+              "shared-lib"
             ],
             "threat": null,
             "sandboxes": [
@@ -4194,7 +4564,14 @@
                 "confidence": 96
               }
             ],
-            "yara": [],
+            "yara": [
+              {
+                "rule": "Windows_API_Function",
+                "ruleset": "Windows_API_Function",
+                "source": "https://github.com/InQuest/yara-rules-vt",
+                "description": "This signature detects the presence of a number of Windows API functionality often seen within embedded executables. When this signature alerts on an executable, it is not an indication of malicious behavior. However, if seen firing in other file types, deeper investigation may be warranted."
+              }
+            ],
             "sigma": {
               "stats": null,
               "rules": []
@@ -4547,11 +4924,11 @@
         },
         "kaspersky": {
           "status": "ok",
-          "zone": "Grey",
-          "file_status": "NotCategorized",
+          "zone": "Green",
+          "file_status": "NoThreats",
           "detections": [],
           "flagged": [],
-          "type": "ELF 64 LE",
+          "type": "elf.64.le",
           "signer": null,
           "first_seen": null,
           "scanned_at": null,
@@ -4575,7 +4952,7 @@
       "release": "pulsedepot-v0.1.0-beta",
       "sha256": "e18e9d78874f219ce015a2dae8f4c3135405526dcff074a732b267be9766f7a3",
       "size": 14521197,
-      "scanned_at": "2026-10-23T03:35:42.832Z",
+      "scanned_at": "2026-10-26T05:52:57.323Z",
       "scans": {
         "virustotal": {
           "status": "ok",
@@ -4594,10 +4971,21 @@
               "contains-pe",
               "sets-process-name",
               "zip",
-              "detect-debug-environment"
+              "detect-debug-environment",
+              "checks-user-input",
+              "long-sleeps"
             ],
             "threat": null,
             "sandboxes": [
+              {
+                "sandbox": "Zenbox",
+                "category": "harmless",
+                "classification": [
+                  "CLEAN"
+                ],
+                "names": [],
+                "confidence": 94
+              },
               {
                 "sandbox": "Zenbox Linux",
                 "category": "harmless",
@@ -4639,8 +5027,10 @@
           "behaviour": {
             "tags": [
               "OBFUSCATED",
-              "SETS_PROCESS_NAME",
-              "DETECT_DEBUG_ENVIRONMENT"
+              "CHECKS_USER_INPUT",
+              "DETECT_DEBUG_ENVIRONMENT",
+              "LONG_SLEEPS",
+              "SETS_PROCESS_NAME"
             ],
             "verdicts": [
               "CLEAN"
@@ -4740,9 +5130,9 @@
               }
             ],
             "counts": {
-              "processes_created": 35,
-              "files_written": 19,
-              "files_dropped": 35,
+              "processes_created": 38,
+              "files_written": 58,
+              "files_dropped": 55,
               "registry_keys_set": 0,
               "dns_lookups": 0,
               "ip_traffic": 0
@@ -4839,12 +5229,26 @@
                     "name": "Hidden Window"
                   },
                   {
+                    "id": "T1497",
+                    "name": "Virtualization/Sandbox Evasion"
+                  },
+                  {
                     "id": "T1064",
                     "name": "Scripting"
                   },
                   {
                     "id": "T1564.001",
                     "name": "Hidden Files and Directories"
+                  }
+                ]
+              },
+              {
+                "id": "TA0006",
+                "name": "Credential Access",
+                "techniques": [
+                  {
+                    "id": "T1056",
+                    "name": "Input Capture"
                   }
                 ]
               },
@@ -4869,6 +5273,10 @@
                     "name": "Query Registry"
                   },
                   {
+                    "id": "T1497",
+                    "name": "Virtualization/Sandbox Evasion"
+                  },
+                  {
                     "id": "T1518",
                     "name": "Software Discovery"
                   },
@@ -4885,6 +5293,10 @@
                   {
                     "id": "T1074",
                     "name": "Data Staged"
+                  },
+                  {
+                    "id": "T1056",
+                    "name": "Input Capture"
                   }
                 ]
               },
@@ -5035,8 +5447,8 @@
         },
         "kaspersky": {
           "status": "ok",
-          "zone": "Grey",
-          "file_status": "NotCategorized",
+          "zone": "Green",
+          "file_status": "NoThreats",
           "detections": [],
           "flagged": [],
           "type": "zip",
@@ -5063,44 +5475,36 @@
       "release": "pulsedepot-v0.1.0-beta",
       "sha256": "06b5d6607022fbd1a8d75268c26028b8a23cdb87652caeeba8aa7ca71518be9b",
       "size": 1634304,
-      "scanned_at": "2026-10-23T03:35:42.832Z",
+      "scanned_at": "2026-10-26T05:52:57.323Z",
       "scans": {
         "virustotal": {
           "status": "ok",
           "stats": {
-            "malicious": 1,
+            "malicious": 0,
             "suspicious": 0,
-            "undetected": 70,
+            "undetected": 60,
             "harmless": 0,
             "type-unsupported": 4
           },
-          "flagged": [
-            {
-              "engine": "Microsoft",
-              "category": "malicious",
-              "result": "Trojan:Win32/Wacatac.C!ml",
-              "heuristic": true,
-              "engine_version": "1.26090",
-              "engine_update": "2026-10-22"
-            }
-          ],
-          "scanned_at": "2026-10-22T00:01:08.000Z",
+          "flagged": [],
+          "scanned_at": "2026-10-26T01:38:58.000Z",
           "url": "https://www.virustotal.com/gui/file/06b5d6607022fbd1a8d75268c26028b8a23cdb87652caeeba8aa7ca71518be9b",
           "details": {
             "tags": [
               "pedll"
             ],
-            "threat": {
-              "label": "trojan.",
-              "categories": [
-                {
-                  "value": "trojan",
-                  "count": 1
-                }
-              ],
-              "names": []
-            },
-            "sandboxes": [],
+            "threat": null,
+            "sandboxes": [
+              {
+                "sandbox": "C2AE",
+                "category": "undetected",
+                "classification": [
+                  "UNKNOWN_VERDICT"
+                ],
+                "names": [],
+                "confidence": null
+              }
+            ],
             "yara": [],
             "sigma": {
               "stats": null,
@@ -5118,7 +5522,9 @@
           },
           "behaviour": {
             "tags": [],
-            "verdicts": [],
+            "verdicts": [
+              "UNKNOWN_VERDICT"
+            ],
             "techniques": [
               {
                 "id": "T1082",
@@ -5254,25 +5660,130 @@
         "metadefender": {
           "status": "ok",
           "stats": {
-            "detected": 0,
-            "total": 1
+            "detected": 1,
+            "total": 21
           },
-          "result": "No Threat Detected",
+          "result": "Infected",
           "engines": [
+            {
+              "engine": "AhnLab",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Aurora",
+              "threat": null,
+              "result": 0
+            },
             {
               "engine": "Avira",
               "threat": null,
               "result": 0
+            },
+            {
+              "engine": "Bitdefender",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Bkav Pro",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "ClamAV",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "CMC",
+              "threat": "Trojan_Win32_Wacatac_C_ml",
+              "result": 1
+            },
+            {
+              "engine": "ESET",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "IKARUS",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "K7",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Lionic",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "OPSWAT Predictive Alin AI",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Quick Heal",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "SentinelOne",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Sophos",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "TACHYON",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Trellix",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Varist",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Webroot SMD",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Xcitium",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Xvirus Anti-Malware",
+              "threat": null,
+              "result": 0
             }
           ],
-          "flagged": [],
-          "scanned_at": null,
+          "flagged": [
+            {
+              "engine": "CMC",
+              "result": "Trojan_Win32_Wacatac_C_ml"
+            }
+          ],
+          "scanned_at": "2026-10-26T04:23:16.071Z",
           "url": "https://metadefender.com/results/hash/06b5d6607022fbd1a8d75268c26028b8a23cdb87652caeeba8aa7ca71518be9b"
         },
         "kaspersky": {
           "status": "ok",
-          "zone": "Grey",
-          "file_status": "NotCategorized",
+          "zone": "Green",
+          "file_status": "NoThreats",
           "detections": [],
           "flagged": [],
           "type": "dll x32",
@@ -5284,18 +5795,18 @@
         "hybridanalysis": {
           "status": "ok",
           "verdict": "suspicious",
-          "threat_score": 76,
-          "av_detect": 3,
-          "family": "Trojan_Win32_Wacatac_C_ml",
+          "threat_score": null,
+          "av_detect": null,
+          "family": null,
           "environment": "Windows 10 64 bit",
           "tags": [],
           "flagged": [
             {
               "engine": "Hybrid Analysis",
-              "result": "Trojan_Win32_Wacatac_C_ml"
+              "result": "suspicious"
             }
           ],
-          "scanned_at": "2026-10-23T03:17:39.000Z",
+          "scanned_at": null,
           "url": "https://hybrid-analysis.com/sample/06b5d6607022fbd1a8d75268c26028b8a23cdb87652caeeba8aa7ca71518be9b"
         },
         "triage": {
@@ -5312,7 +5823,7 @@
       "release": "pulsedepot-v0.1.0-beta",
       "sha256": "d8f1f14b0395fc10daeaa2835aaf0ca3a949a705eae2b7be2e32d3388e816b44",
       "size": 1638400,
-      "scanned_at": "2026-10-23T03:35:42.832Z",
+      "scanned_at": "2026-10-26T05:52:57.323Z",
       "scans": {
         "virustotal": {
           "status": "ok",
@@ -5486,24 +5997,124 @@
           "status": "ok",
           "stats": {
             "detected": 0,
-            "total": 1
+            "total": 21
           },
-          "result": "No Threat Detected",
+          "result": "Infected",
           "engines": [
             {
+              "engine": "AhnLab",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Aurora",
+              "threat": null,
+              "result": 0
+            },
+            {
               "engine": "Avira",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Bitdefender",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Bkav Pro",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "ClamAV",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "CMC",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "ESET",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "IKARUS",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "K7",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Lionic",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "OPSWAT Predictive Alin AI",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Quick Heal",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "SentinelOne",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Sophos",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "TACHYON",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Trellix",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Varist",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Webroot SMD",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Xcitium",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Xvirus Anti-Malware",
               "threat": null,
               "result": 0
             }
           ],
           "flagged": [],
-          "scanned_at": null,
+          "scanned_at": "2026-10-25T07:44:21.100Z",
           "url": "https://metadefender.com/results/hash/d8f1f14b0395fc10daeaa2835aaf0ca3a949a705eae2b7be2e32d3388e816b44"
         },
         "kaspersky": {
           "status": "ok",
-          "zone": "Grey",
-          "file_status": "NotCategorized",
+          "zone": "Green",
+          "file_status": "NoThreats",
           "detections": [],
           "flagged": [],
           "type": "dll x32",
@@ -5516,12 +6127,12 @@
           "status": "ok",
           "verdict": "no specific threat",
           "threat_score": null,
-          "av_detect": 0,
+          "av_detect": null,
           "family": null,
           "environment": "Windows 10 64 bit",
           "tags": [],
           "flagged": [],
-          "scanned_at": "2026-10-23T03:17:47.000Z",
+          "scanned_at": null,
           "url": "https://hybrid-analysis.com/sample/d8f1f14b0395fc10daeaa2835aaf0ca3a949a705eae2b7be2e32d3388e816b44"
         },
         "triage": {
@@ -5538,44 +6149,28 @@
       "release": "pulsedepot-v0.1.0-beta",
       "sha256": "55b05ea5c7666ed3943010de6a6b756f06be1fe14ac8fb39a51fc07205f0407e",
       "size": 22993408,
-      "scanned_at": "2026-10-23T03:35:42.832Z",
+      "scanned_at": "2026-10-26T05:52:57.323Z",
       "scans": {
         "virustotal": {
           "status": "ok",
           "stats": {
-            "malicious": 1,
+            "malicious": 0,
             "suspicious": 0,
-            "undetected": 62,
+            "undetected": 70,
             "harmless": 0,
             "type-unsupported": 4
           },
-          "flagged": [
-            {
-              "engine": "Microsoft",
-              "category": "malicious",
-              "result": "Trojan:Win32/Wacatac.C!ml",
-              "heuristic": true,
-              "engine_version": "1.26090",
-              "engine_update": "2026-10-23"
-            }
-          ],
-          "scanned_at": "2026-10-23T02:34:07.000Z",
+          "flagged": [],
+          "scanned_at": "2026-10-24T04:42:01.000Z",
           "url": "https://www.virustotal.com/gui/file/55b05ea5c7666ed3943010de6a6b756f06be1fe14ac8fb39a51fc07205f0407e",
           "details": {
             "tags": [
+              "detect-debug-environment",
+              "checks-user-input",
               "peexe",
               "64bits"
             ],
-            "threat": {
-              "label": "trojan.",
-              "categories": [
-                {
-                  "value": "trojan",
-                  "count": 1
-                }
-              ],
-              "names": []
-            },
+            "threat": null,
             "sandboxes": [],
             "yara": [],
             "sigma": {
@@ -5594,7 +6189,9 @@
           },
           "behaviour": {
             "tags": [
-              "OBFUSCATED"
+              "OBFUSCATED",
+              "CHECKS_USER_INPUT",
+              "DETECT_DEBUG_ENVIRONMENT"
             ],
             "verdicts": [],
             "techniques": [
@@ -5692,9 +6289,9 @@
               }
             ],
             "counts": {
-              "processes_created": 8,
-              "files_written": 5,
-              "files_dropped": 1,
+              "processes_created": 9,
+              "files_written": 13,
+              "files_dropped": 2,
               "registry_keys_set": 0,
               "dns_lookups": 0,
               "ip_traffic": 0
@@ -5717,6 +6314,10 @@
                   {
                     "id": "T1055",
                     "name": "Process Injection"
+                  },
+                  {
+                    "id": "T1548",
+                    "name": "Abuse Elevation Control Mechanism"
                   }
                 ]
               },
@@ -5747,6 +6348,16 @@
                 ]
               },
               {
+                "id": "TA0006",
+                "name": "Credential Access",
+                "techniques": [
+                  {
+                    "id": "T1056",
+                    "name": "Input Capture"
+                  }
+                ]
+              },
+              {
                 "id": "TA0007",
                 "name": "Discovery",
                 "techniques": [
@@ -5765,6 +6376,16 @@
                   {
                     "id": "T1012",
                     "name": "Query Registry"
+                  }
+                ]
+              },
+              {
+                "id": "TA0009",
+                "name": "Collection",
+                "techniques": [
+                  {
+                    "id": "T1056",
+                    "name": "Input Capture"
                   }
                 ]
               },
@@ -5925,8 +6546,8 @@
         },
         "kaspersky": {
           "status": "ok",
-          "zone": "Grey",
-          "file_status": "NotCategorized",
+          "zone": "Green",
+          "file_status": "NoThreats",
           "detections": [],
           "flagged": [],
           "type": "exe x64",
@@ -5939,14 +6560,12 @@
           "status": "ok",
           "verdict": "no verdict",
           "threat_score": null,
-          "av_detect": 0,
+          "av_detect": null,
           "family": null,
           "environment": "Windows 10 64 bit",
-          "tags": [
-            "evasive"
-          ],
+          "tags": [],
           "flagged": [],
-          "scanned_at": "2026-10-23T03:17:27.000Z",
+          "scanned_at": null,
           "url": "https://hybrid-analysis.com/sample/55b05ea5c7666ed3943010de6a6b756f06be1fe14ac8fb39a51fc07205f0407e"
         },
         "triage": {
@@ -5955,37 +6574,609 @@
       }
     },
     {
-      "id": "crux-dll",
-      "name": "Crux.dll",
+      "id": "crux-0-1-1-windows-x86-zip",
+      "name": "crux-0.1.1-windows-x86.zip",
       "container": null,
       "product": "crux",
-      "version": "0.1.0",
-      "release": "crux-v0.1.0",
-      "sha256": "06b5d6607022fbd1a8d75268c26028b8a23cdb87652caeeba8aa7ca71518be9b",
-      "size": 1634304,
-      "scanned_at": "2026-10-23T03:35:42.832Z",
+      "version": "0.1.1",
+      "release": "crux-v0.1.1",
+      "sha256": "8dbeae74227ef147463a3d3c843e3f0143b8cf4a8d35e07ca897d638ca8c5301",
+      "size": 2035904,
+      "scanned_at": "2026-10-26T05:52:57.323Z",
       "scans": {
         "virustotal": {
           "status": "ok",
           "stats": {
             "malicious": 1,
             "suspicious": 0,
-            "undetected": 70,
+            "undetected": 66,
+            "harmless": 0,
+            "type-unsupported": 7
+          },
+          "flagged": [
+            {
+              "engine": "Bkav",
+              "category": "malicious",
+              "result": "W32.Malware.4EED4C80",
+              "heuristic": false,
+              "engine_version": "8.2.40(8338)",
+              "engine_update": "2026-10-24"
+            }
+          ],
+          "scanned_at": "2026-10-26T04:25:34.000Z",
+          "url": "https://www.virustotal.com/gui/file/8dbeae74227ef147463a3d3c843e3f0143b8cf4a8d35e07ca897d638ca8c5301",
+          "details": {
+            "tags": [
+              "zip",
+              "contains-pe",
+              "detect-debug-environment",
+              "long-sleeps"
+            ],
+            "threat": null,
+            "sandboxes": [
+              {
+                "sandbox": "Zenbox",
+                "category": "harmless",
+                "classification": [
+                  "CLEAN"
+                ],
+                "names": [],
+                "confidence": 95
+              }
+            ],
+            "yara": [],
+            "sigma": {
+              "stats": null,
+              "rules": []
+            },
+            "signature": null
+          },
+          "behaviour": {
+            "tags": [
+              "DETECT_DEBUG_ENVIRONMENT",
+              "LONG_SLEEPS"
+            ],
+            "verdicts": [
+              "CLEAN"
+            ],
+            "techniques": [
+              {
+                "id": "T1033",
+                "description": "Queries process token information to check for Administrator privileges or UAC elevation status",
+                "severity": "IMPACT_SEVERITY_LOW"
+              },
+              {
+                "id": "T1082",
+                "description": "Queries process token information to check for Administrator privileges or UAC elevation status",
+                "severity": "IMPACT_SEVERITY_LOW"
+              },
+              {
+                "id": "T1055",
+                "description": "Writes to the memory another process",
+                "severity": "IMPACT_SEVERITY_LOW"
+              },
+              {
+                "id": "T1574",
+                "description": "A DLL was loaded from a suspicious directory",
+                "severity": "IMPACT_SEVERITY_LOW"
+              },
+              {
+                "id": "T1497",
+                "description": "Allocates memory with a write watch (potentially for evading sandboxes)",
+                "severity": "IMPACT_SEVERITY_INFO"
+              }
+            ],
+            "signatures": [
+              {
+                "name": "privilege_elevation_check",
+                "severity": "IMPACT_SEVERITY_LOW"
+              },
+              {
+                "name": "dllload_suspicious_directory",
+                "severity": "IMPACT_SEVERITY_LOW"
+              },
+              {
+                "name": "injection_write_process",
+                "severity": "IMPACT_SEVERITY_LOW"
+              },
+              {
+                "name": "stealth_timeout",
+                "severity": "IMPACT_SEVERITY_INFO"
+              },
+              {
+                "name": "language_check_registry",
+                "severity": "IMPACT_SEVERITY_INFO"
+              },
+              {
+                "name": "Submission file is bigger than most known malware samples",
+                "severity": "IMPACT_SEVERITY_INFO"
+              },
+              {
+                "name": "Sample drops PE files which have not been started,",
+                "severity": "IMPACT_SEVERITY_INFO"
+              },
+              {
+                "name": "Reads software policies",
+                "severity": "IMPACT_SEVERITY_INFO"
+              },
+              {
+                "name": "Parts of this applications are using the .NET runtime (Probably coded in C#)",
+                "severity": "IMPACT_SEVERITY_INFO"
+              },
+              {
+                "name": "Queries the volume information (name, serial number etc) of a device",
+                "severity": "IMPACT_SEVERITY_INFO"
+              }
+            ],
+            "counts": {
+              "processes_created": 7,
+              "files_written": 11,
+              "files_dropped": 11,
+              "registry_keys_set": 0,
+              "dns_lookups": 2,
+              "ip_traffic": 0
+            },
+            "tactics": [
+              {
+                "id": "TA0002",
+                "name": "Execution",
+                "techniques": [
+                  {
+                    "id": "T1574",
+                    "name": "Hijack Execution Flow"
+                  }
+                ]
+              },
+              {
+                "id": "TA0004",
+                "name": "Privilege Escalation",
+                "techniques": [
+                  {
+                    "id": "T1055",
+                    "name": "Process Injection"
+                  }
+                ]
+              },
+              {
+                "id": "TA0005",
+                "name": "Stealth",
+                "techniques": [
+                  {
+                    "id": "T1055",
+                    "name": "Process Injection"
+                  },
+                  {
+                    "id": "T1574",
+                    "name": "Hijack Execution Flow"
+                  },
+                  {
+                    "id": "T1497",
+                    "name": "Virtualization/Sandbox Evasion"
+                  }
+                ]
+              },
+              {
+                "id": "TA0007",
+                "name": "Discovery",
+                "techniques": [
+                  {
+                    "id": "T1033",
+                    "name": "System Owner/User Discovery"
+                  },
+                  {
+                    "id": "T1082",
+                    "name": "System Information Discovery"
+                  },
+                  {
+                    "id": "T1497",
+                    "name": "Virtualization/Sandbox Evasion"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "metadefender": {
+          "status": "ok",
+          "stats": {
+            "detected": 0,
+            "total": 21
+          },
+          "result": "No Threat Detected",
+          "engines": [
+            {
+              "engine": "AhnLab",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Aurora",
+              "threat": null,
+              "result": 23
+            },
+            {
+              "engine": "Avira",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Bitdefender",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Bkav Pro",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "ClamAV",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "CMC",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "ESET",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "IKARUS",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "K7",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Lionic",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "OPSWAT Predictive Alin AI",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Quick Heal",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "SentinelOne",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Sophos",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "TACHYON",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Trellix",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Varist",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Webroot SMD",
+              "threat": null,
+              "result": 23
+            },
+            {
+              "engine": "Xcitium",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Xvirus Anti-Malware",
+              "threat": null,
+              "result": 0
+            }
+          ],
+          "flagged": [],
+          "scanned_at": "2026-10-26T04:23:42.284Z",
+          "url": "https://metadefender.com/results/hash/8dbeae74227ef147463a3d3c843e3f0143b8cf4a8d35e07ca897d638ca8c5301"
+        },
+        "kaspersky": {
+          "status": "ok",
+          "zone": "Grey",
+          "file_status": "NotCategorized",
+          "detections": [],
+          "flagged": [],
+          "type": "zip",
+          "signer": null,
+          "first_seen": null,
+          "scanned_at": null,
+          "url": "https://opentip.kaspersky.com/8dbeae74227ef147463a3d3c843e3f0143b8cf4a8d35e07ca897d638ca8c5301/"
+        },
+        "hybridanalysis": {
+          "status": "pending"
+        },
+        "triage": {
+          "status": "not configured"
+        }
+      }
+    },
+    {
+      "id": "crux-0-1-1-windows-x86-zip-crux-dll",
+      "name": "Crux.dll",
+      "container": "crux-0.1.1-windows-x86.zip",
+      "product": "crux",
+      "version": "0.1.1",
+      "release": "crux-v0.1.1",
+      "sha256": "e8c2a34c887ad00bc685246afeae1bdd30141dc99ea8b1cec9bdf84ed4d96ce5",
+      "size": 2031616,
+      "scanned_at": "2026-10-26T05:52:57.323Z",
+      "scans": {
+        "virustotal": {
+          "status": "ok",
+          "stats": {
+            "malicious": 2,
+            "suspicious": 0,
+            "undetected": 68,
             "harmless": 0,
             "type-unsupported": 4
           },
           "flagged": [
+            {
+              "engine": "Bkav",
+              "category": "malicious",
+              "result": "W32.Malware.4EED4C80",
+              "heuristic": false,
+              "engine_version": "8.2.40(8338)",
+              "engine_update": "2026-10-24"
+            },
+            {
+              "engine": "Skyhigh",
+              "category": "malicious",
+              "result": "BehavesLike.Win32.Injector.th",
+              "heuristic": false,
+              "engine_version": "v2021.2.0+4045",
+              "engine_update": "2026-10-25"
+            }
+          ],
+          "scanned_at": "2026-10-26T04:26:04.000Z",
+          "url": "https://www.virustotal.com/gui/file/e8c2a34c887ad00bc685246afeae1bdd30141dc99ea8b1cec9bdf84ed4d96ce5",
+          "details": {
+            "tags": [
+              "pedll"
+            ],
+            "threat": null,
+            "sandboxes": [],
+            "yara": [],
+            "sigma": {
+              "stats": null,
+              "rules": []
+            },
+            "signature": {
+              "verified": null,
+              "signers": null,
+              "product": "CrystalWorkshop",
+              "description": "Crux: CrystalWorkshop mod host for FINAL FANTASY XIII, XIII-2 and LR",
+              "copyright": "Freeware. All rights reserved. See LICENSE.",
+              "file_version": "0.1.1",
+              "original_name": "Crux.dll"
+            }
+          },
+          "behaviour": null
+        },
+        "metadefender": {
+          "status": "ok",
+          "stats": {
+            "detected": 1,
+            "total": 21
+          },
+          "result": "Infected",
+          "engines": [
+            {
+              "engine": "AhnLab",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Aurora",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Avira",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Bitdefender",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Bkav Pro",
+              "threat": "W32.Malware.4EED4C80",
+              "result": 1
+            },
+            {
+              "engine": "ClamAV",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "CMC",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "ESET",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "IKARUS",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "K7",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Lionic",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "OPSWAT Predictive Alin AI",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Quick Heal",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "SentinelOne",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Sophos",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "TACHYON",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Trellix",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Varist",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Webroot SMD",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Xcitium",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Xvirus Anti-Malware",
+              "threat": null,
+              "result": 0
+            }
+          ],
+          "flagged": [
+            {
+              "engine": "Bkav Pro",
+              "result": "W32.Malware.4EED4C80"
+            }
+          ],
+          "scanned_at": "2026-10-26T04:23:55.384Z",
+          "url": "https://metadefender.com/results/hash/e8c2a34c887ad00bc685246afeae1bdd30141dc99ea8b1cec9bdf84ed4d96ce5"
+        },
+        "kaspersky": {
+          "status": "ok",
+          "zone": "Grey",
+          "file_status": "NotCategorized",
+          "detections": [],
+          "flagged": [],
+          "type": "dll x32",
+          "signer": null,
+          "first_seen": null,
+          "scanned_at": null,
+          "url": "https://opentip.kaspersky.com/e8c2a34c887ad00bc685246afeae1bdd30141dc99ea8b1cec9bdf84ed4d96ce5/"
+        },
+        "hybridanalysis": {
+          "status": "ok",
+          "verdict": "no specific threat",
+          "threat_score": null,
+          "av_detect": 0,
+          "family": null,
+          "environment": "Windows 10 64 bit",
+          "tags": [],
+          "flagged": [],
+          "scanned_at": "2026-10-26T04:23:33.000Z",
+          "url": "https://hybrid-analysis.com/sample/e8c2a34c887ad00bc685246afeae1bdd30141dc99ea8b1cec9bdf84ed4d96ce5"
+        },
+        "triage": {
+          "status": "not configured"
+        }
+      }
+    },
+    {
+      "id": "crux-0-1-1-windows-x86-zip-version-dll",
+      "name": "version.dll",
+      "container": "crux-0.1.1-windows-x86.zip",
+      "product": "crux",
+      "version": "0.1.1",
+      "release": "crux-v0.1.1",
+      "sha256": "f658e63eed332307a160b6d8ba631b65fb4fc3a106472b4ecde0309f87ac3ff6",
+      "size": 2035200,
+      "scanned_at": "2026-10-26T05:52:57.323Z",
+      "scans": {
+        "virustotal": {
+          "status": "ok",
+          "stats": {
+            "malicious": 3,
+            "suspicious": 0,
+            "undetected": 67,
+            "harmless": 0,
+            "type-unsupported": 4
+          },
+          "flagged": [
+            {
+              "engine": "Bkav",
+              "category": "malicious",
+              "result": "W32.Malware.755CB111",
+              "heuristic": false,
+              "engine_version": "8.2.40(8338)",
+              "engine_update": "2026-10-24"
+            },
             {
               "engine": "Microsoft",
               "category": "malicious",
               "result": "Trojan:Win32/Wacatac.C!ml",
               "heuristic": true,
               "engine_version": "1.26090",
-              "engine_update": "2026-10-22"
+              "engine_update": "2026-10-26"
+            },
+            {
+              "engine": "Skyhigh",
+              "category": "malicious",
+              "result": "BehavesLike.Win32.Injector.th",
+              "heuristic": false,
+              "engine_version": "v2021.2.0+4045",
+              "engine_update": "2026-10-25"
             }
           ],
-          "scanned_at": "2026-10-22T00:01:08.000Z",
-          "url": "https://www.virustotal.com/gui/file/06b5d6607022fbd1a8d75268c26028b8a23cdb87652caeeba8aa7ca71518be9b",
+          "scanned_at": "2026-10-26T04:26:34.000Z",
+          "url": "https://www.virustotal.com/gui/file/f658e63eed332307a160b6d8ba631b65fb4fc3a106472b4ecde0309f87ac3ff6",
           "details": {
             "tags": [
               "pedll"
@@ -6010,395 +7201,140 @@
               "verified": null,
               "signers": null,
               "product": "CrystalWorkshop",
-              "description": "Crux: CrystalWorkshop mod host for FINAL FANTASY XIII, XIII-2 and LR",
-              "copyright": "Freeware. All rights reserved. See LICENSE.",
-              "file_version": "0.1.0",
-              "original_name": "Crux.dll"
-            }
-          },
-          "behaviour": {
-            "tags": [],
-            "verdicts": [],
-            "techniques": [
-              {
-                "id": "T1082",
-                "description": "query environment variable",
-                "severity": "IMPACT_SEVERITY_INFO"
-              },
-              {
-                "id": "T1129",
-                "description": "link function at runtime on Windows",
-                "severity": "IMPACT_SEVERITY_INFO"
-              },
-              {
-                "id": "T1027",
-                "description": "encrypt data using AES via x86 extensions",
-                "severity": "IMPACT_SEVERITY_INFO"
-              },
-              {
-                "id": "T1057",
-                "description": "enumerate threads",
-                "severity": "IMPACT_SEVERITY_INFO"
-              },
-              {
-                "id": "T1574",
-                "description": "linked against MinHook",
-                "severity": "IMPACT_SEVERITY_INFO"
-              },
-              {
-                "id": "T1083",
-                "description": "get common file path",
-                "severity": "IMPACT_SEVERITY_INFO"
-              }
-            ],
-            "signatures": [
-              {
-                "name": "check for software breakpoints",
-                "severity": null
-              },
-              {
-                "name": "query environment variable",
-                "severity": null
-              },
-              {
-                "name": "link function at runtime on Windows",
-                "severity": null
-              },
-              {
-                "name": "inspect section memory permissions",
-                "severity": null
-              },
-              {
-                "name": "set thread local storage value",
-                "severity": null
-              },
-              {
-                "name": "encrypt data using AES via x86 extensions",
-                "severity": null
-              },
-              {
-                "name": "print debug messages",
-                "severity": null
-              },
-              {
-                "name": "suspend thread",
-                "severity": null
-              },
-              {
-                "name": "parse PE header",
-                "severity": null
-              },
-              {
-                "name": "enumerate PE sections",
-                "severity": null
-              }
-            ],
-            "counts": {
-              "processes_created": 0,
-              "files_written": 0,
-              "files_dropped": 0,
-              "registry_keys_set": 0,
-              "dns_lookups": 0,
-              "ip_traffic": 0
-            },
-            "tactics": [
-              {
-                "id": "TA0002",
-                "name": "Execution",
-                "techniques": [
-                  {
-                    "id": "T1129",
-                    "name": "Shared Modules"
-                  },
-                  {
-                    "id": "T1574",
-                    "name": "Hijack Execution Flow"
-                  }
-                ]
-              },
-              {
-                "id": "TA0005",
-                "name": "Stealth",
-                "techniques": [
-                  {
-                    "id": "T1027",
-                    "name": "Obfuscated Files or Information"
-                  },
-                  {
-                    "id": "T1574",
-                    "name": "Hijack Execution Flow"
-                  }
-                ]
-              },
-              {
-                "id": "TA0007",
-                "name": "Discovery",
-                "techniques": [
-                  {
-                    "id": "T1082",
-                    "name": "System Information Discovery"
-                  },
-                  {
-                    "id": "T1057",
-                    "name": "Process Discovery"
-                  },
-                  {
-                    "id": "T1083",
-                    "name": "File and Directory Discovery"
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        "metadefender": {
-          "status": "ok",
-          "stats": {
-            "detected": 0,
-            "total": 1
-          },
-          "result": "No Threat Detected",
-          "engines": [
-            {
-              "engine": "Avira",
-              "threat": null,
-              "result": 0
-            }
-          ],
-          "flagged": [],
-          "scanned_at": null,
-          "url": "https://metadefender.com/results/hash/06b5d6607022fbd1a8d75268c26028b8a23cdb87652caeeba8aa7ca71518be9b"
-        },
-        "kaspersky": {
-          "status": "ok",
-          "zone": "Grey",
-          "file_status": "NotCategorized",
-          "detections": [],
-          "flagged": [],
-          "type": "dll x32",
-          "signer": null,
-          "first_seen": null,
-          "scanned_at": null,
-          "url": "https://opentip.kaspersky.com/06b5d6607022fbd1a8d75268c26028b8a23cdb87652caeeba8aa7ca71518be9b/"
-        },
-        "hybridanalysis": {
-          "status": "ok",
-          "verdict": "suspicious",
-          "threat_score": 76,
-          "av_detect": 3,
-          "family": "Trojan_Win32_Wacatac_C_ml",
-          "environment": "Windows 10 64 bit",
-          "tags": [],
-          "flagged": [
-            {
-              "engine": "Hybrid Analysis",
-              "result": "Trojan_Win32_Wacatac_C_ml"
-            }
-          ],
-          "scanned_at": "2026-10-23T03:17:39.000Z",
-          "url": "https://hybrid-analysis.com/sample/06b5d6607022fbd1a8d75268c26028b8a23cdb87652caeeba8aa7ca71518be9b"
-        },
-        "triage": {
-          "status": "not configured"
-        }
-      }
-    },
-    {
-      "id": "version-dll",
-      "name": "version.dll",
-      "container": null,
-      "product": "crux",
-      "version": "0.1.0",
-      "release": "crux-v0.1.0",
-      "sha256": "d8f1f14b0395fc10daeaa2835aaf0ca3a949a705eae2b7be2e32d3388e816b44",
-      "size": 1638400,
-      "scanned_at": "2026-10-23T03:35:42.832Z",
-      "scans": {
-        "virustotal": {
-          "status": "ok",
-          "stats": {
-            "malicious": 0,
-            "suspicious": 0,
-            "undetected": 71,
-            "harmless": 0,
-            "type-unsupported": 4
-          },
-          "flagged": [],
-          "scanned_at": "2026-10-22T00:01:09.000Z",
-          "url": "https://www.virustotal.com/gui/file/d8f1f14b0395fc10daeaa2835aaf0ca3a949a705eae2b7be2e32d3388e816b44",
-          "details": {
-            "tags": [
-              "pedll"
-            ],
-            "threat": null,
-            "sandboxes": [],
-            "yara": [],
-            "sigma": {
-              "stats": null,
-              "rules": []
-            },
-            "signature": {
-              "verified": null,
-              "signers": null,
-              "product": "CrystalWorkshop",
               "description": "Crux standalone (version.dll proxy): CrystalWorkshop mod host for FINAL FANTASY XIII, XIII-2 and LR",
               "copyright": "Freeware. All rights reserved. See LICENSE.",
-              "file_version": "0.1.0",
+              "file_version": "0.1.1",
               "original_name": "version.dll"
             }
           },
-          "behaviour": {
-            "tags": [],
-            "verdicts": [],
-            "techniques": [
-              {
-                "id": "T1027",
-                "description": "encrypt data using AES via x86 extensions",
-                "severity": "IMPACT_SEVERITY_INFO"
-              },
-              {
-                "id": "T1129",
-                "description": "parse PE header",
-                "severity": "IMPACT_SEVERITY_INFO"
-              },
-              {
-                "id": "T1574",
-                "description": "linked against MinHook",
-                "severity": "IMPACT_SEVERITY_INFO"
-              },
-              {
-                "id": "T1083",
-                "description": "check if file exists",
-                "severity": "IMPACT_SEVERITY_INFO"
-              },
-              {
-                "id": "T1082",
-                "description": "query environment variable",
-                "severity": "IMPACT_SEVERITY_INFO"
-              },
-              {
-                "id": "T1057",
-                "description": "enumerate threads",
-                "severity": "IMPACT_SEVERITY_INFO"
-              }
-            ],
-            "signatures": [
-              {
-                "name": "resume thread",
-                "severity": null
-              },
-              {
-                "name": "encrypt data using AES via x86 extensions",
-                "severity": null
-              },
-              {
-                "name": "compiled with rust",
-                "severity": null
-              },
-              {
-                "name": "encode data using XOR",
-                "severity": null
-              },
-              {
-                "name": "check for software breakpoints",
-                "severity": null
-              },
-              {
-                "name": "print debug messages",
-                "severity": null
-              },
-              {
-                "name": "encode data using Base64",
-                "severity": null
-              },
-              {
-                "name": "set thread local storage value",
-                "severity": null
-              },
-              {
-                "name": "move file",
-                "severity": null
-              },
-              {
-                "name": "parse PE header",
-                "severity": null
-              }
-            ],
-            "counts": {
-              "processes_created": 0,
-              "files_written": 0,
-              "files_dropped": 0,
-              "registry_keys_set": 0,
-              "dns_lookups": 0,
-              "ip_traffic": 0
-            },
-            "tactics": [
-              {
-                "id": "TA0002",
-                "name": "Execution",
-                "techniques": [
-                  {
-                    "id": "T1129",
-                    "name": "Shared Modules"
-                  },
-                  {
-                    "id": "T1574",
-                    "name": "Hijack Execution Flow"
-                  }
-                ]
-              },
-              {
-                "id": "TA0005",
-                "name": "Stealth",
-                "techniques": [
-                  {
-                    "id": "T1027",
-                    "name": "Obfuscated Files or Information"
-                  },
-                  {
-                    "id": "T1574",
-                    "name": "Hijack Execution Flow"
-                  }
-                ]
-              },
-              {
-                "id": "TA0007",
-                "name": "Discovery",
-                "techniques": [
-                  {
-                    "id": "T1083",
-                    "name": "File and Directory Discovery"
-                  },
-                  {
-                    "id": "T1082",
-                    "name": "System Information Discovery"
-                  },
-                  {
-                    "id": "T1057",
-                    "name": "Process Discovery"
-                  }
-                ]
-              }
-            ]
-          }
+          "behaviour": null
         },
         "metadefender": {
           "status": "ok",
           "stats": {
-            "detected": 0,
-            "total": 1
+            "detected": 2,
+            "total": 21
           },
-          "result": "No Threat Detected",
+          "result": "Infected",
           "engines": [
+            {
+              "engine": "AhnLab",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Aurora",
+              "threat": null,
+              "result": 0
+            },
             {
               "engine": "Avira",
               "threat": null,
               "result": 0
+            },
+            {
+              "engine": "Bitdefender",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Bkav Pro",
+              "threat": "W32.Malware.755CB111",
+              "result": 1
+            },
+            {
+              "engine": "ClamAV",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "CMC",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "ESET",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "IKARUS",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "K7",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Lionic",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "OPSWAT Predictive Alin AI",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Quick Heal",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "SentinelOne",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Sophos",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "TACHYON",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Trellix",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Varist",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Webroot SMD",
+              "threat": "Malware_51.0",
+              "result": 1
+            },
+            {
+              "engine": "Xcitium",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Xvirus Anti-Malware",
+              "threat": null,
+              "result": 0
             }
           ],
-          "flagged": [],
-          "scanned_at": null,
-          "url": "https://metadefender.com/results/hash/d8f1f14b0395fc10daeaa2835aaf0ca3a949a705eae2b7be2e32d3388e816b44"
+          "flagged": [
+            {
+              "engine": "Bkav Pro",
+              "result": "W32.Malware.755CB111"
+            },
+            {
+              "engine": "Webroot SMD",
+              "result": "Malware_51.0"
+            }
+          ],
+          "scanned_at": "2026-10-26T04:24:08.102Z",
+          "url": "https://metadefender.com/results/hash/f658e63eed332307a160b6d8ba631b65fb4fc3a106472b4ecde0309f87ac3ff6"
         },
         "kaspersky": {
           "status": "ok",
@@ -6410,7 +7346,7 @@
           "signer": null,
           "first_seen": null,
           "scanned_at": null,
-          "url": "https://opentip.kaspersky.com/d8f1f14b0395fc10daeaa2835aaf0ca3a949a705eae2b7be2e32d3388e816b44/"
+          "url": "https://opentip.kaspersky.com/f658e63eed332307a160b6d8ba631b65fb4fc3a106472b4ecde0309f87ac3ff6/"
         },
         "hybridanalysis": {
           "status": "ok",
@@ -6421,8 +7357,8 @@
           "environment": "Windows 10 64 bit",
           "tags": [],
           "flagged": [],
-          "scanned_at": "2026-10-23T03:17:47.000Z",
-          "url": "https://hybrid-analysis.com/sample/d8f1f14b0395fc10daeaa2835aaf0ca3a949a705eae2b7be2e32d3388e816b44"
+          "scanned_at": "2026-10-26T04:23:32.000Z",
+          "url": "https://hybrid-analysis.com/sample/f658e63eed332307a160b6d8ba631b65fb4fc3a106472b4ecde0309f87ac3ff6"
         },
         "triage": {
           "status": "not configured"
@@ -6438,7 +7374,7 @@
       "release": "drop-changes-v0.1.0",
       "sha256": "42fa67d03bca6fa375594644b34c0b1e9f824f19d1bff2938d3c49ae1105b74e",
       "size": 2817497,
-      "scanned_at": "2026-10-23T03:35:42.832Z",
+      "scanned_at": "2026-10-26T05:52:57.323Z",
       "scans": {
         "virustotal": {
           "status": "ok",
@@ -6585,8 +7521,8 @@
         },
         "kaspersky": {
           "status": "ok",
-          "zone": "Grey",
-          "file_status": "NotCategorized",
+          "zone": "Green",
+          "file_status": "NoThreats",
           "detections": [],
           "flagged": [],
           "type": "unknown",
@@ -6613,7 +7549,7 @@
       "release": "hard-mode-v0.1.0",
       "sha256": "cdc54f964e5115bd69c63e1956e54fa5535232c824bc1a8a0ee2da5026799441",
       "size": 2688430,
-      "scanned_at": "2026-10-23T03:35:42.832Z",
+      "scanned_at": "2026-10-26T05:52:57.323Z",
       "scans": {
         "virustotal": {
           "status": "ok",
@@ -6760,8 +7696,8 @@
         },
         "kaspersky": {
           "status": "ok",
-          "zone": "Grey",
-          "file_status": "NotCategorized",
+          "zone": "Green",
+          "file_status": "NoThreats",
           "detections": [],
           "flagged": [],
           "type": "unknown",
@@ -6788,7 +7724,7 @@
       "release": "mod-settings-v0.1.0",
       "sha256": "d7649080a9cdc382d5686db9686f8e3e3a74b527c9062cc019afce0bd690e21e",
       "size": 2701837,
-      "scanned_at": "2026-10-23T03:35:42.832Z",
+      "scanned_at": "2026-10-26T05:52:57.323Z",
       "scans": {
         "virustotal": {
           "status": "ok",
@@ -6935,8 +7871,8 @@
         },
         "kaspersky": {
           "status": "ok",
-          "zone": "Grey",
-          "file_status": "NotCategorized",
+          "zone": "Green",
+          "file_status": "NoThreats",
           "detections": [],
           "flagged": [],
           "type": "unknown",
@@ -6963,7 +7899,7 @@
       "release": "no-post-battle-heal-v0.1.0",
       "sha256": "86b7056a6cbbc9203c010ca8e93b8c3d1b8936ba613e43c7c98957c5870e714e",
       "size": 2769996,
-      "scanned_at": "2026-10-23T03:35:42.832Z",
+      "scanned_at": "2026-10-26T05:52:57.323Z",
       "scans": {
         "virustotal": {
           "status": "ok",
@@ -7110,8 +8046,8 @@
         },
         "kaspersky": {
           "status": "ok",
-          "zone": "Grey",
-          "file_status": "NotCategorized",
+          "zone": "Green",
+          "file_status": "NoThreats",
           "detections": [],
           "flagged": [],
           "type": "unknown",
@@ -7138,7 +8074,7 @@
       "release": "paradigm-tuning-v0.1.0",
       "sha256": "b3e5502f566a924f41f570a9107046403f901ba0c4bd25b9de9aca7174071c74",
       "size": 2718849,
-      "scanned_at": "2026-10-23T03:35:42.832Z",
+      "scanned_at": "2026-10-26T05:52:57.323Z",
       "scans": {
         "virustotal": {
           "status": "ok",
@@ -7287,8 +8223,8 @@
         },
         "kaspersky": {
           "status": "ok",
-          "zone": "Grey",
-          "file_status": "NotCategorized",
+          "zone": "Green",
+          "file_status": "NoThreats",
           "detections": [],
           "flagged": [],
           "type": "unknown",
@@ -7301,12 +8237,12 @@
           "status": "ok",
           "verdict": "no specific threat",
           "threat_score": null,
-          "av_detect": 0,
+          "av_detect": null,
           "family": null,
           "environment": "Windows 10 64 bit",
           "tags": [],
           "flagged": [],
-          "scanned_at": "2026-10-23T03:18:35.000Z",
+          "scanned_at": null,
           "url": "https://hybrid-analysis.com/sample/b3e5502f566a924f41f570a9107046403f901ba0c4bd25b9de9aca7174071c74"
         },
         "triage": {
@@ -7323,7 +8259,7 @@
       "release": "xiii2-ui-scale-v0.1.0",
       "sha256": "5bfb599e2d83a652e405a092ef88665491508bf88ed53de93a3352443eac44ae",
       "size": 1081192,
-      "scanned_at": "2026-10-23T03:35:42.832Z",
+      "scanned_at": "2026-10-26T05:52:57.323Z",
       "scans": {
         "virustotal": {
           "status": "ok",
@@ -7470,8 +8406,8 @@
         },
         "kaspersky": {
           "status": "ok",
-          "zone": "Grey",
-          "file_status": "NotCategorized",
+          "zone": "Green",
+          "file_status": "NoThreats",
           "detections": [],
           "flagged": [],
           "type": "unknown",
