@@ -273,6 +273,55 @@
   ],
   "mods": [
     {
+      "id": "accessories-with-stats",
+      "name": "Accessories with Stats",
+      "title": "Accessories with Stats",
+      "kind": "mod",
+      "version": "0.1.0",
+      "stage": "release",
+      "date": "2026-11-01",
+      "games": [
+        "xiii"
+      ],
+      "stores": [
+        {
+          "name": "Steam"
+        }
+      ],
+      "summary": "Accessories in FINAL FANTASY XIII gain STR, MAG and HP stats that grow with their level, and there are new accessory auto-abilities.",
+      "tag": "accessories-with-stats-v0.1.0",
+      "docs": "mods/accessories-with-stats",
+      "icon": "shard",
+      "requires": [
+        "pulsedepot",
+        "crux"
+      ],
+      "platforms": {
+        "windows": {
+          "file": "xiii-accessories-with-stats-0.1.0.cws",
+          "bytes": 1630361,
+          "sha256": "a940057d6e07b097789e728554590558ad749a39a3cb842d316d8d81bb20cbd1",
+          "requirements": [
+            "FINAL FANTASY XIII, Steam version, on Windows or on Linux (Proton).",
+            "**PulseDepot** (beta), the mod manager. It also installs **Crux**, which loads this mod in the game and adds the in-game **Mod Settings** menu."
+          ],
+          "label": "Windows"
+        },
+        "linux": {
+          "file": "xiii-accessories-with-stats-0.1.0.cws",
+          "bytes": 1630361,
+          "sha256": "a940057d6e07b097789e728554590558ad749a39a3cb842d316d8d81bb20cbd1",
+          "requirements": [
+            "FINAL FANTASY XIII, Steam version, on Windows or on Linux (Proton).",
+            "**PulseDepot** (beta), the mod manager. It also installs **Crux**, which loads this mod in the game and adds the in-game **Mod Settings** menu.",
+            "**Proton:** without NovaFix, the game’s Steam launch options need `WINEDLLOVERRIDES=\"version=n,b\" %command%` so Crux loads."
+          ],
+          "label": "Linux (Proton)"
+        }
+      },
+      "screenshots": []
+    },
+    {
       "id": "accessorize",
       "name": "Accessorize",
       "title": "Accessorize",

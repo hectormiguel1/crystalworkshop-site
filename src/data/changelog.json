@@ -146,6 +146,22 @@
     "id": "crux-0.2.0-beta"
   },
   {
+    "product": "accessories-with-stats",
+    "name": "Accessories with Stats",
+    "kind": "mod",
+    "games": [
+      "xiii"
+    ],
+    "version": "0.1.0",
+    "stage": "release",
+    "date": "2026-11-01",
+    "title": "First release",
+    "items": [
+      "First release: accessory stats (STR, MAG and HP) that grow with level, and new accessory auto-abilities in all eleven game languages."
+    ],
+    "id": "accessories-with-stats-0.1.0"
+  },
+  {
     "product": "accessorize",
     "name": "Accessorize",
     "kind": "mod",

@@ -26,6 +26,9 @@
 - name: feature-request
   color: a2eeef
   description: An idea for a new feature
+- name: mod:accessories-with-stats
+  color: d4c5f9
+  description: About the Accessories with Stats mod
 - name: mod:accessorize
   color: d4c5f9
   description: About the Accessorize mod

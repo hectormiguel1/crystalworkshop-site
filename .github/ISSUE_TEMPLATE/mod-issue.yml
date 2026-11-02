@@ -15,6 +15,7 @@ body:
       label: Mod
       description: Which mod is it about?
       options:
+        - Accessories with Stats (FF XIII)
         - Accessorize (FF XIII)
         - XIII-2 — Accessorize (FF XIII-2)
         - Crystal Clear (FF XIII)
