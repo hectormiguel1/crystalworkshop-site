@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generated": "2026-10-26T10:41:04.677Z",
+  "generated": "2026-11-02T00:58:47.176Z",
   "scanners": {
     "virustotal": "configured",
     "metadefender": "configured",
@@ -18,14 +18,14 @@
       "release": "crystalworkshop-v0.1.0-alpha",
       "sha256": "c454d2ecd6535c1ae7d85a0a6633bbec6350b7cf059ea08ec87e029ded51dabf",
       "size": 54146260,
-      "scanned_at": "2026-10-26T10:41:04.677Z",
+      "scanned_at": "2026-11-02T00:58:47.176Z",
       "scans": {
         "virustotal": {
           "status": "ok",
           "stats": {
             "malicious": 0,
             "suspicious": 0,
-            "undetected": 66,
+            "undetected": 67,
             "harmless": 0,
             "type-unsupported": 8
           },
@@ -402,8 +402,8 @@
         },
         "kaspersky": {
           "status": "ok",
-          "zone": "Green",
-          "file_status": "NoThreats",
+          "zone": "Grey",
+          "file_status": "NotCategorized",
           "detections": [],
           "flagged": [],
           "type": "zip",
@@ -430,7 +430,7 @@
       "release": "crystalworkshop-v0.1.0-alpha",
       "sha256": "c33a8f96a67be5e3ad4029642788d4dce708058b97331b27a61cbd12218c9594",
       "size": 50658160,
-      "scanned_at": "2026-10-26T10:41:04.677Z",
+      "scanned_at": "2026-11-02T00:58:47.176Z",
       "scans": {
         "virustotal": {
           "status": "ok",
@@ -588,11 +588,11 @@
         },
         "kaspersky": {
           "status": "ok",
-          "zone": "Green",
-          "file_status": "NoThreats",
+          "zone": "Grey",
+          "file_status": "NotCategorized",
           "detections": [],
           "flagged": [],
-          "type": "elf.64.le",
+          "type": "ELF 64 LE",
           "signer": null,
           "first_seen": null,
           "scanned_at": null,
@@ -616,14 +616,14 @@
       "release": "crystalworkshop-v0.1.0-alpha",
       "sha256": "7d9b465373f99ff736aacdc930cf281e9017463d8c1da7c499189f448f4092e0",
       "size": 26443480,
-      "scanned_at": "2026-10-26T10:41:04.677Z",
+      "scanned_at": "2026-11-02T00:58:47.176Z",
       "scans": {
         "virustotal": {
           "status": "ok",
           "stats": {
             "malicious": 0,
             "suspicious": 0,
-            "undetected": 62,
+            "undetected": 63,
             "harmless": 0,
             "type-unsupported": 11
           },
@@ -774,11 +774,11 @@
         },
         "kaspersky": {
           "status": "ok",
-          "zone": "Green",
-          "file_status": "NoThreats",
+          "zone": "Grey",
+          "file_status": "NotCategorized",
           "detections": [],
           "flagged": [],
-          "type": "elf.64.le",
+          "type": "ELF 64 LE",
           "signer": null,
           "first_seen": null,
           "scanned_at": null,
@@ -802,7 +802,7 @@
       "release": "crystalworkshop-v0.1.0-alpha",
       "sha256": "b3a79cdb5c83eaa4844cf9707610b631db107f4e796e57a45fd4f613ee333f58",
       "size": 28108192,
-      "scanned_at": "2026-10-26T10:41:04.677Z",
+      "scanned_at": "2026-11-02T00:58:47.176Z",
       "scans": {
         "virustotal": {
           "status": "ok",
@@ -1195,11 +1195,11 @@
         },
         "kaspersky": {
           "status": "ok",
-          "zone": "Green",
-          "file_status": "NoThreats",
+          "zone": "Grey",
+          "file_status": "NotCategorized",
           "detections": [],
           "flagged": [],
-          "type": "elf.64.le",
+          "type": "ELF 64 LE",
           "signer": null,
           "first_seen": null,
           "scanned_at": null,
@@ -1223,7 +1223,7 @@
       "release": "crystalworkshop-v0.1.0-alpha",
       "sha256": "82d80b4730c4b960b7004aaffb4a1ac60ab3958f0e75fed0ca579df3c944ea57",
       "size": 52777215,
-      "scanned_at": "2026-10-26T10:41:04.677Z",
+      "scanned_at": "2026-11-02T00:58:47.176Z",
       "scans": {
         "virustotal": {
           "status": "ok",
@@ -1664,8 +1664,8 @@
         },
         "kaspersky": {
           "status": "ok",
-          "zone": "Green",
-          "file_status": "NoThreats",
+          "zone": "Grey",
+          "file_status": "NotCategorized",
           "detections": [],
           "flagged": [],
           "type": "zip",
@@ -1692,26 +1692,26 @@
       "release": "crystalworkshop-v0.1.0-alpha",
       "sha256": "c126316f7478eaff1ad8087702eda5930f2400187b9c8b3592219c34f6632780",
       "size": 7286798,
-      "scanned_at": "2026-10-26T10:41:04.677Z",
+      "scanned_at": "2026-11-02T00:58:47.176Z",
       "scans": {
         "virustotal": {
           "status": "ok",
           "stats": {
             "malicious": 0,
             "suspicious": 0,
-            "undetected": 70,
+            "undetected": 69,
             "harmless": 0,
             "type-unsupported": 4
           },
           "flagged": [],
-          "scanned_at": "2026-10-15T12:18:57.000Z",
+          "scanned_at": "2026-10-30T21:17:06.000Z",
           "url": "https://www.virustotal.com/gui/file/c126316f7478eaff1ad8087702eda5930f2400187b9c8b3592219c34f6632780",
           "details": {
             "tags": [
-              "overlay",
               "detect-debug-environment",
-              "pedll",
+              "overlay",
               "long-sleeps",
+              "pedll",
               "64bits"
             ],
             "threat": null,
@@ -2147,7 +2147,7 @@
       "release": "crystalworkshop-v0.1.0-alpha",
       "sha256": "6e2f5d338907649a0896d9300e4f9dc0c7782c065f24d9d515ee8d7db4800783",
       "size": 44564992,
-      "scanned_at": "2026-10-26T10:41:04.677Z",
+      "scanned_at": "2026-11-02T00:58:47.176Z",
       "scans": {
         "virustotal": {
           "status": "ok",
@@ -2552,8 +2552,8 @@
         },
         "kaspersky": {
           "status": "ok",
-          "zone": "Green",
-          "file_status": "NoThreats",
+          "zone": "Grey",
+          "file_status": "NotCategorized",
           "detections": [],
           "flagged": [],
           "type": "exe x64",
@@ -2588,7 +2588,7 @@
       "release": "crystalworkshop-v0.1.0-alpha",
       "sha256": "b68fc40add25492bdb6aa056f84d6dfaa4ba61c75cf9bfc3338a4d4f90ea3932",
       "size": 24711168,
-      "scanned_at": "2026-10-26T10:41:04.677Z",
+      "scanned_at": "2026-11-02T00:58:47.176Z",
       "scans": {
         "virustotal": {
           "status": "ok",
@@ -2946,8 +2946,8 @@
         },
         "kaspersky": {
           "status": "ok",
-          "zone": "Green",
-          "file_status": "NoThreats",
+          "zone": "Grey",
+          "file_status": "NotCategorized",
           "detections": [],
           "flagged": [],
           "type": "exe x64",
@@ -2982,7 +2982,7 @@
       "release": "crystalworkshop-v0.1.0-alpha",
       "sha256": "55b05ea5c7666ed3943010de6a6b756f06be1fe14ac8fb39a51fc07205f0407e",
       "size": 22993408,
-      "scanned_at": "2026-10-26T10:41:04.677Z",
+      "scanned_at": "2026-11-02T00:58:47.176Z",
       "scans": {
         "virustotal": {
           "status": "ok",
@@ -3379,14 +3379,14 @@
         },
         "kaspersky": {
           "status": "ok",
-          "zone": "Green",
-          "file_status": "NoThreats",
+          "zone": "Grey",
+          "file_status": "NotCategorized",
           "detections": [],
           "flagged": [],
           "type": "exe x64",
           "signer": null,
-          "first_seen": null,
-          "scanned_at": null,
+          "first_seen": "2026-10-31T14:09:00.000Z",
+          "scanned_at": "2026-10-31T15:16:00.000Z",
           "url": "https://opentip.kaspersky.com/55b05ea5c7666ed3943010de6a6b756f06be1fe14ac8fb39a51fc07205f0407e/"
         },
         "hybridanalysis": {
@@ -3415,7 +3415,7 @@
       "release": "pulsedepot-v0.1.0-beta",
       "sha256": "20cb10b259c9512863d27e0504d6fdb1de7b3f448be45cf711b0124a3d5336c7",
       "size": 16403640,
-      "scanned_at": "2026-10-26T10:41:04.677Z",
+      "scanned_at": "2026-11-02T00:58:47.176Z",
       "scans": {
         "virustotal": {
           "status": "ok",
@@ -3829,8 +3829,8 @@
         },
         "kaspersky": {
           "status": "ok",
-          "zone": "Green",
-          "file_status": "NoThreats",
+          "zone": "Grey",
+          "file_status": "NotCategorized",
           "detections": [],
           "flagged": [],
           "type": "zip",
@@ -3857,19 +3857,19 @@
       "release": "pulsedepot-v0.1.0-beta",
       "sha256": "06b5d6607022fbd1a8d75268c26028b8a23cdb87652caeeba8aa7ca71518be9b",
       "size": 1634304,
-      "scanned_at": "2026-10-26T10:41:04.677Z",
+      "scanned_at": "2026-11-02T00:58:47.176Z",
       "scans": {
         "virustotal": {
           "status": "ok",
           "stats": {
             "malicious": 0,
             "suspicious": 0,
-            "undetected": 60,
+            "undetected": 70,
             "harmless": 0,
             "type-unsupported": 4
           },
           "flagged": [],
-          "scanned_at": "2026-10-26T01:38:58.000Z",
+          "scanned_at": "2026-10-27T07:17:36.000Z",
           "url": "https://www.virustotal.com/gui/file/06b5d6607022fbd1a8d75268c26028b8a23cdb87652caeeba8aa7ca71518be9b",
           "details": {
             "tags": [
@@ -4164,8 +4164,8 @@
         },
         "kaspersky": {
           "status": "ok",
-          "zone": "Green",
-          "file_status": "NoThreats",
+          "zone": "Grey",
+          "file_status": "NotCategorized",
           "detections": [],
           "flagged": [],
           "type": "dll x32",
@@ -4205,19 +4205,19 @@
       "release": "pulsedepot-v0.1.0-beta",
       "sha256": "d8f1f14b0395fc10daeaa2835aaf0ca3a949a705eae2b7be2e32d3388e816b44",
       "size": 1638400,
-      "scanned_at": "2026-10-26T10:41:04.677Z",
+      "scanned_at": "2026-11-02T00:58:47.176Z",
       "scans": {
         "virustotal": {
           "status": "ok",
           "stats": {
             "malicious": 0,
             "suspicious": 0,
-            "undetected": 71,
+            "undetected": 68,
             "harmless": 0,
             "type-unsupported": 4
           },
           "flagged": [],
-          "scanned_at": "2026-10-22T00:01:09.000Z",
+          "scanned_at": "2026-10-29T08:30:57.000Z",
           "url": "https://www.virustotal.com/gui/file/d8f1f14b0395fc10daeaa2835aaf0ca3a949a705eae2b7be2e32d3388e816b44",
           "details": {
             "tags": [
@@ -4495,8 +4495,8 @@
         },
         "kaspersky": {
           "status": "ok",
-          "zone": "Green",
-          "file_status": "NoThreats",
+          "zone": "Grey",
+          "file_status": "NotCategorized",
           "detections": [],
           "flagged": [],
           "type": "dll x32",
@@ -4531,7 +4531,7 @@
       "release": "pulsedepot-v0.1.0-beta",
       "sha256": "b3a79cdb5c83eaa4844cf9707610b631db107f4e796e57a45fd4f613ee333f58",
       "size": 28108192,
-      "scanned_at": "2026-10-26T10:41:04.677Z",
+      "scanned_at": "2026-11-02T00:58:47.176Z",
       "scans": {
         "virustotal": {
           "status": "ok",
@@ -4924,11 +4924,11 @@
         },
         "kaspersky": {
           "status": "ok",
-          "zone": "Green",
-          "file_status": "NoThreats",
+          "zone": "Grey",
+          "file_status": "NotCategorized",
           "detections": [],
           "flagged": [],
-          "type": "elf.64.le",
+          "type": "ELF 64 LE",
           "signer": null,
           "first_seen": null,
           "scanned_at": null,
@@ -4952,7 +4952,7 @@
       "release": "pulsedepot-v0.1.0-beta",
       "sha256": "e18e9d78874f219ce015a2dae8f4c3135405526dcff074a732b267be9766f7a3",
       "size": 14521197,
-      "scanned_at": "2026-10-26T10:41:04.677Z",
+      "scanned_at": "2026-11-02T00:58:47.176Z",
       "scans": {
         "virustotal": {
           "status": "ok",
@@ -5447,8 +5447,8 @@
         },
         "kaspersky": {
           "status": "ok",
-          "zone": "Green",
-          "file_status": "NoThreats",
+          "zone": "Grey",
+          "file_status": "NotCategorized",
           "detections": [],
           "flagged": [],
           "type": "zip",
@@ -5475,19 +5475,19 @@
       "release": "pulsedepot-v0.1.0-beta",
       "sha256": "06b5d6607022fbd1a8d75268c26028b8a23cdb87652caeeba8aa7ca71518be9b",
       "size": 1634304,
-      "scanned_at": "2026-10-26T10:41:04.677Z",
+      "scanned_at": "2026-11-02T00:58:47.176Z",
       "scans": {
         "virustotal": {
           "status": "ok",
           "stats": {
             "malicious": 0,
             "suspicious": 0,
-            "undetected": 60,
+            "undetected": 70,
             "harmless": 0,
             "type-unsupported": 4
           },
           "flagged": [],
-          "scanned_at": "2026-10-26T01:38:58.000Z",
+          "scanned_at": "2026-10-27T07:17:36.000Z",
           "url": "https://www.virustotal.com/gui/file/06b5d6607022fbd1a8d75268c26028b8a23cdb87652caeeba8aa7ca71518be9b",
           "details": {
             "tags": [
@@ -5782,8 +5782,8 @@
         },
         "kaspersky": {
           "status": "ok",
-          "zone": "Green",
-          "file_status": "NoThreats",
+          "zone": "Grey",
+          "file_status": "NotCategorized",
           "detections": [],
           "flagged": [],
           "type": "dll x32",
@@ -5823,19 +5823,19 @@
       "release": "pulsedepot-v0.1.0-beta",
       "sha256": "d8f1f14b0395fc10daeaa2835aaf0ca3a949a705eae2b7be2e32d3388e816b44",
       "size": 1638400,
-      "scanned_at": "2026-10-26T10:41:04.677Z",
+      "scanned_at": "2026-11-02T00:58:47.176Z",
       "scans": {
         "virustotal": {
           "status": "ok",
           "stats": {
             "malicious": 0,
             "suspicious": 0,
-            "undetected": 71,
+            "undetected": 68,
             "harmless": 0,
             "type-unsupported": 4
           },
           "flagged": [],
-          "scanned_at": "2026-10-22T00:01:09.000Z",
+          "scanned_at": "2026-10-29T08:30:57.000Z",
           "url": "https://www.virustotal.com/gui/file/d8f1f14b0395fc10daeaa2835aaf0ca3a949a705eae2b7be2e32d3388e816b44",
           "details": {
             "tags": [
@@ -6113,8 +6113,8 @@
         },
         "kaspersky": {
           "status": "ok",
-          "zone": "Green",
-          "file_status": "NoThreats",
+          "zone": "Grey",
+          "file_status": "NotCategorized",
           "detections": [],
           "flagged": [],
           "type": "dll x32",
@@ -6149,7 +6149,7 @@
       "release": "pulsedepot-v0.1.0-beta",
       "sha256": "55b05ea5c7666ed3943010de6a6b756f06be1fe14ac8fb39a51fc07205f0407e",
       "size": 22993408,
-      "scanned_at": "2026-10-26T10:41:04.677Z",
+      "scanned_at": "2026-11-02T00:58:47.176Z",
       "scans": {
         "virustotal": {
           "status": "ok",
@@ -6546,14 +6546,14 @@
         },
         "kaspersky": {
           "status": "ok",
-          "zone": "Green",
-          "file_status": "NoThreats",
+          "zone": "Grey",
+          "file_status": "NotCategorized",
           "detections": [],
           "flagged": [],
           "type": "exe x64",
           "signer": null,
-          "first_seen": null,
-          "scanned_at": null,
+          "first_seen": "2026-10-31T14:09:00.000Z",
+          "scanned_at": "2026-10-31T15:16:00.000Z",
           "url": "https://opentip.kaspersky.com/55b05ea5c7666ed3943010de6a6b756f06be1fe14ac8fb39a51fc07205f0407e/"
         },
         "hybridanalysis": {
@@ -6582,7 +6582,7 @@
       "release": "crux-v0.1.1",
       "sha256": "8dbeae74227ef147463a3d3c843e3f0143b8cf4a8d35e07ca897d638ca8c5301",
       "size": 2035904,
-      "scanned_at": "2026-10-26T10:41:04.677Z",
+      "scanned_at": "2026-11-02T00:58:47.176Z",
       "scans": {
         "virustotal": {
           "status": "ok",
@@ -6896,8 +6896,8 @@
         },
         "kaspersky": {
           "status": "ok",
-          "zone": "Green",
-          "file_status": "NoThreats",
+          "zone": "Grey",
+          "file_status": "NotCategorized",
           "detections": [],
           "flagged": [],
           "type": "zip",
@@ -6932,7 +6932,7 @@
       "release": "crux-v0.1.1",
       "sha256": "e8c2a34c887ad00bc685246afeae1bdd30141dc99ea8b1cec9bdf84ed4d96ce5",
       "size": 2031616,
-      "scanned_at": "2026-10-26T10:41:04.677Z",
+      "scanned_at": "2026-11-02T00:58:47.176Z",
       "scans": {
         "virustotal": {
           "status": "ok",
@@ -6968,7 +6968,17 @@
               "pedll"
             ],
             "threat": null,
-            "sandboxes": [],
+            "sandboxes": [
+              {
+                "sandbox": "C2AE",
+                "category": "undetected",
+                "classification": [
+                  "UNKNOWN_VERDICT"
+                ],
+                "names": [],
+                "confidence": null
+              }
+            ],
             "yara": [],
             "sigma": {
               "stats": null,
@@ -6984,7 +6994,23 @@
               "original_name": "Crux.dll"
             }
           },
-          "behaviour": null
+          "behaviour": {
+            "tags": [],
+            "verdicts": [
+              "UNKNOWN_VERDICT"
+            ],
+            "techniques": [],
+            "signatures": [],
+            "counts": {
+              "processes_created": 0,
+              "files_written": 0,
+              "files_dropped": 0,
+              "registry_keys_set": 0,
+              "dns_lookups": 0,
+              "ip_traffic": 0
+            },
+            "tactics": []
+          }
         },
         "metadefender": {
           "status": "ok",
@@ -7111,8 +7137,8 @@
         },
         "kaspersky": {
           "status": "ok",
-          "zone": "Green",
-          "file_status": "NoThreats",
+          "zone": "Grey",
+          "file_status": "NotCategorized",
           "detections": [],
           "flagged": [],
           "type": "dll x32",
@@ -7147,14 +7173,14 @@
       "release": "crux-v0.1.1",
       "sha256": "f658e63eed332307a160b6d8ba631b65fb4fc3a106472b4ecde0309f87ac3ff6",
       "size": 2035200,
-      "scanned_at": "2026-10-26T10:41:04.677Z",
+      "scanned_at": "2026-11-02T00:58:47.176Z",
       "scans": {
         "virustotal": {
           "status": "ok",
           "stats": {
-            "malicious": 3,
+            "malicious": 2,
             "suspicious": 0,
-            "undetected": 67,
+            "undetected": 69,
             "harmless": 0,
             "type-unsupported": 4
           },
@@ -7165,15 +7191,7 @@
               "result": "W32.Malware.755CB111",
               "heuristic": false,
               "engine_version": "8.2.40(8338)",
-              "engine_update": "2026-10-24"
-            },
-            {
-              "engine": "Microsoft",
-              "category": "malicious",
-              "result": "Trojan:Win32/Wacatac.C!ml",
-              "heuristic": true,
-              "engine_version": "1.26090",
-              "engine_update": "2026-10-26"
+              "engine_update": "2026-10-29"
             },
             {
               "engine": "Skyhigh",
@@ -7181,26 +7199,27 @@
               "result": "BehavesLike.Win32.Injector.th",
               "heuristic": false,
               "engine_version": "v2021.2.0+4045",
-              "engine_update": "2026-10-25"
+              "engine_update": "2026-10-29"
             }
           ],
-          "scanned_at": "2026-10-26T04:26:34.000Z",
+          "scanned_at": "2026-10-30T04:24:39.000Z",
           "url": "https://www.virustotal.com/gui/file/f658e63eed332307a160b6d8ba631b65fb4fc3a106472b4ecde0309f87ac3ff6",
           "details": {
             "tags": [
               "pedll"
             ],
-            "threat": {
-              "label": "trojan.",
-              "categories": [
-                {
-                  "value": "trojan",
-                  "count": 1
-                }
-              ],
-              "names": []
-            },
-            "sandboxes": [],
+            "threat": null,
+            "sandboxes": [
+              {
+                "sandbox": "C2AE",
+                "category": "undetected",
+                "classification": [
+                  "UNKNOWN_VERDICT"
+                ],
+                "names": [],
+                "confidence": null
+              }
+            ],
             "yara": [],
             "sigma": {
               "stats": null,
@@ -7218,7 +7237,9 @@
           },
           "behaviour": {
             "tags": [],
-            "verdicts": [],
+            "verdicts": [
+              "UNKNOWN_VERDICT"
+            ],
             "techniques": [
               {
                 "id": "T1057",
@@ -7480,8 +7501,8 @@
         },
         "kaspersky": {
           "status": "ok",
-          "zone": "Green",
-          "file_status": "NoThreats",
+          "zone": "Grey",
+          "file_status": "NotCategorized",
           "detections": [],
           "flagged": [],
           "type": "dll x32",
@@ -7508,6 +7529,539 @@
       }
     },
     {
+      "id": "xiii-accessorize-0-1-0-cws",
+      "name": "xiii-accessorize-0.1.0.cws",
+      "container": null,
+      "product": "accessorize",
+      "version": "0.1.0",
+      "release": "accessorize-v0.1.0",
+      "sha256": "d051ca559f09cf41b9aed7fbc87783d3a90e2f03d070cea92c7b46740c9bc8e3",
+      "size": 2879287,
+      "scanned_at": "2026-11-02T00:58:47.176Z",
+      "scans": {
+        "virustotal": {
+          "status": "ok",
+          "stats": {
+            "malicious": 0,
+            "suspicious": 0,
+            "undetected": 61,
+            "harmless": 0,
+            "type-unsupported": 14
+          },
+          "flagged": [],
+          "scanned_at": "2026-11-02T00:42:44.000Z",
+          "url": "https://www.virustotal.com/gui/file/d051ca559f09cf41b9aed7fbc87783d3a90e2f03d070cea92c7b46740c9bc8e3",
+          "details": {
+            "tags": [],
+            "threat": null,
+            "sandboxes": [],
+            "yara": [],
+            "sigma": {
+              "stats": null,
+              "rules": []
+            },
+            "signature": null
+          },
+          "behaviour": null
+        },
+        "metadefender": {
+          "status": "ok",
+          "stats": {
+            "detected": 0,
+            "total": 21
+          },
+          "result": "No Threat Detected",
+          "engines": [
+            {
+              "engine": "AhnLab",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Aurora",
+              "threat": null,
+              "result": 23
+            },
+            {
+              "engine": "Avira",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Bitdefender",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Bkav Pro",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "ClamAV",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "CMC",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "ESET",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "IKARUS",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "K7",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Lionic",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "OPSWAT Predictive Alin AI",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Quick Heal",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "SentinelOne",
+              "threat": null,
+              "result": 23
+            },
+            {
+              "engine": "Sophos",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "TACHYON",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Trellix",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Varist",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Webroot SMD",
+              "threat": null,
+              "result": 23
+            },
+            {
+              "engine": "Xcitium",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Xvirus Anti-Malware",
+              "threat": null,
+              "result": 0
+            }
+          ],
+          "flagged": [],
+          "scanned_at": "2026-11-02T00:40:19.127Z",
+          "url": "https://metadefender.com/results/hash/d051ca559f09cf41b9aed7fbc87783d3a90e2f03d070cea92c7b46740c9bc8e3"
+        },
+        "kaspersky": {
+          "status": "ok",
+          "zone": "Grey",
+          "file_status": "NotCategorized",
+          "detections": [],
+          "flagged": [],
+          "type": "unknown",
+          "signer": null,
+          "first_seen": null,
+          "scanned_at": null,
+          "url": "https://opentip.kaspersky.com/d051ca559f09cf41b9aed7fbc87783d3a90e2f03d070cea92c7b46740c9bc8e3/"
+        },
+        "hybridanalysis": {
+          "status": "error",
+          "error": "sandbox analysis failed: File \"xiii-accessorize-0.1.0.cws\" was detected as \"raw data\", this format is not"
+        },
+        "triage": {
+          "status": "not configured"
+        }
+      }
+    },
+    {
+      "id": "xiii2-accessorize-0-1-0-cws",
+      "name": "xiii2-accessorize-0.1.0.cws",
+      "container": null,
+      "product": "accessorize-xiii2",
+      "version": "0.1.0",
+      "release": "accessorize-xiii2-v0.1.0",
+      "sha256": "b2af45001e60465877b24388065fb0a3609962c57a23130717e422e808e53c58",
+      "size": 4342216,
+      "scanned_at": "2026-11-02T00:58:47.176Z",
+      "scans": {
+        "virustotal": {
+          "status": "ok",
+          "stats": {
+            "malicious": 0,
+            "suspicious": 0,
+            "undetected": 59,
+            "harmless": 0,
+            "type-unsupported": 14
+          },
+          "flagged": [],
+          "scanned_at": "2026-11-02T00:43:14.000Z",
+          "url": "https://www.virustotal.com/gui/file/b2af45001e60465877b24388065fb0a3609962c57a23130717e422e808e53c58",
+          "details": {
+            "tags": [],
+            "threat": null,
+            "sandboxes": [],
+            "yara": [],
+            "sigma": {
+              "stats": null,
+              "rules": []
+            },
+            "signature": null
+          },
+          "behaviour": null
+        },
+        "metadefender": {
+          "status": "ok",
+          "stats": {
+            "detected": 0,
+            "total": 21
+          },
+          "result": "No Threat Detected",
+          "engines": [
+            {
+              "engine": "AhnLab",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Aurora",
+              "threat": null,
+              "result": 23
+            },
+            {
+              "engine": "Avira",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Bitdefender",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Bkav Pro",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "ClamAV",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "CMC",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "ESET",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "IKARUS",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "K7",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Lionic",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "OPSWAT Predictive Alin AI",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Quick Heal",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "SentinelOne",
+              "threat": null,
+              "result": 23
+            },
+            {
+              "engine": "Sophos",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "TACHYON",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Trellix",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Varist",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Webroot SMD",
+              "threat": null,
+              "result": 23
+            },
+            {
+              "engine": "Xcitium",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Xvirus Anti-Malware",
+              "threat": null,
+              "result": 0
+            }
+          ],
+          "flagged": [],
+          "scanned_at": "2026-11-02T00:40:32.153Z",
+          "url": "https://metadefender.com/results/hash/b2af45001e60465877b24388065fb0a3609962c57a23130717e422e808e53c58"
+        },
+        "kaspersky": {
+          "status": "ok",
+          "zone": "Grey",
+          "file_status": "NotCategorized",
+          "detections": [],
+          "flagged": [],
+          "type": "unknown",
+          "signer": null,
+          "first_seen": null,
+          "scanned_at": null,
+          "url": "https://opentip.kaspersky.com/b2af45001e60465877b24388065fb0a3609962c57a23130717e422e808e53c58/"
+        },
+        "hybridanalysis": {
+          "status": "ok",
+          "verdict": "no specific threat",
+          "threat_score": null,
+          "av_detect": 0,
+          "family": null,
+          "environment": "Windows 10 64 bit",
+          "tags": [],
+          "flagged": [],
+          "scanned_at": "2026-11-02T00:40:14.000Z",
+          "url": "https://hybrid-analysis.com/sample/b2af45001e60465877b24388065fb0a3609962c57a23130717e422e808e53c58"
+        },
+        "triage": {
+          "status": "not configured"
+        }
+      }
+    },
+    {
+      "id": "crystal-clear-0-1-0-cws",
+      "name": "crystal-clear-0.1.0.cws",
+      "container": null,
+      "product": "crystal-clear",
+      "version": "0.1.0",
+      "release": "crystal-clear-v0.1.0",
+      "sha256": "a6f4cd1c98b58b9c16ba7aa329c79eed3da7f28c87955edfaca593845017ae3a",
+      "size": 2714047,
+      "scanned_at": "2026-11-02T00:58:47.176Z",
+      "scans": {
+        "virustotal": {
+          "status": "ok",
+          "stats": {
+            "malicious": 0,
+            "suspicious": 0,
+            "undetected": 61,
+            "harmless": 0,
+            "type-unsupported": 14
+          },
+          "flagged": [],
+          "scanned_at": "2026-11-02T00:43:44.000Z",
+          "url": "https://www.virustotal.com/gui/file/a6f4cd1c98b58b9c16ba7aa329c79eed3da7f28c87955edfaca593845017ae3a",
+          "details": {
+            "tags": [],
+            "threat": null,
+            "sandboxes": [],
+            "yara": [],
+            "sigma": {
+              "stats": null,
+              "rules": []
+            },
+            "signature": null
+          },
+          "behaviour": null
+        },
+        "metadefender": {
+          "status": "ok",
+          "stats": {
+            "detected": 0,
+            "total": 21
+          },
+          "result": "No Threat Detected",
+          "engines": [
+            {
+              "engine": "AhnLab",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Aurora",
+              "threat": null,
+              "result": 23
+            },
+            {
+              "engine": "Avira",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Bitdefender",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Bkav Pro",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "ClamAV",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "CMC",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "ESET",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "IKARUS",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "K7",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Lionic",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "OPSWAT Predictive Alin AI",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Quick Heal",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "SentinelOne",
+              "threat": null,
+              "result": 23
+            },
+            {
+              "engine": "Sophos",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "TACHYON",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Trellix",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Varist",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Webroot SMD",
+              "threat": null,
+              "result": 23
+            },
+            {
+              "engine": "Xcitium",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Xvirus Anti-Malware",
+              "threat": null,
+              "result": 0
+            }
+          ],
+          "flagged": [],
+          "scanned_at": "2026-11-02T00:40:45.166Z",
+          "url": "https://metadefender.com/results/hash/a6f4cd1c98b58b9c16ba7aa329c79eed3da7f28c87955edfaca593845017ae3a"
+        },
+        "kaspersky": {
+          "status": "ok",
+          "zone": "Grey",
+          "file_status": "NotCategorized",
+          "detections": [],
+          "flagged": [],
+          "type": "unknown",
+          "signer": null,
+          "first_seen": null,
+          "scanned_at": null,
+          "url": "https://opentip.kaspersky.com/a6f4cd1c98b58b9c16ba7aa329c79eed3da7f28c87955edfaca593845017ae3a/"
+        },
+        "hybridanalysis": {
+          "status": "error",
+          "error": "sandbox analysis failed: File \"crystal-clear-0.1.0.cws\" was detected as \"raw data\", this format is not su"
+        },
+        "triage": {
+          "status": "not configured"
+        }
+      }
+    },
+    {
       "id": "xiii-drop-changes-0-1-0-cws",
       "name": "xiii-drop-changes-0.1.0.cws",
       "container": null,
@@ -7516,7 +8070,7 @@
       "release": "drop-changes-v0.1.0",
       "sha256": "42fa67d03bca6fa375594644b34c0b1e9f824f19d1bff2938d3c49ae1105b74e",
       "size": 2817497,
-      "scanned_at": "2026-10-26T10:41:04.677Z",
+      "scanned_at": "2026-11-02T00:58:47.176Z",
       "scans": {
         "virustotal": {
           "status": "ok",
@@ -7663,8 +8217,8 @@
         },
         "kaspersky": {
           "status": "ok",
-          "zone": "Green",
-          "file_status": "NoThreats",
+          "zone": "Grey",
+          "file_status": "NotCategorized",
           "detections": [],
           "flagged": [],
           "type": "unknown",
@@ -7691,7 +8245,7 @@
       "release": "hard-mode-v0.1.0",
       "sha256": "cdc54f964e5115bd69c63e1956e54fa5535232c824bc1a8a0ee2da5026799441",
       "size": 2688430,
-      "scanned_at": "2026-10-26T10:41:04.677Z",
+      "scanned_at": "2026-11-02T00:58:47.176Z",
       "scans": {
         "virustotal": {
           "status": "ok",
@@ -7838,8 +8392,8 @@
         },
         "kaspersky": {
           "status": "ok",
-          "zone": "Green",
-          "file_status": "NoThreats",
+          "zone": "Grey",
+          "file_status": "NotCategorized",
           "detections": [],
           "flagged": [],
           "type": "unknown",
@@ -7858,6 +8412,181 @@
       }
     },
     {
+      "id": "xiii-honey-i-shrunk-the-hud-0-1-0-cws",
+      "name": "xiii-honey-i-shrunk-the-hud-0.1.0.cws",
+      "container": null,
+      "product": "honey-i-shrunk-the-hud",
+      "version": "0.1.0",
+      "release": "honey-i-shrunk-the-hud-v0.1.0",
+      "sha256": "8884b9aaa400c45c232e3c851b8cb092f2435476b405ec52550c90dde21b1cad",
+      "size": 2708647,
+      "scanned_at": "2026-11-02T00:58:47.176Z",
+      "scans": {
+        "virustotal": {
+          "status": "ok",
+          "stats": {
+            "malicious": 0,
+            "suspicious": 0,
+            "undetected": 61,
+            "harmless": 0,
+            "type-unsupported": 14
+          },
+          "flagged": [],
+          "scanned_at": "2026-11-02T00:44:45.000Z",
+          "url": "https://www.virustotal.com/gui/file/8884b9aaa400c45c232e3c851b8cb092f2435476b405ec52550c90dde21b1cad",
+          "details": {
+            "tags": [],
+            "threat": null,
+            "sandboxes": [],
+            "yara": [],
+            "sigma": {
+              "stats": null,
+              "rules": []
+            },
+            "signature": null
+          },
+          "behaviour": null
+        },
+        "metadefender": {
+          "status": "ok",
+          "stats": {
+            "detected": 0,
+            "total": 21
+          },
+          "result": "No Threat Detected",
+          "engines": [
+            {
+              "engine": "AhnLab",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Aurora",
+              "threat": null,
+              "result": 23
+            },
+            {
+              "engine": "Avira",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Bitdefender",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Bkav Pro",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "ClamAV",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "CMC",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "ESET",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "IKARUS",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "K7",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Lionic",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "OPSWAT Predictive Alin AI",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Quick Heal",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "SentinelOne",
+              "threat": null,
+              "result": 23
+            },
+            {
+              "engine": "Sophos",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "TACHYON",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Trellix",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Varist",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Webroot SMD",
+              "threat": null,
+              "result": 23
+            },
+            {
+              "engine": "Xcitium",
+              "threat": null,
+              "result": 0
+            },
+            {
+              "engine": "Xvirus Anti-Malware",
+              "threat": null,
+              "result": 0
+            }
+          ],
+          "flagged": [],
+          "scanned_at": "2026-11-02T00:41:11.117Z",
+          "url": "https://metadefender.com/results/hash/8884b9aaa400c45c232e3c851b8cb092f2435476b405ec52550c90dde21b1cad"
+        },
+        "kaspersky": {
+          "status": "ok",
+          "zone": "Grey",
+          "file_status": "NotCategorized",
+          "detections": [],
+          "flagged": [],
+          "type": "unknown",
+          "signer": null,
+          "first_seen": null,
+          "scanned_at": null,
+          "url": "https://opentip.kaspersky.com/8884b9aaa400c45c232e3c851b8cb092f2435476b405ec52550c90dde21b1cad/"
+        },
+        "hybridanalysis": {
+          "status": "error",
+          "error": "sandbox analysis failed: File \"xiii-honey-i-shrunk-the-hud-0.1.0.cws\" was detected as \"raw data\", this fo"
+        },
+        "triage": {
+          "status": "not configured"
+        }
+      }
+    },
+    {
       "id": "xiii-mod-settings-0-1-0-cws",
       "name": "xiii-mod-settings-0.1.0.cws",
       "container": null,
@@ -7866,7 +8595,7 @@
       "release": "mod-settings-v0.1.0",
       "sha256": "d7649080a9cdc382d5686db9686f8e3e3a74b527c9062cc019afce0bd690e21e",
       "size": 2701837,
-      "scanned_at": "2026-10-26T10:41:04.677Z",
+      "scanned_at": "2026-11-02T00:58:47.176Z",
       "scans": {
         "virustotal": {
           "status": "ok",
@@ -8013,8 +8742,8 @@
         },
         "kaspersky": {
           "status": "ok",
-          "zone": "Green",
-          "file_status": "NoThreats",
+          "zone": "Grey",
+          "file_status": "NotCategorized",
           "detections": [],
           "flagged": [],
           "type": "unknown",
@@ -8041,7 +8770,7 @@
       "release": "no-post-battle-heal-v0.1.0",
       "sha256": "86b7056a6cbbc9203c010ca8e93b8c3d1b8936ba613e43c7c98957c5870e714e",
       "size": 2769996,
-      "scanned_at": "2026-10-26T10:41:04.677Z",
+      "scanned_at": "2026-11-02T00:58:47.176Z",
       "scans": {
         "virustotal": {
           "status": "ok",
@@ -8188,8 +8917,8 @@
         },
         "kaspersky": {
           "status": "ok",
-          "zone": "Green",
-          "file_status": "NoThreats",
+          "zone": "Grey",
+          "file_status": "NotCategorized",
           "detections": [],
           "flagged": [],
           "type": "unknown",
@@ -8216,7 +8945,7 @@
       "release": "paradigm-tuning-v0.1.0",
       "sha256": "b3e5502f566a924f41f570a9107046403f901ba0c4bd25b9de9aca7174071c74",
       "size": 2718849,
-      "scanned_at": "2026-10-26T10:41:04.677Z",
+      "scanned_at": "2026-11-02T00:58:47.176Z",
       "scans": {
         "virustotal": {
           "status": "ok",
@@ -8365,8 +9094,8 @@
         },
         "kaspersky": {
           "status": "ok",
-          "zone": "Green",
-          "file_status": "NoThreats",
+          "zone": "Grey",
+          "file_status": "NotCategorized",
           "detections": [],
           "flagged": [],
           "type": "unknown",
@@ -8401,7 +9130,7 @@
       "release": "xiii2-ui-scale-v0.1.0",
       "sha256": "5bfb599e2d83a652e405a092ef88665491508bf88ed53de93a3352443eac44ae",
       "size": 1081192,
-      "scanned_at": "2026-10-26T10:41:04.677Z",
+      "scanned_at": "2026-11-02T00:58:47.176Z",
       "scans": {
         "virustotal": {
           "status": "ok",
@@ -8548,8 +9277,8 @@
         },
         "kaspersky": {
           "status": "ok",
-          "zone": "Green",
-          "file_status": "NoThreats",
+          "zone": "Grey",
+          "file_status": "NotCategorized",
           "detections": [],
           "flagged": [],
           "type": "unknown",
