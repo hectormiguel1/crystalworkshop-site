@@ -164,6 +164,9 @@ function cruxRelease(pulsedepot, rows) {
   const raw = existsSync(archive) ? readFromZip(archive, 'Crux/CRUX-MANIFEST.json') : null;
   if (!raw) return null;
   const manifest = JSON.parse(raw.toString('utf8'));
+  const changelogRaw = readFromZip(archive, 'docs/CRUX-CHANGELOG.md');
+  if (!changelogRaw) throw new Error(`${path.relative(SITE, archive)} has no docs/CRUX-CHANGELOG.md: rebuild the release folder`);
+  const latest = latestChangelog(changelogRaw.toString('utf8').replace(/\r\n/g, '\n'));
   const builds = Object.entries(manifest.files).map(([file, f]) => ({
     file,
     variant: f.variant,
@@ -195,15 +198,33 @@ function cruxRelease(pulsedepot, rows) {
     icon: 'crux',
     builds,
     platforms: { windows: platform('windows'), linux: platform('linux') },
-    changelog: [
-      {
-        version: pulsedepot.version,
-        text: `First public release, bundled with PulseDepot ${pulsedepot.version}. ${builds
-          .map((b) => `${b.file} (${b.variant === 'addon' ? 'NovaFix addon' : 'standalone'})`)
-          .join(', ')}, SHA-256 verified by PulseDepot before install.`,
-      },
-    ],
+    changelog: [{ version: latest.version, title: latest.title, items: latest.items }],
+    knownIssues: latest.knownIssues,
   };
+}
+
+/** Newest `## [version]` section of a Keep-a-Changelog file: title, items (no Known issues) and known issues. */
+function latestChangelog(md) {
+  const sec = h2Sections(md).find((s) => /^\[[^\]]+\]/.test(s.title));
+  if (!sec) throw new Error('CRUX-CHANGELOG.md has no ## [version] section');
+  const version = sec.title.match(/^\[([^\]]+)\]/)[1];
+  const bullets = (body) =>
+    body
+      .split(/\n(?=- )/)
+      .filter((s) => s.startsWith('- '))
+      .map((s) => plain(s.replace(/^- /, '')))
+      .filter(Boolean);
+  const [preamble, ...blocks] = sec.body.split(/^###\s+/m);
+  const subs = [
+    { title: '', body: preamble.trim() },
+    ...blocks.map((b) => {
+      const [head, ...rest] = b.split('\n');
+      return { title: head.trim(), body: rest.join('\n').trim() };
+    }),
+  ];
+  const items = subs.filter((s) => s.title !== 'Known issues').flatMap((s) => bullets(s.body));
+  const knownIssues = subs.filter((s) => s.title === 'Known issues').flatMap((s) => bullets(s.body));
+  return { version, title: `Crux ${version}`, items, knownIssues };
 }
 
 /**
@@ -263,8 +284,6 @@ function modReleases(names, date) {
         .map((l) => l.slice(2).trim()),
     }));
     const requires = ['pulsedepot', 'crux'];
-    const needsSettings = /Mod Settings\*\*\s+\d/.test(req);
-    if (needsSettings) requires.push('mod-settings');
     const short = names[`mods/${slug}/${file}`] || title;
     const asset = { file, bytes: statSync(path.join(dir, file)).size, sha256: sums[`${slug}/${file}`] || sums[file] };
     const reqItems = req
@@ -343,7 +362,7 @@ function changelogData(rel) {
   const entries = [];
   for (const p of rel.products) {
     for (const c of p.changelog || []) {
-      const { title, items } = changelogItems(c.text);
+      const { title, items } = c.items ? c : changelogItems(c.text);
       const extra = p.id === 'crystalworkshop' && items.length === 0 ? p.features.map((f) => f.replace(/:.*$/, '')) : [];
       entries.push({ product: p.id, name: p.name, kind: p.kind, games: p.games, version: c.version, stage: stageOf(c.version), date: p.date, title, items: [...items, ...extra] });
     }
@@ -663,7 +682,7 @@ const OG = [
   ['crystalworkshop', 'CrystalWorkshop', 'The modding editor: guides with screenshots', 'crystalworkshop'],
   ['pulsedepot', 'PulseDepot', 'The mod manager: install, order and apply mods', 'pulsedepot'],
   ['crux', 'Crux', 'The mod host the game loads', 'crux'],
-  ['mods', 'Mods', 'Hard Mode, Drop Changes, Paradigm Tuning and more', 'shard'],
+  ['mods', 'Mods', 'Hard Mode, Loot Your Way, Paradigm Tuning and more', 'shard'],
   ['legal', 'Licences', 'Freeware terms, mod permissions, third-party notices', 'crystalworkshop'],
 ];
 

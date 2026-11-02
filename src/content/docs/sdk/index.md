@@ -32,7 +32,14 @@ What it gives you:
   for calling and hooking;
 - all-or-nothing hook installs with rollback;
 - host storage regions and bit-packed records (`#[derive(PackedRecord)]`);
-- `settings!` providers for the shared Mod Settings menu;
+- `settings!` providers for Crux's Mod Settings menu (Configuration →
+  Mod Settings in all three games);
+- `menu`: your own entries in the game's main menu (all three games),
+  shared with other mods, never touching the saves;
+- the game's running text language, for texts your unit shows itself;
+- helpers for the steps every unit's `init` and `shutdown` repeat
+  (`lifecycle!`, `image::Ledger`, `PerSave::open_in`,
+  `Init::register_settings`);
 - save events and `PerSave`, for settings and state kept per save slot;
 - allocation-free log lines;
 - `FakeHost`, an in-memory host for testing a unit on your own machine.
@@ -50,8 +57,10 @@ What it gives you:
 7. [Package a shard](packaging/): add the DLL to a CrystalWorkshop project,
    export a `.cws`, install it with PulseDepot.
 8. [Testing](testing/): host tests with `FakeHost`, export checks.
-9. [Walkthrough: hello-unit](hello-unit/): the example unit end to end.
-10. [API reference](reference/): the modules and where the full rustdoc is.
+9. [Main-menu entries](menus/): new rows in the main menu of all three
+   games, shared with other mods, and the hello-menu example.
+10. [Walkthrough: hello-unit](hello-unit/): the example unit end to end.
+11. [API reference](reference/): the modules and where the full rustdoc is.
 
 ## Before you start
 
@@ -61,4 +70,4 @@ What it gives you:
 - Units target the Steam releases. Every address a unit uses is checked
   against the retail bytes first; on any other build the unit refuses to
   start and leaves the game untouched.
-- The SDK is at version 0.1.0. Pin it to a release tag.
+- The SDK is at version 0.4.0. Pin it to a release tag.

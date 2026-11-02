@@ -73,7 +73,9 @@ mod wins and the review reports the conflict.
      **Preview**, then **Build**.
    - **Add clip**, **Clone** and **Remove** edit rows and clips.
    - **Undo**, **Redo** and **Revert** are in the toolbar.
-   - **Export file** writes the edited file on its own.
+   - **Export file** writes the edited schedule and its node tree
+     (`.json`) to the workspace folder, in `actions/` under a folder named
+     after the motion pack.
 
 ![An ACB schedule with its timeline and links](../../../assets/generated/cw/acb.webp)
 
@@ -108,6 +110,11 @@ Bink 2 movies cannot be previewed.
    - `actioneffect.sub_name`.
 
    Importing new audio is under **Banks, music & import**.
+4. **Files:** the input of an import is a WAV or Ogg in the workspace
+   folder. Type a name to use the `sound` folder (`hit.wav` is
+   `sound/hit.wav`), a path such as `sound/in/hit.wav`, or a full path to a
+   file anywhere. Exported sounds go to `sound/`, and previews of inputs to
+   `sound/preview/`.
 
 ![The Sound page](../../../assets/generated/cw/sound.webp)
 

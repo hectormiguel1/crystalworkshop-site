@@ -82,7 +82,7 @@ sounds, VFX, markers and colliders.
    **collision**, **vfx**, **sound**, **colliders** and **props** draw
    helpers. **Lights: Scene / Studio / Off** picks the lighting.
 9. **Render PNG** writes the current view to
-   `<game>/ff13_studio/workspace/renders/`.
+   the workspace folder (`renders/scenes/` in the game's folder).
 
 </Steps>
 
@@ -93,7 +93,8 @@ Import a shard or a mod project into the session:
 - **GUI:** **File › Open shard…**, then **Import as project**, picks a
   `.cws`.
 - **Folder:** a mod project directory can only be imported through MCP
-  `import_bin` with the folder path ([Enabling MCP](../mcp/)).
+  `import_bin`. Put the folder in the game's `inbox` folder of the
+  workspace folder and give `inbox/<folder>` ([Enabling MCP](../mcp/)).
 
 The imported scene edits are pending changes. Turn on **Modified only** in
 the Scenes tree to see the zones they touch, then open one in **View**.

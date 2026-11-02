@@ -15,7 +15,7 @@ then install it with PulseDepot and try it in game.
 - At least one pending change. For example, the Potion price from
   [Simple DB Edit](../db-edit/). The status bar shows `1 pending change`, and the top
   bar shows **Export (1)**.
-- PulseDepot 0.1.0-beta (its own package), to install the shard.
+- PulseDepot 0.2.0-beta (its own package), to install the shard.
 
 ## Steps: review your changes
 
@@ -54,7 +54,16 @@ then install it with PulseDepot and try it in game.
    - **Version** is required and must be semver, for example `1.0.0`.
    - **Author**, **Game** (read-only) and an optional **Image** are shown
      on PulseDepot's details page.
-   - **Output** defaults to `<game>/ff13_studio/exports/<name>.cws`.
+   - **Output** defaults to `<name> <version>.cws` in the `shards` folder
+     of the workspace folder ([Glossary](../glossary/)), for example
+     `workspace/ff13/shards/My Mod 1.0.0.cws`. The name is kept as
+     you typed it; only characters Windows or Linux do not allow in a file
+     name become `_`. **Browse…** opens there. You may
+     pick another folder, but not one inside the game folder. When a shard
+     of the same name is replaced, the earlier one is kept in the hidden
+     `.history` folder.
+   - **Image** is a PNG or JPEG. **Browse…** opens in the workspace's
+     `inbox` folder.
 
    ![Export dialog with the Mod metadata form](../../../assets/shots/cw/export-shard.webp)
 
@@ -97,7 +106,7 @@ conflicts and troubleshooting.
 
 ## Result
 
-The shard is in `ff13_studio/exports/`, and PulseDepot lists it as
+The shard is in the workspace folder's `shards` folder, and PulseDepot lists it as
 **SHARD · v1.0.0**. In game, the Potion's shop price is the new value.
 
 ## Undo / revert

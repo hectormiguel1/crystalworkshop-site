@@ -15,12 +15,21 @@ body:
       label: Mod
       description: Which mod is it about?
       options:
-        - Drop Changes (FF XIII)
-        - Hard Mode (FF XIII)
-        - XIII Mod Settings (FF XIII)
+        - Accessorize (FF XIII)
+        - XIII-2 — Accessorize (FF XIII-2)
+        - Crystal Clear (FF XIII)
+        - Honey, I Shrunk the HUD (FF XIII)
+        - XIII-2 — Honey, I Shrunk the HUD (FF XIII-2)
+        - XIII — Loot Your Way (FF XIII)
+        - LIGHTNING RETURNS — Loot Your Way (FF XIII / LR)
+        - XIII-2 — Loot Your Way (FF XIII-2)
         - No Post-Battle Healing (FF XIII)
+        - XIII — Pain Your Way (FF XIII)
+        - LIGHTNING RETURNS — Pain Your Way (FF XIII / LR)
+        - XIII-2 — Pain Your Way (FF XIII-2)
         - Paradigm Tuning (FF XIII)
-        - XIII-2 UI Scale (FF XIII-2)
+        - Seventh Ark (FF XIII)
+        - Strike a Pose (FF XIII)
     validations:
       required: true
   - type: input

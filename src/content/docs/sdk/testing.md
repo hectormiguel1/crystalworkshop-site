@@ -78,6 +78,13 @@ Building `menu::descriptor()` in a test catches every malformed control
 (duplicate IDs, bad ranges, too many controls). If you ship translations,
 assert that `texts::problems(&required, CATALOG)` is empty.
 
+## Test main-menu entries
+
+`testing::FakeGame` plays the game's main menu for a unit that adds
+entries with `menu::add_main_entry`: open the menu, highlight and choose
+rows, and read what reached the game. See
+[Main-menu entries](../menus/#testing).
+
 ## Check the built DLL
 
 A unit must export exactly `init` and `shutdown`. From a clone of the SDK

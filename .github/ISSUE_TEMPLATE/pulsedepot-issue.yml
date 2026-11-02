@@ -31,8 +31,8 @@ body:
     id: version
     attributes:
       label: Version
-      description: The PulseDepot version (the current release is 0.1.0-beta).
-      placeholder: e.g. 0.1.0-beta
+      description: The PulseDepot version (the current release is 0.2.0-beta).
+      placeholder: e.g. 0.2.0-beta
     validations:
       required: true
   - type: dropdown

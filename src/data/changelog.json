@@ -8,9 +8,47 @@
       "xiii2",
       "lr"
     ],
+    "version": "0.2.0-alpha",
+    "stage": "alpha",
+    "date": "2026-11-01",
+    "title": "A redesigned interface with new pages and fixes",
+    "items": [
+      "A new app layout (app bar, project explorer, status footer, command palette Ctrl+K, document tabs, icon rail)",
+      "A script outline and problems drawer with token-based highlighting",
+      "A scene placement outline and viewport toolbar with an inspector showing original and current values",
+      "A multi-track cutscene timeline with transport controls and export",
+      "XIII motion clips checked with the game's own evaluation beside the preview",
+      "An effects layout with a playback timeline and typed fields",
+      "A UI Layouts page that edits and previews menu layouts for all three games",
+      "A Fonts page for the game's menu fonts",
+      "One undo history for the whole project",
+      "A redesigned Settings page with row density (Compact or Comfortable)",
+      "An export wizard with a package-details step and grouped warnings",
+      "Exports and AI assistants kept inside a workspace folder beside the game executable",
+      "Revert one script class or a whole file (asks first and can be undone)",
+      "Java script tools capped at 30% of memory",
+      "Exports never drop a changed file and merge file lists",
+      "XIII scene lights no longer draw black",
+      "Undo steps whose files changed since are refused",
+      "Multi-byte text no longer cut in half",
+      "Shards keep their name and version",
+      "Unsaved work protected when you leave or switch sessions",
+      "The interface no longer freezes during background work"
+    ],
+    "id": "crystalworkshop-0.2.0-alpha"
+  },
+  {
+    "product": "crystalworkshop",
+    "name": "CrystalWorkshop",
+    "kind": "app",
+    "games": [
+      "xiii",
+      "xiii2",
+      "lr"
+    ],
     "version": "0.1.0-alpha",
     "stage": "alpha",
-    "date": "2026-10-21",
+    "date": "2026-11-01",
     "title": "First public release",
     "items": [
       "<strong>Sheets (WDB) and SQL</strong>",
@@ -34,9 +72,44 @@
       "xiii2",
       "lr"
     ],
+    "version": "0.2.0-beta",
+    "stage": "beta",
+    "date": "2026-11-01",
+    "title": "Redesigned interface and new pages",
+    "items": [
+      "A new look with an icon rail (new Mods and Review pages, a details drawer for the selected mod and confirmations for danger-zone actions)",
+      "A Game setup page (game folder, archive and optional data, Crux host, large memory support and Uninstall all in one place)",
+      "Create package is now a wizard (Source, Details and Output steps)",
+      "Format tools has a search box",
+      "A Crux settings page (choices and filters, and reset any setting to its default)",
+      "An Apply result page that shows each stage of Apply (if the Crux settings could not be saved, your edits are kept so you can retry them)",
+      "An Activity page (recent reviews, applies and Crux repairs for each game)",
+      "Preferences for interface density and scale",
+      "A large memory support switch for the game executable (on by default; not available where Steam's DRM would reject a changed game file, so on Linux the Proton launch option PROTON_FORCE_LARGE_ADDRESS_AWARE=1 is suggested instead; a change made there by an earlier PulseDepot is undone)",
+      "Each mod is checked against the bundled Crux before Apply (and against the raised script capacity setting when it needs it)",
+      "Repair Crux installs PulseDepot's Crux into the game folder again (your mods and saves stay as they are)",
+      "PulseDepot keeps its own settings in pulsedepot.json next to the program (game folders, launch options and install choices)",
+      "The Crux console window is hidden by default",
+      "The Mod Settings menu (Configuration, Mod Settings) is now part of Crux and installed with it",
+      "Game setup shows the installed and bundled Crux versions and says when an update is available (an older Crux in the game folder is replaced on Apply and the review names it)",
+      "Mod lists saved by older versions load again and installed mods are always listed",
+      "PulseDepot reports the real state of the game executable if writing the large memory flag fails",
+      "Packages are still not code-signed (Windows SmartScreen asks once) and there is no installer"
+    ],
+    "id": "pulsedepot-0.2.0-beta"
+  },
+  {
+    "product": "pulsedepot",
+    "name": "PulseDepot",
+    "kind": "app",
+    "games": [
+      "xiii",
+      "xiii2",
+      "lr"
+    ],
     "version": "0.1.0-beta",
     "stage": "beta",
-    "date": "2026-10-21",
+    "date": "2026-11-01",
     "title": "First public release",
     "items": [
       "Crux in two builds with NovaFix detection",
@@ -57,27 +130,169 @@
       "xiii2",
       "lr"
     ],
-    "version": "0.1.0-beta",
+    "version": "0.2.0-beta",
     "stage": "beta",
-    "date": "2026-10-21",
-    "title": "First public release, bundled with PulseDepot 0.1.0-beta",
+    "date": "2026-11-01",
+    "title": "Crux 0.2.0-beta",
     "items": [
-      "Crux.dll (NovaFix addon)",
-      "version.dll (standalone)",
-      "SHA-256 verified by PulseDepot before install"
+      "The in-game Mod Settings menu (Configuration → Mod Settings) is now built into Crux for FINAL FANTASY XIII, FINAL FANTASY XIII-2 (Steam and Microsoft Store) and LIGHTNING RETURNS: FINAL FANTASY XIII. It lists every installed mod's options in the language the game is running in. It replaces the separate Mod Settings package; PulseDepot turns the old package off.",
+      "Support for one more FINAL FANTASY XIII executable.",
+      "More room for game scripts in FINAL FANTASY XIII: up to 1024 script classes and 1024 resident battle scripts. Mods that need the extra room require this version of Crux or later.",
+      "Startup diagnostics: Crux writes a diagnostics log next to the game's add-ons that you can attach to bug reports. It records which game files and mods Crux finds, and whether the game asks Crux for mod files in the first minutes of play.",
+      "The game is still recognised after its executable has been patched to use more memory (Large Address Aware).",
+      "Help lines in Mod Settings show only the selected row's own description.",
+      "Mod Settings and the game-language detection could fail to start."
     ],
-    "id": "crux-0.1.0-beta"
+    "id": "crux-0.2.0-beta"
   },
   {
-    "product": "drop-changes",
-    "name": "Drop Changes",
+    "product": "accessorize",
+    "name": "Accessorize",
     "kind": "mod",
     "games": [
       "xiii"
     ],
     "version": "0.1.0",
     "stage": "release",
-    "date": "2026-10-21",
+    "date": "2026-11-01",
+    "title": "First release",
+    "items": [
+      "Up to seven accessory slots per character, with three new Crystarium accessory nodes per character.",
+      "Set for each save slot; off until you turn it on.",
+      "Saves only ever hold values the unmodded game accepts."
+    ],
+    "id": "accessorize-0.1.0"
+  },
+  {
+    "product": "accessorize-xiii2",
+    "name": "XIII-2 — Accessorize",
+    "kind": "mod",
+    "games": [
+      "xiii2"
+    ],
+    "version": "0.1.0",
+    "stage": "release",
+    "date": "2026-11-01",
+    "title": "First release",
+    "items": [
+      "Seven accessory slots instead of four, with capacity counted over all seven.",
+      "Automatic equipping fills up to seven accessories.",
+      "An optional accessory capacity bonus.",
+      "Saves always stay within the game's own accessory capacity.",
+      "Steam and Microsoft Store versions of the game.",
+      "Menu texts in all eleven game languages."
+    ],
+    "id": "accessorize-xiii2-0.1.0"
+  },
+  {
+    "product": "crystal-clear",
+    "name": "Crystal Clear",
+    "kind": "mod",
+    "games": [
+      "xiii"
+    ],
+    "version": "0.1.0",
+    "stage": "release",
+    "date": "2026-11-01",
+    "title": "First release",
+    "items": [
+      "Sharper menus, icons and text above 1280x720; nothing changes at 1280x720.",
+      "Art sharpness and Text sharpness settings.",
+      "Text style: Edge ramp or Smooth curve.",
+      "Upscale filter: Edge-adaptive (FSR), Contrast-adaptive (CAS) or Bilinear (retail).",
+      "Works with texture-replacement packs.",
+      "All settings in Configuration, Mod Settings, Crystal Clear, in all eleven game languages."
+    ],
+    "id": "crystal-clear-0.1.0"
+  },
+  {
+    "product": "honey-i-shrunk-the-hud",
+    "name": "Honey, I Shrunk the HUD",
+    "kind": "mod",
+    "games": [
+      "xiii"
+    ],
+    "version": "0.1.0",
+    "stage": "release",
+    "date": "2026-11-01",
+    "title": "First release",
+    "items": [
+      "Shrinks or enlarges the battle and field HUD around the centre of the screen.",
+      "HUD size setting, 25 to 200%, 100% by default.",
+      "Menus, the pause screen, shops and the Crystarium always stay at their original size.",
+      "Works with Strike a Pose."
+    ],
+    "id": "honey-i-shrunk-the-hud-0.1.0"
+  },
+  {
+    "product": "honey-i-shrunk-the-hud-xiii2",
+    "name": "XIII-2 — Honey, I Shrunk the HUD",
+    "kind": "mod",
+    "games": [
+      "xiii2"
+    ],
+    "version": "0.2.0",
+    "stage": "release",
+    "date": "2026-11-01",
+    "title": "Settings in Mod Settings",
+    "items": [
+      "Renamed from Field and Battle HUD Scale to Honey, I Shrunk the HUD.",
+      "Field HUD Scale, Battle HUD Scale and a Reset to 50% entry are listed under Configuration → Mod Settings, with texts in eleven languages.",
+      "The mod no longer adds a Configuration page of its own.",
+      "HUD scaling no longer turns itself off when another mod changes the Configuration menu.",
+      "Fixed: on the Microsoft Store version, opening Configuration could crash the game."
+    ],
+    "id": "honey-i-shrunk-the-hud-xiii2-0.2.0"
+  },
+  {
+    "product": "honey-i-shrunk-the-hud-xiii2",
+    "name": "XIII-2 — Honey, I Shrunk the HUD",
+    "kind": "mod",
+    "games": [
+      "xiii2"
+    ],
+    "version": "0.1.0",
+    "stage": "release",
+    "date": "2026-11-01",
+    "title": "First release",
+    "items": [
+      "Field and battle HUD scaling with separate sizes.",
+      "Moogle Clock and Feral Link prompt kept in place.",
+      "Scaled cinematic-action prompts.",
+      "Mod Settings page."
+    ],
+    "id": "honey-i-shrunk-the-hud-xiii2-0.1.0"
+  },
+  {
+    "product": "loot-your-way",
+    "name": "XIII — Loot Your Way",
+    "kind": "mod",
+    "games": [
+      "xiii"
+    ],
+    "version": "0.2.0",
+    "stage": "release",
+    "date": "2026-11-01",
+    "title": "More games",
+    "items": [
+      "Renamed from Drop Changes to Loot Your Way.",
+      "Works on FINAL FANTASY XIII-2 (Steam and Microsoft Store) and LIGHTNING RETURNS: FINAL FANTASY XIII, each as its own download.",
+      "Each game shows only the settings that game supports.",
+      "The help for item-type settings names the game's item categories.",
+      "The Quantities by item type page shows just the item type."
+    ],
+    "id": "loot-your-way-0.2.0"
+  },
+  {
+    "product": "loot-your-way",
+    "name": "XIII — Loot Your Way",
+    "kind": "mod",
+    "games": [
+      "xiii"
+    ],
+    "version": "0.1.0",
+    "stage": "release",
+    "date": "2026-11-01",
     "title": "First release",
     "items": [
       "Drop chance modes (Native, Native + bonus, Fixed) and quantities.",
@@ -89,45 +304,58 @@
       "Results-screen options.",
       "Settings kept for each save slot."
     ],
-    "id": "drop-changes-0.1.0"
+    "id": "loot-your-way-0.1.0"
   },
   {
-    "product": "hard-mode",
-    "name": "Hard Mode",
+    "product": "loot-your-way-lr",
+    "name": "LIGHTNING RETURNS — Loot Your Way",
+    "kind": "mod",
+    "games": [
+      "xiii",
+      "lr"
+    ],
+    "version": "0.2.0",
+    "stage": "release",
+    "date": "2026-11-01",
+    "title": "LIGHTNING RETURNS",
+    "items": [
+      "Renamed from Drop Changes to Loot Your Way.",
+      "Works on LIGHTNING RETURNS: FINAL FANTASY XIII."
+    ],
+    "id": "loot-your-way-lr-0.2.0"
+  },
+  {
+    "product": "loot-your-way-xiii2",
+    "name": "XIII-2 — Loot Your Way",
+    "kind": "mod",
+    "games": [
+      "xiii2"
+    ],
+    "version": "0.2.0",
+    "stage": "release",
+    "date": "2026-11-01",
+    "title": "FINAL FANTASY XIII-2",
+    "items": [
+      "Renamed from Drop Changes to Loot Your Way.",
+      "Works on FINAL FANTASY XIII-2 (Steam and Microsoft Store)."
+    ],
+    "id": "loot-your-way-xiii2-0.2.0"
+  },
+  {
+    "product": "no-post-battle-heal",
+    "name": "No Post-Battle Healing",
     "kind": "mod",
     "games": [
       "xiii"
     ],
-    "version": "0.1.0",
+    "version": "0.2.0",
     "stage": "release",
-    "date": "2026-10-21",
-    "title": "First release",
+    "date": "2026-11-01",
+    "title": "Maintenance release",
     "items": [
-      "Enemy HP, Strength and Magic multipliers.",
-      "Minimums based on your party's average, with an outnumber guard.",
-      "Boss scaling.",
-      "Easy-mode override.",
-      "Settings kept for each save slot."
+      "No gameplay change. The switch is under Configuration → Mod Settings → No Post-Battle Healing."
     ],
-    "id": "hard-mode-0.1.0"
-  },
-  {
-    "product": "mod-settings",
-    "name": "XIII Mod Settings",
-    "kind": "mod",
-    "games": [
-      "xiii"
-    ],
-    "version": "0.1.0",
-    "stage": "release",
-    "date": "2026-10-21",
-    "title": "First release",
-    "items": [
-      "Configuration → Mod Settings with a list of mods, their setting groups and settings, split into pages.",
-      "Shows the settings of NovaFix add-ons too.",
-      "Menu texts in all eleven game languages."
-    ],
-    "id": "mod-settings-0.1.0"
+    "id": "no-post-battle-heal-0.2.0"
   },
   {
     "product": "no-post-battle-heal",
@@ -138,7 +366,7 @@
     ],
     "version": "0.1.0",
     "stage": "release",
-    "date": "2026-10-21",
+    "date": "2026-11-01",
     "title": "First release",
     "items": [
       "HP carries from a victory into the next battle; a knocked-out member starts with 1 HP.",
@@ -146,6 +374,93 @@
       "Setting and carried HP kept for each save slot."
     ],
     "id": "no-post-battle-heal-0.1.0"
+  },
+  {
+    "product": "pain-your-way",
+    "name": "XIII — Pain Your Way",
+    "kind": "mod",
+    "games": [
+      "xiii"
+    ],
+    "version": "0.2.0",
+    "stage": "release",
+    "date": "2026-11-01",
+    "title": "More games",
+    "items": [
+      "Renamed from Hard Mode to Pain Your Way.",
+      "No gameplay changes for FINAL FANTASY XIII.",
+      "This release adds the XIII-2 and LIGHTNING RETURNS builds."
+    ],
+    "id": "pain-your-way-0.2.0"
+  },
+  {
+    "product": "pain-your-way",
+    "name": "XIII — Pain Your Way",
+    "kind": "mod",
+    "games": [
+      "xiii"
+    ],
+    "version": "0.1.0",
+    "stage": "release",
+    "date": "2026-11-01",
+    "title": "First release",
+    "items": [
+      "Enemy HP, Strength and Magic multipliers.",
+      "Minimums based on your party's average, with an outnumber guard.",
+      "Boss scaling.",
+      "Easy-mode override.",
+      "Settings kept for each save slot."
+    ],
+    "id": "pain-your-way-0.1.0"
+  },
+  {
+    "product": "pain-your-way-lr",
+    "name": "LIGHTNING RETURNS — Pain Your Way",
+    "kind": "mod",
+    "games": [
+      "xiii",
+      "lr"
+    ],
+    "version": "0.2.0",
+    "stage": "release",
+    "date": "2026-11-01",
+    "title": "LIGHTNING RETURNS",
+    "items": [
+      "Works on LIGHTNING RETURNS: FINAL FANTASY XIII. The HP, Strength and Magic multipliers apply on top of the difficulty you picked; the Easy-mode override is not available there."
+    ],
+    "id": "pain-your-way-lr-0.2.0"
+  },
+  {
+    "product": "pain-your-way-xiii2",
+    "name": "XIII-2 — Pain Your Way",
+    "kind": "mod",
+    "games": [
+      "xiii2"
+    ],
+    "version": "0.2.0",
+    "stage": "release",
+    "date": "2026-11-01",
+    "title": "FINAL FANTASY XIII-2",
+    "items": [
+      "Works on FINAL FANTASY XIII-2 (Steam and Microsoft Store)."
+    ],
+    "id": "pain-your-way-xiii2-0.2.0"
+  },
+  {
+    "product": "paradigm-tuning",
+    "name": "Paradigm Tuning",
+    "kind": "mod",
+    "games": [
+      "xiii"
+    ],
+    "version": "0.2.0",
+    "stage": "release",
+    "date": "2026-11-01",
+    "title": "Maintenance release",
+    "items": [
+      "No gameplay changes since 0.1.0."
+    ],
+    "id": "paradigm-tuning-0.2.0"
   },
   {
     "product": "paradigm-tuning",
@@ -156,34 +471,53 @@
     ],
     "version": "0.1.0",
     "stage": "release",
-    "date": "2026-10-21",
+    "date": "2026-11-01",
     "title": "First release",
     "items": [
-      "Normal, Cross or Wide for each paradigm, chosen in the Paradigm Deck and shown on the battle labels.",
-      "Role-aware Cross and Wide targeting.",
-      "Synergists queue several enhancements; Saboteurs keep casting.",
-      "Help texts in eleven languages.",
-      "Choices kept for each save slot."
+      "Normal, Cross or Wide for each paradigm, chosen in the Paradigm Deck and shown on the paradigm name and on the battle paradigm labels.",
+      "Normal is the original party AI; Cross and Wide change how companions in the same role pick their targets.",
+      "The Paradigm Deck's help line explains each formation's variant, in all eleven game languages.",
+      "Choices kept for each save slot outside your save files."
     ],
     "id": "paradigm-tuning-0.1.0"
   },
   {
-    "product": "xiii2-ui-scale",
-    "name": "XIII-2 UI Scale",
+    "product": "seventh-ark",
+    "name": "Seventh Ark",
     "kind": "mod",
     "games": [
-      "xiii2"
+      "xiii"
     ],
     "version": "0.1.0",
     "stage": "release",
-    "date": "2026-10-21",
+    "date": "2026-11-01",
     "title": "First release",
     "items": [
-      "Field and battle HUD scaling with separate sizes.",
-      "Moogle Clock and Feral Link prompt kept in place.",
-      "Scaled cinematic-action prompts.",
-      "Mod Settings page."
+      "Seventh Ark restoration: the Ark's trials and their labels.",
+      "Ark Network warps between the Ark, Orphan's Cradle, Eden, Gran Pulse and the Narthex, with a working teleporter ring at the entrance.",
+      "A fallen stone guardian statue in the entrance hall with a voiced, subtitled briefing on your first visit, and a way to check your trial progress.",
+      "A unique accessory in each trial's reward chest; 5,000 gil in each of the Treasure Trial's spheres; Nemesis awards 75,000 CP and can drop Dark Matter or a Trapezohedron.",
+      "Restored Datalog entries."
     ],
-    "id": "xiii2-ui-scale-0.1.0"
+    "id": "seventh-ark-0.1.0"
+  },
+  {
+    "product": "strike-a-pose",
+    "name": "Strike a Pose",
+    "kind": "mod",
+    "games": [
+      "xiii"
+    ],
+    "version": "0.1.0",
+    "stage": "release",
+    "date": "2026-11-01",
+    "title": "First release",
+    "items": [
+      "Strike a Pose: an experimental photo mode for FINAL FANTASY XIII, opened from the main menu entry <strong>Photo mode (experimental)</strong>.",
+      "Free-fly camera with lens and roll adjustments, a stored camera and a clear view for screenshots.",
+      "Move and pose the characters already in the scene.",
+      "Works with Honey, I Shrunk the HUD."
+    ],
+    "id": "strike-a-pose-0.1.0"
   }
 ]

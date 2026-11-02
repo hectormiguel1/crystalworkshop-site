@@ -68,12 +68,12 @@ on Windows or Linux.
 
 <Steps>
 
-1. Extract `crystalworkshop-0.1.0-alpha-windows-x86_64.zip` to a folder you
+1. Extract `crystalworkshop-0.2.0-alpha-windows-x86_64.zip` to a folder you
    can write to.
 2. Start `crystalworkshop.exe`. The build is not code-signed. If SmartScreen
    says "Windows protected your PC", choose **More info › Run anyway**.
 3. Optional: in a terminal, `crystalw.exe --version` prints
-   `crystalw 0.1.0-alpha (CrystalWorkshop ALPHA)`.
+   `crystalw 0.2.0-alpha (CrystalWorkshop ALPHA)`.
 
 </Steps>
 
@@ -84,8 +84,8 @@ on Windows or Linux.
 
 <Steps>
 
-1. Extract `crystalworkshop-0.1.0-alpha-linux-x86_64.zip` with
-   `unzip crystalworkshop-0.1.0-alpha-linux-x86_64.zip` (or any archive
+1. Extract `crystalworkshop-0.2.0-alpha-linux-x86_64.zip` with
+   `unzip crystalworkshop-0.2.0-alpha-linux-x86_64.zip` (or any archive
    manager that keeps file permissions), for example to
    `~/Apps/CrystalWorkshop`. If the program won't start, run
    `chmod +x crystalworkshop crystalw pulsedepot` in the extracted folder.
@@ -104,18 +104,26 @@ Crux DLLs that installing mods needs; get it for testing in game.
 
 ## Result
 
-The window title reads **CrystalWorkshop 0.1.0-alpha**. **Settings ›
+The window title reads **CrystalWorkshop 0.2.0-alpha**. **Settings ›
 About** shows the version and the ALPHA channel.
+
+Your exports, renders and the files you bring in to import go to the
+**workspace folder**: by default `workspace` inside the folder you extracted,
+next to the program. You can move it under **Settings › Workspace**.
 
 ## Undo / remove
 
-Delete the folder. CrystalWorkshop keeps its settings in these places:
+Delete the folder. This also deletes the default workspace folder with your
+exports, so copy out anything you want to keep. CrystalWorkshop keeps its
+settings in these places:
 
 - **Settings:** `~/.local/share/ff13-studio` on Linux, or the app-data
   folder on Windows.
 - **Author key:** `$XDG_CONFIG_HOME/ff13-studio/author`.
 - **Caches:** `ff13-studio` in the cache folder.
 - **Per-game work:** `ff13_studio/` inside each game folder.
+- **Workspace folder:** if you moved it, the folder shown under **Settings ›
+  Workspace**.
 
 Delete those as well to remove everything.
 

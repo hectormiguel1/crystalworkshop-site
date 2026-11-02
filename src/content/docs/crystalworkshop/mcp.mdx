@@ -31,7 +31,8 @@ stdin/stdout, and logs go to stderr.
 crystalw --mcp --game ff13                      # or xiii2, lr; detected install
 crystalw --mcp --game ff13 --root "/path/to/FINAL FANTASY XIII"
 crystalw --mcp --game lr --variant A --locale us --read-only
-crystalw --version                              # crystalw 0.1.0-alpha (CrystalWorkshop ALPHA)
+crystalw --mcp --game ff13 --workspace "/path/to/workspace"
+crystalw --version                              # crystalw 0.2.0-alpha (CrystalWorkshop ALPHA)
 ```
 
 | Flag | Meaning |
@@ -41,6 +42,7 @@ crystalw --version                              # crystalw 0.1.0-alpha (CrystalW
 | `--variant U\|C\|A\|V` | The archive variant: U/C for XIII and XIII-2, A/V for LR. |
 | `--locale <l>` | The display locale for names (default `us`). |
 | `--read-only` | AI clients can only read. |
+| `--workspace <dir>` | The workspace folder. Default: the one chosen under **Settings › Workspace**, else `workspace` next to the program. |
 | `--tools progressive\|full` | Tool listing mode (below). `--full-tools` is the same as `--tools full`. |
 | `--loose <dir>` | Read loose files instead of the archives. |
 
@@ -155,7 +157,7 @@ enable_tool_group {"group":"texts"}    → the texts tools are listed from now o
 - Run SQL (writes are previewed by default; `dry_run:false` applies them).
 - Edit through the same editors: fields, text, scripts (compile), scene
   placements, VFX fields.
-- Render models and scenes to PNG.
+- Render models and scenes to PNG, in the workspace folder.
 - Export loose files or a `.cws` shard.
 
 **Cannot:**
@@ -163,6 +165,7 @@ enable_tool_group {"group":"texts"}    → the texts tools are listed from now o
 - Write save files, or install mods into the game. PulseDepot does that, and
   only when you apply.
 - Bypass **Read-only for AI**, or `--read-only`.
+- Read or write files outside the workspace folder, or change where it is.
 - Unlock a password-protected author key. Reopening your own shards needs
   you, in the app.
 - Do things the UI refuses. The same guards apply, for example unverified
@@ -170,6 +173,51 @@ enable_tool_group {"group":"texts"}    → the texts tools are listed from now o
 
 Every AI action is recorded in `<game>/ff13_studio/audit.log`. Edits stay
 pending until exported, and `undo` reverts them.
+
+**Opening another game.** `switch_game` and `open_game` refuse while there
+are unexported changes or unsaved script drafts. Pass `force: true` to
+discard them; the audit log records it. Opening the game that is already
+open changes nothing. `status` and `get_active_game` report `unsaved_files`
+and `script_drafts`. If a client disconnects from `crystalw` before
+exporting, its staged changes are dropped and the audit log records how
+many.
+
+## Files and the workspace folder
+
+AI clients always work inside the workspace folder of the open game (for
+example `workspace/ff13`):
+
+- Paths are relative to the game's workspace folder. A bare file name goes
+  into the operation's own folder: `a.png` in a font export becomes
+  `fonts/a.png`, while `inbox/b.png` is taken as written.
+- Paths that try to leave it are refused: `..`, absolute paths, drive
+  letters, names starting with a dot, and Windows device names such as
+  `CON`.
+- Files read for an import (a sound, a glyph PNG, a motion clip, an action
+  schedule, an effect package) come from the workspace folder too.
+- Exports made from a game file go into a folder named after it, for
+  example `motions/mot/pc/c000.bin/idle.mtb` or
+  `vfx/chr/f092/v1/veffs.jp.win32.xfv/`.
+- Copying from another game's install works only from a game folder
+  CrystalWorkshop has detected or you have chosen. Leave the folder out to
+  use the known install.
+- `status` shows where the workspace folder is. Only you can change it,
+  under **Settings › Workspace** or with `--workspace`.
+- **Read-only for AI** and `--read-only` also block AI exports into the
+  workspace folder.
+- The audit log records every AI export with the files it wrote.
+- Links and junctions inside the workspace folder are not followed
+  specially. Don't point links inside it at other places.
+
+The `workspace_files` table lists the open game's workspace files: `path`,
+`kind` (the folder, such as `models` or `renders`), `ext`, `size`,
+`modified`, and `source`, the game file an export came from. `link` names
+the table `source` joins: `models`, `gui_textures`, `actions`,
+`motion_packs`, `vfx_files` or `wfl_fonts`.
+
+```sql
+SELECT path, source, link FROM workspace_files WHERE kind = 'renders'
+```
 
 ## Undo / revert
 

@@ -1,9 +1,9 @@
 THIRD-PARTY NOTICES
-CrystalWorkshop 0.1.0-alpha
+CrystalWorkshop 0.2.0-alpha
 
-CrystalWorkshop 0.1.0-alpha is freeware; see LICENSE. It includes the third-party
+CrystalWorkshop 0.2.0-alpha is freeware; see LICENSE. It includes the third-party
 components listed below. Each component remains under its own licence,
-and those licences apply to that component instead of CrystalWorkshop 0.1.0-alpha's terms.
+and those licences apply to that component instead of CrystalWorkshop 0.2.0-alpha's terms.
 The full licence texts follow the lists; each text appears once, with the
 copyright lines listed per component.
 

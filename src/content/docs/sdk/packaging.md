@@ -62,11 +62,11 @@ The full export options are in the
 
 1. Start PulseDepot, pick the game, choose **Add mod…** and select the
    `.cws`.
-2. If your menu needs it, also install the
-   [XIII Mod Settings](../../mods/mod-settings/) mod.
-3. Review and apply, then start the game (see
-   [Install shard mods](../../pulsedepot/install-shards/)).
-4. Read `Crux.jsonl` for your unit's lines (see [Logging](../logging/)).
+2. Review and apply, then start the game (see
+   [Install shard mods](../../pulsedepot/install-shards/)). Your
+   `settings!` page, if any, is under **Configuration → Mod Settings**
+   ([Mod Settings menu](../../mods/mod-settings/)).
+3. Read `Crux.jsonl` for your unit's lines (see [Logging](../logging/)).
 
 Removing the mod in PulseDepot removes the unit. The game's saves are
 never touched.

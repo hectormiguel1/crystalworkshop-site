@@ -1,9 +1,9 @@
 THIRD-PARTY NOTICES
-PulseDepot 0.1.0-beta
+PulseDepot 0.2.0-beta
 
-PulseDepot 0.1.0-beta is freeware; see LICENSE. It includes the third-party
+PulseDepot 0.2.0-beta is freeware; see LICENSE. It includes the third-party
 components listed below. Each component remains under its own licence,
-and those licences apply to that component instead of PulseDepot 0.1.0-beta's terms.
+and those licences apply to that component instead of PulseDepot 0.2.0-beta's terms.
 The full licence texts follow the lists; each text appears once, with the
 copyright lines listed per component.
 

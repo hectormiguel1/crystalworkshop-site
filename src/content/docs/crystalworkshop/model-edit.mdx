@@ -40,7 +40,7 @@ workspace.
    |---|---|
    | **Meshes** | Each mesh with its material, vertex and triangle counts. Hide, reorder (↑ ↓) or delete meshes. |
    | **Materials** | Shader parameters (PRAM). |
-   | **Textures** | Each texture, to view or replace. |
+   | **Textures** | Each texture, to view, export or replace. **Replace…** opens the file picker in the model's folder of the workspace folder. |
    | **Skeleton** | Joints. |
    | **Motion** | Play clips from the model's motion packs. |
    | **Effects** | VFX attached to the model. |
@@ -49,7 +49,8 @@ workspace.
    | **Diagnostics** | Problems found reading the model. |
    | **Stats** | Counts and sizes. |
 
-4. **Render…** writes a PNG. **Diff** compares your edit with the original.
+4. **Render…** writes a PNG into the workspace folder (`renders`). **Diff**
+   compares your edit with the original.
 
 </Steps>
 
@@ -59,9 +60,10 @@ workspace.
 
 <Steps>
 
-1. Choose **Export for editing**. CrystalWorkshop writes a workspace to
-   `<game>/ff13_studio/workspace/models/<game>/<archive path>/`. **Open
-   folder** opens it. The workspace holds:
+1. Choose **Export for editing**. CrystalWorkshop writes the model's files
+   into the workspace folder, under `<game>/models/<archive path>/` (for
+   Lightning: `ff13/models/chr/pc/c001/bin/c001.win32.trb/`). **Open
+   folder** opens it. The folder holds:
 
    | File | Edit it? |
    |---|---|
@@ -70,6 +72,14 @@ workspace.
    | `model.ff13.json` | No (the sidecar) |
    | `model.obj` | No (inspection only) |
    | `manifest.json` | No |
+
+   Exporting again replaces these files. When you had changed one of them
+   since the last export, the result says **replaced edited file** and the
+   earlier version stays in the workspace folder's history (`.history`,
+   the last five versions).
+
+   An AI client (MCP) can only name files inside the workspace folder, such
+   as `textures/<name>.png` in the model's folder or `inbox/<name>.png`.
 
 2. Edit `model.glb`:
    - **You can change:** vertex positions, normals, UVs, colours and skin
@@ -98,7 +108,7 @@ The **Changes** page lists the model's `.trb` and `.imgb`. Export them with
 ## Undo / revert
 
 **Undo**, **Redo** and **Revert** are in the model toolbar. Revert returns
-the model to the game's original. The workspace folder stays until you
+the model to the game's original. The model's files in the workspace folder stay until you
 delete it.
 
 ## Known limits (Experimental)

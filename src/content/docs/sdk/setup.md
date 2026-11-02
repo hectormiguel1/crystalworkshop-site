@@ -47,7 +47,7 @@ edition = "2024"
 crate-type = ["cdylib", "rlib"]
 
 [dependencies]
-workshop-ext-sdk = { git = "https://github.com/hectormiguel1/workshop-extension-sdk", tag = "v0.1.0" }
+workshop-ext-sdk = { git = "https://github.com/hectormiguel1/workshop-extension-sdk", tag = "v0.4.0" }
 
 [profile.release]
 # Keep the default unwinding: init, shutdown and every SDK callback catch

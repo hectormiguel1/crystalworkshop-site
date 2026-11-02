@@ -16,6 +16,8 @@ Both Crux builds log to the same place:
   | `1` | Show a console window. |
   | `3` | Both. |
 
+Crux keeps its console window hidden. To see one (`mode` `1` or `3`), turn on **Show Crux console (debugging)** under **Crux settings** in PulseDepot, or set `showConsole=true` under `[console]` in `Crux.ini`. With the console hidden, `mode` `1` writes nothing; use `2` or `3` to keep the log file.
+
 ## Reading it
 
 - **No `Crux.jsonl` at all** means Crux did not load. Check the launch option on Proton (standalone build) or your NovaFix install (addon build). See [Standalone or NovaFix addon](../hosts/).

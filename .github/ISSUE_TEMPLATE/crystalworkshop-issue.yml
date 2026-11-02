@@ -32,8 +32,8 @@ body:
     id: version
     attributes:
       label: Version
-      description: The CrystalWorkshop version (the current release is 0.1.0-alpha).
-      placeholder: e.g. 0.1.0-alpha
+      description: The CrystalWorkshop version (the current release is 0.2.0-alpha).
+      placeholder: e.g. 0.2.0-alpha
     validations:
       required: true
   - type: dropdown

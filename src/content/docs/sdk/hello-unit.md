@@ -94,13 +94,13 @@ codegen unit, symbols stripped, panics unwind). `export_check` prints
 2. Add the DLL under the unit id `example.hello` and tick **Late (first
    field idle)**, to match the example's "Greet at field idle" setting.
 3. **Export…** › **Shard (.cws)**, name it "Hello unit", version `0.1.0`.
-4. Install the shard with PulseDepot (and the XIII Mod Settings mod for
-   the menu), apply, start the game.
+4. Install the shard with PulseDepot, apply, start the game.
 
 `Crux.jsonl` then shows `hello: session 1`, and `hello: session 2` the next
-time you start the game. The example ships no translated texts, so in the
-XIII Mod Settings menu its labels read "Unavailable" until you add them
-(see [In-game settings](../settings/#texts-and-translations)).
+time you start the game. The example ships no texts for its settings
+page, and **Configuration → Mod Settings** hides settings whose texts a
+mod does not ship, so its page appears only after you add them (see
+[In-game settings](../settings/#texts-and-translations)).
 
 The full step-by-step is in [Package a shard](../packaging/).
 

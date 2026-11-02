@@ -1,6 +1,6 @@
 ---
 title: "Complete guide"
-description: "The full PulseDepot 0.1.0-beta guide on one page."
+description: "The full PulseDepot 0.2.0-beta guide on one page."
 sidebar:
   label: "Complete guide (one page)"
 ---
@@ -19,13 +19,106 @@ packages without editing your game archives or your save files.
 [Report a problem](https://github.com/hectormiguel1/crystalworkshop-site/issues/new/choose)).
 
 :::caution[BETA]
-This is the first public build. It is tested in game and has
+PulseDepot is in beta. It is tested in game and has
 passed automated tests on Linux and under Wine, but it has **not** been
 tested on a real Windows PC. Mods never change your save files. Report
 problems with the files listed under [Troubleshooting](#troubleshooting).
 :::
 
 ![The Mods page with five XIII shards listed](../../../assets/shots/pd/mods.webp)
+
+## What's new in 0.2.0
+
+### PulseDepot 0.2.0-beta
+
+**Added**
+
+- A redesigned interface: an icon rail for navigation, new Mods and Review
+  pages, a details drawer for the selected mod, and confirmations for
+  actions in the danger zone.
+- **Game setup** page: the game folder, archive and optional data, the Crux
+  host, large memory support and **Uninstall all** in one place.
+- **Create package** is now a wizard with Source, Details and Output steps.
+- **Format tools** has a search box.
+- **Crux settings** page: change Crux's settings with choices and filters,
+  and reset any setting to its default.
+- **Apply result** page: shows each stage of Apply. If the mods were
+  installed but the Crux settings could not be saved, your settings edits
+  are kept so you can retry them.
+- **Activity** page: recent reviews, applies and Crux repairs for each game.
+- **Preferences**: interface density and scale.
+- **Large memory support** switch for the game executable, on by default.
+  It is not available where Steam's DRM would reject a changed game file
+  (on Linux, the Proton launch option `PROTON_FORCE_LARGE_ADDRESS_AWARE=1`
+  is suggested instead), and a change made there by an earlier PulseDepot
+  is undone.
+- Before Apply, each mod is checked against the Crux that PulseDepot
+  installs, and against the raised script capacity setting when the mod
+  needs it.
+- **Repair Crux** installs PulseDepot's Crux into the game folder again,
+  for example when its files are damaged. Your mods and saves stay as they
+  are.
+- PulseDepot keeps its own settings (game folders, launch options and
+  install choices) in `pulsedepot.json` next to the program.
+
+**Changed**
+
+- The Crux console window is hidden by default.
+- The Mod Settings menu (Configuration, Mod Settings) is now part of Crux
+  and is installed with it.
+- Game setup shows the installed and the bundled Crux version, and says
+  when an update is available. An older Crux found in the game folder is
+  replaced on Apply, and the review names it.
+
+**Fixed**
+
+- Mod lists saved by older versions load again, and installed mods are
+  always listed.
+- If writing the large memory flag fails, PulseDepot now reports the state
+  the game executable is actually in.
+
+**Known issues**
+
+- Packages are not code-signed (Windows SmartScreen asks once), and there
+  is no installer.
+
+### Crux 0.2.0-beta (included)
+
+**Added**
+
+- The in-game Mod Settings menu (Configuration → Mod Settings) is now built
+  into Crux for FINAL FANTASY XIII, FINAL FANTASY XIII-2 (Steam and
+  Microsoft Store) and LIGHTNING RETURNS: FINAL FANTASY XIII. It lists every
+  installed mod's options in the language the game is running in. It
+  replaces the separate Mod Settings package; PulseDepot turns the old
+  package off.
+- Support for one more FINAL FANTASY XIII executable.
+- More room for game scripts in FINAL FANTASY XIII: up to 1024 script
+  classes and 1024 resident battle scripts. Mods that need the extra room
+  require this version of Crux or later.
+- Startup diagnostics: Crux writes a diagnostics log next to the game's
+  add-ons that you can attach to bug reports. It records which game files
+  and mods Crux finds, and whether the game asks Crux for mod files in the
+  first minutes of play.
+
+**Changed**
+
+- The game is still recognised after its executable has been patched to
+  use more memory (Large Address Aware).
+- Help lines in Mod Settings show only the selected row's own description.
+
+**Fixed**
+
+- Mod Settings and the game-language detection could fail to start.
+
+**Known issues**
+
+- The Mod Settings menu on the Microsoft Store edition of FINAL FANTASY
+  XIII-2 and on LIGHTNING RETURNS has not yet been tested in game.
+
+### 0.1.0-beta (2026-10-21)
+
+- First public release.
 
 ## How it fits together
 
@@ -42,8 +135,9 @@ Crux             ──loads───▶ that image inside the game (a small DLL
   into one **Crux image**, `active.crximg`.
 - **Crux** is the mod host the game loads. It serves the image's files to the
   game while it runs and loads the mods' units. It ships in two builds:
-  - `Crux.dll`, a NovaFix addon;
-  - `version.dll`, standalone, for games without NovaFix.
+  - `version.dll`, standalone, beside the game executable;
+  - `Crux.dll`, an addon, used when PulseDepot detects the third-party
+    NovaFix loader in the game folder.
 
   PulseDepot picks the right build and installs it when you apply.
 
@@ -52,7 +146,7 @@ Crux             ──loads───▶ that image inside the game (a small DLL
 | File | What it is |
 |---|---|
 | `pulsedepot.exe` / `pulsedepot` | PulseDepot (64-bit Windows / x86_64 Linux). |
-| `Crux/Crux.dll` | Crux as a NovaFix addon (32-bit, loaded by the game). |
+| `Crux/Crux.dll` | Crux as an addon (32-bit, loaded by the game), used when PulseDepot detects the third-party NovaFix loader. |
 | `Crux/version.dll` | Crux standalone (32-bit). It forwards every Windows `version.dll` call to the system copy. |
 | `Crux/CRUX-MANIFEST.json` | Size and SHA-256 of both Crux builds. PulseDepot checks them before it installs one. |
 | `Crux/CRUX-BUILD.json` | Build details of both Crux builds. |
@@ -66,28 +160,30 @@ Crux             ──loads───▶ that image inside the game (a small DLL
 
 ## Requirements
 
-- The Steam release of FINAL FANTASY XIII and/or XIII-2. LIGHTNING RETURNS is
-  in the game list, but no LR mods ship with this release. Treat LR support
-  as experimental.
+- The Steam release of FINAL FANTASY XIII, FINAL FANTASY XIII-2 or
+  LIGHTNING RETURNS: FINAL FANTASY XIII. LR support is experimental. Some
+  XIII-2 and LIGHTNING RETURNS mod builds are not yet tested in game; each
+  mod's page says so.
 - **Microsoft Store versions:** only XIII-2, and only as an experiment:
   PulseDepot cannot start Store games yet. See
   [Compatibility](https://hectormiguel1.github.io/crystalworkshop-site/compatibility/).
 - **Windows:** 64-bit Windows 10 or 11 with Direct3D 12 or Vulkan drivers.
 - **Linux:** x86_64 with a Vulkan or OpenGL driver. The games run through
   Steam Play (Proton).
-- **NovaFix is optional.** With NovaFix, Crux runs as its addon. Without it,
-  Crux runs as `version.dll` beside the game executable.
+- **No other loader is needed.** Crux runs as `version.dll` beside the game
+  executable. If PulseDepot detects the third-party NovaFix loader, it
+  installs Crux as that loader's addon instead.
 - **Mods that change game scripts only:** a 64-bit JDK 17 or newer (`java`
   and `javac`, not just a Java runtime). No Java is bundled. See
   [Script mods and Java](#script-mods-and-java).
 
 ## Install on Windows
 
-1. Extract `pulsedepot-0.1.0-beta-windows-x86_64.zip` to a folder you can
+1. Extract `pulsedepot-0.2.0-beta-windows-x86_64.zip` to a folder you can
    write to, for example `C:\Games\PulseDepot`. Do not use `Program Files`.
    Keep the whole folder together: PulseDepot refuses to apply without `Crux\`.
 2. Optional: check the zip against `SHA256SUMS.txt`
-   (PowerShell: `Get-FileHash .\pulsedepot-0.1.0-beta-windows-x86_64.zip`).
+   (PowerShell: `Get-FileHash .\pulsedepot-0.2.0-beta-windows-x86_64.zip`).
 3. Start `pulsedepot.exe`. The build is **not code-signed**, so SmartScreen
    may say "Windows protected your PC". Choose **More info**, check that the
    file is `pulsedepot.exe` from this folder, then choose **Run anyway**.
@@ -99,9 +195,9 @@ Crux             ──loads───▶ that image inside the game (a small DLL
 
 ## Install on Linux (Steam / Proton)
 
-1. Extract `pulsedepot-0.1.0-beta-linux-x86_64.zip` anywhere you can write,
+1. Extract `pulsedepot-0.2.0-beta-linux-x86_64.zip` anywhere you can write,
    for example `~/Games/PulseDepot`, with
-   `unzip pulsedepot-0.1.0-beta-linux-x86_64.zip` (or any archive manager that
+   `unzip pulsedepot-0.2.0-beta-linux-x86_64.zip` (or any archive manager that
    keeps file permissions). Start `./pulsedepot` or `./start-pulsedepot.sh`.
    If it won't start, run `chmod +x pulsedepot start-pulsedepot.sh check-java.sh`
    in the extracted folder. (No AppImage is built for this release.)
@@ -122,8 +218,9 @@ Crux             ──loads───▶ that image inside the game (a small DLL
 
    Without this override, Proton uses Wine's own `version.dll` and Crux never
    loads.
-4. **With NovaFix** (Crux as `addons/Crux.dll`), keep whatever NovaFix itself
-   needs. Crux adds no requirement.
+4. **If PulseDepot detected the third-party NovaFix loader** (Crux as
+   `addons/Crux.dll`), keep whatever that loader needs. Crux adds no
+   requirement.
 5. For script mods, install a JDK 17 or newer from your distribution, for
    example Arch `jdk17-openjdk` or `jdk21-openjdk`, Debian/Ubuntu
    `openjdk-17-jdk`, Fedora `java-17-openjdk-devel`. Run `./check-java.sh`
@@ -279,8 +376,8 @@ ships in the package.
   - otherwise `addons/mod_data` beside the game executable, if that folder
     exists;
   - otherwise `<game folder>/mod_data`.
-- **PulseDepot's own state** goes in `<game folder>/ff13_studio/nova/<game>/`:
-  the installed mod list (`bundle.json`), the installed mods and backups of
+- **PulseDepot's own state** goes in `<game folder>/ff13_studio/nova/`:
+  the installed mod list, the installed mods and backups of
   any image PulseDepot did not make.
 - **Crux** is installed as one of:
   - `Crux.dll` in the NovaFix `addons` folder. For XIII:
@@ -361,9 +458,9 @@ Apply stops **before writing anything** in these cases:
   mods, delete `addons\Crux.dll`, or the `version.dll` beside the game
   executable, by hand. Then remove the `WINEDLLOVERRIDES` launch option on
   Linux.
-- **All PulseDepot state:** delete `<game folder>\ff13_studio\nova\` (or the
-  whole `ff13_studio` folder if you do not use CrystalWorkshop) and the
-  `active.crximg` that Apply wrote.
+- **All PulseDepot state:** delete the `<game folder>/ff13_studio/nova/`
+  folder and the `active.crximg` that Apply wrote. Delete the parent
+  `ff13_studio` folder only if you don't use CrystalWorkshop with this game.
 - **PulseDepot itself:** delete its folder. It installs nothing else.
 
 **Your saves are untouched** at every step. PulseDepot and Crux never read or
@@ -396,6 +493,8 @@ write save files.
 - The Linux build is a native x86_64 binary and is not packaged as an
   AppImage. Its runtime has been tested less than the Windows build's.
 - PulseDepot never removes Crux itself (see [Uninstalling](#uninstalling)).
-- LIGHTNING RETURNS appears in the game list, but no LR mod ships with this
-  release.
+- Some XIII-2 and LIGHTNING RETURNS mod builds are not yet tested in game;
+  each mod's page says so.
+- The Mod Settings menu on the Microsoft Store edition of XIII-2 and on
+  LIGHTNING RETURNS is not yet tested in game.
 - Only the ▲/▼ buttons reorder the list.

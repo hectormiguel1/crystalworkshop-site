@@ -51,6 +51,13 @@ import { Tabs, TabItem, Steps, Aside, Badge, LinkCard, CardGrid } from '@astrojs
    - **Export (N)** shows how many files you changed ([Simple Mod Export](../mod-export/)).
    - The gear button opens **Settings**. It reads **AI** while the MCP
      server runs ([Enabling MCP](../mcp/)).
+6. **Check the workspace folder** under **Settings › Workspace**. Everything
+   CrystalWorkshop exports or renders goes there, with one folder per game
+   (`ff13`, `xiii2`, `lr`). By default it is `workspace` next to the
+   program. The badge reads **Ready**, or **Unavailable** with the reason.
+   **Choose…** moves it, **Open folder** opens it and **Reset to default**
+   goes back to `workspace`. File pickers start there, but you can still
+   pick any file.
 
 </Steps>
 
@@ -60,13 +67,15 @@ import { Tabs, TabItem, Steps, Aside, Badge, LinkCard, CardGrid } from '@astrojs
 
 The status bar shows the archive (`archive US/EU`), the locale and
 `0 pending changes`. The window title reads, for example,
-**CrystalWorkshop 0.1.0-alpha — FINAL FANTASY XIII**.
+**CrystalWorkshop 0.2.0-alpha — FINAL FANTASY XIII**.
 
 ## Undo / revert
 
 Nothing is changed by opening a game. CrystalWorkshop reads the archives and
-keeps its own work (indexes, renders, audit log) under
-`<game folder>/ff13_studio/`. Delete that folder to forget it.
+keeps its own work (indexes, audit log) under
+`<game folder>/ff13_studio/`. Delete that folder to forget it. Exports and
+renders are in the workspace folder; delete that game's folder there (for
+example `workspace/ff13`) to remove them.
 
 ## Related
 

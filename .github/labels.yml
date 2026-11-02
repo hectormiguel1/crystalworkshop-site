@@ -26,21 +26,48 @@
 - name: feature-request
   color: a2eeef
   description: An idea for a new feature
-- name: mod:drop-changes
+- name: mod:accessorize
   color: d4c5f9
-  description: About the Drop Changes mod
-- name: mod:hard-mode
+  description: About the Accessorize mod
+- name: mod:accessorize-xiii2
   color: d4c5f9
-  description: About the Hard Mode mod
-- name: mod:mod-settings
+  description: About the XIII-2 — Accessorize mod
+- name: mod:crystal-clear
   color: d4c5f9
-  description: About the XIII Mod Settings mod
+  description: About the Crystal Clear mod
+- name: mod:honey-i-shrunk-the-hud
+  color: d4c5f9
+  description: About the Honey, I Shrunk the HUD mod
+- name: mod:honey-i-shrunk-the-hud-xiii2
+  color: d4c5f9
+  description: About the XIII-2 — Honey, I Shrunk the HUD mod
+- name: mod:loot-your-way
+  color: d4c5f9
+  description: About the XIII — Loot Your Way mod
+- name: mod:loot-your-way-lr
+  color: d4c5f9
+  description: About the LIGHTNING RETURNS — Loot Your Way mod
+- name: mod:loot-your-way-xiii2
+  color: d4c5f9
+  description: About the XIII-2 — Loot Your Way mod
 - name: mod:no-post-battle-heal
   color: d4c5f9
   description: About the No Post-Battle Healing mod
+- name: mod:pain-your-way
+  color: d4c5f9
+  description: About the XIII — Pain Your Way mod
+- name: mod:pain-your-way-lr
+  color: d4c5f9
+  description: About the LIGHTNING RETURNS — Pain Your Way mod
+- name: mod:pain-your-way-xiii2
+  color: d4c5f9
+  description: About the XIII-2 — Pain Your Way mod
 - name: mod:paradigm-tuning
   color: d4c5f9
   description: About the Paradigm Tuning mod
-- name: mod:xiii2-ui-scale
+- name: mod:seventh-ark
   color: d4c5f9
-  description: About the XIII-2 UI Scale mod
+  description: About the Seventh Ark mod
+- name: mod:strike-a-pose
+  color: d4c5f9
+  description: About the Strike a Pose mod

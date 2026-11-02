@@ -19,7 +19,7 @@ A **CrystalWorkshop Shard** (`.cws`) is the file players install. It stores your
    - **Changes** is this version's changelog entry in Markdown, for example `### Changed` and a list.
    - **Version** is required and must be semver, for example `1.0.0`.
    - **Author**, **Game** (read-only) and an optional **Image** are shown on PulseDepot's details page.
-   - **Output** defaults to `<game>/ff13_studio/exports/<name>.cws`.
+   - **Output** defaults to `<name>.cws` in the `shards` folder of the workspace folder, for example `workspace/ff13/shards/Cheaper Potions.cws`. **Browse…** opens there; you can also pick another folder outside the game folder.
 
    ![The Mod metadata form of the Export dialog](../../../../assets/shots/cw/export-shard.webp)
 
@@ -27,7 +27,7 @@ A **CrystalWorkshop Shard** (`.cws`) is the file players install. It stores your
 
 </Steps>
 
-**Result:** your shard is in `ff13_studio/exports/`. Your changes stay pending, so you can keep working and export again with a higher version.
+**Result:** your shard is in the workspace folder's `shards` folder (**Settings › Workspace › Open folder** opens it). Your changes stay pending, so you can keep working and export again with a higher version. Exporting the same name again keeps the earlier shard in the hidden `.history` folder.
 
 :::caution[Back up your author key]
 The first export creates your **author key** (in `~/.config/ff13-studio/author/` on Linux; the matching app-data folder on Windows). Each shard carries your project encrypted to this key, so only you can reopen it as an editable project with **File › Open shard…**. Without the key you cannot reopen your own shards as projects; the mod inside keeps working for players.

@@ -6,5 +6,5 @@
   "downloadBase": "https://github.com/hectormiguel1/crystalworkshop-site/releases",
   "tagPattern": "{id}-v{version}",
   "author": "CrystalWorkshop",
-  "releaseDir": "../dist/release-2026-10-21"
+  "releaseDir": "../dist/release-2026-11-01"
 }

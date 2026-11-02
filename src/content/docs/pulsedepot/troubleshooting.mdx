@@ -16,7 +16,7 @@ description: Fix the common PulseDepot problems, and find the Crux log to attach
 ## The Crux log
 
 - The file is `Crux.jsonl` in the Crux folder (`addons`). It rotates to `Crux.jsonl.1` and `Crux.jsonl.2`.
-- Logging is set by `[log] mode` in `Crux.ini`: `2` (the default) writes the file, `1` shows a console, `3` does both.
+- Logging is set by `[log] mode` in `Crux.ini`: `2` (the default) writes the file, `1` shows a console, `3` does both. The console window is hidden unless you turn on **Show Crux console (debugging)** under **Crux settings** (or set `showConsole=true` under `[console]`).
 - Attach this log to bug reports, together with PulseDepot's status line and the `BUILD-INFO.json` from the package.
 
 More about the log: [Crux logs](../../crux/logs/).

@@ -23,28 +23,60 @@
   ],
   "mods": [
     {
-      "mod": "drop-changes",
-      "file": "legal/mod-drop-changes.txt"
+      "mod": "accessorize",
+      "file": "legal/mod-accessorize.txt"
     },
     {
-      "mod": "hard-mode",
-      "file": "legal/mod-hard-mode.txt"
+      "mod": "accessorize-xiii2",
+      "file": "legal/mod-accessorize-xiii2.txt"
     },
     {
-      "mod": "mod-settings",
-      "file": "legal/mod-mod-settings.txt"
+      "mod": "crystal-clear",
+      "file": "legal/mod-crystal-clear.txt"
+    },
+    {
+      "mod": "honey-i-shrunk-the-hud",
+      "file": "legal/mod-honey-i-shrunk-the-hud.txt"
+    },
+    {
+      "mod": "honey-i-shrunk-the-hud-xiii2",
+      "file": "legal/mod-honey-i-shrunk-the-hud-xiii2.txt"
+    },
+    {
+      "mod": "loot-your-way",
+      "file": "legal/mod-loot-your-way.txt"
+    },
+    {
+      "mod": "loot-your-way-lr",
+      "file": "legal/mod-loot-your-way-lr.txt"
+    },
+    {
+      "mod": "loot-your-way-xiii2",
+      "file": "legal/mod-loot-your-way-xiii2.txt"
     },
     {
       "mod": "no-post-battle-heal",
       "file": "legal/mod-no-post-battle-heal.txt"
     },
     {
+      "mod": "pain-your-way",
+      "file": "legal/mod-pain-your-way.txt"
+    },
+    {
+      "mod": "pain-your-way-lr",
+      "file": "legal/mod-pain-your-way-lr.txt"
+    },
+    {
+      "mod": "pain-your-way-xiii2",
+      "file": "legal/mod-pain-your-way-xiii2.txt"
+    },
+    {
       "mod": "paradigm-tuning",
       "file": "legal/mod-paradigm-tuning.txt"
     },
     {
-      "mod": "xiii2-ui-scale",
-      "file": "legal/mod-xiii2-ui-scale.txt"
+      "mod": "strike-a-pose",
+      "file": "legal/mod-strike-a-pose.txt"
     }
   ],
   "components": [

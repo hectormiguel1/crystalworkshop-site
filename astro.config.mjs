@@ -14,6 +14,8 @@ const base = process.env.BASE_PATH || '/';
 const outDir = process.env.SITE_OUT_DIR || (existsSync(new URL('../xtask', import.meta.url)) ? '../dist/site' : './dist');
 
 const group = (label, items, extra = {}) => ({ label, items, ...extra });
+// Redirect targets are written as-is into the meta refresh, so they carry the base.
+const to = (path) => `${base.replace(/\/$/, '')}${path}`;
 
 export default defineConfig({
   site,
@@ -21,6 +23,19 @@ export default defineConfig({
   outDir,
   trailingSlash: 'always',
   telemetry: false,
+  redirects: {
+    '/mods/drop-changes/': to('/mods/loot-your-way/'),
+    '/mods/drop-changes-xiii2/': to('/mods/loot-your-way-xiii2/'),
+    '/mods/drop-changes-lr/': to('/mods/loot-your-way-lr/'),
+    '/mods/hard-mode/': to('/mods/pain-your-way/'),
+    '/mods/hard-mode-xiii2/': to('/mods/pain-your-way-xiii2/'),
+    '/mods/hard-mode-lr/': to('/mods/pain-your-way-lr/'),
+    '/mods/xiii2-ui-scale/': to('/mods/honey-i-shrunk-the-hud-xiii2/'),
+    '/mods/xiii-ui-scale/': to('/mods/honey-i-shrunk-the-hud/'),
+    '/mods/ui-sharp/': to('/mods/crystal-clear/'),
+    '/mods/photo-mode/': to('/mods/strike-a-pose/'),
+    '/mods/accessory-expansion-xiii2/': to('/mods/accessorize-xiii2/'),
+  },
   integrations: [
     starlight({
       title: 'CrystalWorkshop',
@@ -109,6 +124,7 @@ export default defineConfig({
         group('Crux', [
           { label: 'What Crux is', link: '/crux/' },
           { label: 'Standalone or NovaFix addon', link: '/crux/hosts/' },
+          { label: 'Mod Settings menu', link: '/mods/mod-settings/' },
           { label: 'Logs', link: '/crux/logs/' },
           { label: 'Uninstall', link: '/crux/uninstall/' },
           { label: 'FAQ', link: '/crux/faq/' },
@@ -123,6 +139,7 @@ export default defineConfig({
           { label: '6. Logging', link: '/sdk/logging/' },
           { label: '7. Package a shard', link: '/sdk/packaging/' },
           { label: '8. Testing', link: '/sdk/testing/' },
+          { label: '9. Main-menu entries', link: '/sdk/menus/' },
           { label: 'Walkthrough: hello-unit', link: '/sdk/hello-unit/' },
           { label: 'API reference', link: '/sdk/reference/' },
           { label: 'Source on GitHub', link: 'https://github.com/hectormiguel1/workshop-extension-sdk', attrs: { target: '_blank', rel: 'noopener' } },

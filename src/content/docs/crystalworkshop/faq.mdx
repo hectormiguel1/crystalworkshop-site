@@ -13,12 +13,37 @@ import { Tabs, TabItem, Steps, Aside, Badge, LinkCard, CardGrid } from '@astrojs
 No:
 
 - It reads the archives.
-- It keeps its own work in `<game>/ff13_studio/`.
+- It keeps its own work in `<game>/ff13_studio/`, and your exports and
+  renders in the workspace folder.
 - It writes into the game only when you export **loose files**, and then
   only to `mod_data` (with backups).
 - It never touches saves.
 
-Shards are separate files in `ff13_studio/exports/`.
+Shards are separate files in the workspace folder (`shards`).
+
+**Where do my exports go?**
+Into the **workspace folder**: by default `workspace` next to the program.
+It has one folder per game (`ff13`, `xiii2`, `lr`), and inside each a
+folder per kind: `shards`, `models`, `renders`, `gui`, `fonts`, `sound`,
+`actions`, `motions`, `vfx`, `navimap` and `inbox` (for files you bring in
+to import). When a file is overwritten, its last 5 earlier versions are kept
+in the hidden `.history` folder of that game's folder. **Settings › Workspace ›
+Open folder** opens it.
+
+**Can I move the workspace folder?**
+Yes. Under **Settings › Workspace**, use **Choose…** (or **Reset to
+default**). The folder must be a full path. It cannot be a whole drive, your
+home folder itself, inside a game install, or contain one. CrystalWorkshop
+creates it if it is missing and checks that it can write there; the badge
+then reads **Ready**, or **Unavailable** with the reason. Headless,
+`crystalw --mcp --workspace <dir>` uses another folder for that run.
+
+**Why did the AI say a path leaves the workspace folder?**
+AI clients can only use paths inside the open game's workspace folder,
+relative to it, such as `fonts/a.png` or `inbox/b.png`. `..`, absolute
+paths, drive letters, names starting with a dot and Windows device names
+such as `CON` are refused. Put the file in the game's `inbox` folder (for
+example `workspace/ff13/inbox`) and give `inbox/<name>`. See [Enabling MCP](../mcp/).
 
 **Which games are supported?**
 FINAL FANTASY XIII is the most complete. XIII-2 and LIGHTNING RETURNS open
@@ -53,6 +78,7 @@ projects. Keep a backup of `~/.config/ff13-studio/author/`.
 - **Author key:** `ff13-studio/author` in the config folder.
 - **Caches:** `ff13-studio` in the cache folder.
 - **Per-game work:** `<game>/ff13_studio/`.
+- **Exports and renders:** the workspace folder (**Settings › Workspace**).
 
 **What is CrystalWorkshop's licence? Who owns the mods I make?**
 CrystalWorkshop is freeware: free to download and use, all rights reserved.
@@ -63,6 +89,21 @@ belong to you, subject to the game's own terms. Bundled third-party
 components keep their own licences, listed in `THIRD-PARTY-NOTICES.txt`.
 FINAL FANTASY is a trademark of Square Enix. CrystalWorkshop is an unofficial
 fan tool, not affiliated with or endorsed by Square Enix.
+
+**Why does CrystalWorkshop ask before closing or switching games?**
+Your changes stay in memory until you export them. Nothing is saved
+automatically.
+
+- Closing the window with unexported changes or unsaved script drafts asks
+  "Are you sure you want to exit? There are unsaved changes." **Exit**
+  closes and drops them. **Cancel** keeps you working.
+- Opening another game, game folder or archive variant asks "Switching will
+  discard unsaved changes. Continue?" **Discard and switch** drops them.
+  **Cancel** keeps the open game.
+- Choosing the game that is already open changes nothing.
+- If CrystalWorkshop has to close without asking (for example, the graphics
+  device is lost), the log and `<game>/ff13_studio/audit.log` record how many
+  changes were dropped.
 
 **What does ALPHA mean here?**
 Features can change, and some fail on some files. Pages and `ALPHA.md` mark
@@ -83,6 +124,7 @@ with later versions.
 | Export: rows marked **Unverified** | That route is not proven in game. Tick **allow** to include it, at your own risk. |
 | Export blocked (Crystarium) | Fix the Crystarium validation errors first. |
 | The mod has no effect in game | That is a PulseDepot/Crux question. Check the `Crux.jsonl` log beside the game executable (`addons`). See PulseDepot's guide. |
+| Settings › Workspace reads **Unavailable** | The reason is shown next to it. Choose a full path you can write to that is not a whole drive, your home folder itself or inside a game install, or choose **Reset to default**. |
 | MCP client sees no tools / 401 | **Headless:** check the path to `crystalw` and the `--game` value. **HTTP:** tick **Allow AI clients**, and use the current bearer token. |
 | The AI keeps calling `call_tool` | That is expected in progressive mode. Use `enable_tool_group` to list a group's tools, or `--tools full`. |
 
