@@ -404,7 +404,7 @@
     "title": "More games",
     "items": [
       "Renamed from Hard Mode to Pain Your Way.",
-      "No gameplay changes for FINAL FANTASY XIII.",
+      "Fixed: damaged enemies no longer refill to full HP when they change form (for example the Garuda Interceptor and the Lake Bresha bike).",
       "This release adds the XIII-2 and LIGHTNING RETURNS builds."
     ],
     "id": "pain-your-way-0.2.0"

@@ -889,8 +889,8 @@
       "platforms": {
         "windows": {
           "file": "xiii-pain-your-way-0.2.0.cws",
-          "bytes": 2733509,
-          "sha256": "bd65920e94caa62e386f1753361f3858bc3faa978460c598eea4e783df2d5451",
+          "bytes": 2735441,
+          "sha256": "5cf148049eaa0c638aa637f985713f4e9f9d7811f47595f0d8523fa11033953a",
           "requirements": [
             "FINAL FANTASY XIII, Steam version, on Windows or on Linux (Proton).",
             "**PulseDepot** (beta), the mod manager. It also installs **Crux**, which loads this mod in the game and adds the in-game **Mod Settings** menu."
@@ -899,8 +899,8 @@
         },
         "linux": {
           "file": "xiii-pain-your-way-0.2.0.cws",
-          "bytes": 2733509,
-          "sha256": "bd65920e94caa62e386f1753361f3858bc3faa978460c598eea4e783df2d5451",
+          "bytes": 2735441,
+          "sha256": "5cf148049eaa0c638aa637f985713f4e9f9d7811f47595f0d8523fa11033953a",
           "requirements": [
             "FINAL FANTASY XIII, Steam version, on Windows or on Linux (Proton).",
             "**PulseDepot** (beta), the mod manager. It also installs **Crux**, which loads this mod in the game and adds the in-game **Mod Settings** menu.",
@@ -968,8 +968,8 @@
       "platforms": {
         "windows": {
           "file": "lr-pain-your-way-0.2.0.cws",
-          "bytes": 5855703,
-          "sha256": "196d05d70c887b5574eb31c00f0a2b48eb067f95f51f2766c24f6627d047d2c7",
+          "bytes": 5855700,
+          "sha256": "597f3d9dee06fa20208ba5545ed84d946c680b1195115a415f89397e48d3ae2d",
           "requirements": [
             "LIGHTNING RETURNS: FINAL FANTASY XIII, Steam version, on Windows or on Linux (Proton).",
             "**PulseDepot** (beta), the mod manager. It also installs **Crux**, which loads this mod in the game and adds the in-game **Mod Settings** menu."
@@ -978,8 +978,8 @@
         },
         "linux": {
           "file": "lr-pain-your-way-0.2.0.cws",
-          "bytes": 5855703,
-          "sha256": "196d05d70c887b5574eb31c00f0a2b48eb067f95f51f2766c24f6627d047d2c7",
+          "bytes": 5855700,
+          "sha256": "597f3d9dee06fa20208ba5545ed84d946c680b1195115a415f89397e48d3ae2d",
           "requirements": [
             "LIGHTNING RETURNS: FINAL FANTASY XIII, Steam version, on Windows or on Linux (Proton).",
             "**PulseDepot** (beta), the mod manager. It also installs **Crux**, which loads this mod in the game and adds the in-game **Mod Settings** menu.",
@@ -1021,8 +1021,8 @@
       "platforms": {
         "windows": {
           "file": "xiii2-pain-your-way-0.2.0.cws",
-          "bytes": 4378594,
-          "sha256": "9ba1f96d48e49174c070c0c2003e0fb83ccf86415620b2cfcf37adcecd35306c",
+          "bytes": 4379458,
+          "sha256": "060a87b536debbce26eb09e75d2fa086f92297ef12a9812556d9b3f63547ba42",
           "requirements": [
             "FINAL FANTASY XIII-2, Steam version, on Windows or on Linux (Proton).",
             "The Microsoft Store version is experimental and not tested yet.",
@@ -1032,8 +1032,8 @@
         },
         "linux": {
           "file": "xiii2-pain-your-way-0.2.0.cws",
-          "bytes": 4378594,
-          "sha256": "9ba1f96d48e49174c070c0c2003e0fb83ccf86415620b2cfcf37adcecd35306c",
+          "bytes": 4379458,
+          "sha256": "060a87b536debbce26eb09e75d2fa086f92297ef12a9812556d9b3f63547ba42",
           "requirements": [
             "FINAL FANTASY XIII-2, Steam version, on Windows or on Linux (Proton).",
             "The Microsoft Store version is experimental and not tested yet.",
