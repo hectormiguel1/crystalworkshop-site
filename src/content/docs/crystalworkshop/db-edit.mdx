@@ -44,7 +44,7 @@ edit the sheet directly, then you make the same change with SQL.
 2. Read data:
 
    ```sql
-   SELECT id, buy_price, sell_price, name(name_txt)
+   SELECT id, buy_price, sell_price, name(name_txt_id)
    FROM item WHERE buy_price BETWEEN 100 AND 1000
    ORDER BY buy_price DESC LIMIT 20
    ```
@@ -76,7 +76,7 @@ Other useful statements:
 
 ```sql
 INSERT INTO item (id, buy_price) COPY FROM 'it_potion' VALUES ('it_mega', 900)
-SELECT i.id, t.text FROM item i JOIN texts t ON t.key = i.name_txt AND t.locale = 'us'
+SELECT i.id, t.text FROM item i JOIN texts t ON t.key = i.name_txt_id AND t.locale = 'us'
 ```
 
 ## Result
