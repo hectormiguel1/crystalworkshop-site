@@ -1,0 +1,200 @@
+# Publishes mod releases to Nexus Mods after their virus scans are clean, for
+# the PUBLIC site repository (not active in the private repository: it lives
+# under site/deploy-template/). Copy it to .github/workflows/nexus.yml at the
+# root of the public repository. Setup: see "Publishing to Nexus Mods" in the
+# README (environment `nexus`, secret NEXUS_API_KEY, nexus/products.json IDs,
+# variable NEXUS_DRY_RUN).
+#
+# It runs after the "Virus scans" workflow and on demand. The plan job reads
+# public/api/scans.json, nexus/products.json and nexus/published.json (no Nexus
+# credential) and lists every mapped mod whose newest release is clean on
+# VirusTotal, MetaDefender and Kaspersky and is not recorded as published.
+# Nothing is uploaded while NEXUS_DRY_RUN is not "false" (the plan goes to the
+# step summary). The publish job runs in the protected `nexus` environment: a
+# required reviewer approves, then each mod's .cws, README and notices are
+# zipped and added as a new version of its existing Nexus file, and the version
+# is recorded in nexus/published.json on main.
+name: Publish to Nexus Mods
+
+on:
+  workflow_run:
+    workflows: ['Virus scans']
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      product:
+        description: 'Release slug to publish (all = every mapped mod)'
+        type: string
+        default: all
+      dry_run:
+        description: 'Dry run: only write the plan to the step summary'
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: nexus
+  cancel-in-progress: false
+
+jobs:
+  plan:
+    # Scans always finish with exit 0, so only a finished run is not enough:
+    # the plan itself reads the scan results.
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      items: ${{ steps.plan.outputs.items }}
+      publish: ${{ steps.plan.outputs.publish }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: main
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 24
+      - name: Plan
+        id: plan
+        run: node scripts/nexus/plan-main.mjs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PRODUCT: ${{ inputs.product || 'all' }}
+          INPUT_DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && format('{0}', inputs.dry_run) || '' }}
+          VAR_DRY_RUN: ${{ vars.NEXUS_DRY_RUN }}
+
+  publish:
+    needs: plan
+    if: needs.plan.outputs.publish == 'true'
+    runs-on: ubuntu-latest
+    environment: nexus
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        item: ${{ fromJSON(needs.plan.outputs.items) }}
+    name: Publish ${{ matrix.item.slug }} ${{ matrix.item.version }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: main
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 24
+      # Checks the mod and file IDs and that Nexus does not have the version,
+      # downloads the .cws, verifies its SHA-256, builds the zip, changelog and
+      # description, and refuses internal terms. Fails before any upload.
+      - name: Stage
+        id: stage
+        run: node scripts/nexus/stage-main.mjs
+        env:
+          ITEM: ${{ toJSON(matrix.item) }}
+          # Read-only token (workflow default): authenticated release reads
+          # avoid the anonymous API rate limit.
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NEXUS_API_KEY: ${{ secrets.NEXUS_API_KEY }}
+          STAGE_DIR: ${{ runner.temp }}/nexus-stage
+      - name: Upload to Nexus Mods
+        id: upload
+        if: steps.stage.outputs.skip == 'false'
+        uses: Nexus-Mods/upload-action@98532f7670c27cbecc78fae03fa3e278147827e2 # v1.0.0-beta.11
+        with:
+          api_key: ${{ secrets.NEXUS_API_KEY }}
+          file_id: ${{ matrix.item.file_id }}
+          mod_id: ${{ matrix.item.mod_id }}
+          filename: ${{ steps.stage.outputs.zip }}
+          version: ${{ matrix.item.version }}
+          display_name: ${{ matrix.item.display_name }}
+          description: ${{ steps.stage.outputs.description }}
+          category: ${{ matrix.item.category }}
+          archive_existing_version: ${{ matrix.item.archive_old }}
+          update_mod_version: true
+          changelog: ${{ steps.stage.outputs.changelog }}
+      # After a successful upload (or when Nexus already had the version), leave
+      # a tiny note for the record job. This job has no write access.
+      - name: Note the published version
+        if: success() && (steps.stage.outputs.skip == 'true' || steps.upload.outcome == 'success')
+        run: |
+          mkdir -p "$RUNNER_TEMP/nexus-published"
+          printf '{"slug":"%s","version":"%s"}\n' "$SLUG" "$VERSION" > "$RUNNER_TEMP/nexus-published/$SLUG.json"
+        env:
+          SLUG: ${{ matrix.item.slug }}
+          VERSION: ${{ matrix.item.version }}
+      - name: Keep the note
+        if: success() && (steps.stage.outputs.skip == 'true' || steps.upload.outcome == 'success')
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: nexus-published-${{ matrix.item.slug }}
+          path: ${{ runner.temp }}/nexus-published/${{ matrix.item.slug }}.json
+          retention-days: 1
+      - name: Summary
+        if: always()
+        run: |
+          if [ "$SKIP" = "true" ]; then
+            echo "- ${SLUG} ${VERSION}: already on Nexus, skipped" >> "$GITHUB_STEP_SUMMARY"
+          elif [ "$STATUS" = "success" ]; then
+            echo "- ${SLUG} ${VERSION}: uploaded" >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "- ${SLUG} ${VERSION}: FAILED" >> "$GITHUB_STEP_SUMMARY"
+          fi
+        env:
+          SKIP: ${{ steps.stage.outputs.skip }}
+          STATUS: ${{ job.status }}
+          SLUG: ${{ matrix.item.slug }}
+          VERSION: ${{ matrix.item.version }}
+
+  # Records every version the publish jobs finished in nexus/published.json,
+  # in one commit. It has no environment and no Nexus secret; it is the only
+  # job with write access. It uses no checkout or setup-node action: the one
+  # step that fetches, commits and pushes is the only place the write token
+  # is passed (download-artifact gets no token; it reads this run's artifacts
+  # through the runner). A push made with GITHUB_TOKEN does not start other
+  # workflows, so the site is not redeployed.
+  record:
+    needs: [plan, publish]
+    if: always() && needs.plan.outputs.publish == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - name: Collect the notes
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          pattern: nexus-published-*
+          merge-multiple: true
+          path: ${{ runner.temp }}/nexus-notes
+      - name: Record in the ledger
+        run: |
+          set -eu
+          if ! ls "$NOTES"/*.json >/dev/null 2>&1; then echo "Nothing to record."; exit 0; fi
+          # No checkout action: the token is used by this step only. The ledger
+          # scripts come from a fresh clone of main (they import only Node
+          # built-ins and each other); the preinstalled node runs them.
+          work="$RUNNER_TEMP/ledger-repo"
+          rm -rf "$work"
+          git init --quiet "$work"
+          cd "$work"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          url="https://x-access-token:${GH_TOKEN}@github.com/${REPO}.git"
+          for i in 1 2 3 4 5; do
+            git fetch --quiet --depth 1 "$url" main
+            git checkout --quiet --force -B main FETCH_HEAD
+            LEDGER_DIR="$NOTES" node scripts/nexus/ledger-main.mjs
+            git add nexus/published.json
+            if git diff --cached --quiet; then exit 0; fi
+            git commit --quiet -m "Record Nexus uploads [skip ci]"
+            if git push --quiet "$url" HEAD:main; then exit 0; fi
+            sleep $((i * 3))
+          done
+          echo "::error::could not push the ledger"
+          exit 1
+        env:
+          NOTES: ${{ runner.temp }}/nexus-notes
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}

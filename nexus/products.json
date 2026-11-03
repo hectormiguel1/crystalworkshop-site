@@ -1,0 +1,130 @@
+{
+  "accessories-with-stats": {
+    "mod_id": null,
+    "file_id": null,
+    "display_name": "Accessories with Stats",
+    "category": "main",
+    "archive_old": false,
+    "game": "FINAL FANTASY XIII (Steam)"
+  },
+  "accessorize": {
+    "mod_id": "8959301779546",
+    "file_id": "8292804",
+    "display_name": "XIII — Accessorize",
+    "category": "main",
+    "archive_old": false,
+    "game": "FINAL FANTASY XIII (Steam)"
+  },
+  "accessorize-xiii2": {
+    "mod_id": null,
+    "file_id": null,
+    "display_name": "XIII-2 — Accessorize",
+    "category": "main",
+    "archive_old": false,
+    "game": "FINAL FANTASY XIII-2 (Steam and Microsoft Store)"
+  },
+  "crystal-clear": {
+    "mod_id": "8959301779543",
+    "file_id": "8292639",
+    "display_name": "Crystal Clear",
+    "category": "main",
+    "archive_old": false,
+    "game": "FINAL FANTASY XIII (Steam)"
+  },
+  "honey-i-shrunk-the-hud": {
+    "mod_id": "8959301779545",
+    "file_id": "8292759",
+    "display_name": "XIII — Honey, I Shrunk the HUD",
+    "category": "main",
+    "archive_old": false,
+    "game": "FINAL FANTASY XIII (Steam)"
+  },
+  "honey-i-shrunk-the-hud-xiii2": {
+    "mod_id": null,
+    "file_id": null,
+    "display_name": "XIII-2 — Honey, I Shrunk the HUD",
+    "category": "main",
+    "archive_old": false,
+    "game": "FINAL FANTASY XIII-2 (Steam and Microsoft Store)"
+  },
+  "loot-your-way": {
+    "mod_id": "8959301779536",
+    "file_id": "8207979",
+    "display_name": "XIII — Loot Your Way",
+    "category": "main",
+    "archive_old": false,
+    "game": "FINAL FANTASY XIII (Steam)"
+  },
+  "loot-your-way-lr": {
+    "mod_id": null,
+    "file_id": null,
+    "display_name": "LIGHTNING RETURNS — Loot Your Way",
+    "category": "main",
+    "archive_old": false,
+    "game": "LIGHTNING RETURNS: FINAL FANTASY XIII (Steam)"
+  },
+  "loot-your-way-xiii2": {
+    "mod_id": null,
+    "file_id": null,
+    "display_name": "XIII-2 — Loot Your Way",
+    "category": "main",
+    "archive_old": false,
+    "game": "FINAL FANTASY XIII-2 (Steam and Microsoft Store)"
+  },
+  "no-post-battle-heal": {
+    "mod_id": null,
+    "file_id": null,
+    "display_name": "No Post-Battle Healing",
+    "category": "main",
+    "archive_old": false,
+    "game": "FINAL FANTASY XIII (Steam)"
+  },
+  "pain-your-way": {
+    "mod_id": "8959301779538",
+    "file_id": "8229633",
+    "display_name": "XIII — Pain Your Way",
+    "category": "main",
+    "archive_old": false,
+    "game": "FINAL FANTASY XIII (Steam)"
+  },
+  "pain-your-way-lr": {
+    "mod_id": null,
+    "file_id": null,
+    "display_name": "LIGHTNING RETURNS — Pain Your Way",
+    "category": "main",
+    "archive_old": false,
+    "game": "LIGHTNING RETURNS: FINAL FANTASY XIII (Steam)"
+  },
+  "pain-your-way-xiii2": {
+    "mod_id": null,
+    "file_id": null,
+    "display_name": "XIII-2 — Pain Your Way",
+    "category": "main",
+    "archive_old": false,
+    "game": "FINAL FANTASY XIII-2 (Steam and Microsoft Store)"
+  },
+  "paradigm-tuning": {
+    "mod_id": "8959301779539",
+    "file_id": "8229678",
+    "display_name": "Paradigm Tuning",
+    "category": "main",
+    "archive_old": false,
+    "game": "FINAL FANTASY XIII (Steam)"
+  },
+  "seventh-ark": {
+    "mod_id": "8959301779547",
+    "file_id": "8292837",
+    "display_name": "Seventh Ark",
+    "category": "main",
+    "archive_old": false,
+    "game": "FINAL FANTASY XIII (Steam)"
+  },
+  "strike-a-pose": {
+    "mod_id": "8959301779544",
+    "file_id": "8292681",
+    "display_name": "Strike a Pose",
+    "category": "main",
+    "archive_old": false,
+    "game": "FINAL FANTASY XIII (Steam)"
+  }
+}
